@@ -7,7 +7,7 @@ import { PageSchema } from '@/components/PageSchema';
 import { ArrowRightIcon } from '@/components/icons';
 import { BLOG_AUTHOR } from '@/lib/blog-author';
 import styles from '@/components/blog/blog.module.css';
-import { getPost, postsFor, relatedPosts, type BlogPost } from '@/lib/blog-posts';
+import { byNewest, getPost, postsFor, relatedPosts, wordCountOf, type BlogPost } from '@/lib/blog-posts';
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
 import { ORG_ID } from '@/lib/schema';
 
@@ -16,6 +16,8 @@ const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae2
 const OG_IMAGE = '/assets/filesafe/BljrSmLCnm4gF9LpsTRZ/media/6a90ca4e747464c6b3a3be10.png.webp';
 const OG_LOCALE: Record<Locale, string> = { en: 'en_US' };
 const LANG: Record<Locale, string> = { en: 'en-US' };
+/* an image path on this origin or an absolute URL (posts 2–5 use the client's media library) */
+const abs = (src: string) => (/^https?:\/\//.test(src) ? src : `${SITE_URL}${src}`);
 
 const alternates = (path: string, locale: Locale) => ({ canonical: localizeHref(path, locale) });
 /* a post's alternates: its own path as canonical */
@@ -23,7 +25,7 @@ const postAlternates = (post: BlogPost, locale: Locale) => ({ canonical: localiz
 
 export function blogIndexMetadata(locale: Locale): Metadata {
   const t = ui(locale).blog;
-  const posts = postsFor(locale);
+  const posts = [...postsFor(locale)].sort(byNewest);
   return {
     title: t.indexMetaTitle,
     description: t.indexMetaDesc,
@@ -43,7 +45,8 @@ const GUIDES: Array<[href: string, label: string]> = [
 
 export function BlogIndexPage({ locale }: { locale: Locale }) {
   const t = ui(locale).blog;
-  const posts = [...postsFor(locale)].sort((a, b) => (a.datePublished < b.datePublished ? 1 : -1));
+  /* newest first; posts published the same day keep the document's order (lib/blog-posts.ts) */
+  const posts = [...postsFor(locale)].sort(byNewest);
   return (
     <BlogShell>
       <PageSchema items={[]} locale={locale} />
@@ -118,8 +121,11 @@ export function PostPage({ slug, locale }: { slug: string; locale: Locale }) {
   const related = relatedPosts(post.slug, locale);
   const url = `${SITE_URL}${localizeHref(`/blog/${post.slug}`, locale)}`;
   const home = `${SITE_URL}${localizeHref('/', locale)}`;
-  const wordCount = post.sections.flatMap((s) => s.paragraphs).map(plain).join(' ').split(/\s+/).length;
 
+  /* BlogPosting (headline, description, the hero image, the go-live date, author = the Organization the client named,
+     publisher = the site's #organization), FAQPage from the on-page FAQ text verbatim (only when the post has one) and
+     BreadcrumbList Home › Sleep Blog › post; PageSchema adds them to the page's one graph with #organization, #store and
+     #website */
   const graph = {
     '@graph': [
       {
@@ -129,7 +135,7 @@ export function PostPage({ slug, locale }: { slug: string; locale: Locale }) {
         url,
         headline: post.title,
         description: post.metaDescription,
-        image: { '@type': 'ImageObject', url: `${SITE_URL}${post.featured.src}`, width: post.featured.width, height: post.featured.height },
+        image: { '@type': 'ImageObject', url: abs(post.featured.src), width: post.featured.width, height: post.featured.height },
         datePublished: post.datePublished,
         dateModified: post.dateModified || post.datePublished,
         author: { '@type': 'Organization', name: BLOG_AUTHOR.name, url: BLOG_AUTHOR.url },
@@ -137,16 +143,16 @@ export function PostPage({ slug, locale }: { slug: string; locale: Locale }) {
            lib/blog-author.ts); publisher: the site's #organization node */
         publisher: { '@id': ORG_ID },
         keywords: post.keywords.join(', '),
-        wordCount,
+        wordCount: wordCountOf(post),
         articleSection: t.section,
         inLanguage: LANG[locale],
       },
-      {
+      ...(post.faqs.length ? [{
         '@type': 'FAQPage',
         '@id': `${url}#faq`,
         inLanguage: LANG[locale],
         mainEntity: post.faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: plain(f.answer) } })),
-      },
+      }] : []),
       {
         '@type': 'BreadcrumbList',
         '@id': `${url}#breadcrumb`,

@@ -2,11 +2,11 @@ import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { SITE } from '@/components/site-config';
 import { BLOG_BYLINE_NAME } from '@/lib/blog-author';
-import type { BlogPost } from '@/lib/blog-posts';
+import { readTimeOf, sectionBlocks, type BlogBlock, type BlogPost, type BlogTable } from '@/lib/blog-posts';
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
 import { Faq } from './Faq';
 import { Rich } from './Rich';
-import { ArrowRightIcon } from '@/components/icons';
+import { ArrowRightIcon, CheckCircleIcon } from '@/components/icons';
 import styles from './blog.module.css';
 
 /* Orange brush-stroke divider used under the site's own headings (same SVG as the GHL pages). */
@@ -43,12 +43,13 @@ function Meta({ post, byline }: { post: BlogPost; byline: string }) {
       <span aria-hidden="true" className={styles.metaDot}>•</span>
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-        {post.readTime}
+        {readTimeOf(post)}
       </span>
     </div>
   );
 }
 
+/* the listing card: the hero image lazy, the post's own page loads it with priority */
 export function PostCard({ post, headingLevel = 'h3', locale = 'en' }: { post: BlogPost; headingLevel?: 'h2' | 'h3'; locale?: Locale }) {
   const H = headingLevel;
   const t = ui(locale).blog;
@@ -56,7 +57,7 @@ export function PostCard({ post, headingLevel = 'h3', locale = 'en' }: { post: B
   return (
     <article className={styles.card}>
       <a href={href} className={styles.cardImg} tabIndex={-1} aria-hidden="true">
-        <Image src={post.featured.src} alt={post.featured.alt} width={post.featured.width} height={post.featured.height} sizes="(max-width: 720px) 100vw, 33vw" />
+        <Image src={post.featured.src} alt={post.featured.alt} width={post.featured.width} height={post.featured.height} sizes="(max-width: 720px) 100vw, 33vw" loading="lazy" />
       </a>
       <div className={styles.cardBody}>
         <Meta post={post} byline={`${t.by} ${BLOG_BYLINE_NAME[locale]}`} />
@@ -72,14 +73,18 @@ export function PostCard({ post, headingLevel = 'h3', locale = 'en' }: { post: B
   );
 }
 
-export function BlogCta({ locale = 'en' }: { locale?: Locale }) {
+/* The shared store block: the store's name, address, hours and phone, "Get Dream Mapped" → /booking. On a post it closes
+   the article under the article's own closing heading (lib/blog-posts.ts `closing`), with the closing paragraph's
+   non-address sentence as its lead; the address the article's closing paragraph gave is this block, never repeated. */
+export function BlogCta({ locale = 'en', title, lead, className }: { locale?: Locale; title?: string; lead?: string; className?: string }) {
   const t = ui(locale).blog;
+  const text = lead !== undefined ? lead : title ? '' : t.ctaText;
   return (
-    <section className={styles.cta} aria-labelledby="blog-cta-title">
+    <section className={className ? `${styles.cta} ${className}` : styles.cta} aria-labelledby="blog-cta-title">
       <div className={styles.ctaGlow} aria-hidden="true" />
       <p className={styles.ctaEyebrow}>{t.ctaEyebrow}</p>
-      <h2 id="blog-cta-title" className={styles.ctaTitle}>{t.ctaTitle}</h2>
-      <p className={styles.ctaText}>{t.ctaText}</p>
+      <h2 id="blog-cta-title" className={styles.ctaTitle}>{title || t.ctaTitle}</h2>
+      {text && <p className={styles.ctaText}>{text}</p>}
       <div className={styles.ctaBtns}>
         <a href={localizeHref('/booking', locale)} className={styles.btn}>{t.ctaBook}</a>
         <a href={SITE.phoneHref} className={`${styles.btn} ${styles.btnGhost}`}>{t.ctaCall(SITE.phone)}</a>
@@ -97,6 +102,43 @@ export function QuizCta({ locale = 'en' }: { locale?: Locale }) {
       <p className={styles.quizCtaLine}>{t.line}</p>
       <a href={localizeHref('/sleep-quiz', locale)} className={styles.btn}>{t.button} <ArrowRightIcon /></a>
     </section>
+  );
+}
+
+/* a data table with its header row; the cells may carry links. Two-column tables fit any width, wider ones scroll. */
+function Table({ table }: { table: BlogTable }) {
+  const narrow = table.head.length <= 2;
+  return (
+    <>
+      <div className={styles.tableWrap}>
+        <table className={narrow ? `${styles.table} ${styles.tableNarrow}` : styles.table}>
+          {table.caption && <caption>{table.caption}</caption>}
+          <thead><tr>{table.head.map((h, k) => <th key={k} scope="col">{h}</th>)}</tr></thead>
+          <tbody>{table.rows.map((r, k) => <tr key={k}>{r.map((cell, m) => (m === 0 ? <th key={m} scope="row"><Rich text={cell} /></th> : <td key={m}><Rich text={cell} /></td>))}</tr>)}</tbody>
+        </table>
+      </div>
+      {table.note && <p className={styles.tableNote}>{table.note}</p>}
+    </>
+  );
+}
+
+/* one block of a section: a paragraph, an <h3>, a check-icon list (SVG, no emoji) or numbered list (<ol>), or a table */
+function Block({ block }: { block: BlogBlock }) {
+  if ('p' in block) return <p className={styles.p}><Rich text={block.p} /></p>;
+  if ('h3' in block) return <h3 className={styles.h3}>{block.h3}</h3>;
+  if ('table' in block) return <Table table={block.table} />;
+  if (block.list.style === 'number') {
+    return <ol className={styles.numList}>{block.list.items.map((it, k) => <li key={k}><Rich text={it} /></li>)}</ol>;
+  }
+  return (
+    <ul className={styles.checkList}>
+      {block.list.items.map((it, k) => (
+        <li key={k}>
+          <CheckCircleIcon className={styles.checkIco} aria-hidden="true" />
+          <span><Rich text={it} /></span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -118,31 +160,16 @@ export function BlogArticle({ post, related, locale = 'en' }: { post: BlogPost; 
         </div>
       </header>
 
+      {/* the hero image, above the fold: priority (preloaded, eager) on the post itself */}
       <figure className={post.featuredFit === 'contain' ? `${styles.featured} ${styles.featuredContain}` : styles.featured}>
-        <Image src={post.featured.src} alt={post.featured.alt} width={post.featured.width} height={post.featured.height} sizes="(max-width: 1100px) 100vw, 1040px" priority />
+        <Image src={post.featured.src} alt={post.featured.alt} width={post.featured.width} height={post.featured.height} sizes="(max-width: 1100px) 100vw, 1040px" priority fetchPriority="high" />
       </figure>
 
       <main className={styles.article} id="article">
         {post.sections.map((s, i) => (
           <section key={i} className={styles.section}>
             {s.heading && <h2 className={styles.h2}>{s.heading}</h2>}
-            {s.paragraphs.map((p, j) => (
-              <p key={j} className={styles.p}>
-                <Rich text={p} />
-              </p>
-            ))}
-            {s.table && (
-              <>
-                <div className={styles.tableWrap}>
-                  <table className={styles.table}>
-                    {s.table.caption && <caption>{s.table.caption}</caption>}
-                    <thead><tr>{s.table.head.map((h, k) => <th key={k} scope="col">{h}</th>)}</tr></thead>
-                    <tbody>{s.table.rows.map((r, k) => <tr key={k}>{r.map((cell, m) => (m === 0 ? <th key={m} scope="row">{cell}</th> : <td key={m}>{cell}</td>))}</tr>)}</tbody>
-                  </table>
-                </div>
-                {s.table.note && <p className={styles.tableNote}>{s.table.note}</p>}
-              </>
-            )}
+            {sectionBlocks(s).map((b, j) => <Block key={j} block={b} />)}
             {s.image && (
               <figure className={styles.figure}>
                 <Image src={s.image.src} alt={s.image.alt} width={s.image.width} height={s.image.height} sizes="(max-width: 820px) 100vw, 780px" loading="lazy" />
@@ -152,10 +179,24 @@ export function BlogArticle({ post, related, locale = 'en' }: { post: BlogPost; 
           </section>
         ))}
 
-        <section className={styles.faq} aria-labelledby="faq-title">
-          <h2 id="faq-title" className={styles.h2}>{t.faq}</h2>
-          <Faq items={post.faqs} />
-        </section>
+        {post.faqs.length > 0 && (
+          <section className={styles.faq} aria-labelledby="faq-title">
+            <h2 id="faq-title" className={styles.h2}>{post.faqTitle || t.faq}</h2>
+            <Faq items={post.faqs} />
+          </section>
+        )}
+
+        {/* the article's closing, in the document's order: the store block under the closing heading, the closing call
+            to action (→ /booking) and the tagline (a styled paragraph, not a heading) */}
+        {post.closing && (
+          <>
+            <BlogCta locale={locale} title={post.closing.heading} lead={post.closing.lead ?? ''} className={styles.ctaInArticle} />
+            <p className={styles.closingCta}>
+              <a href={localizeHref('/booking', locale)}>{post.closing.cta} <ArrowRightIcon /></a>
+            </p>
+            {post.closing.tagline && <p className={styles.tagline}>{post.closing.tagline}</p>}
+          </>
+        )}
 
         {post.visit && (
           <section className={styles.visit} aria-labelledby="visit-title">
@@ -181,7 +222,8 @@ export function BlogArticle({ post, related, locale = 'en' }: { post: BlogPost; 
 
       <div className={styles.container}>
         <QuizCta locale={locale} />
-        <BlogCta locale={locale} />
+        {/* the store block once per page: inside the article when the post has a closing, here otherwise */}
+        {!post.closing && <BlogCta locale={locale} />}
         <section className={styles.related} aria-labelledby="related-title">
           <h2 id="related-title" className={styles.h2Center}>{t.related}</h2>
           <div className={styles.cards}>

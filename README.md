@@ -202,7 +202,59 @@ restore the route folder from the McAllen repo together with the post data). `ve
 (`/blog/custom-mattresses-improving-health`, `/blog/pressure-mapping-for-sleep`, `/blog/mattresses-that-relieve-aches`,
 `/blog/memory-foam-vs-hybrid-mattress-mcallen`, `/blog/mattress-size-guide-mcallen` and their relocated spellings) and the
 builder's `/post/*` URLs to `/blog`. The sitemap and llms.txt list posts automatically once they exist; the post-build
-gate now covers the blog tree too.
+gate now covers the blog tree too. (Superseded on November 5, 2026 by the five Castle Rock articles — see "Blog posts".)
+
+### Blog posts (November 5, 2026)
+
+The client's "Castle Rock Blogs" document: five articles, published November 5, 2026 (store time) in the document's order
+(`lib/blog-posts.ts` `POSTS`; post 1 leads `/blog`, same-day posts keep that order). The text is the document's,
+verbatim; nothing is added — no offer, price, staff quote or claim.
+
+| # | Route | Hero image | Title tag (chars) |
+|---|---|---|---|
+| 1 | `/blog/moving-to-castle-rock-mattress-guide` | this site's Pressure Mapping station photo (`/assets/filesafe/jbbpu1HIxUn7iMOO9Ysd/media/69d8277f74d020e518f93f1e.png.webp`, 2000×1334) — no storefront photo (`STORE_PHOTO_URL`) yet; switch to it once supplied | Moving to Castle Rock? Your Mattress Guide \| Snooze Mattress (60) |
+| 2 | `/blog/side-sleeper-mattress-castle-rock` | `kfb27KLffGslRPEihqeR/media/6ae22ef836aa4a07e82f97a1.png` (1072×802) | Side Sleeper Mattress Guide in Castle Rock \| Snooze Mattress (60) |
+| 3 | `/blog/sleep-recovery-active-coloradans` | `…/6ae22efd9c1511d5b92babd7.png` (991×660) | Sleep and Recovery for Active Coloradans \| Snooze Mattress (58) |
+| 4 | `/blog/adjustable-beds-explained-castle-rock` | `…/6ae22ef8736386d0dc308d78.png` (1087×711) | Adjustable Beds Explained: Who They’re For \| Snooze Mattress (60) |
+| 5 | `/blog/mattress-size-guide-castle-rock` | `…/6ae22ef836aa4a07e82f9796.png` (1084×720) | Queen, King or California King? Size Guide \| Snooze Mattress (60) |
+
+- **Template** (`components/blog/BlogLayout.tsx`, `lib/blog-posts.ts` `BlogBlock`): one H1 (the document's title), the
+  document's headings as H2 (the size names in post 5 as H3 under "Mattress sizes at a glance"), bullets as check-icon
+  lists (inline SVG), numbered lists and the Sleep Fit steps as `<ol>`, the size chart as a real `<table>` with a header
+  row (no sideways scroll at two columns), the FAQ as an accordion under the document's "Frequently asked questions"
+  H2 (every answer is in the HTML; a `<noscript>` rule opens all of them without JavaScript). The closing follows the
+  document's order: the article's closing heading over the shared store block (`BlogCta`: Snooze Mattress + Wellness, the
+  address, hours and phone, "Get Dream Mapped" → `/booking`; the document's address sentence is this block, never
+  repeated as text; post 1's non-address sentence is the block's lead), the closing call to action ("Start your Sleep
+  Fit.", "Get fitted today.", "Discover your Sleep Score.", "Find your fit.") as a link to `/booking`, and the tagline
+  as a styled paragraph. Then the quiz prompt and two related posts (the next two in listing order, wrapping).
+- **Images**: the hero through next/image (`/_next/image`, WebP) with `priority` + `fetchPriority="high"` on the post (preloaded),
+  lazy on the listing and related cards. `next.config.ts` turns the optimizer on (it was `unoptimized`) and allows
+  remote images only from `assets.cdn.filesafe.space/kfb27KLffGslRPEihqeR/media/**`. Alt text describes each picture.
+- **Internal links** (on the document's words, first occurrence per post; no external links, no `/contact-us` or
+  `/optin-page` CTA): Dream Mapping → `/dream-mapping`; the first "Sleep Fit" and the closing call to action →
+  `/booking`; Sleep Coach → `/about-us`; pillow (posts 1–3) → `/pillows`; adjustable base (posts 1, 3, 4, 5) →
+  `/adjustable-mattress-bases`; "Sheets and protection" / "Bedding" (posts 1, 3) → `/premium-sheets`; financing (post 4,
+  post 5's FAQ) → `/mattress-financing`; the first "mattress" (posts 2, 5) → `/mattresses`; the size chart's Twin / Twin
+  XL / Full → `/full-twin-mattresses`, Queen → `/queen-mattresses`, King / California King → `/king-mattresses`.
+- **SEO / schema** (`components/blog/pages.tsx`): self-canonical; meta description = the article's first two sentences
+  (98–153 chars); the page's one JSON-LD graph adds BlogPosting (headline, description, image, datePublished =
+  dateModified = 2026-11-05, author the Organization "Snooze Mattress + Wellness in Castle Rock", publisher →
+  `#organization`), FAQPage (the on-page FAQ, verbatim) and BreadcrumbList Home › Sleep Blog › post. No AggregateRating.
+  The sitemap lists each post with its date; `llms.txt` lists them under Guides.
+- **Around the site**: `/blog` lists the five posts (the empty state is gone), the header's Blog dropdown lists them
+  (`lib/blog-nav.ts`: title + one of the article's own headings), `/mattresses`' "Buying guides" band links posts 2 and
+  5 (`components/GuideLinks.tsx`: the articles' titles and sentences, the band title is the post-2 tagline).
+  `vercel.json` no longer redirects `/blog/mattress-size-guide-castle-rock` (an A-era relocated McAllen slug, now post
+  5's real address); the McAllen slugs still 308 to `/blog`.
+- **Claims carried as written** (the brief: keep): "up to 30% of your support", "thousands of sensors", "7 to 10 years",
+  "Adults need 7 or more hours of sleep, according to common guidelines". **NEEDS CLIENT CONFIRMATION** (kept as
+  written, not changed): post 5's "each person has about 30 inches, which is narrower than a crib mattress is wide"
+  (a standard crib mattress is about 28 inches wide, so 30 inches is wider, not narrower); "Sleep Fit" and "Sleep
+  Score" as names of the in-store process and its result (the rest of the site calls it Dream Mapping / the pressure
+  map); "Walk-ins are welcome during store hours"; adjustable-base features ("Many have remote controls", "Some bases
+  let each side adjust on its own", "Split options let each person set their own position"); "Most mattresses begin to
+  lose support after 7 to 10 years" as a general statement.
 
 ### Verify (November 5, 2026)
 
@@ -279,7 +331,8 @@ then set it in the Production environment only and redeploy. After the first dep
 | Desktop hero backgrounds | `overrides/overrides.json` `heroBackgrounds` (home, About Us, financing) | the shared neutral background |
 | Brand lineup | `lib/brands.json` + the home strip, `/mattresses` blocks, FAQ copy | McAllen's 15 brands (per-location decision: confirm) |
 | Customer reviews | `lib/reviews.json`, then `npm run reviews` | none shown |
-| Blog articles | `lib/blog-posts.ts` + the `app/(en)/blog/[slug]` route | `/blog` shows the empty state |
+| Blog: storefront hero for post 1 | `lib/blog-posts.ts` post 1 `featured` (with `STORE_PHOTO_URL`) | the Pressure Mapping station photo |
+| Blog claims | see "Blog posts" → NEEDS CLIENT CONFIRMATION | kept as written |
 | Legal pages | `/privacy-policy-page`, `/terms-conditions-page` | governing law and venue follow the store ("State of Colorado", "Douglas County") — review |
 | Offer | `lib/offer.ts` (Black Friday, Nov 3 – Dec 1, 2026, approved for McAllen) | shown on the home band and the sales page — confirm for Castle Rock |
 | Legal entity name | — | not asserted (no `legalName` in the schema) |

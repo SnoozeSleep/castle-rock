@@ -9,8 +9,13 @@ const nextConfig: NextConfig = {
   // so `next start` behaves like the deployment.
   // Assets are always relative (no assetPrefix).
   experimental: { inlineCss: true }, // the page's own CSS is written into the HTML instead of render-blocking stylesheet requests
-  // next/image (footer logo) serves the local files as they are; nothing is optimized per request
-  images: { unoptimized: true },
+  // next/image (the blog's hero and card images, the footer logo) goes through the image optimizer: resized and served as
+  // WebP at /_next/image, never the originals. Remote sources are limited to the client's media library folder that holds
+  // the blog hero images (the Castle Rock blog brief, November 5, 2026); local /assets files need no pattern.
+  images: {
+    formats: ['image/webp'],
+    remotePatterns: [{ protocol: 'https', hostname: 'assets.cdn.filesafe.space', pathname: '/kfb27KLffGslRPEihqeR/media/**' }],
+  },
   async rewrites() {
     return [
       { source: '/ghl-stub/widget/:path*', destination: '/ghl-stub.html' },

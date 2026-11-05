@@ -12,6 +12,8 @@ export function Faq({ items }: { items: BlogFaq[] }) {
   const base = useId();
   return (
     <div className={styles.faqList}>
+      {/* without JavaScript every answer is open (the accordion is an enhancement; the text is in the HTML either way) */}
+      <noscript dangerouslySetInnerHTML={{ __html: `<style>.${styles.faqPanel}{grid-template-rows:1fr!important}</style>` }} />
       {items.map((f, i) => {
         const isOpen = open === i;
         const panelId = `${base}-panel-${i}`;

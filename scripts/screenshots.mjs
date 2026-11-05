@@ -19,7 +19,10 @@ const BROWSER = process.env.BROWSER_PATH || ['C:/Program Files (x86)/Microsoft/E
 if (!BROWSER) throw new Error('no Edge/Chrome found: set BROWSER_PATH');
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = [['home', '/'], ['about-us', '/about-us'], ['booking', '/booking'], ['contact-us', '/contact-us'], ['mattress-financing', '/mattress-financing']];
+/* PAGES=name=/route,name=/route overrides the list (and skips the dropdown / drawer captures), e.g. the blog pass:
+   PAGES=blog=/blog,post-moving=/blog/moving-to-castle-rock-mattress-guide node scripts/screenshots.mjs docs/screenshots/blog */
+const CUSTOM = process.env.PAGES ? process.env.PAGES.split(',').map((s) => s.split('=')) : null;
+const PAGES = CUSTOM || [['home', '/'], ['about-us', '/about-us'], ['booking', '/booking'], ['contact-us', '/contact-us'], ['mattress-financing', '/mattress-financing']];
 const VIEWPORTS = { desktop: { width: 1366, height: 900 }, mobile: { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const issues = {};
@@ -65,11 +68,11 @@ try {
       await page.close();
     }
   }
-  { const page = await open(browser, '/', VIEWPORTS.desktop); await wait(500);
+  if (!CUSTOM) { const page = await open(browser, '/', VIEWPORTS.desktop); await wait(500);
     const trigger = await page.$('button[aria-label="Open Our Products menu"]');
     if (trigger) { await trigger.click(); await wait(700); } else console.log('dropdown trigger not found');
     await page.screenshot({ path: path.join(OUT, 'nav-dropdown-desktop.png') }); console.log('desktop  dropdown             nav-dropdown-desktop.png'); await page.close(); }
-  { const page = await open(browser, '/', VIEWPORTS.mobile); await wait(500);
+  if (!CUSTOM) { const page = await open(browser, '/', VIEWPORTS.mobile); await wait(500);
     const burger = await page.$('button[aria-label="Open menu"]');
     if (burger) { await burger.click(); await wait(900); } else console.log('menu button not found');
     await page.screenshot({ path: path.join(OUT, 'mobile-drawer.png') }); console.log('mobile   drawer               mobile-drawer.png'); await page.close(); }

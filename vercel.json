@@ -25,7 +25,6 @@
     { "source": "/blog/memory-foam-vs-hybrid-mattress-mcallen", "destination": "/blog", "permanent": true },
     { "source": "/blog/mattress-size-guide-mcallen", "destination": "/blog", "permanent": true },
     { "source": "/blog/memory-foam-vs-hybrid-mattress-castle-rock", "destination": "/blog", "permanent": true },
-    { "source": "/blog/mattress-size-guide-castle-rock", "destination": "/blog", "permanent": true },
     { "source": "/post/:slug", "destination": "/blog", "permanent": true },
     { "source": "/:slug-sp", "destination": "/:slug", "permanent": true },
     { "source": "/:slug-:id(\\d{4,6})", "destination": "/:slug", "permanent": true }

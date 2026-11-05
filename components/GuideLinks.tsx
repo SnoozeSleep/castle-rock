@@ -1,21 +1,21 @@
 import { localizeHref, type Locale } from '@/lib/i18n';
 import { ArrowRightIcon, Icon } from './icons';
 
-/* "Buying guides" — a short band at the end of /mattresses linking the two guides most relevant to a mattress shopper
-   (November 2026 brief, E): the buying guide (sizes, comfort levels, foam vs coils) and the cooling mattresses page.
-   The previous location's version linked two of its blog posts; the Castle Rock blog ships empty (F), so the cards point at the
-   hand-written guide pages until Castle Rock articles exist. Server-rendered, outside the GoHighLevel markup, so it
-   never touches the page payload. Styles: overrides/global.css (.snz-areas, .snz-card). */
+/* "Buying guides" — a short band at the end of /mattresses linking two of the Castle Rock blog articles (the blog brief,
+   November 5, 2026): the side-sleeper guide and the mattress size guide (lib/blog-posts.ts posts 2 and 5). The band title
+   is one of the articles' own taglines and each card carries the article's title and one of its own sentences — no copy
+   written for the band. Server-rendered, outside the GoHighLevel markup, so it never touches the page payload. Styles:
+   overrides/global.css (.snz-areas, .snz-card). */
 const COPY = {
   en: {
     eyebrow: 'Buying guides',
-    title: 'Not sure what size you need, or whether foam or coils suit you?',
+    title: 'Not Every Mattress Fits Every Body.',
     text: 'Two guides to read before you come in for your Dream Mapping fitting.',
     cards: [
-      { icon: 'bed-wide' as const, title: 'How to choose a mattress', text: 'Standard sizes, the five comfort levels, foam, hybrid or innerspring, and what to try in the showroom.', href: '/how-to-choose-a-mattress' },
-      { icon: 'snowflake' as const, title: 'Cooling mattresses', text: 'Why a mattress sleeps hot through bright Colorado summers and dry, heated winters, and the cooling models on the floor.', href: '/cooling-mattresses' },
+      { icon: 'spine' as const, title: 'Side Sleeper in Castle Rock? How to Find a Mattress That Supports Your Shoulders and Hips', text: 'Here’s what side sleepers should know before shopping.', href: '/blog/side-sleeper-mattress-castle-rock' },
+      { icon: 'bed-wide' as const, title: 'Queen, King or California King? How to Choose the Right Mattress Size for Your Bedroom', text: 'Here’s how to pick the size that fits your body, your partner and your bedroom.', href: '/blog/mattress-size-guide-castle-rock' },
     ],
-    more: 'Read the guide',
+    more: 'Read article',
   },
 };
 
