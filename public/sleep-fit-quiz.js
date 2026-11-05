@@ -32,9 +32,9 @@ const CONFIG = {
     address: "6360 Promenade Pkwy, Castle Rock, CO 80108",
     bookingUrl: SITE_URL + PREFIX + "/booking",      // Dream Mapping booking page
     shopUrl: SITE_URL + PREFIX + "/mattresses",      // mattresses page
-    // [CR_QUIZ_WEBHOOK] the Castle Rock sub-account's Inbound Webhook URL (Automation -> Workflows -> trigger); mirrors
-    // lib/integrations.ts quizWebhookUrl. EMPTY until the client supplies it: sendLead() logs the payload and posts nothing.
-    webhookUrl: ""
+    // the Castle Rock sub-account's Inbound Webhook URL (Automation -> Workflows -> trigger), supplied November 5, 2026;
+    // mirrors lib/integrations.ts quizWebhookUrl (change both together, bump QUIZ_SCRIPT ?v= in components/SleepQuiz.tsx)
+    webhookUrl: "https://services.leadconnectorhq.com/hooks/gsqZfpbY5MmVessxREvK/webhook-trigger/qhy1QYTG65DvduRltRW9"
   }
 };
 
@@ -515,7 +515,6 @@ async function sendLead(){
   const payload = buildPayload();
   window.__sleepFitLastPayload = payload;
   const url = STORE.webhookUrl;
-  if(!url || url.includes("REPLACE")){ console.warn("[Sleep Fit Quiz] No GHL webhook configured — payload would be:", payload); return; }
   const body = new URLSearchParams(payload); // form-encoded = no CORS preflight
   const post = fetch(url,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body,keepalive:true}).catch(err=>console.warn("Lead post failed",err));
   await Promise.race([post, new Promise(r=>setTimeout(r,2500))]);

@@ -12,12 +12,12 @@ import './sleep-quiz/sleep-fit-quiz.css';
    own top bar and © line are not needed. Styles are the quiz's own stylesheet scoped under .snz-quiz
    (components/sleep-quiz/sleep-fit-quiz.css). The quiz logic is public/sleep-fit-quiz.js, loaded after hydration
    so React never re-renders the subtree the quiz mutates; it reads the language from data-lang and sends the
-   lead to the Castle Rock GoHighLevel inbound webhook (CONFIG inside the script, [CR_QUIZ_WEBHOOK]: while it is
-   empty the completed quiz is logged, not posted). */
+   lead to the Castle Rock GoHighLevel inbound webhook (CONFIG inside the script; the URL mirrors lib/integrations.ts
+   quizWebhookUrl). */
 
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
 const OG_IMAGE = '/assets/filesafe/BljrSmLCnm4gF9LpsTRZ/media/6a90ca4e747464c6b3a3be10.png.webp';
-export const QUIZ_SCRIPT = '/sleep-fit-quiz.js?v=4'; // v=4: the Castle Rock store CONFIG (November 2026), origin-relative links
+export const QUIZ_SCRIPT = '/sleep-fit-quiz.js?v=5'; // v=5: the Castle Rock quiz webhook (November 5, 2026); v=4: the store CONFIG, origin-relative links
 
 const L = LOCATION;
 const META: Record<Locale, { title: string; description: string; ogLocale: string; noscript: string }> = {

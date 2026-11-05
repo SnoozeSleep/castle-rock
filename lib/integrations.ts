@@ -34,7 +34,7 @@ export const INTEGRATIONS = {
   /** [CR_FORM_ID] the LeadConnector "Optin" form id: the contact page form and the popup form on the product pages
       (scripts/integrations.mjs) */
   formId: '',
-  /** [CR_QUIZ_WEBHOOK] the inbound webhook of the Castle Rock sub-account's Sleep Fit Quiz workflow; mirrored in
-      public/sleep-fit-quiz.js CONFIG.store.webhookUrl — change both together */
-  quizWebhookUrl: '',
+  /** the inbound webhook of the Castle Rock sub-account's Sleep Fit Quiz workflow (supplied November 5, 2026); mirrored
+      in public/sleep-fit-quiz.js CONFIG.store.webhookUrl — change both together and bump QUIZ_SCRIPT ?v= */
+  quizWebhookUrl: 'https://services.leadconnectorhq.com/hooks/gsqZfpbY5MmVessxREvK/webhook-trigger/qhy1QYTG65DvduRltRW9',
 };
