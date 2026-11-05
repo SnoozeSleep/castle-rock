@@ -1,49 +1,37 @@
-'use client';
 /**
- * The client's GoHighLevel chat widget (LeadConnector), one per page. The snippet is the client's, verbatim (loader.js with
- * data-resources-url and data-widget-id); it is appended to the end of <body> once the page has loaded and the browser is
- * idle (lazy, after load), so it adds nothing to the critical path, the main-thread work before load, or hydration (it
- * lands after #snz-app, where React never looks). Once per page view: the root layout stays mounted across client-side
- * navigations, so the widget keeps running instead of loading again. The site does not style the widget: its position,
- * look, copy and hours are managed in the client's CRM.
+ * The client's GoHighLevel chat widget (LeadConnector), one per page in the page's language: the English widget on every
+ * page under app/(en) (and the global 404), the Spanish one on /es and /es/* (app/es). Rendered once, by the root layout
+ * (components/SiteDocument.tsx SiteBody), never by a page. The snippet is the client's (loader.js with data-resources-url
+ * and data-widget-id) as ONE next/script per page, strategy "lazyOnload" (the browser loads it when idle after the load
+ * event, so it adds nothing to the critical path, the main-thread work before load, or hydration), keyed and identified
+ * by the widget id so it is never added twice. next/script appends it to the end of <body>, outside #snz-app and the
+ * React tree. The root layout stays mounted across client-side navigations within a language, so the widget keeps
+ * running instead of loading again; switching language is a full page load (the EN | ES links in the top bar and the
+ * mobile menu are plain <a> elements, and each language has its own root layout), so every page starts with only its own
+ * language's widget. The site does not style the widget: its position, look, copy and hours are managed in the client's
+ * CRM.
  *
- * Castle Rock, CO (November 2026): one widget id per language in lib/integrations.ts — [CR_CHAT_EN] for the English
- * pages, [CR_CHAT_ES] for /es — both empty until the client supplies them, so nothing is loaded. Each root layout passes
- * its own language: a language without an id gets no widget, and the English widget never loads on a Spanish page. The
- * previous location's widgets (English and Spanish) were removed.
+ * Castle Rock, CO: the widget ids live in lib/integrations.ts `chatWidgetId` (EN 6aecf1606e7a665a17da2e4d, ES
+ * 6aecf3bd11a83697ce11aafb, supplied November 6, 2026); an empty id renders nothing.
  */
-import { useEffect } from 'react';
+import Script from 'next/script';
 import { INTEGRATIONS } from '@/lib/integrations';
 import type { Locale } from '@/lib/i18n';
 
-const SCRIPT_ID = 'snz-chat-widget';
+const LOADER_SRC = 'https://widgets.leadconnectorhq.com/loader.js';
+const RESOURCES_URL = 'https://widgets.leadconnectorhq.com/chat-widget/loader.js';
 
-export function ChatWidget({ locale = 'en' }: { locale?: Locale }) {
-  useEffect(() => {
-    const widgetId = (INTEGRATIONS.chatWidgetId[locale] || '').trim();
-    if (!widgetId || document.getElementById(SCRIPT_ID)) return;
-    let idle = 0;
-    let timer = 0;
-    const add = () => {
-      if (document.getElementById(SCRIPT_ID)) return;
-      const s = document.createElement('script');
-      s.id = SCRIPT_ID;
-      s.src = 'https://widgets.leadconnectorhq.com/loader.js';
-      s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-      s.setAttribute('data-widget-id', widgetId);
-      document.body.appendChild(s);
-    };
-    const schedule = () => {
-      if (typeof window.requestIdleCallback === 'function') idle = window.requestIdleCallback(add, { timeout: 4000 });
-      else timer = window.setTimeout(add, 1500);
-    };
-    if (document.readyState === 'complete') schedule();
-    else window.addEventListener('load', schedule, { once: true });
-    return () => {
-      window.removeEventListener('load', schedule);
-      if (idle) window.cancelIdleCallback(idle);
-      if (timer) window.clearTimeout(timer);
-    };
-  }, []);
-  return null;
+export function ChatWidget({ locale }: { locale: Locale }) {
+  const widgetId = (INTEGRATIONS.chatWidgetId[locale] || '').trim();
+  if (!widgetId) return null;
+  return (
+    <Script
+      key={widgetId}
+      id={`snz-chat-${widgetId}`}
+      src={LOADER_SRC}
+      strategy="lazyOnload"
+      data-resources-url={RESOURCES_URL}
+      data-widget-id={widgetId}
+    />
+  );
 }

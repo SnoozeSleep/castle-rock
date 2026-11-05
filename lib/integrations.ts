@@ -2,8 +2,8 @@
    DISABLES the integration: nothing is rendered, nothing is loaded, no event is lost (the dataLayer events in
    public/snz-events.js and the quiz keep pushing to window.dataLayer either way). Every previous location's id was
    removed. The GoHighLevel values (location, reviews widget, calendar, form, quiz webhook) are the client's, supplied
-   November 5, 2026, like the tracking ids (GTM, GA4, Simpli.fi); the chat widget id is still a [CR_*] placeholder,
-   listed in the README under NEEDS CLIENT INPUT until supplied.
+   November 5, 2026, like the tracking ids (GTM, GA4, Simpli.fi); the chat widget ids (English and Spanish) on
+   November 6, 2026.
 
    Readers: components/Tracking.tsx (ga4Id, gtmIds, simplifiTagId; googleSiteVerification through the layout metadata),
    components/ChatWidget.tsx (chatWidgetId), components/BookingPage.tsx (bookingCalendarUrl), scripts/integrations.mjs
@@ -21,10 +21,10 @@ export const INTEGRATIONS = {
   ga4Id: 'G-RRW8EFJHLW',
   /** Simpli.fi tag id (https://tag.simpli.fi/sifitag/<id>, async) */
   simplifiTagId: 'f02b62cf-a006-4430-9df7-96dfd0660612',
-  /** [CR_CHAT_EN] / [CR_CHAT_ES] LeadConnector chat widget ids (data-widget-id), one per language: the English widget on
-      the English pages, the Spanish one under /es. Neither is supplied yet. A language without an id gets NO widget —
-      the English widget never loads on /es (components/ChatWidget.tsx). */
-  chatWidgetId: { en: '', es: '' } as Record<'en' | 'es', string>,
+  /** LeadConnector chat widget ids (data-widget-id), one per language, supplied November 6, 2026: the English widget on
+      the English pages, the Spanish one on /es and /es/*. A language without an id gets NO widget — the English widget
+      never loads on /es (components/ChatWidget.tsx). */
+  chatWidgetId: { en: '6aecf1606e7a665a17da2e4d', es: '6aecf3bd11a83697ce11aafb' } as Record<'en' | 'es', string>,
   /** the Castle Rock GoHighLevel sub-account (location) id (supplied November 5, 2026): the reviews widget URL, the CDN
       media path and the webhook host. The image library paths under /assets/filesafe/<previous location id>/ are files
       copied from the clone (shared brand assets) and keep that path. */

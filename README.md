@@ -141,8 +141,8 @@ PER-LOCATION decision: this list is McAllen's and needs confirming for Castle Ro
 ### D. Tracking / embeds — all gated on `lib/integrations.ts`
 
 (State of the clone. The GoHighLevel values — location, reviews widget, calendar, form, quiz webhook — were supplied and
-installed on November 5, 2026: see "Client-supplied ids, images and embeds installed"; the tracking and chat ids are
-still placeholders.)
+installed on November 5, 2026: see "Client-supplied ids, images and embeds installed"; the tracking ids followed the same
+day and the chat widget ids on November 6, 2026: see "Chat widget installed".)
 
 Every third-party id is an empty `[CR_*]` placeholder; an empty value disables the integration (nothing rendered,
 nothing loaded) and nothing of McAllen is left. The section shells stay and offer the store's phone and e-mail instead.
@@ -152,7 +152,7 @@ nothing loaded) and nothing of McAllen is left. The section shells stay and offe
 | Google Tag Manager | `gtmIds` `[CR_GTM]` — GTM-TVPN94M only if the agency confirms it is shared | `components/Tracking.tsx` (head snippet + body noscript per container) | no tag, no preconnect |
 | Google Analytics 4 | `ga4Id` `[CR_GA4]` | `components/Tracking.tsx` (gtag.js + config, once) | no tag |
 | Simpli.fi | `simplifiTagId` `[CR_SIMPLIFI]` | `components/Tracking.tsx` | no tag |
-| Chat widget | `chatWidgetId` `[CR_CHAT_EN]` | `components/ChatWidget.tsx` (loader appended after load, when idle; no site styling) | not loaded |
+| Chat widget | `chatWidgetId` `{ en, es }` (installed November 6, 2026) | `components/ChatWidget.tsx` (one next/script per page, lazyOnload, the page language's id; no site styling) | not loaded |
 | Booking calendar | `bookingCalendarUrl` `[CR_CALENDAR_ID]` | `components/BookingPage.tsx` (`/booking`) | a "being connected" card with the phone and e-mail replaces the iframe; no widget script |
 | Opt-in form | `formId` `[CR_FORM_ID]` | `scripts/integrations.mjs` (`npm run integrations`) → the form embeds on 9 routes (contact page + the product pages' popup) | the iframes point at the site's own `/ghl-stub/form/CR_FORM_ID` → `public/ghl-stub.html`: "This form is being connected. Call (303) 736-8465 or email keithc@snoozemattresscompany.com"; nothing posts anywhere |
 | Reviews widget | `ghlLocationId` `[CR_GHL_LOCATION_ID]` + `reviewsWidgetId` `[CR_REVIEWS_WIDGET_ID]` | `scripts/reviews-widget.mjs` (`npm run reviews:widget`) → "Some of Our Happy Customers" on 12 routes | one line in the section: "Customer reviews for the Castle Rock store are being connected. Call (303) 736-8465 or email keithc@snoozemattresscompany.com"; "Read more reviews on Google" hidden until `[CR_PLACE_ID]` |
@@ -331,8 +331,6 @@ Production environment only and redeploy.
 | Placeholder | Where | Until supplied |
 |---|---|---|
 | `[CR_DOMAIN]` | the Vercel project's domain + `NEXT_PUBLIC_SITE_URL` (Production) | canonicals, sitemap, robots, llms.txt and JSON-LD use the deployment host; no host redirect |
-| `[CR_CHAT_EN]` | `lib/integrations.ts` `chatWidgetId.en` | no chat widget on the English pages |
-| `[CR_CHAT_ES]` | `lib/integrations.ts` `chatWidgetId.es` | no chat widget on `/es` (each language loads only its own id: the English widget never loads on a Spanish page) |
 | `[CR_PLACE_ID]` | `lib/location.ts` `PLACE_ID`, then `npm run reviews:widget` | address links open a Maps search; no `hasMap` / `geo` / GBP `sameAs`; "Read more reviews on Google" hidden |
 | Form redirect (GoHighLevel setting) | the Optin form `j5X6ShHH15vRKdggRsLr` → on submit: redirect to `https://<domain>/thank/you` | the form shows its inline "Thank you for submitting your entry." message, so the visitor never reaches the noindex thank-you page and `optin_submit` cannot fire |
 | Form test submission | `/contact-us`, by a person | not submitted from the build machine: the form's bot check (Cloudflare Turnstile) gives no token to an automated browser |
@@ -542,13 +540,54 @@ toggle; an unknown slug fails the build. The "Buying guides" band on `/es/mattre
 like the English band; the read time reads "N min de lectura". The old Spanish blog URLs of the clone still 308 to
 `/es/blog` (`vercel.json`); none of the new slugs collides with them.
 
-**Chat.** `lib/integrations.ts` `chatWidgetId` is `{ en, es }`, both empty (`[CR_CHAT_EN]`, `[CR_CHAT_ES]`): no widget
-loads in either language, and when only the English id arrives the Spanish pages still load none. Observed on
-November 6, 2026 (agency item, not the site): the tag container `GTM-TVPN94M` itself requests
-`widgets.leadconnectorhq.com/loader.js` on every page in both languages. That script carries no widget id and no
-`<chat-widget>` renders, but a chat tag configured in the container would show the same (English) widget on `/es` —
-if the container is meant to carry chat, it needs a rule for `/es`; otherwise the tag should come out and the ids go in
-`lib/integrations.ts`.
+**Chat.** `lib/integrations.ts` `chatWidgetId` is `{ en, es }`; both ids were supplied and installed on November 6,
+2026 — see "Chat widget installed" below: the English widget on the English pages, the Spanish one on `/es`.
+
+### Chat widget installed (November 6, 2026)
+
+The client's LeadConnector chat widgets, one per language; nothing else changed.
+
+| | Widget id | Pages |
+|---|---|---|
+| English | `6aecf1606e7a665a17da2e4d` | every page under `app/(en)`, and the 404 for unknown URLs |
+| Spanish | `6aecf3bd11a83697ce11aafb` | `/es` and every `/es/*` page (`app/es`) |
+
+- **Code.** `lib/integrations.ts` `chatWidgetId: { en, es }` (the gate stays: an empty id renders nothing).
+  `components/ChatWidget.tsx` is ONE `next/script` per page: `src` `https://widgets.leadconnectorhq.com/loader.js`,
+  `data-resources-url` `https://widgets.leadconnectorhq.com/chat-widget/loader.js`, `data-widget-id`,
+  `strategy="lazyOnload"` (loaded when the browser is idle after the load event), keyed and identified by the widget
+  id (`#snz-chat-<id>`). It is rendered once, by the root layout (`components/SiteDocument.tsx` `SiteBody`, shared by
+  `app/(en)/layout.tsx`, `app/es/layout.tsx` and `app/global-not-found.tsx`), never by a page; each layout passes its
+  own language, so the English id never reaches a Spanish page. No site-side styling: position, look, greeting and
+  hours are set in the CRM.
+- **Language switch.** The EN | ES links (top bar and mobile menu) are plain `<a href>` elements, unchanged: a full page
+  load into the other root layout, which starts with only that language's widget.
+- **CSP.** None exists (no `Content-Security-Policy` in `next.config.ts`, `vercel.json`, `middleware.ts` or the
+  pages), so nothing needed allowing.
+- **Checks** (production build, Chrome, November 6, 2026). `/`, `/adjustable-mattress-bases`, `/booking` and
+  `/blog/mattress-size-guide-castle-rock` and their Spanish twins at 1366 × 900 and 375 × 812: exactly one widget
+  script with the page language's id, one `<chat-widget>`, one bubble 20 px from the bottom-right corner, the widget
+  config fetched only for that id, no console, page or CSP errors. The EN | ES toggle swaps the widget (English →
+  Spanish → English, one widget each time); a navigation through the header loads the next page with one widget. At
+  375 px the only pinned controls are the sticky header's logo, call and menu buttons at the top: neither the bubble
+  nor its greeting card covers them (checked at the top, 35 %, 70 % and the end of each page), and the open mobile menu
+  covers the bubble. `scripts/check-es.mjs` now requires the Spanish id on every `/es` page and the English id on its
+  twin.
+- **Lighthouse** 12.8.2, before (9413307) vs after, the two production builds served side by side and run alternately,
+  median of 3: mobile `/` 50 → 48, mobile `/adjustable-mattress-bases` 55 → 53, mobile `/es` 48 → 49, desktop `/`
+  98 → 99; accessibility, best practices and SEO unchanged (96–100 / 59–61 / 100); LCP and CLS unchanged. The low
+  mobile scores were there before: total blocking time of about 2.2–2.6 s, almost all of it the tag container's tags.
+  The widget's `loader.js` was already listed under "third-party cookies" before this change (the container's copy).
+- **Seen, not site faults (CRM / tag container).** The greeting card ("Not sure which mattress fits you? Chat with a
+  Sleep Coach." / "¿No sabe qué colchón es para usted? Chatee con un Sleep Coach.") opens on its own and, at 375 px,
+  covers about 300 × 175 px of the content above the bubble until it is closed (on `/booking`, part of the calendar
+  card). The Spanish greeting says *usted* where the site's Spanish says *tú*. The tag container `GTM-TVPN94M` still
+  requests its own `loader.js` without a widget id on every page: no second widget renders, but it downloads the
+  loader a second time and can come out of the container now that the site carries the widget.
+- **Screenshots.** `docs/screenshots/chat/`: `/`, `/adjustable-mattress-bases`, `/booking` and
+  `/blog/mattress-size-guide-castle-rock`, English and Spanish, 1366 px and 375 px, with the widget loaded.
+- **404.** An unknown URL — `/es/<anything>` included — gets the English 404 page (`app/global-not-found.tsx`, see
+  "Spanish site restored"), so it carries the English widget, like the page around it.
 
 ---
 

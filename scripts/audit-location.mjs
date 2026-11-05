@@ -167,7 +167,7 @@ console.log(`  hreflang reciprocity: ${recip ? `${recip} broken` : 'every altern
 
 // ---- integrations in the built routes
 console.log('\n=== integrations in built routes ===');
-const w = { calendar: /widget\/booking\/([A-Za-z0-9_\[\]-]+)/g, form: /widget\/form\/([A-Za-z0-9_\[\]-]+)/g, 'form placeholder': /ghl-stub\/form\/([A-Za-z0-9_\[\]-]+)/g, reviews: /review_widget\/([A-Za-z0-9]+)\?widgetId=([a-f0-9]+)/g, 'reviews placeholder': /data-snz-reviews="(pending)"/g, gtm: /googletagmanager\.com\/gtm\.js\?id=([A-Z0-9-]+)|ns\.html\?id=([A-Z0-9-]+)/g, ga4: /gtag\/js\?id=([A-Z0-9-]+)/g, chat: /data-widget-id="([a-f0-9]+)"/g, simplifi: /tag\.simpli\.fi\/sifitag\/([a-z0-9-]+)/g };
+const w = { calendar: /widget\/booking\/([A-Za-z0-9_\[\]-]+)/g, form: /widget\/form\/([A-Za-z0-9_\[\]-]+)/g, 'form placeholder': /ghl-stub\/form\/([A-Za-z0-9_\[\]-]+)/g, reviews: /review_widget\/([A-Za-z0-9]+)\?widgetId=([a-f0-9]+)/g, 'reviews placeholder': /data-snz-reviews="(pending)"/g, gtm: /googletagmanager\.com\/gtm\.js\?id=([A-Z0-9-]+)|ns\.html\?id=([A-Z0-9-]+)/g, ga4: /gtag\/js\?id=([A-Z0-9-]+)/g, chat: /data-widget-id(?:="|\\":\\")([a-f0-9]+)/g, simplifi: /tag\.simpli\.fi\/sifitag\/([a-z0-9-]+)/g };
 for (const [k, re] of Object.entries(w)) { const ids = new Map(); for (const f of html) { const s = fs.readFileSync(f, 'utf8'); for (const m of s.matchAll(re)) { const id = m.slice(1).filter(Boolean).join('/'); (ids.get(id) || ids.set(id, new Set()).get(id)).add(rel(f)); } } if (!ids.size) console.log(`  ${k}: none`); for (const [id, pages] of ids) console.log(`  ${k}: ${id} on ${pages.size} route(s)`); }
 
 console.log(`\n${problems ? `PROBLEMS: ${problems}` : 'CLEAN: no unintended leftovers, Castle Rock data consistent on every route'}`);

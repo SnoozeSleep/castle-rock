@@ -8,8 +8,10 @@
  * -> back to the same Spanish page); every internal link on the Spanish page stays under /es; no visible English left
  * (customer reviews are exempt: they are marked lang="en"); no console or page errors; the tags fire with no
  * interaction — gtm.js for the container, gtag.js + a page_view hit for the GA4 property, the Simpli.fi tag once — and
- * the site's chat widget does NOT load and no <chat-widget> renders (no Spanish widget id yet; the English one must
- * never load on /es; a loader requested by the tag container instead is printed as a note); form_embed.js at most once.
+ * the chat widget is the site's one script carrying the Spanish widget id on the Spanish page and the English id on its
+ * English twin (lib/integrations.ts chatWidgetId; never the other language's id, never two scripts, at most one
+ * <chat-widget>; a loader.js request beyond the site's own — the tag container's copy — is printed as a note);
+ * form_embed.js at most once.
  * A second gtag.js request for the same property (the container's own copy) is a note too. At 390 px: no horizontal overflow, no errors. Then the dataLayer events on /es: phone_click,
  * directions_click, optin_submit, booking_confirmation and quiz_completed (the quiz webhook request is intercepted and
  * NOT sent: its body is read to confirm the store and the language; no lead is posted).
@@ -29,6 +31,9 @@ const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const pick = (src, re) => (src.match(re) || [, ''])[1];
 const integ = read('lib/integrations.ts');
 const GTM = pick(integ, /gtmIds: \['([^']*)'/), GA4 = pick(integ, /ga4Id: '([^']*)'/), SIFI = pick(integ, /simplifiTagId: '([^']*)'/);
+const CHAT = { en: pick(integ, /chatWidgetId: \{ en: '([^']*)'/), es: pick(integ, /chatWidgetId: \{ en: '[^']*', es: '([^']*)'/) };
+const chatWant = (l) => (CHAT[l] ? [CHAT[l]] : []);
+const chatIdsOf = (page) => page.evaluate(() => [...document.querySelectorAll('script[data-widget-id]')].map((s) => s.getAttribute('data-widget-id')));
 const SLUG_ES = {}; { const m = read('lib/blog-nav.ts').match(/export const BLOG_SLUG_ES[^=]*=\s*\{([\s\S]*?)\};/); if (m) for (const p of m[1].matchAll(/'([^']+)':\s*'([^']+)'/g)) SLUG_ES[p[1]] = p[2]; }
 
 /* the English routes, from the build */
@@ -57,6 +62,8 @@ async function open(route, width, track) {
   if (track) page.on('request', (q) => req.push(q.url()));
   const res = await page.goto(BASE + route, { waitUntil: 'networkidle2', timeout: 120000 }).catch(() => null);
   await wait(track ? 3500 : 800);
+  // the chat widget script is added after load, when the browser is idle (next/script lazyOnload)
+  if (CHAT.en || CHAT.es) await page.waitForFunction(() => document.querySelector('script[data-widget-id]'), { timeout: 10000 }).catch(() => {});
   return { page, errors, req, status: res ? res.status() : 0 };
 }
 
@@ -84,15 +91,15 @@ for (const en of enRoutes.sort()) {
       lang: document.documentElement.lang, h1: document.querySelectorAll('h1').length, title: document.title, alts, toggles, off: off.slice(0, 6),
       canonical: rel((document.querySelector('link[rel="canonical"]') || {}).href || ''), robots: (document.querySelector('meta[name="robots"]') || {}).content || '',
       left: [...new Set(left)].slice(0, 5), leftN: new Set(left).size, scrollW: document.documentElement.scrollWidth,
-      // the site's own widget (components/ChatWidget.tsx appends script#snz-chat-widget) and any widget that rendered
-      chatOwn: !!document.getElementById('snz-chat-widget'), chatRendered: document.querySelectorAll('chat-widget').length,
+      // the site's widget script(s) (components/ChatWidget.tsx: next/script with data-widget-id) and any widget that rendered
+      chatIds: [...document.querySelectorAll('script[data-widget-id]')].map((s) => s.getAttribute('data-widget-id')), chatRendered: document.querySelectorAll('chat-widget').length,
       formEmbed: [...document.scripts].filter((s) => /form_embed\.js/.test(s.src)).length,
       events: (window.dataLayer || []).filter((e) => e && typeof e.event === 'string').map((e) => e.event),
     };
   }, ENGLISH.source, BRANDS.source);
   const n = (re) => S.req.filter((u) => re.test(u)).length;
   const hits = S.req.filter((u) => /\/g\/collect\?/.test(u) && u.includes('tid=' + GA4)).length;
-  const tags = { gtm: n(new RegExp('gtm\\.js\\?id=' + GTM)), gtag: n(new RegExp('gtag/js\\?id=' + GA4)), hits, sifi: n(new RegExp('sifitag/' + SIFI)), chat: n(/widgets\.leadconnectorhq\.com\/loader\.js|chat-widget\/loader\.js/) };
+  const tags = { gtm: n(new RegExp('gtm\\.js\\?id=' + GTM)), gtag: n(new RegExp('gtag/js\\?id=' + GA4)), hits, sifi: n(new RegExp('sifitag/' + SIFI)), chat: n(/widgets\.leadconnectorhq\.com\/loader\.js|chat-widget\/loader\.js/), loader: n(/widgets\.leadconnectorhq\.com\/loader\.js/) };
   const noindex = /noindex/.test(info.robots); const post = /^\/blog\/./.test(en);
   if (S.status !== 200) flag(`${es}: HTTP ${S.status}`);
   if (info.lang !== 'es') flag(`${es}: <html lang="${info.lang}">`);
@@ -107,10 +114,11 @@ for (const en of enRoutes.sort()) {
   if (tags.gtm < 1 || tags.gtag < 1 || tags.hits < 1 || tags.sifi !== 1) flag(`${es}: tags gtm.js ×${tags.gtm}, gtag.js ×${tags.gtag}, GA4 hits ×${tags.hits}, Simpli.fi ×${tags.sifi}`);
   // the site requests gtag.js once; a second request is the tag container loading its own copy of the same property
   if (tags.gtag > 1) notes.gtagTwice.push(es);
-  if (info.chatOwn) flag(`${es}: the site's chat widget loaded (no Spanish widget id is set)`);
-  if (info.chatRendered) flag(`${es}: a chat widget rendered (${info.chatRendered} <chat-widget>)`);
-  // the chat loader requested by something other than the site (the tag container): reported, not a site fault
-  if (tags.chat && !info.chatOwn) notes.chatLoader.push(es);
+  // the chat widget: one script with the Spanish id, never the English one, never two
+  if (JSON.stringify(info.chatIds) !== JSON.stringify(chatWant('es'))) flag(`${es}: chat widget ids ${JSON.stringify(info.chatIds)} (expected ${JSON.stringify(chatWant('es'))})`);
+  if (info.chatRendered > 1) flag(`${es}: ${info.chatRendered} <chat-widget> elements`);
+  // loader.js requested more often than the site's own script: the tag container's copy (reported, not a site fault)
+  if (tags.loader > chatWant('es').length) notes.chatLoader.push(es);
   if (info.formEmbed > 1) flag(`${es}: form_embed.js ×${info.formEmbed}`);
   if (info.scrollW > 1280) flag(`${es}: horizontal overflow at 1280 (${info.scrollW})`);
   await S.page.close();
@@ -121,6 +129,8 @@ for (const en of enRoutes.sort()) {
   if (back.lang !== 'en') flag(`${en}: <html lang="${back.lang}">`);
   if (back.h1 !== 1) flag(`${en}: ${back.h1} <h1>`);
   if (!back.es.length || back.es.some((h) => h !== es)) flag(`${en}: toggle to Spanish ${JSON.stringify(back.es.slice(0, 2))} (expected ${es})`);
+  const enChat = await chatIdsOf(E.page);
+  if (JSON.stringify(enChat) !== JSON.stringify(chatWant('en'))) flag(`${en}: chat widget ids ${JSON.stringify(enChat)} (expected ${JSON.stringify(chatWant('en'))})`);
   if (E.errors.length) flag(`${en}: ${E.errors.length} console/page error(s): ${[...new Set(E.errors)].slice(0, 2).join(' | ')}`);
   await E.page.close();
   let mobile = '';
@@ -172,6 +182,6 @@ if (!ONLY) {
 await browser.close();
 console.log(`\n${rows.length} pair(s): ${rows.filter((r) => r[1] !== '—').length} with a Spanish twin`);
 if (notes.gtagTwice.length) console.log(`note: gtag.js for ${GA4} was requested twice on ${notes.gtagTwice.length} Spanish page(s) — the site's own request plus the tag container's copy of the same property (container setting, not the site)`);
-if (notes.chatLoader.length) console.log(`note: the LeadConnector chat loader (widgets.leadconnectorhq.com/loader.js) was requested on ${notes.chatLoader.length} Spanish page(s) by something other than the site's widget — the tag container ${GTM}; no <chat-widget> rendered`);
+if (notes.chatLoader.length) console.log(`note: the LeadConnector chat loader (widgets.leadconnectorhq.com/loader.js) was requested on ${notes.chatLoader.length} Spanish page(s) more often than the site's own widget script — the tag container ${GTM} loads its own copy (container setting, not the site)`);
 console.log(problems ? `PROBLEMS: ${problems}` : 'spanish check ok');
 process.exit(problems ? 1 : 0);
