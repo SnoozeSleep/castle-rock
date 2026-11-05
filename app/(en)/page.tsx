@@ -7,7 +7,7 @@ import { SizeTypeGrid } from '@/components/SizeTypeGrid';
 import { AreaLinks } from '@/components/AreaLinks';
 
 export const metadata: Metadata = {
-  "title": "Castle Rock Mattress Store | Dream Mapping | Snooze Mattress",
+  "title": "Mattress Store in Castle Rock, CO | Snooze Mattress",
   "description": "Castle Rock, CO mattress store with a free Dream Mapping fitting, top brands and financing options at 6360 Promenade Pkwy. Open Sundays 11–6.",
   "authors": [
     {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "canonical": "/"
   },
   "openGraph": {
-    "title": "Castle Rock Mattress Store | Dream Mapping | Snooze Mattress",
+    "title": "Mattress Store in Castle Rock, CO | Snooze Mattress",
     "description": "Castle Rock, CO mattress store with a free Dream Mapping fitting, top brands and financing options at 6360 Promenade Pkwy. Open Sundays 11–6.",
     "url": "/",
     "type": "website",

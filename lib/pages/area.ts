@@ -16,7 +16,7 @@ export function areaPage(city: string, slug: string): ContentPage {
     schemaPage: { type: 'WebPage', city },
     copy: {
       en: {
-        title: `Mattress Store Serving ${city}, CO | Snooze Mattress`,
+        title: `Serving ${city} from Castle Rock | Snooze Mattress`,
         description: `Mattress shopping from ${city}? Snooze Mattress + Wellness in Castle Rock fits you with free Dream Mapping and delivers free on orders over $999.`,
         crumb: `Serving ${city}`,
         eyebrow: 'Service area',

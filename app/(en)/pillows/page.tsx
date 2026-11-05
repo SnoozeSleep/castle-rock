@@ -5,13 +5,13 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Pillows in Castle Rock, CO for How You Sleep | Snooze Mattress",
+  "title": "Pillows in Castle Rock for How You Sleep | Snooze Mattress",
   "description": "Pillows in Castle Rock, CO fitted to how you sleep: side, back and stomach sleepers. Premium pillows at Snooze Mattress + Wellness for your sleep style.",
   "alternates": {
     "canonical": "/pillows"
   },
   "openGraph": {
-    "title": "Pillows in Castle Rock, CO for How You Sleep | Snooze Mattress",
+    "title": "Pillows in Castle Rock for How You Sleep | Snooze Mattress",
     "description": "Pillows in Castle Rock, CO fitted to how you sleep: side, back and stomach sleepers. Premium pillows at Snooze Mattress + Wellness for your sleep style.",
     "url": "/pillows",
     "type": "website",

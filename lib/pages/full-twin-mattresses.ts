@@ -9,7 +9,7 @@ export const PAGE: ContentPage = {
   copy: {
     en: {
       title: 'Full & Twin Mattresses in Castle Rock, CO | Snooze Mattress',
-      description: 'Twin, twin XL and full mattresses in Castle Rock, CO for kids, guest rooms and smaller bedrooms, from the brands at Snooze, fitted with free Dream Mapping.',
+      description: 'Twin, twin XL and full mattresses in Castle Rock for kids, guest rooms and smaller bedrooms, from the brands at Snooze, fitted with free Dream Mapping.',
       crumb: 'Full & Twin Mattresses',
       eyebrow: 'Mattresses by size',
       h1: 'Full and twin mattresses in Castle Rock, CO',

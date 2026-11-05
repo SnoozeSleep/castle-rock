@@ -87,7 +87,7 @@ const en: UiStrings = {
     ctaEyebrow: 'Real People. Real Results. Real Sleep.', ctaTitle: 'Visit Our Showroom',
     ctaText: 'Talk to our Sleep Specialists in Castle Rock. Get pressure-mapped, try the mattresses that fit your body, and ask about 0% financing — we treat every person who walks through our door like family.',
     ctaBook: 'Book Your Dream Mapping Appointment', ctaCall: (p) => `Call ${p}`, ctaAddr: '6360 Promenade Pkwy, Castle Rock, CO 80108 · Mon–Sat 10 AM–7 PM · Sun 11 AM–6 PM',
-    indexMetaTitle: 'Sleep Blog | Snooze Mattress in Castle Rock',
+    indexMetaTitle: 'Castle Rock Sleep Blog | Snooze Mattress',
     indexMetaDesc: 'Sleep tips from Snooze Mattress + Wellness in Castle Rock: custom mattresses, pressure mapping and how the right mattress relieves aches and pains.',
     ogDesc: 'Custom mattresses, pressure mapping and better sleep — from the Snooze team in Castle Rock.', section: 'Sleep & Wellness', by: 'By', /* + the author's name, lib/blog-author.ts */ sources: 'Sources',
   },

@@ -5,14 +5,14 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Privacy Policy | Snooze Mattress",
-  "description": "How Snooze Mattress + Wellness – Castle Rock collects, uses and shares your personal information when you visit our website, contact us or use our services.",
+  "title": "Castle Rock Privacy Policy | Snooze Mattress",
+  "description": "How Snooze Mattress + Wellness in Castle Rock collects, uses and shares your personal information when you visit the site, contact us or use our services.",
   "alternates": {
     "canonical": "/privacy-policy-page"
   },
   "openGraph": {
-    "title": "Privacy Policy | Snooze Mattress",
-    "description": "How Snooze Mattress + Wellness – Castle Rock collects, uses and shares your personal information when you visit our website, contact us or use our services.",
+    "title": "Castle Rock Privacy Policy | Snooze Mattress",
+    "description": "How Snooze Mattress + Wellness in Castle Rock collects, uses and shares your personal information when you visit the site, contact us or use our services.",
     "url": "/privacy-policy-page",
     "type": "website",
     "images": [

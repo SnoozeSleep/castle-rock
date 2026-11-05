@@ -5,13 +5,13 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Terms & Conditions | Snooze Mattress",
+  "title": "Castle Rock Terms & Conditions | Snooze Mattress",
   "description": "The terms and conditions for using the Snooze Mattress + Wellness – Castle Rock website. By accessing or using the website, you agree to these terms.",
   "alternates": {
     "canonical": "/terms-conditions-page"
   },
   "openGraph": {
-    "title": "Terms & Conditions | Snooze Mattress",
+    "title": "Castle Rock Terms & Conditions | Snooze Mattress",
     "description": "The terms and conditions for using the Snooze Mattress + Wellness – Castle Rock website. By accessing or using the website, you agree to these terms.",
     "url": "/terms-conditions-page",
     "type": "website",

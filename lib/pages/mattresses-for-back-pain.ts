@@ -8,7 +8,7 @@ export const PAGE: ContentPage = {
   schemaPage: { type: 'CollectionPage' },
   copy: {
     en: {
-      title: 'Mattresses for Back Pain in Castle Rock, CO | Snooze Mattress',
+      title: 'Mattresses for Back Pain in Castle Rock | Snooze Mattress',
       description: 'Mattresses for back pain and side sleepers in Castle Rock, CO: a free Dream Mapping scan finds your pressure points and the Sleep Coach finds the support.',
       crumb: 'Back Pain & Side Sleepers',
       eyebrow: 'Mattresses by need',

@@ -5,14 +5,14 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Sleep Recliner (Zcliner) in Castle Rock, CO | Snooze Mattress",
-  "description": "The SleepRecliner (Zcliner®) by Flexsteel, available at Snooze Mattress + Wellness in Castle Rock: advanced comfort technology with therapeutic positioning.",
+  "title": "Sleep Recliner (Zcliner) in Castle Rock | Snooze Mattress",
+  "description": "The SleepRecliner (Zcliner®) by Flexsteel at Snooze Mattress + Wellness in Castle Rock: advanced comfort technology with therapeutic positioning.",
   "alternates": {
     "canonical": "/sleep-recliner"
   },
   "openGraph": {
-    "title": "Sleep Recliner (Zcliner) in Castle Rock, CO | Snooze Mattress",
-    "description": "The SleepRecliner (Zcliner®) by Flexsteel, available at Snooze Mattress + Wellness in Castle Rock: advanced comfort technology with therapeutic positioning.",
+    "title": "Sleep Recliner (Zcliner) in Castle Rock | Snooze Mattress",
+    "description": "The SleepRecliner (Zcliner®) by Flexsteel at Snooze Mattress + Wellness in Castle Rock: advanced comfort technology with therapeutic positioning.",
     "url": "/sleep-recliner",
     "type": "website",
     "images": [

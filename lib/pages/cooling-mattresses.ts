@@ -9,7 +9,7 @@ export const PAGE: ContentPage = {
   copy: {
     en: {
       title: 'Cooling Mattresses in Castle Rock, CO | Snooze Mattress',
-      description: 'Cooling mattresses in Castle Rock, CO for dry air and heated winter bedrooms: Tempur-Pedic cooling models and the Spring Air Copper Collection, fitted free.',
+      description: 'Cooling mattresses in Castle Rock for dry air and heated winter bedrooms: Tempur-Pedic cooling models and the Spring Air Copper Collection, fitted free.',
       crumb: 'Cooling Mattresses',
       eyebrow: 'Mattresses by type',
       h1: 'Cooling mattresses for Colorado summers and heated winters',

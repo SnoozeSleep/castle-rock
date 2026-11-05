@@ -5,14 +5,14 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Massage Chairs in Castle Rock, CO — Infinity | Snooze Mattress",
-  "description": "Infinity massage chairs in Castle Rock, CO at Snooze Mattress + Wellness: advanced massage technology designed to help you relax and recover. Try one in store.",
+  "title": "Massage Chairs in Castle Rock: Infinity | Snooze Mattress",
+  "description": "Infinity massage chairs in Castle Rock at Snooze Mattress + Wellness: advanced massage technology to help you relax and recover. Try one in store.",
   "alternates": {
     "canonical": "/massage-chairs"
   },
   "openGraph": {
-    "title": "Massage Chairs in Castle Rock, CO — Infinity | Snooze Mattress",
-    "description": "Infinity massage chairs in Castle Rock, CO at Snooze Mattress + Wellness: advanced massage technology designed to help you relax and recover. Try one in store.",
+    "title": "Massage Chairs in Castle Rock: Infinity | Snooze Mattress",
+    "description": "Infinity massage chairs in Castle Rock at Snooze Mattress + Wellness: advanced massage technology to help you relax and recover. Try one in store.",
     "url": "/massage-chairs",
     "type": "website",
     "images": [

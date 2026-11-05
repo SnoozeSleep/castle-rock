@@ -6,13 +6,13 @@ import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
   "title": "About Us: Castle Rock Mattress Store | Snooze Mattress",
-  "description": "Snooze Mattress + Wellness, Castle Rock, CO: science-backed Dream Mapping fittings, real Sleep Coaches and no commission pressure to find your right mattress.",
+  "description": "Snooze Mattress + Wellness in Castle Rock: science-backed Dream Mapping fittings, real Sleep Coaches and no commission pressure to find your mattress.",
   "alternates": {
     "canonical": "/about-us"
   },
   "openGraph": {
     "title": "About Us: Castle Rock Mattress Store | Snooze Mattress",
-    "description": "Snooze Mattress + Wellness, Castle Rock, CO: science-backed Dream Mapping fittings, real Sleep Coaches and no commission pressure to find your right mattress.",
+    "description": "Snooze Mattress + Wellness in Castle Rock: science-backed Dream Mapping fittings, real Sleep Coaches and no commission pressure to find your mattress.",
     "url": "/about-us",
     "type": "website",
     "images": [

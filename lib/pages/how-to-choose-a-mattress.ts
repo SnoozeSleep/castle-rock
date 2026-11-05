@@ -9,7 +9,7 @@ export const PAGE: ContentPage = {
   kind: 'guide',
   copy: {
     en: {
-      title: 'How to Choose a Mattress: Sizes & Comfort | Snooze Mattress',
+      title: 'How to Choose a Mattress in Castle Rock | Snooze Mattress',
       description: 'How to choose a mattress in Castle Rock: standard sizes, the five comfort levels, sleep position, what to try in the showroom, and free Dream Mapping.',
       crumb: 'How to Choose a Mattress',
       eyebrow: 'Buying guide',

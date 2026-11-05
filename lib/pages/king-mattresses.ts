@@ -8,8 +8,8 @@ export const PAGE: ContentPage = {
   schemaPage: { type: 'CollectionPage' },
   copy: {
     en: {
-      title: 'King Mattresses in Castle Rock: Room for Two | Snooze Mattress',
-      description: 'King and split king mattresses in Castle Rock, CO from Tempur-Pedic, Sealy, Stearns & Foster, Serta and more, fitted to both of you with free Dream Mapping.',
+      title: 'King Mattresses in Castle Rock, CO | Snooze Mattress',
+      description: 'King and split king mattresses in Castle Rock from Tempur-Pedic, Sealy, Stearns & Foster, Serta and more, fitted to both of you with free Dream Mapping.',
       crumb: 'King Mattresses',
       eyebrow: 'Mattresses by size',
       h1: 'King mattresses in Castle Rock, CO',

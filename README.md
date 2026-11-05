@@ -164,6 +164,29 @@ no-JS fallback (the calendar URL + (303) 736-8465) once the calendar is configur
 `widgets` carries the same placeholders for a re-convert. No Google Search Console verification was supplied
 (`googleSiteVerification`).
 
+### E. SEO/UX parity (verified on the build; fixed where an item had not survived the clone)
+
+a one H1 per page (`npm run audit`; `/sleep-quiz` draws its H1 client-side) · b one JSON-LD graph per page
+(`lib/schema.ts`): LocalBusiness + Organization + WebSite with the Castle Rock NAP, hours, sameAs (Facebook +
+Instagram), `areaServed` the six Colorado cities, no `hasMap` / `geo` / `legalName` until the Place ID; FAQPage, Service
+(`/dream-mapping`, `/booking`), CollectionPage, WebPage and BreadcrumbList as on McAllen; no AggregateRating
+(`npm run schema:check`, 0 errors) · c alt text on every image, logos "<Brand> logo"; the placeholder cards describe
+themselves as placeholders · d the nav drawer and mega-menu fixes carried · e the `/booking` 5-step flow and "What
+happens at your Dream Mapping visit" carried · f `/about-us`: the three equal-height cards with the "Best Price
+Guaranteed" body, "Sleep Coaches" only, the trust ticker "Castle Rock's Top Rated Mattress Store", the serving line in
+the hero copy, no Get-In-Touch form, no "Visit Our Showroom" card, no standalone team section (verified in the export;
+the shared Sleep-Coaches-with-a-customer photo of the clone stays in the About hero) · g every hand-written CTA goes to
+`/booking` or `/dream-mapping` · h the Black Friday band (`lib/offer.ts`, November 3 – December 1, 2026 — approved for
+McAllen; confirm it applies to Castle Rock) is ON and hides itself afterwards; only the 365-Night Sleep Guarantee
+wording · i hero LCP rules: the hero background is preloaded (the neutral hero on the three pages that lost their
+composites), the H1 carries no `opacity:0` and no JS gate · j the "Buying guides" cards on `/mattresses` link the buying
+guide and the cooling page (`components/GuideLinks.tsx`; the McAllen version linked two McAllen posts) · k the branded
+404 (`app/(en)/not-found.tsx`: navy ground, logo, home / mattresses / booking links, the phone) · l the blog author is
+the Organization "Snooze Mattress + Wellness in Castle Rock" (`lib/blog-author.ts`) · m titles: every indexable title
+names Castle Rock, ends "| Snooze Mattress" and is ≤ 60 characters, descriptions ≤ 155 — the clone's titles with the city name had put
+15 pages over the limits after A1 (measured on the A build: titles over 60 characters or without "Castle Rock", descriptions over 155); retitled here (`scripts/seo-metadata.mjs` updated to match), the service-area pages
+read "Serving Parker from Castle Rock", the legal pages "Castle Rock Privacy Policy" / "Castle Rock Terms & Conditions".
+
 ---
 
 # History: the McAllen conversion this site was cloned from

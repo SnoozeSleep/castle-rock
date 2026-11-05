@@ -1,19 +1,19 @@
 import { localizeHref, type Locale } from '@/lib/i18n';
 import { ArrowRightIcon, Icon } from './icons';
 
-/* "Not sure what size you need?" — a short band at the end of /mattresses (EN + ES) linking the two guides the
-   agency's blog drafts asked to be linked from the mattresses page (SEO report, October 27, 2026): the mattress size
-   guide and the memory foam vs hybrid comparison. Server-rendered, outside the GoHighLevel markup (like
-   components/AreaLinks.tsx on the home page), so it never touches the page payload. Styles: overrides/global.css
-   (.snz-areas, .snz-card). */
+/* "Buying guides" — a short band at the end of /mattresses linking the two guides most relevant to a mattress shopper
+   (November 2026 brief, E): the buying guide (sizes, comfort levels, foam vs coils) and the cooling mattresses page.
+   The McAllen version linked two McAllen blog posts; the Castle Rock blog ships empty (F), so the cards point at the
+   hand-written guide pages until Castle Rock articles exist. Server-rendered, outside the GoHighLevel markup, so it
+   never touches the page payload. Styles: overrides/global.css (.snz-areas, .snz-card). */
 const COPY = {
   en: {
-    eyebrow: 'From the Sleep Blog',
+    eyebrow: 'Buying guides',
     title: 'Not sure what size you need, or whether foam or coils suit you?',
-    text: 'Two guides from our Sleep Coaches to read before you come in for your Dream Mapping fitting.',
+    text: 'Two guides to read before you come in for your Dream Mapping fitting.',
     cards: [
-      { icon: 'bed-wide' as const, title: 'Mattress size guide: full, queen or king', text: 'Real dimensions, room sizes and tips for couples, kids and holiday guests.', href: '/how-to-choose-a-mattress' },
-      { icon: 'snowflake' as const, title: 'Memory foam vs hybrid for Colorado summers and heated winters', text: 'Which sleeps cooler, which suits couples, and how long each type lasts.', href: '/blog/memory-foam-vs-hybrid-mattress-castle-rock' },
+      { icon: 'bed-wide' as const, title: 'How to choose a mattress', text: 'Standard sizes, the five comfort levels, foam, hybrid or innerspring, and what to try in the showroom.', href: '/how-to-choose-a-mattress' },
+      { icon: 'snowflake' as const, title: 'Cooling mattresses', text: 'Why a mattress sleeps hot through bright Colorado summers and dry, heated winters, and the cooling models on the floor.', href: '/cooling-mattresses' },
     ],
     more: 'Read the guide',
   },
