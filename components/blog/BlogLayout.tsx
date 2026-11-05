@@ -31,7 +31,7 @@ export function BlogShell({ children }: { children: ReactNode }) {
   );
 }
 
-function Meta({ post, byline }: { post: BlogPost; byline: string }) {
+function Meta({ post, byline, locale }: { post: BlogPost; byline: string; locale: Locale }) {
   return (
     <div className={styles.meta}>
       <span className={styles.byline}>{byline}</span>
@@ -43,7 +43,7 @@ function Meta({ post, byline }: { post: BlogPost; byline: string }) {
       <span aria-hidden="true" className={styles.metaDot}>•</span>
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-        {readTimeOf(post)}
+        {readTimeOf(post, locale)}
       </span>
     </div>
   );
@@ -60,7 +60,7 @@ export function PostCard({ post, headingLevel = 'h3', locale = 'en' }: { post: B
         <Image src={post.featured.src} alt={post.featured.alt} width={post.featured.width} height={post.featured.height} sizes="(max-width: 720px) 100vw, 33vw" loading="lazy" />
       </a>
       <div className={styles.cardBody}>
-        <Meta post={post} byline={`${t.by} ${BLOG_BYLINE_NAME[locale]}`} />
+        <Meta post={post} byline={`${t.by} ${BLOG_BYLINE_NAME[locale]}`} locale={locale} />
         <H className={styles.cardTitle}>
           <a href={href}>{post.title}</a>
         </H>
@@ -155,7 +155,7 @@ export function BlogArticle({ post, related, locale = 'en' }: { post: BlogPost; 
           </nav>
           <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h1 className={styles.title}>{post.title}</h1>
-          <Meta post={post} byline={`${t.by} ${BLOG_BYLINE_NAME[locale]}`} />
+          <Meta post={post} byline={`${t.by} ${BLOG_BYLINE_NAME[locale]}`} locale={locale} />
           <Divider />
         </div>
       </header>

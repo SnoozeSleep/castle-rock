@@ -1,8 +1,9 @@
 /* The blog's author (the client's decision, November 4, 2026; it replaces the October 27 "Snooze Mattress Company"):
-   the Organization "Snooze Mattress + Wellness in Castle Rock" at the site's home URL, on every post in both languages:
-   the BlogPosting author and the article:author tag carry that one name, and the visible byline reads "By Snooze
-   Mattress + Wellness in Castle Rock" / "Por Snooze Mattress + Wellness en Castle Rock" (lib/i18n.ts `by` + the name below
-   for the page's language). The LocalBusiness legalName is unchanged. The city comes from lib/location.ts. */
+   the Organization "Snooze Mattress + Wellness in Castle Rock" at the site's home URL, on every post. The name is given
+   in the page's language — "Snooze Mattress + Wellness in Castle Rock" on the English posts, "Snooze Mattress + Wellness
+   en Castle Rock" on the Spanish ones (the Spanish brief, November 2026) — in the BlogPosting author, the article:author
+   tag and the visible byline ("By …" / "Por …": lib/i18n.ts `by` + the name below). The LocalBusiness legalName is
+   unchanged. The city comes from lib/location.ts. */
 import { LOCATION } from './location';
 import { SITE_URL } from './schema';
 import type { Locale } from './i18n';

@@ -145,7 +145,7 @@ const es: UiStrings = {
     indexIntro: 'Colchones a tu medida, mapeo de presión y mañanas sin dolor, directo de los Especialistas en Sueño de Snooze Mattress + Wellness en Castle Rock.',
     home: 'Inicio', blogCrumb: 'Blog del Sueño', readArticle: 'Leer artículo', read: (t) => `Leer: ${t}`, faq: 'Preguntas Frecuentes', related: 'Artículos Relacionados',
     ctaEyebrow: 'Gente Real. Resultados Reales. Sueño Real.', ctaTitle: 'Visita Nuestra Tienda',
-    ctaText: 'Platica con nuestros Especialistas en Sueño en Castle Rock. Hazte tu mapeo de presión, prueba los colchones que le quedan a tu cuerpo y pregunta por el financiamiento al 0%. Aquí tratamos a cada persona que entra por nuestra puerta como familia.',
+    ctaText: 'Platica con nuestros Especialistas en Sueño en Castle Rock. Hazte tu mapeo de presión, prueba los colchones que le quedan a tu cuerpo y pregunta por el financiamiento al 0%; aquí tratamos a cada persona que entra por nuestra puerta como familia.',
     ctaBook: 'Agenda tu Dream Mapping', ctaCall: (p) => `Llama al ${p}`, ctaAddr: 'Snooze Mattress + Wellness · 6360 Promenade Pkwy, Castle Rock, CO 80108 · Lun–Sáb 10 AM–7 PM · Dom 11 AM–6 PM',
     indexMetaTitle: 'Blog del Sueño de Castle Rock | Snooze Mattress',
     indexMetaDesc: 'Consejos para dormir mejor de Snooze Mattress + Wellness en Castle Rock: colchones a tu medida, mapeo de presión y cómo el colchón correcto alivia dolores.',

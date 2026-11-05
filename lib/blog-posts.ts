@@ -23,6 +23,8 @@
  * links, **bold**, _italic_.
  */
 import { LOCATION, STORE_PHOTO_URL } from './location';
+import { BLOG_SLUG_ES } from './blog-nav';
+import { spanishPosts } from './blog-posts-es';
 
 export type BlogImage = { src: string; alt: string; width: number; height: number };
 
@@ -90,7 +92,7 @@ const STOREFRONT_HERO: BlogImage = STORE_PHOTO_URL
 const DATE = '2026-11-05';
 const DATE_DISPLAY = 'November 5, 2026';
 
-export const POSTS: BlogPost[] = [
+const ENGLISH: BlogPost[] = [
   /* 1 — Moving to Castle Rock */
   {
     slug: 'moving-to-castle-rock-mattress-guide',
@@ -522,8 +524,12 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-/* the Spanish articles (/es/blog/<slug>): none yet — /es/blog shows its empty state until they are written */
-export const POSTS_ES: BlogPost[] = [];
+/* the English articles, each paired with its Spanish version (lib/blog-nav.ts BLOG_SLUG_ES: English slug -> Spanish slug) */
+export const POSTS: BlogPost[] = ENGLISH.map((p) => (BLOG_SLUG_ES[p.slug] ? { ...p, altSlug: BLOG_SLUG_ES[p.slug] } : p));
+
+/* the Spanish articles (/es/blog/<slug>, lib/blog-posts-es.ts): the same five, translated; the hero image and the dates
+   come from the English twin */
+export const POSTS_ES: BlogPost[] = spanishPosts(ENGLISH);
 
 export type BlogLocale = 'en' | 'es';
 export const postsFor = (locale: BlogLocale = 'en') => (locale === 'es' ? POSTS_ES : POSTS);
@@ -565,5 +571,5 @@ export const wordCountOf = (post: BlogPost) => {
   for (const f of post.faqs) parts.push(f.question, f.answer);
   return parts.map(stripInline).join(' ').split(/\s+/).filter(Boolean).length;
 };
-/** "N min read" at about 200 words a minute (the client supplied no read times) */
-export const readTimeOf = (post: BlogPost) => post.readTime || `${Math.max(1, Math.round(wordCountOf(post) / 200))} min read`;
+/** "N min read" / "N min de lectura" at about 200 words a minute (the client supplied no read times) */
+export const readTimeOf = (post: BlogPost, locale: BlogLocale = 'en') => post.readTime || `${Math.max(1, Math.round(wordCountOf(post) / 200))} ${locale === 'es' ? 'min de lectura' : 'min read'}`;

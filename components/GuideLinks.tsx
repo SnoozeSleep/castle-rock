@@ -1,8 +1,9 @@
 import { localizeHref, type Locale } from '@/lib/i18n';
 import { ArrowRightIcon, Icon } from './icons';
 
-/* "Buying guides" — a short band at the end of /mattresses linking two of the Castle Rock blog articles (the blog brief,
-   November 5, 2026): the side-sleeper guide and the mattress size guide (lib/blog-posts.ts posts 2 and 5). The band title
+/* "Buying guides" — a short band at the end of /mattresses (EN + ES) linking two of the Castle Rock blog articles (the
+   blog brief, November 5, 2026): the side-sleeper guide and the mattress size guide (lib/blog-posts.ts posts 2 and 5; on
+   /es their Spanish versions, lib/blog-posts-es.ts). The band title
    is one of the articles' own taglines and each card carries the article's title and one of its own sentences — no copy
    written for the band. Server-rendered, outside the GoHighLevel markup, so it never touches the page payload. Styles:
    overrides/global.css (.snz-areas, .snz-card). */
@@ -18,14 +19,14 @@ const COPY = {
     more: 'Read article',
   },
   es: {
-    eyebrow: 'Del Blog del Sueño',
-    title: '¿No sabes qué tamaño necesitas, o si te conviene espuma o resortes?',
-    text: 'Dos guías de nuestros Sleep Coaches para leer antes de venir a tu ajuste de Dream Mapping.',
+    eyebrow: 'Guías de compra',
+    title: 'No todos los colchones le quedan a todos los cuerpos.',
+    text: 'Dos guías para leer antes de venir a tu ajuste de Dream Mapping.',
     cards: [
-      { icon: 'bed-wide' as const, title: 'Guía de tamaños de colchón: full, queen o king', text: 'Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas.', href: '/blog/guia-tamanos-de-colchon-castle-rock' },
-      { icon: 'snowflake' as const, title: 'Memory foam vs híbrido para las noches calurosas de verano', text: 'Cuál duerme más fresco, cuál conviene a las parejas y cuánto dura cada tipo.', href: '/blog/colchon-memory-foam-vs-hibrido-castle-rock' },
+      { icon: 'spine' as const, title: '¿Duermes de lado en Castle Rock? Cómo encontrar un colchón que dé soporte a tus hombros y caderas', text: 'Esto es lo que conviene saber antes de comprar si duermes de lado.', href: '/blog/colchon-para-dormir-de-lado-castle-rock' },
+      { icon: 'bed-wide' as const, title: '¿Queen, king o California king? Cómo elegir el tamaño de colchón correcto para tu recámara', text: 'Así puedes elegir el tamaño que va con tu cuerpo, con tu pareja y con tu recámara.', href: '/blog/guia-de-tamanos-de-colchon-castle-rock' },
     ],
-    more: 'Leer la guía',
+    more: 'Leer artículo',
   },
 };
 

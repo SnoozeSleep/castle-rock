@@ -5,7 +5,7 @@ import { BlogArticle, BlogCta, BlogShell, Divider, PostCard } from '@/components
 import { plain } from '@/components/blog/Rich';
 import { PageSchema } from '@/components/PageSchema';
 import { ArrowRightIcon } from '@/components/icons';
-import { BLOG_AUTHOR } from '@/lib/blog-author';
+import { BLOG_AUTHOR, BLOG_BYLINE_NAME } from '@/lib/blog-author';
 import styles from '@/components/blog/blog.module.css';
 import { altBlogPath, byNewest, getPost, postsFor, relatedPosts, wordCountOf, type BlogPost } from '@/lib/blog-posts';
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
@@ -117,7 +117,7 @@ export function postMetadata(slug: string, locale: Locale): Metadata {
       siteName: 'Snooze Mattress + Wellness',
       publishedTime: post.datePublished,
       modifiedTime: post.dateModified || post.datePublished,
-      authors: [BLOG_AUTHOR.name],
+      authors: [BLOG_BYLINE_NAME[locale]],
       images: [{ url: post.featured.src, width: post.featured.width, height: post.featured.height, alt: post.featured.alt }],
     },
     twitter: { card: 'summary_large_image', title: post.metaTitle, description: post.metaDescription, images: [post.featured.src] },
@@ -149,9 +149,9 @@ export function PostPage({ slug, locale }: { slug: string; locale: Locale }) {
         image: { '@type': 'ImageObject', url: abs(post.featured.src), width: post.featured.width, height: post.featured.height },
         datePublished: post.datePublished,
         dateModified: post.dateModified || post.datePublished,
-        author: { '@type': 'Organization', name: BLOG_AUTHOR.name, url: BLOG_AUTHOR.url },
-        /* author: the Organization the client named for the blog (November 4, 2026; its name and url are in
-           lib/blog-author.ts); publisher: the site's #organization node */
+        author: { '@type': 'Organization', name: BLOG_BYLINE_NAME[locale], url: BLOG_AUTHOR.url },
+        /* author: the Organization the client named for the blog (November 4, 2026; its name — in the page's language —
+           and url are in lib/blog-author.ts); publisher: the site's #organization node */
         publisher: { '@id': ORG_ID },
         keywords: post.keywords.join(', '),
         wordCount: wordCountOf(post),

@@ -37,7 +37,7 @@ const enRoutes = [];
 (function walk(d, rel) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) { if (!/^(_next|es|assets)$/.test(e.name) || rel) walk(p, `${rel}/${e.name}`); } else if (e.name.endsWith('.html') && !/^(404|_not-found|_global-error|ghl-stub)\.html$/.test(e.name) && !(e.name === 'es.html' && !rel)) enRoutes.push(`${rel}/${e.name.slice(0, -5)}`.replace(/\/index$/, '') || '/'); } })(OUT, '');
 const twin = (route) => { const post = /^\/blog\/([^/]+)$/.exec(route); return post ? (SLUG_ES[post[1]] ? `/es/blog/${SLUG_ES[post[1]]}` : null) : route === '/' ? '/es' : `/es${route}`; };
 
-const ENGLISH = /\b(the|and|with|your|our|for|you|from|mattress|mattresses|sleep|book|appointment|financing|available|learn more|get in touch|read article|visit us|home|about us|frequently asked)\b/i;
+const ENGLISH = /\b(the|and|with|your|our|for|you|from|mattress|mattresses|sleep|book|appointment|financing|available|learn more|get in touch|read|visit us|home|about us|frequently asked|minutes?|related|share|by)\b/i;
 const BRANDS = /Snooze|Dream Mapping|Sleep Coach|Sleep Fit|Zcliner|SleepRecliner|SleepCorner|Infinity|Synchrony|Wells Fargo|Snap Finance|Promenade|http|@|Beautyrest|Stearns|Tempur|Brooklyn Bedding|King Koil|Spring Air|Bedgear|Helix|DreamFit|BedTech|Sealy|Serta|Nectar|Copper Collection|GlacioTex|Black Friday|Google|Facebook|Instagram|memory foam|queen|king|full|twin|split king/i;
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, protocolTimeout: 240000, args: ['--no-first-run', '--disable-gpu', '--hide-scrollbars'] });
@@ -158,9 +158,11 @@ if (!ONLY) {
   const hook = pick(integ, /quizWebhookUrl: '([^']*)'/);
   if (posted.length !== 1) flag(`quiz webhook requests: ${posted.length} (expected 1, intercepted)`);
   else {
-    let body = {}; try { body = JSON.parse(posted[0].body); } catch { /* not JSON */ }
+    // the quiz posts form-encoded (no CORS preflight); the page also keeps the payload it built
+    let body = Object.fromEntries(new URLSearchParams(posted[0].body));
+    if (!body.lang) body = (await p.evaluate(() => window.__sleepFitLastPayload)) || {};
     const flat = JSON.stringify(body);
-    console.log(`quiz webhook (intercepted, not sent): ${posted[0].url === hook ? 'the Castle Rock hook' : posted[0].url}; lang=${body.lang}; names the store: ${/Castle Rock/.test(flat)}`);
+    console.log(`quiz webhook (intercepted, not sent): ${posted[0].url === hook ? 'the Castle Rock hook' : posted[0].url}; lang=${body.lang}; store_name=${body.store_name}; page_url=${body.page_url}`);
     if (posted[0].url !== hook) flag('quiz webhook URL is not lib/integrations.ts quizWebhookUrl');
     if (body.lang !== 'es') flag(`quiz payload lang=${body.lang}`);
     if (!/Castle Rock/.test(flat)) flag('quiz payload does not name Castle Rock');

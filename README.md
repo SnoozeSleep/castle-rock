@@ -445,7 +445,7 @@ desktop + mobile; home and financing full pages, the dropdown and the drawer).
 ### Spanish site restored (November 6, 2026)
 
 The client wants `/es` after all. Three commits: the restore (a revert of "B. Spanish site removed"), the
-re-localisation and parity pass, and the Spanish blog.
+re-localisation and parity pass, and the Spanish blog. 74 pages build: 37 English and 37 Spanish.
 
 **What is back.** `app/es`: a Spanish twin of every English page, under its own root layout (`app/es/layout.tsx`,
 `<html lang="es">`; English is `app/(en)/layout.tsx`, `lang="en"`; both render `components/SiteDocument.tsx`, so there is
@@ -517,6 +517,30 @@ FDA" (it was "aprobada", which claims more).
 "memory foam vs hybrid" guide that does not exist (`/blog/memory-foam-vs-hybrid-mattress-castle-rock`, a redirect to the
 blog index) — it now points at the buying guide, like the same sentence on `/cooling-mattresses`; five
 CollectionPage `name`s in the page schema were one title edit behind (`npm run schema` re-read the titles).
+
+**Blog in Spanish.** The five articles exist in Spanish at `/es/blog/<slug>` (`lib/blog-posts-es.ts`), listed on `/es/blog`
+and in the header's Blog menu on `/es`:
+
+| English | Spanish |
+|---|---|
+| `/blog/moving-to-castle-rock-mattress-guide` | `/es/blog/mudanza-a-castle-rock-guia-de-colchones` |
+| `/blog/side-sleeper-mattress-castle-rock` | `/es/blog/colchon-para-dormir-de-lado-castle-rock` |
+| `/blog/sleep-recovery-active-coloradans` | `/es/blog/sueno-y-recuperacion-coloradenses-activos` |
+| `/blog/adjustable-beds-explained-castle-rock` | `/es/blog/camas-ajustables-explicadas-castle-rock` |
+| `/blog/mattress-size-guide-castle-rock` | `/es/blog/guia-de-tamanos-de-colchon-castle-rock` |
+
+Each is a translation of the client's article, section for section — same headings, check lists, numbered Sleep Fit
+steps (`<ol>`), the size table (a `<table>`), FAQ, closing call to action and tagline — written as natural Spanish, not
+word for word, and adding nothing the English article does not say (the numbers are the article's own; Sleep Fit,
+Dream Mapping, Sleep Coach and Sleep Score keep their names; "Snooze Mattress" inside the text is the articles' own
+wording). The same internal links on the same words, to the `/es` pages (13–20 per article, the same count as the
+English one). The hero image and the dates come from the English twin (Spanish alt text; "5 de noviembre de 2026").
+Schema per article: `BlogPosting` + `FAQPage` + `BreadcrumbList`, `inLanguage` `es-US`, author "Snooze Mattress +
+Wellness en Castle Rock" (the English posts keep "… in Castle Rock"). The pairing is one table — `lib/blog-nav.ts`
+`BLOG_SLUG_ES` — read by the hreflang pair (reciprocal, x-default = English), the sitemap alternates and the EN | ES
+toggle; an unknown slug fails the build. The "Buying guides" band on `/es/mattresses` links Spanish posts 2 and 5,
+like the English band; the read time reads "N min de lectura". The old Spanish blog URLs of the clone still 308 to
+`/es/blog` (`vercel.json`); none of the new slugs collides with them.
 
 **Chat.** `lib/integrations.ts` `chatWidgetId` is `{ en, es }`, both empty (`[CR_CHAT_EN]`, `[CR_CHAT_ES]`): no widget
 loads in either language, and when only the English id arrives the Spanish pages still load none. Observed on
