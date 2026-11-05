@@ -81,7 +81,8 @@ together.
   descriptions ≤ 155 (`npm run audit` enforces all three; the About title is "About Us: Castle Rock Mattress Store").
   Legal pages: governing law and venue follow the store ("State of Colorado", "Douglas County, Colorado") — **the client
   should review the legal pages**.
-- **Images.** Every McAllen storefront, team and hero photo is gone: the storefront (location cards on every page, the
+- **Images.** (State of the clone; the client's own photos and heroes were installed on November 5, 2026 — see
+  "Client-supplied ids, images and embeds installed".) Every McAllen storefront, team and hero photo is gone: the storefront (location cards on every page, the
   About Us storefront, the LocalBusiness `image`), the home team photo ("A Family-Owned Business with a Personal Touch" /
   "Meet Your Sleep Coaches" column and phone photo) and Step 05 "Take Home Better Sleep" of the 5-step flow show the navy
   "Photo coming soon" card (`public/assets/castle-rock/photo-coming-soon.svg`) until `STORE_PHOTO_URL` / `TEAM_PHOTO_URL` in
@@ -135,6 +136,10 @@ the built pages and the site source; only the tooling that removes or audits the
 PER-LOCATION decision: this list is McAllen's and needs confirming for Castle Rock** (NEEDS CLIENT INPUT).
 
 ### D. Tracking / embeds — all gated on `lib/integrations.ts`
+
+(State of the clone. The GoHighLevel values — location, reviews widget, calendar, form, quiz webhook — were supplied and
+installed on November 5, 2026: see "Client-supplied ids, images and embeds installed"; the tracking and chat ids are
+still placeholders.)
 
 Every third-party id is an empty `[CR_*]` placeholder; an empty value disables the integration (nothing rendered,
 nothing loaded) and nothing of McAllen is left. The section shells stay and offer the store's phone and e-mail instead.
@@ -212,7 +217,7 @@ verbatim; nothing is added — no offer, price, staff quote or claim.
 
 | # | Route | Hero image | Title tag (chars) |
 |---|---|---|---|
-| 1 | `/blog/moving-to-castle-rock-mattress-guide` | this site's Pressure Mapping station photo (`/assets/filesafe/jbbpu1HIxUn7iMOO9Ysd/media/69d8277f74d020e518f93f1e.png.webp`, 2000×1334) — no storefront photo (`STORE_PHOTO_URL`) yet; switch to it once supplied | Moving to Castle Rock? Your Mattress Guide \| Snooze Mattress (60) |
+| 1 | `/blog/moving-to-castle-rock-mattress-guide` | the Castle Rock storefront (`lib/location.ts` `STORE_PHOTO_URL`, 2048×1536; since the install of November 5, 2026 — the Pressure Mapping station photo until then) | Moving to Castle Rock? Your Mattress Guide \| Snooze Mattress (60) |
 | 2 | `/blog/side-sleeper-mattress-castle-rock` | `kfb27KLffGslRPEihqeR/media/6ae22ef836aa4a07e82f97a1.png` (1072×802) | Side Sleeper Mattress Guide in Castle Rock \| Snooze Mattress (60) |
 | 3 | `/blog/sleep-recovery-active-coloradans` | `…/6ae22efd9c1511d5b92babd7.png` (991×660) | Sleep and Recovery for Active Coloradans \| Snooze Mattress (58) |
 | 4 | `/blog/adjustable-beds-explained-castle-rock` | `…/6ae22ef8736386d0dc308d78.png` (1087×711) | Adjustable Beds Explained: Who They’re For \| Snooze Mattress (60) |
@@ -230,7 +235,8 @@ verbatim; nothing is added — no offer, price, staff quote or claim.
   as a styled paragraph. Then the quiz prompt and two related posts (the next two in listing order, wrapping).
 - **Images**: the hero through next/image (`/_next/image`, WebP) with `priority` + `fetchPriority="high"` on the post (preloaded),
   lazy on the listing and related cards. `next.config.ts` turns the optimizer on (it was `unoptimized`) and allows
-  remote images only from `assets.cdn.filesafe.space/kfb27KLffGslRPEihqeR/media/**`. Alt text describes each picture.
+  remote images only from `assets.cdn.filesafe.space/kfb27KLffGslRPEihqeR/media/**` (and, since the install, the Castle
+  Rock location's own `gsqZfpbY5MmVessxREvK/media/**`). Alt text describes each picture.
 - **Internal links** (on the document's words, first occurrence per post; no external links, no `/contact-us` or
   `/optin-page` CTA): Dream Mapping → `/dream-mapping`; the first "Sleep Fit" and the closing call to action →
   `/booking`; Sleep Coach → `/about-us`; pillow (posts 1–3) → `/pillows`; adjustable base (posts 1, 3, 4, 5) →
@@ -294,44 +300,39 @@ verbatim; nothing is added — no offer, price, staff quote or claim.
 - `/es/*` → 308: `vercel.json` carries `/es` → `/` and `/es/:path*` → `/:path*` (permanent); Vercel applies these at the
   edge, so they cannot be exercised on the local server build — verify on the first deployment with
   `curl -I https://<deployment>/es/mattresses` (expect `308` + `location: /mattresses`).
-- **Not done from this machine:** the Vercel project. The Vercel CLI here is logged out (`npx vercel whoami` →
-  "Logged out") and no token is available, so no project could be created or linked and no `*.vercel.app` preview
-  exists yet — see "Deployment".
+- **Vercel** (at the time of this pass): the CLI on the build machine is logged out, so no project could be created
+  from here; the project was connected afterwards — see "Deployment".
 
-### Deployment (to do once, with Vercel access)
+### Deployment
 
 GitHub: `SnoozeSleep/castle-rock` (https://github.com/SnoozeSleep/castle-rock), every section its own commit on `main`.
 The repository was created on November 5, 2026 before this work started (the brief named it `castlerock`; the existing,
 empty `castle-rock` repository was used). It was created **public**; the brief asked for private, and changing the
 visibility needs an organisation admin (Settings → General → Danger Zone → Change visibility).
 
-Vercel: no project exists yet. In the Vercel dashboard import `SnoozeSleep/castle-rock` as project `castlerock`
-(framework Next.js, no output-directory override, no environment variable), or from a logged-in CLI
-`npx vercel link` + `npx vercel git connect`. Every push to `main` then deploys. Do NOT set `NEXT_PUBLIC_SITE_URL`
-until the custom domain (`[CR_DOMAIN]`, expected `castlerock.snoozemattresscompany.com`) is attached and resolving;
-then set it in the Production environment only and redeploy. After the first deployment: open the `*.vercel.app` URL
-(assets, fonts, icons, hero) and check `curl -I https://<deployment>/es/mattresses` → 308.
+Vercel: project `snooze-mattress/castle-rock`, connected to this repository (it appeared between the first push and the
+install of November 5, 2026); every push to `main` deploys, and the result shows as the commit status "Vercel" on
+GitHub. The deployment's `*.vercel.app` host sits behind Vercel's login (deployment protection), so it cannot be opened
+or curl-ed anonymously: someone signed in to the team checks the preview (assets, fonts, icons, hero) and
+`curl -I https://<deployment>/es/mattresses` → 308. Do NOT set `NEXT_PUBLIC_SITE_URL` until the custom domain
+(`[CR_DOMAIN]`, expected `castlerock.snoozemattresscompany.com`) is attached and resolving; then set it in the
+Production environment only and redeploy.
 
 ### NEEDS CLIENT INPUT — `[CR_*]` values still needed
+
+(The GoHighLevel ids, the photos, the heroes and the embeds supplied on November 5, 2026 are installed — see
+"Client-supplied ids, images and embeds installed" below; the rows left are what is still missing.)
 
 | Placeholder | Where | Until supplied |
 |---|---|---|
 | `[CR_DOMAIN]` | the Vercel project's domain + `NEXT_PUBLIC_SITE_URL` (Production) | canonicals, sitemap, robots, llms.txt and JSON-LD use the deployment host; no host redirect |
-| `[CR_GHL_LOCATION_ID]` | `lib/integrations.ts` `ghlLocationId` | reviews widget and webhook host unknown |
 | `[CR_GTM]` | `lib/integrations.ts` `gtmIds` — GTM-TVPN94M **only if the agency confirms** it is shared | no tag manager |
 | `[CR_GA4]`, `[CR_SIMPLIFI]` | `lib/integrations.ts` `ga4Id`, `simplifiTagId` | no analytics / Simpli.fi tag |
 | `[CR_CHAT_EN]` | `lib/integrations.ts` `chatWidgetId` | no chat widget |
-| `[CR_QUIZ_WEBHOOK]` | `lib/integrations.ts` `quizWebhookUrl` + `public/sleep-fit-quiz.js` `CONFIG.store.webhookUrl` (bump `?v=`) | completed quizzes are logged, not sent |
-| `[CR_FORM_ID]` | `lib/integrations.ts` `formId`, then `npm run integrations` | the contact page and product-page popups show the "being connected" card |
-| `[CR_CALENDAR_ID]` | `lib/integrations.ts` `bookingCalendarUrl` | `/booking` shows the "being connected" card with the phone and e-mail |
-| `[CR_REVIEWS_WIDGET_ID]` | `lib/integrations.ts` `reviewsWidgetId`, then `npm run reviews:widget` | the reviews sections show the pending notice |
 | `[CR_PLACE_ID]` | `lib/location.ts` `PLACE_ID`, then `npm run reviews:widget` | address links open a Maps search; no `hasMap` / `geo` / GBP `sameAs`; "Read more reviews on Google" hidden |
-| `STORE_PHOTO_URL` | `lib/location.ts` (+ `scripts/relocate-castle-rock.mjs` for the generated pages) | the location cards and the About Us storefront show the "Photo coming soon" card; the schema image is the logo |
-| `TEAM_PHOTO_URL` | `lib/location.ts` (+ the relocation script) | the home "Family-Owned" card and Step 05 show the "Photo coming soon" card |
-| Desktop hero backgrounds | `overrides/overrides.json` `heroBackgrounds` (home, About Us, financing) | the shared neutral background |
+| Form redirect (GoHighLevel setting) | the Optin form `j5X6ShHH15vRKdggRsLr` → on submit: redirect to `https://<domain>/thank/you` | the form shows its inline "Thank you for submitting your entry." message, so the visitor never reaches the noindex thank-you page and `optin_submit` cannot fire |
+| Form test submission | `/contact-us`, by a person | not submitted from the build machine: the form's bot check (Cloudflare Turnstile) gives no token to an automated browser |
 | Brand lineup | `lib/brands.json` + the home strip, `/mattresses` blocks, FAQ copy | McAllen's 15 brands (per-location decision: confirm) |
-| Customer reviews | `lib/reviews.json`, then `npm run reviews` | none shown |
-| Blog: storefront hero for post 1 | `lib/blog-posts.ts` post 1 `featured` (with `STORE_PHOTO_URL`) | the Pressure Mapping station photo |
 | Blog claims | see "Blog posts" → NEEDS CLIENT CONFIRMATION | kept as written |
 | Legal pages | `/privacy-policy-page`, `/terms-conditions-page` | governing law and venue follow the store ("State of Colorado", "Douglas County") — review |
 | Offer | `lib/offer.ts` (Black Friday, Nov 3 – Dec 1, 2026, approved for McAllen) | shown on the home band and the sales page — confirm for Castle Rock |
@@ -343,6 +344,85 @@ Deals" column (Snooze-O-Pedic from $499, Helix 20% off, the King Koil base bundl
 around 85%", "10° cooler", "Best Price Guaranteed" / price matching), the guarantee band's "Price Match Promise" /
 "Free Delivery & Setup" / "Old Mattress Haul Away" tiles and the showroom-interior photo beside Step 02 of the 5-step
 flow — the client should confirm each applies to the Castle Rock store.
+
+### Client-supplied ids, images and embeds installed (November 5, 2026)
+
+Every placeholder the client supplied a value for is replaced; nothing else changed. One commit per block (images,
+quiz, GHL embeds, verify). Rebuild order after changing a value: `npm run images:castle-rock` →
+`npm run heroes:castle-rock` → `npm run integrations` → `npm run reviews:widget` → `npm run reviews` (cards AFTER the
+widget) → `npm run lastmod` → `npm run build` → `npm run audit` → `npm run schema:check`.
+
+- **GHL location** `gsqZfpbY5MmVessxREvK` (`lib/integrations.ts ghlLocationId`): the reviews widget URL, the webhook host
+  and the client's media library. The copied image library keeps its `/assets/filesafe/ARD47WoZpqaZSQ9MSxLD/` paths.
+- **Images** (`lib/location.ts` `STORE_PHOTO_URL` 2048×1536 JPEG, `TEAM_PHOTO_URL` 680×1020 PNG, a portrait;
+  `scripts/castle-rock-images.mjs`): the storefront on every location card, the About Us storefront and Step 01 (alt
+  "Snooze Mattress + Wellness storefront in Castle Rock, CO"), as the LocalBusiness `image` (the original URL) and as
+  the hero of blog post 1; the team photo on the **home page's** "A Family-Owned Business with a Personal Touch" card
+  (that card is on the home page, not on /about-us; column background + the phone photo) and on Step 05 of the 5-step
+  flow on `/about-us` and `/mattress-financing` (alt "Sleep Coaches at Snooze Mattress + Wellness in Castle Rock") —
+  those places only, no standalone team section. The pages load them through next/image's optimizer
+  (`/_next/image?url=…&w=640|750&q=75`, WebP; `next.config.ts` `images.remotePatterns` allows that media folder); the
+  payload image nodes and the per-element aspect-ratio rules follow; the originals are never downloaded; no page shows
+  or requests the "Photo coming soon" card any more (the card file, its CSS fallback and its entry in the offline shim's
+  asset list stay for the day a constant is emptied). One CSS rule (`overrides/global.css`): the portrait team photo's focal
+  point in Step 05's landscape frame (`object-position: 50% 18%`; centred, the crop cut both faces off).
+  Desktop heroes (≥ 768px; `overrides/overrides.json` `heroBackgrounds`, `scripts/castle-rock-heroes.mjs`): the client's
+  1920×1080 composites on the home, About Us and financing pages at `/_next/image …&w=1920`, in every CSS variant of the
+  desktop-only hero section and as the page's desktop preload (`fetchpriority="high"`); the payload keeps the original;
+  phones keep the shared background; overlay and sizing are the builder's own; the level-1 heading carries no
+  `opacity:0` and no JS gate. The composites are the client's artwork and are used as supplied: each carries a
+  "22+ ★★★★★" Google / Facebook badge and a "Tech Trusted by: NASA / Mayo Clinic" badge, and the About Us one shows the
+  same customers-with-a-coach photo other locations use — reported, not altered.
+- **Quiz** (`lib/integrations.ts quizWebhookUrl` = `public/sleep-fit-quiz.js CONFIG.store.webhookUrl`, `QUIZ_SCRIPT ?v=5`):
+  one form-encoded POST per completed quiz to
+  `https://services.leadconnectorhq.com/hooks/gsqZfpbY5MmVessxREvK/webhook-trigger/qhy1QYTG65DvduRltRW9`
+  (`store_id` "castle-rock", `store_name` "Snooze Mattress + Wellness – Castle Rock"); the placeholder gate is gone.
+- **Reviews widget** (`scripts/reviews-widget.mjs`): `iframe.lc_reviews_widget`, src
+  `https://reputationhub.site/reputation/widgets/review_widget/gsqZfpbY5MmVessxREvK?widgetId=679d4982d04bf58812792124`,
+  frameborder 0, scrolling no, `min-width:100%; width:100%`, lazy, title "Customer reviews", in "Some of Our Happy
+  Customers" on 12 routes; `review-widget.js` once per page after it (`components/GhlEmbedScripts.tsx`). The builder
+  renders the section twice (desktop-only + mobile-only): every iframe starts with the site's placeholder src and
+  carries the live URL in `data-src`, and the inline swap gives the live src ONLY to the copy that is laid out — the
+  hidden copy keeps the placeholder. No Review / AggregateRating schema; "Read more reviews on Google" stays hidden
+  until `[CR_PLACE_ID]`. What the widget itself shows (its "5.00 · 60 reviews" header and "AI Summary" card) is the
+  widget's own content, configured in GoHighLevel.
+- **Review cards** (`lib/reviews.json`, `scripts/recent-reviews.mjs`): Ryan E. (Jun 2026) and Christian B. (May 2026),
+  verbatim — the reviewers' spelling stays ("matress"), the one line-break artifact is joined ("got some") — 5 stars,
+  "Google review" badge, one set above the widget in each copy; no schema. The 3-star review the client listed is not
+  shown (client's instruction). A staff first name appears only inside the quotes; the site names no staff.
+- **Booking calendar** (`components/BookingPage.tsx`): `https://link.snoozesleep.com/widget/booking/3JULWAhT1FJeSO6Nk2Rn`,
+  `allow="payment"`, `width:100%; border:none; overflow:hidden`, `scrolling="no"`, id
+  `3JULWAhT1FJeSO6Nk2Rn_1793899704757`, no stray `<br>`; the sizing fix and the no-JS fallback (the calendar URL +
+  (303) 736-8465) stay; `form_embed.js` once.
+- **Opt-in form** (`scripts/integrations.mjs`; `lib/integrations.ts` `formId`, `formHeight`): the Optin form
+  `j5X6ShHH15vRKdggRsLr` INLINE on `/contact-us` and in the product pages' popup: `inline-j5X6ShHH15vRKdggRsLr`,
+  `data-layout {'id':'INLINE'}`, alwaysShow / alwaysActivated / neverDeactivate, `data-form-name "Optin"`,
+  `data-height 736` (736px reserved on load, `form_embed.js` resizes), `data-layout-iframe-id`, `data-form-id`,
+  `data-cookie-consent="true"` / `data-cookie-consent-provider="auto"`, title "Contact form",
+  `width:100%; border:none; border-radius:3px`; not on `/about-us`; `form_embed.js` exactly once per page. The script
+  now also writes the title and the reserved height into the hydration (payload) copy of the inline embed: hydration
+  re-renders the builder's custom code from the payload, and the browser showed title "Optin" and no reserved height
+  until that copy matched (the popups keep their own `height:100%`).
+
+**Verified (headless Chrome, the server build, November 5, 2026; desktop 1366 + phone 390):** all 56 optimizer URLs
+answer 200 as WebP and no page requests an original; the reviews widget renders in the visible copy only (the hidden
+copy keeps the placeholder) with the two cards above it; `review-widget.js` and `form_embed.js` load once where needed
+and nowhere else; the form loads with its fields and sizes itself (769px desktop, 896px phone); the calendar loads at
+its own height (785px desktop) as "Dream Mapping Castle Rock · 10 min" and, read as a Mountain-time visitor
+(`GMT-07:00 America/Denver (MST)`), offered 11:00 AM … 6:45 PM for the rest of that day at about 10:55 AM Mountain —
+the store's hours (the widget shows slots in the visitor's own time zone, with a selector); 0 console errors from the
+site (the only console messages come from Cloudflare Turnstile inside the form's own frame); nothing renders after the
+footer and no image is broken on home, About Us, booking and contact; `/thank/you` is noindex and pushes
+`optin_submit`; audit CLEAN, schema 0 errors on 37 pages.
+A quiz run POSTed one clearly fake lead ("TEST Quiz DELETE ME", test-quiz-delete@example.com, (303) 555-0199) to the
+Castle Rock webhook — GoHighLevel answered 200, `quiz_completed` fired — **delete it in GoHighLevel
+`gsqZfpbY5MmVessxREvK`** (the build machine has no GoHighLevel access). **The form test lead was NOT submitted:** the
+form's bot check (Cloudflare Turnstile) issues no token to an automated browser, headless or visible, and it was not
+worked around; a person should submit one test entry on `/contact-us`. Read from the form's own configuration: its
+success action is the inline message "Thank you for submitting your entry.", with no redirect URL — set the on-submit
+action in GoHighLevel to redirect to `https://<domain>/thank/you` so the thank-you page and `optin_submit` are reached
+(agency item). Screenshots: `docs/screenshots/verify/` (home hero, About Us, booking, contact and the reviews section,
+desktop + mobile; home and financing full pages, the dropdown and the drawer).
 
 ---
 
