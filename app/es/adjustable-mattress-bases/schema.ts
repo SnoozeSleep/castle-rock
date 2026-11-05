@@ -96,8 +96,8 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/es/adjustable-mattress-bases#webpage`,
     "url": `${SITE_URL}/es/adjustable-mattress-bases`,
-    "name": "Camas y Bases Ajustables en Castle Rock, CO",
-    "description": "Camas y bases ajustables en Castle Rock, CO en Snooze Mattress + Wellness: más comodidad, soporte y alivio de presión, menos ronquidos. Pruébalas en la tienda.",
+    "name": "Camas y Bases Ajustables en Castle Rock",
+    "description": "Camas y bases ajustables en Snooze Mattress + Wellness, Castle Rock: más comodidad, soporte y alivio de presión, menos ronquidos. Pruébalas en la tienda.",
     "inLanguage": "es-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

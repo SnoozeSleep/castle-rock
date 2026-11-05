@@ -64,16 +64,12 @@ function walkHtml(dir, out = []) { if (!fs.existsSync(dir)) return out; for (con
 const rel = (p) => path.relative(ROOT, p).replace(/\\/g, '/');
 
 let problems = 0;
-/* the builder dictionaries (overrides/i18n/es.part-N.json, es.extra.json) are keyed by the English of the original clone,
-   which names the previous location: only their Spanish values are audited. es.castle-rock.json (the dictionary the
-   Spanish pages are written from) is keyed by the current English and is audited whole. */
-const DICT = /overrides\/i18n\/es\.(part-\d+|extra)\.json$/;
 function scan(files, label) {
   console.log(`\n=== ${label}: ${files.length} file(s) ===`);
   const found = {};
   for (const f of files) {
     const r = rel(f);
-    const s = DICT.test(r) ? Object.values(JSON.parse(fs.readFileSync(f, 'utf8'))).join('\n') : fs.readFileSync(f, 'utf8');
+    const s = fs.readFileSync(f, 'utf8');
     for (const L of LEFTOVERS) {
       const re = new RegExp(L.re.source, L.re.flags); let m;
       while ((m = re.exec(s))) { const ctx = s.slice(Math.max(0, m.index - 70), m.index + m[0].length + 70).replace(/\s+/g, ' '); if (L.ok(ctx, r)) continue; (found[L.name] ??= []).push(`${r}: …${ctx}…`); }

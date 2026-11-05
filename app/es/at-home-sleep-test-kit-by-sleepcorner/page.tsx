@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Kit de Prueba de Sueño en Casa en Castle Rock | Snooze Mattress",
-  "description": "El Kit de Prueba de Sueño en Casa de SleepCorner en Snooze Mattress + Wellness, Castle Rock: prueba nocturna aprobada por la FDA y revisada por profesionales.",
+  "title": "Prueba de Sueño en Casa en Castle Rock | Snooze Mattress",
+  "description": "Prueba de Sueño en Casa de SleepCorner en Snooze Mattress + Wellness, Castle Rock: kit nocturno autorizado por la FDA, revisado por profesionales.",
   "alternates": {
     "canonical": "/es/at-home-sleep-test-kit-by-sleepcorner",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Kit de Prueba de Sueño en Casa en Castle Rock | Snooze Mattress",
-    "description": "El Kit de Prueba de Sueño en Casa de SleepCorner en Snooze Mattress + Wellness, Castle Rock: prueba nocturna aprobada por la FDA y revisada por profesionales.",
+    "title": "Prueba de Sueño en Casa en Castle Rock | Snooze Mattress",
+    "description": "Prueba de Sueño en Casa de SleepCorner en Snooze Mattress + Wellness, Castle Rock: kit nocturno autorizado por la FDA, revisado por profesionales.",
     "url": "/es/at-home-sleep-test-kit-by-sleepcorner",
     "type": "website",
     "images": [

@@ -66,7 +66,7 @@ export const PAGE: ContentPage = {
       cta: { title: 'Skip the guesswork', text: 'Book a free Dream Mapping fitting in Castle Rock and let the pressure map choose the comfort level for you.', button: 'Book a free fitting' },
     },
     es: {
-      title: 'Cómo Elegir un Colchón: Tamaños y Confort | Snooze Mattress',
+      title: 'Cómo Elegir un Colchón en Castle Rock | Snooze Mattress',
       description: 'Cómo elegir colchón en Castle Rock: tamaños estándar, los cinco niveles de comodidad, la posición al dormir y el ajuste gratis de Dream Mapping.',
       crumb: 'Cómo Elegir un Colchón',
       eyebrow: 'Guía de compra',

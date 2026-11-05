@@ -97,7 +97,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@id": `${SITE_URL}/es/mattress-protectors#webpage`,
     "url": `${SITE_URL}/es/mattress-protectors`,
     "name": "Protectores de Colchón en Castle Rock, CO",
-    "description": "Protectores de colchón en Castle Rock, CO de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
+    "description": "Protectores de colchón en Castle Rock de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
     "inLanguage": "es-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

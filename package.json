@@ -12,6 +12,8 @@
     "qa:header": "node scripts/qa-header.mjs",
     "lastmod": "node scripts/lastmod.mjs",
     "seo:meta": "node scripts/seo-metadata.mjs",
+    "es:sync": "node scripts/es-sync.mjs",
+    "es:check": "node scripts/es-sync.mjs --check",
     "es:fixes": "node scripts/spanish-copy-fixes.mjs",
     "headings": "node scripts/heading-structure.mjs",
     "brand": "node scripts/brand-nap.mjs",

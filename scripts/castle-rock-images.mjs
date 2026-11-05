@@ -82,7 +82,7 @@ function ratios(headAndBody, markup) {
   return out;
 }
 
-const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app'));
+const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app', '(en)')); // the English pages only: app/es is written from them by scripts/es-sync.mjs (npm run es:sync)
 let changed = 0, touched = { imgs: 0, nodes: 0, column: 0, orphans: 0 };
 for (const file of files) {
   const rel = path.relative(ROOT, file).split(path.sep).join('/');

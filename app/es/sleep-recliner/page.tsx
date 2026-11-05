@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Sillón Reclinable Zcliner en Castle Rock, CO | Snooze Mattress",
-  "description": "El SleepRecliner (Zcliner®) de Flexsteel, disponible en Snooze Mattress + Wellness en Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
+  "title": "Sillón Reclinable Zcliner en Castle Rock | Snooze Mattress",
+  "description": "El SleepRecliner (Zcliner®) de Flexsteel en Snooze Mattress + Wellness, Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
   "alternates": {
     "canonical": "/es/sleep-recliner",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Sillón Reclinable Zcliner en Castle Rock, CO | Snooze Mattress",
-    "description": "El SleepRecliner (Zcliner®) de Flexsteel, disponible en Snooze Mattress + Wellness en Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
+    "title": "Sillón Reclinable Zcliner en Castle Rock | Snooze Mattress",
+    "description": "El SleepRecliner (Zcliner®) de Flexsteel en Snooze Mattress + Wellness, Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
     "url": "/es/sleep-recliner",
     "type": "website",
     "images": [

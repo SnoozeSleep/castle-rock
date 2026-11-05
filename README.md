@@ -121,6 +121,9 @@ their English pages); the sitemap is English only; `<html lang="en">`; the schem
 on any `/es/` link. **If the client does want a Spanish site, stop here: the McAllen repo has the full `/es` tree and
 dictionaries to port from.**
 
+**Superseded on November 6, 2026: the client wants the Spanish site, and it is back — see "Spanish site restored"
+below. Everything this section says was removed is restored there.**
+
 ### C. Brands
 
 McAllen's approved 15-brand lineup is carried over unchanged, in the client's order (`lib/brands.json`, approved for
@@ -297,9 +300,8 @@ verbatim; nothing is added — no offer, price, staff quote or claim.
   the placeholder card, the GHL stub, the CSS and JS chunks) answers 200 with a `*.vercel.app` Host; nothing redirects,
   so the `*.vercel.app` site renders with its assets, fonts, icons and hero. Unknown URLs (`/no-such-page`, `/a/b/c`)
   answer 404 with the branded page ("Page Not Found | Snooze Mattress", the phone).
-- `/es/*` → 308: `vercel.json` carries `/es` → `/` and `/es/:path*` → `/:path*` (permanent); Vercel applies these at the
-  edge, so they cannot be exercised on the local server build — verify on the first deployment with
-  `curl -I https://<deployment>/es/mattresses` (expect `308` + `location: /mattresses`).
+- `/es/*` → 308 (true for this pass only): `vercel.json` carried `/es` → `/` and `/es/:path*` → `/:path*`. Those two
+  redirects were removed when the Spanish site was restored (November 6, 2026): `/es/mattresses` now answers 200.
 - **Vercel** (at the time of this pass): the CLI on the build machine is logged out, so no project could be created
   from here; the project was connected afterwards — see "Deployment".
 
@@ -317,7 +319,7 @@ UTC) had no Vercel status 14 minutes later** — on the sibling repositories the
 push — so from here they are NOT confirmed as deployed: check the project's Git connection / production branch in the
 Vercel dashboard, or redeploy `main` there. The deployment's `*.vercel.app` host sits behind Vercel's login (deployment
 protection), so it cannot be opened or curl-ed anonymously: someone signed in to the team checks the preview (assets,
-fonts, icons, hero) and `curl -I https://<deployment>/es/mattresses` → 308. Do NOT set `NEXT_PUBLIC_SITE_URL` until the custom domain
+fonts, icons, hero) and `curl -I https://<deployment>/es/mattresses` → 200 (the Spanish page). Do NOT set `NEXT_PUBLIC_SITE_URL` until the custom domain
 (`[CR_DOMAIN]`, expected `castlerock.snoozemattresscompany.com`) is attached and resolving; then set it in the
 Production environment only and redeploy.
 
@@ -329,7 +331,8 @@ Production environment only and redeploy.
 | Placeholder | Where | Until supplied |
 |---|---|---|
 | `[CR_DOMAIN]` | the Vercel project's domain + `NEXT_PUBLIC_SITE_URL` (Production) | canonicals, sitemap, robots, llms.txt and JSON-LD use the deployment host; no host redirect |
-| `[CR_CHAT_EN]` | `lib/integrations.ts` `chatWidgetId` | no chat widget |
+| `[CR_CHAT_EN]` | `lib/integrations.ts` `chatWidgetId.en` | no chat widget on the English pages |
+| `[CR_CHAT_ES]` | `lib/integrations.ts` `chatWidgetId.es` | no chat widget on `/es` (each language loads only its own id: the English widget never loads on a Spanish page) |
 | `[CR_PLACE_ID]` | `lib/location.ts` `PLACE_ID`, then `npm run reviews:widget` | address links open a Maps search; no `hasMap` / `geo` / GBP `sameAs`; "Read more reviews on Google" hidden |
 | Form redirect (GoHighLevel setting) | the Optin form `j5X6ShHH15vRKdggRsLr` → on submit: redirect to `https://<domain>/thank/you` | the form shows its inline "Thank you for submitting your entry." message, so the visitor never reaches the noindex thank-you page and `optin_submit` cannot fire |
 | Form test submission | `/contact-us`, by a person | not submitted from the build machine: the form's bot check (Cloudflare Turnstile) gives no token to an automated browser |
@@ -438,6 +441,90 @@ success action is the inline message "Thank you for submitting your entry.", wit
 action in GoHighLevel to redirect to `https://<domain>/thank/you` so the thank-you page and `optin_submit` are reached
 (agency item). Screenshots: `docs/screenshots/verify/` (home hero, About Us, booking, contact and the reviews section,
 desktop + mobile; home and financing full pages, the dropdown and the drawer).
+
+### Spanish site restored (November 6, 2026)
+
+The client wants `/es` after all. Three commits: the restore (a revert of "B. Spanish site removed"), the
+re-localisation and parity pass, and the Spanish blog.
+
+**What is back.** `app/es`: a Spanish twin of every English page, under its own root layout (`app/es/layout.tsx`,
+`<html lang="es">`; English is `app/(en)/layout.tsx`, `lang="en"`; both render `components/SiteDocument.tsx`, so there is
+one copy of the tracking, header, footer and embed loaders). Unknown URLs get `app/global-not-found.tsx`
+(`experimental.globalNotFound`: with two root layouts a top-level not-found has no layout to sit in); the 404 copy is
+`components/NotFoundContent.tsx` in both languages. The EN | ES toggle (top bar and drawer) is a plain `<a href>` to the
+same page in the other language (`lib/i18n.ts` `alternateHref`; a blog post goes to its twin through
+`lib/blog-nav.ts` `BLOG_SLUG_ES`). Every pair declares `en-US` / `es-US` / `x-default` (= English) and a
+self-canonical; the sitemap lists both languages with each page's own lastmod (`lib/lastmod.json`); `/llms.txt` has an
+"En español" section. `vercel.json`: the two `/es` → English 308s are gone, the Spanish legacy redirects (`-sp` slugs,
+`/es/home-page`, old Spanish blog URLs → `/es/blog`) are back.
+
+**How the Spanish pages are made — one source, the English page.**
+
+- The 17 builder-generated pages (`app/es/<route>/content.ts`, `client.tsx`, `scripts.ts`, `page.tsx`) are WRITTEN FROM
+  their English twins by `scripts/es-sync.mjs` (`npm run es:sync`): the English markup and every string of its hydration
+  payload are translated text node by text node through `overrides/i18n/es.castle-rock.json` (English segment →
+  Spanish; 1,023 entries, built from the restored Spanish pages plus the copy written since), internal links get the
+  `/es` prefix, and nothing else changes. So a Spanish page has every section, image, embed, id and class its English
+  page has — the storefront and team photos, the desktop heroes, the reviews widget and the two review cards, the
+  Optin form, the brand blocks, the Black Friday band — by construction, not by replaying each change. A fragment that
+  needs a different translation in one sentence uses a contextual key (`"Our @@ <the sentence>"`); a segment that is the
+  same in Spanish is listed with itself as the value; an English segment with no entry stays English, is listed, and
+  makes the run exit 1. `npm run es:check` reports without writing — after the rebuild order below it must say
+  "0 file(s) would change".
+- Customer words are not translated: the two review quotes stay in English, marked `lang="en"`, with Spanish labels
+  around them ("Reseñas Recientes", "Reseña de Google", "5 de 5 estrellas", the month in Spanish). Embed titles are
+  Spanish ("Reseñas de clientes", "Formulario de contacto"); the embeds themselves (form, calendar, reviews widget) are
+  the client's GoHighLevel pages and render in whatever language they are configured in there.
+- The scripts that own a block of the generated pages — `castle-rock-images`, `castle-rock-heroes`, `integrations`,
+  `reviews-widget`, `recent-reviews` — now edit the ENGLISH tree only; `es:sync` carries the result to `/es`.
+- The 12 hand-written content pages (`lib/pages/*.ts`), the service-area pages, the booking page, the quiz and the
+  shared components carry their own `es` copy block next to the English one; `scripts/seo-metadata.mjs` holds both
+  languages' titles and descriptions for the generated pages.
+- The builder dictionaries of the original clone (`overrides/i18n/es.part-N.json`, `es.extra.json`, `segments.json`)
+  came back with the revert and were then removed: they are keyed by the McAllen English, which no page uses any
+  more. With them gone `scripts/convert.mjs` generates English only (as before) and `es:sync` makes the Spanish.
+
+**Rebuild order** (after anything that changes the English generated pages):
+`images:castle-rock` → `heroes:castle-rock` → `integrations` → `reviews:widget` → `reviews` → `es:sync` → `seo:meta` →
+`schema` → `lastmod` → `build` → `audit` → `schema:check` → `node scripts/check-parity.mjs`.
+
+**Re-localised.** Titles ≤ 60 characters ending "| Snooze Mattress" with "Castle Rock" in every one, descriptions ≤ 155
+(the audit enforces both, in both languages). Hours "Lun–Sáb 10 AM–7 PM, Dom 11 AM–6 PM", "hora de la Montaña" where
+a time zone is named (the service-area pages said "hora del Este"). Climate copy is Front Range and carries no
+numbers: aire seco, la calefacción del invierno, el sol del verano, la altura. Three English lines still describe
+Castle Rock as warm — "ideal for Castle Rock's warm climate" (`/mattresses`), "perfect for warm Castle Rock nights"
+(`/pillows`), "perfect for Castle Rock heat" (`/premium-sheets`) — and were left as they are (English copy was not in
+this brief); their Spanish twins say "tanto en verano como con la calefacción del invierno", "las noches de Castle
+Rock en verano o con calefacción" and "Castle Rock en verano y con calefacción". "FDA-cleared" is "autorizada por la
+FDA" (it was "aprobada", which claims more).
+
+**Checks.**
+
+- `npm run audit` (two languages now): `<html lang>` per tree, the NAP / hours / Maps query / one LocalBusiness node on
+  every route, the title and description rules, complete and reciprocal hreflang, an English twin for every Spanish
+  page and back, the same NAP counts on both sides.
+- `node scripts/check-parity.mjs`: the built English and Spanish pages block by block — same blocks in the same order,
+  same sentence count per block, same links (without the `/es` prefix), same images and embeds. `[route]` prints one
+  pair; intended differences are listed in its `ALLOW` table with the reason.
+- `node scripts/check-es.mjs` (the site running on :4173, Chrome): per pair — 200, `lang`, one `<h1>`, hreflang and
+  canonical, the toggle round trip, links staying under `/es`, no visible English, no console errors, GTM + GA4 +
+  Simpli.fi firing with no interaction, no chat widget, `form_embed.js` once; then the five dataLayer events on `/es`
+  (the quiz webhook request is intercepted, not sent).
+- `scripts/post-build.mjs`: the old ZIP and "(956)" no longer match webpack module ids in the compiled bundles (a
+  fresh-clone build numbered a module `78504` and the gate failed on it).
+
+**Also changed on the English side** (found while diffing the two languages): `/memory-foam-mattresses` linked a
+"memory foam vs hybrid" guide that does not exist (`/blog/memory-foam-vs-hybrid-mattress-castle-rock`, a redirect to the
+blog index) — it now points at the buying guide, like the same sentence on `/cooling-mattresses`; five
+CollectionPage `name`s in the page schema were one title edit behind (`npm run schema` re-read the titles).
+
+**Chat.** `lib/integrations.ts` `chatWidgetId` is `{ en, es }`, both empty (`[CR_CHAT_EN]`, `[CR_CHAT_ES]`): no widget
+loads in either language, and when only the English id arrives the Spanish pages still load none. Observed on
+November 6, 2026 (agency item, not the site): the tag container `GTM-TVPN94M` itself requests
+`widgets.leadconnectorhq.com/loader.js` on every page in both languages. That script carries no widget id and no
+`<chat-widget>` renders, but a chat tag configured in the container would show the same (English) widget on `/es` —
+if the container is meant to carry chat, it needs a rule for `/es`; otherwise the tag should come out and the ids go in
+`lib/integrations.ts`.
 
 ---
 

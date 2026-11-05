@@ -69,7 +69,7 @@ const apply = (html, block) => { let s = strip(html); let n = 0; s = s.replace(O
 /* a page already carrying the markers: re-render the block in place */
 const refresh = (html, block) => { let n = 0; const s = html.replace(new RegExp(`${START}[\\s\\S]*?${END}`, 'g'), () => { n++; return block; }); return { s, n }; };
 
-const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app'));
+const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app', '(en)')); // the English pages only: app/es is written from them by scripts/es-sync.mjs (npm run es:sync)
 let changed = 0, placed = 0;
 for (const f of files) {
   const rel = path.relative(ROOT, f).split(path.sep).join('/');

@@ -96,8 +96,8 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/es/mattresses#webpage`,
     "url": `${SITE_URL}/es/mattresses`,
-    "name": "Colchones en Castle Rock, CO: Marcas Líderes",
-    "description": "Colchones en Castle Rock, CO: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil y más, ajustados a ti en una sesión gratis de Dream Mapping.",
+    "name": "Colchones en Castle Rock: Marcas Líderes",
+    "description": "Colchones en Castle Rock: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil y más, ajustados a ti en una sesión gratis de Dream Mapping.",
     "inLanguage": "es-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

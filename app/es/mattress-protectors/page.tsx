@@ -6,7 +6,7 @@ import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
   "title": "Protectores de Colchón en Castle Rock, CO | Snooze Mattress",
-  "description": "Protectores de colchón en Castle Rock, CO de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
+  "description": "Protectores de colchón en Castle Rock de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
   "alternates": {
     "canonical": "/es/mattress-protectors",
     "languages": {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   "openGraph": {
     "title": "Protectores de Colchón en Castle Rock, CO | Snooze Mattress",
-    "description": "Protectores de colchón en Castle Rock, CO de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
+    "description": "Protectores de colchón en Castle Rock de Snooze Mattress + Wellness: protección transpirable e impermeable contra derrames y alérgenos para tu inversión.",
     "url": "/es/mattress-protectors",
     "type": "website",
     "images": [

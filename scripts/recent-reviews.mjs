@@ -31,7 +31,7 @@ const WIDGET_START = /(?:<script type=["']text\/javascript["'] src=["']https:\/\
    it (the marker precedes the iframe, which must not get a second copy), else in front of the widget's own embed */
 const MARKER = /<!--snz-reviews-widget-->/g;
 const placeBefore = (html, block) => { const s = strip(html); return MARKER.test(s) ? s.replace(MARKER, (m) => block + m) : s.replace(WIDGET_START, (m) => block + m); };
-const LABELS = { en: { title: 'Recent Reviews', stars: (n) => `${n} out of 5 stars`, from: 'Google review' }, es: { title: 'Reseñas Recientes', stars: (n) => `${n} de 5 estrellas`, from: 'Reseña en Google' } };
+const LABELS = { en: { title: 'Recent Reviews', stars: (n) => `${n} out of 5 stars`, from: 'Google review' }, es: { title: 'Reseñas Recientes', stars: (n) => `${n} de 5 estrellas`, from: 'Reseña de Google' } };
 
 const reviews = (DATA.reviews || []).filter((r) => r && r.name && r.text && r.stars);
 function render(locale) {
@@ -45,7 +45,7 @@ function render(locale) {
 }
 const strip = (html) => html.replace(new RegExp(`${START}[\\s\\S]*?${END}`, 'g'), '');
 
-const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app'));
+const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app', '(en)')); // the English pages only: app/es is written from them by scripts/es-sync.mjs (npm run es:sync)
 let changed = 0, placed = 0;
 for (const f of files) {
   const rel = path.relative(ROOT, f).split(path.sep).join('/'); const locale = /^app\/es\//.test(rel) ? 'es' : 'en';

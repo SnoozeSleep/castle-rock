@@ -97,7 +97,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@id": `${SITE_URL}/mattresses#webpage`,
     "url": `${SITE_URL}/mattresses`,
     "name": "Mattresses in Castle Rock, CO: Top Brands",
-    "description": "Mattresses in Castle Rock, CO: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
+    "description": "Mattresses in Castle Rock: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
     "inLanguage": "en-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

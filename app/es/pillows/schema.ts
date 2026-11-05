@@ -96,7 +96,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/es/pillows#webpage`,
     "url": `${SITE_URL}/es/pillows`,
-    "name": "Almohadas en Castle Rock, CO para Tu Descanso",
+    "name": "Almohadas en Castle Rock para Tu Descanso",
     "description": "Almohadas en Castle Rock, CO para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
     "inLanguage": "es-US",
     "isPartOf": {

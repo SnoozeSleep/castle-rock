@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Sillas de Masaje Infinity en Castle Rock, CO | Snooze Mattress",
-  "description": "Sillas de masaje Infinity en Castle Rock, CO en Snooze Mattress + Wellness: tecnología de masaje avanzada para relajarte y recuperarte. Pruébalas en la tienda.",
+  "title": "Sillas de Masaje Infinity en Castle Rock | Snooze Mattress",
+  "description": "Sillas de masaje Infinity en Snooze Mattress + Wellness, Castle Rock: tecnología de masaje avanzada para relajarte y recuperarte. Pruébalas en la tienda.",
   "alternates": {
     "canonical": "/es/massage-chairs",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Sillas de Masaje Infinity en Castle Rock, CO | Snooze Mattress",
-    "description": "Sillas de masaje Infinity en Castle Rock, CO en Snooze Mattress + Wellness: tecnología de masaje avanzada para relajarte y recuperarte. Pruébalas en la tienda.",
+    "title": "Sillas de Masaje Infinity en Castle Rock | Snooze Mattress",
+    "description": "Sillas de masaje Infinity en Snooze Mattress + Wellness, Castle Rock: tecnología de masaje avanzada para relajarte y recuperarte. Pruébalas en la tienda.",
     "url": "/es/massage-chairs",
     "type": "website",
     "images": [

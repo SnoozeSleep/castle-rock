@@ -5,7 +5,10 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "robots": { "index": false, "follow": true },
+  "robots": {
+    "index": false,
+    "follow": true
+  },
   "title": "Gracias",
   "description": "Vas en camino a dormir mejor: nuestro Coach de Dream Mapping se pondrá en contacto contigo muy pronto.",
   "alternates": {

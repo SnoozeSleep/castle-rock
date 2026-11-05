@@ -48,7 +48,7 @@ export const PAGE: ContentPage = {
       cta: { title: 'Map your pressure points, free', text: 'Five minutes on the Dream Mapping bed in Castle Rock shows what your back needs from a mattress.', button: 'Book a free fitting' },
     },
     es: {
-      title: 'Colchones para Dolor de Espalda y de Lado | Snooze Mattress',
+      title: 'Dolor de Espalda: Colchones en Castle Rock | Snooze Mattress',
       description: 'Colchones para dolor de espalda y dormir de lado en Castle Rock, CO: un escaneo gratis de Dream Mapping encuentra tus puntos de presión y el soporte.',
       crumb: 'Dolor de Espalda y Dormir de Lado',
       eyebrow: 'Colchones por necesidad',

@@ -96,8 +96,8 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/es/sleep-recliner#webpage`,
     "url": `${SITE_URL}/es/sleep-recliner`,
-    "name": "Sillón Reclinable Zcliner en Castle Rock, CO",
-    "description": "El SleepRecliner (Zcliner®) de Flexsteel, disponible en Snooze Mattress + Wellness en Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
+    "name": "Sillón Reclinable Zcliner en Castle Rock",
+    "description": "El SleepRecliner (Zcliner®) de Flexsteel en Snooze Mattress + Wellness, Castle Rock: tecnología de confort avanzada con posiciones terapéuticas.",
     "inLanguage": "es-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

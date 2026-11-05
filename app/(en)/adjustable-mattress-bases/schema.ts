@@ -96,7 +96,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/adjustable-mattress-bases#webpage`,
     "url": `${SITE_URL}/adjustable-mattress-bases`,
-    "name": "Adjustable Beds & Bases in Castle Rock, CO",
+    "name": "Adjustable Beds & Bases in Castle Rock",
     "description": "Adjustable beds and bases in Castle Rock, CO from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
     "inLanguage": "en-US",
     "isPartOf": {

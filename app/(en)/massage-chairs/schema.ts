@@ -96,8 +96,8 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/massage-chairs#webpage`,
     "url": `${SITE_URL}/massage-chairs`,
-    "name": "Massage Chairs in Castle Rock, CO — Infinity",
-    "description": "Infinity massage chairs in Castle Rock, CO at Snooze Mattress + Wellness: advanced massage technology designed to help you relax and recover. Try one in store.",
+    "name": "Massage Chairs in Castle Rock: Infinity",
+    "description": "Infinity massage chairs in Castle Rock at Snooze Mattress + Wellness: advanced massage technology to help you relax and recover. Try one in store.",
     "inLanguage": "en-US",
     "isPartOf": {
       "@id": `${SITE_URL}/#website`

@@ -54,8 +54,8 @@ export function areaPage(city: string, slug: string): ContentPage {
         cta: { title: `Book your free fitting from ${city}`, text: `Five minutes on the Dream Mapping bed in ${L.city}, and you leave knowing which mattresses fit the way you sleep.`, button: 'Book a free fitting' },
       },
       es: {
-        title: `Tienda de Colchones para ${city}, CO | Snooze Mattress`,
-        description: `¿Buscas colchón desde ${city}? Snooze Mattress + Wellness en Castle Rock te ajusta con Dream Mapping gratis y entrega gratis en compras mayores de $999.`,
+        title: `${city}: Colchones en Castle Rock | Snooze Mattress`,
+        description: `¿Buscas colchón desde ${city}? En Snooze Mattress + Wellness, Castle Rock: Dream Mapping gratis y entrega gratis en compras mayores de $999.`,
         crumb: `Atendemos ${city}`,
         eyebrow: 'Zona de servicio',
         h1: `Tienda de colchones que atiende a ${city}, CO`,
@@ -74,7 +74,7 @@ export function areaPage(city: string, slug: string): ContentPage {
             'Hay financiamiento con Synchrony y Wells Fargo, y Snap Finance ofrece una opción de renta con opción a compra para quienes quizá no califiquen para crédito tradicional. Las solicitudes se hacen en tienda; la decisión de aprobación la toma la institución financiera. La página de financiamiento tiene los detalles y las preguntas más frecuentes.',
           ] },
           { h2: 'Antes de visitarnos', listStyle: 'facts', bullets: [
-            `Horario: ${L.hours.es[0]}, ${L.hours.es[1]} (hora del Este).`,
+            `Horario: ${L.hours.es[0]}, ${L.hours.es[1]} (hora de la Montaña).`,
             `Llama al ${L.phone} para preguntar por una marca o un tamaño, o reserva tu Dream Mapping en línea para que un Sleep Coach te esté esperando.`,
             'Si quieres, haz primero el [Sleep Fit Quiz](/es/sleep-quiz) de 60 segundos en casa; el mapa en tienda confirma el resultado.',
             'Las parejas se mapean por separado, así que vengan juntos si comparten la cama.',
@@ -84,7 +84,7 @@ export function areaPage(city: string, slug: string): ContentPage {
         faqs: [
           { question: `¿Dónde está la tienda Snooze para ${city}?`, answer: `En ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, en el condado de Douglas, abierta ${L.hours.es[0]} y ${L.hours.es[1]}.` },
           { question: `¿Entregan en ${city}?`, answer: `Sí. La entrega e instalación son gratis en compras mayores de $999; el Sleep Coach confirma la ventana de entrega para tu dirección en ${city} al hacer tu compra.` },
-          { question: '¿Qué otras ciudades atienden?', answer: `${areaList('y')}, y el resto del área de Castle Rock.` },
+          { question: '¿Qué otras ciudades atienden?', answer: `${areaList('y')}, y el resto del sur del área metropolitana de Denver.` },
           { question: '¿Necesito cita para Dream Mapping?', answer: 'No. Puedes llegar sin cita en horario de tienda, pero reservar en línea garantiza que un Sleep Coach esté listo cuando llegues.' },
           { question: '¿Qué marcas puedo probar en la sala de exhibición?', answer: `${BRANDS_ES}, además de bases ajustables, almohadas, protectores y sábanas.` },
           { question: '¿Hay financiamiento?', answer: 'Sí: Synchrony, Wells Fargo y una opción de renta con opción a compra con Snap Finance, que se solicita en tienda.' },

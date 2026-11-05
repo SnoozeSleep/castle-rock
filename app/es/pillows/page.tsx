@@ -5,7 +5,7 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Almohadas en Castle Rock, CO para Tu Descanso | Snooze Mattress",
+  "title": "Almohadas en Castle Rock para Tu Descanso | Snooze Mattress",
   "description": "Almohadas en Castle Rock, CO para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
   "alternates": {
     "canonical": "/es/pillows",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Almohadas en Castle Rock, CO para Tu Descanso | Snooze Mattress",
+    "title": "Almohadas en Castle Rock para Tu Descanso | Snooze Mattress",
     "description": "Almohadas en Castle Rock, CO para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
     "url": "/es/pillows",
     "type": "website",

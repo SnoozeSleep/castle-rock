@@ -6,7 +6,8 @@ import { postsFor } from '@/lib/blog-posts';
    robots.txt points at it in a comment). Prerendered once at build time, like the sitemap, so every link carries the
    site's canonical origin (lib/location.ts SITE_URL: the custom domain once NEXT_PUBLIC_SITE_URL is set, the deployment
    host until then). Only facts the site states: the NAP, the hours, Dream Mapping, the brand lineup (lib/brands.json),
-   delivery and financing as the pages describe them, the areas served; the guides list grows with lib/blog-posts.ts. */
+   delivery and financing as the pages describe them, the areas served; the guides list grows with lib/blog-posts.ts.
+   "En español" lists the Spanish twin of every page (/es/…, restored November 2026) and the Spanish articles. */
 export const dynamic = 'force-static';
 
 const L = LOCATION;
@@ -16,6 +17,7 @@ const line = (label: string, path: string, note = '') => `- [${label}](${u(path)
 export function GET() {
   const brands = BRANDS.mattressBrands.map((b) => (b === 'Snooze-O-Pedic' ? `${b} (sold only at Snooze)` : b)).join(', ');
   const posts = postsFor('en').map((p) => line(p.title, `/blog/${p.slug}`));
+  const postsEs = postsFor('es').map((p) => line(p.title, `/es/blog/${p.slug}`));
   const text = [
     `# Snooze Mattress + Wellness — ${L.city}, ${L.region}`,
     '',
@@ -65,6 +67,37 @@ export function GET() {
     '',
     '## Areas served',
     ...L.serviceAreas.map((a) => line(`${a.city}, ${L.region}`, a.slug)),
+    '',
+    '## En español',
+    `Todo el sitio está disponible en español bajo ${u('/es')}; el horario es ${L.hours.es[0]}, ${L.hours.es[1]} (hora de la Montaña).`,
+    line('Inicio', '/es', `La tienda de ${L.city}, Dream Mapping, marcas, garantía y financiamiento`),
+    line('Dream Mapping', '/es/dream-mapping', 'Cómo funciona el ajuste gratis de colchón con mapa de presión'),
+    line('Agenda tu cita', '/es/booking', 'Reserva en línea de una cita de Dream Mapping'),
+    line('Nosotros', '/es/about-us', `La tienda de ${L.city} y sus Sleep Coaches`),
+    line('Preguntas frecuentes', '/es/faq', 'Respuestas sobre Dream Mapping, la tienda, la entrega y el financiamiento'),
+    line('Contacto', '/es/contact-us', 'Dirección, teléfono, horario y cómo llegar'),
+    line('Colchones', '/es/mattresses', 'Marcas y tipos de colchón en la sala de exhibición'),
+    line('Colchones queen', '/es/queen-mattresses'),
+    line('Colchones king', '/es/king-mattresses'),
+    line('Colchones full y twin', '/es/full-twin-mattresses'),
+    line('Colchones de memory foam', '/es/memory-foam-mattresses'),
+    line('Colchones para dolor de espalda', '/es/mattresses-for-back-pain'),
+    line('Colchones frescos', '/es/cooling-mattresses'),
+    line('Bases ajustables', '/es/adjustable-mattress-bases'),
+    line('Almohadas', '/es/pillows'),
+    line('Protectores de colchón', '/es/mattress-protectors'),
+    line('Sábanas premium', '/es/premium-sheets'),
+    line('Sillas de masaje', '/es/massage-chairs'),
+    line('Sillón reclinable para dormir', '/es/sleep-recliner', 'El Zcliner'),
+    line('Kit de prueba de sueño en casa', '/es/at-home-sleep-test-kit-by-sleepcorner'),
+    line('Financiamiento de colchones', '/es/mattress-financing', 'Synchrony, Wells Fargo y renta con opción a compra de Snap Finance'),
+    line('Ofertas vigentes', '/es/mattress-sales'),
+    line('Cómo elegir un colchón', '/es/how-to-choose-a-mattress'),
+    line('Sleep Fit Quiz', '/es/sleep-quiz', 'Cuestionario en línea de 60 segundos'),
+    ...(postsEs.length ? [line('Blog del Sueño', '/es/blog'), ...postsEs] : []),
+    ...L.serviceAreas.map((a) => line(`${a.city}, ${L.region}`, `/es${a.slug}`)),
+    line('Política de privacidad', '/es/privacy-policy-page'),
+    line('Términos y condiciones', '/es/terms-conditions-page'),
     '',
     '## Optional',
     line('Privacy policy', '/privacy-policy-page'),

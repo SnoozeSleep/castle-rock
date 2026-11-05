@@ -96,7 +96,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/pillows#webpage`,
     "url": `${SITE_URL}/pillows`,
-    "name": "Pillows in Castle Rock, CO for How You Sleep",
+    "name": "Pillows in Castle Rock for How You Sleep",
     "description": "Pillows in Castle Rock, CO fitted to how you sleep: side, back and stomach sleepers. Premium pillows at Snooze Mattress + Wellness for your sleep style.",
     "inLanguage": "en-US",
     "isPartOf": {

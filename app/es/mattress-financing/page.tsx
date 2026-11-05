@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Financiamiento de Colchones en Castle Rock, CO | Snooze Mattress",
-  "description": "Financiamiento especial de colchones en Castle Rock, CO. Con crédito aprobado; los términos varían según la promoción. Detalles en tienda o agenda tu visita.",
+  "title": "Financiamiento de Colchones en Castle Rock | Snooze Mattress",
+  "description": "Financiamiento especial de colchones en Castle Rock. Con crédito aprobado; los términos varían según la promoción. Detalles en tienda o agenda tu visita.",
   "alternates": {
     "canonical": "/es/mattress-financing",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Financiamiento de Colchones en Castle Rock, CO | Snooze Mattress",
-    "description": "Financiamiento especial de colchones en Castle Rock, CO. Con crédito aprobado; los términos varían según la promoción. Detalles en tienda o agenda tu visita.",
+    "title": "Financiamiento de Colchones en Castle Rock | Snooze Mattress",
+    "description": "Financiamiento especial de colchones en Castle Rock. Con crédito aprobado; los términos varían según la promoción. Detalles en tienda o agenda tu visita.",
     "url": "/es/mattress-financing",
     "type": "website",
     "images": [

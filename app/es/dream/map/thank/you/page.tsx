@@ -5,7 +5,10 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "robots": { "index": false, "follow": true },
+  "robots": {
+    "index": false,
+    "follow": true
+  },
   "title": "¡Gracias por Agendar tu Cita de Dream Mapping!",
   "description": "¡Nuestros Sleep Coaches ya quieren conocerte y empezar juntos tu nueva etapa de mejor sueño!",
   "alternates": {

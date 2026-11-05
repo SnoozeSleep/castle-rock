@@ -7,7 +7,7 @@ import { SizeTypeGrid } from '@/components/SizeTypeGrid';
 import { AreaLinks } from '@/components/AreaLinks';
 
 export const metadata: Metadata = {
-  "title": "Colchones en Castle Rock | Dream Mapping | Snooze Mattress",
+  "title": "Tienda de Colchones en Castle Rock, CO | Snooze Mattress",
   "description": "Tienda de colchones en Castle Rock, CO con Dream Mapping gratis, marcas líderes y financiamiento en 6360 Promenade Pkwy. Abrimos domingos 11–6.",
   "authors": [
     {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Colchones en Castle Rock | Dream Mapping | Snooze Mattress",
+    "title": "Tienda de Colchones en Castle Rock, CO | Snooze Mattress",
     "description": "Tienda de colchones en Castle Rock, CO con Dream Mapping gratis, marcas líderes y financiamiento en 6360 Promenade Pkwy. Abrimos domingos 11–6.",
     "url": "/es",
     "type": "website",

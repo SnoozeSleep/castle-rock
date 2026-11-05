@@ -64,7 +64,7 @@ function payloadCopy(source) {
   return source.replace(bodyM[1], () => JSON.stringify(newBody));
 }
 
-const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app'));
+const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === 'content.ts') files.push(p); } })(path.join(ROOT, 'app', '(en)')); // the English pages only: app/es is written from them by scripts/es-sync.mjs (npm run es:sync)
 let changed = 0, embeds = 0;
 for (const f of files) {
   const s = fs.readFileSync(f, 'utf8');
