@@ -119,6 +119,20 @@ their English pages); the sitemap is English only; `<html lang="en">`; the schem
 on any `/es/` link. **If the client does want a Spanish site, stop here: the McAllen repo has the full `/es` tree and
 dictionaries to port from.**
 
+### C. Brands
+
+McAllen's approved 15-brand lineup is carried over unchanged, in the client's order (`lib/brands.json`, approved for
+McAllen on November 4, 2026): Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by
+King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic, BedTech, BedGear, Sleeptone, DreamFit —
+on every surface: the home page logo strip (both copies of the marquee), the `/mattresses` brand blocks as they stand
+after the November 4 revert (the blocks the client kept; `scripts/page-schema.mjs` builds the page's brand ItemList from
+them), the FAQ answers and the area pages' brand sentence, the store's schema `brand[]` and the llms.txt key facts. The "Trusted by Major Brands" composite on
+`/mattress-sales` and `/mattress-financing` is McAllen's copy without the dropped brand's logo (McAllen 136a349; here
+`ARD47WoZpqaZSQ9MSxLD/media/snz-brand-composite.webp`, `lcimg … r_320–r_1200`). No Puffy, no Englander (verified: zero occurrences in
+the built pages and the site source; only the tooling that removes or audits them names them — `scripts/audit-location.mjs`,
+`scripts/brand-brooklyn.mjs`, `scripts/logo-marquee-patch.mjs`). **The client said brands are a
+PER-LOCATION decision: this list is McAllen's and needs confirming for Castle Rock** (NEEDS CLIENT INPUT).
+
 ---
 
 # History: the McAllen conversion this site was cloned from
