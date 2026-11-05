@@ -53,44 +53,6 @@ export function areaPage(city: string, slug: string): ContentPage {
         ],
         cta: { title: `Book your free fitting from ${city}`, text: `Five minutes on the Dream Mapping bed in ${L.city}, and you leave knowing which mattresses fit the way you sleep.`, button: 'Book a free fitting' },
       },
-      es: {
-        title: `Tienda de Colchones para ${city}, CO | Snooze Mattress`,
-        description: `¿Buscas colchón desde ${city}? Snooze Mattress + Wellness en Castle Rock te ajusta con Dream Mapping gratis y entrega gratis en compras mayores de $999.`,
-        crumb: `Atendemos ${city}`,
-        eyebrow: 'Zona de servicio',
-        h1: `Tienda de colchones que atiende a ${city}, CO`,
-        intro: [
-          `Snooze Mattress + Wellness está en el condado de Douglas, al sur del área metropolitana de Denver, en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, y atiende a ${city} y al resto de ${areaList('y')}. Esto es lo que te da una visita desde ${city}: una sesión gratis de Dream Mapping de cinco minutos, las marcas que conoces en un solo piso, Sleep Coaches que no trabajan por comisión, opciones de financiamiento, y entrega e instalación gratis en compras mayores de $999.`,
-        ],
-        sections: [
-          { h2: `Por qué los clientes de ${city} vienen a Snooze en ${L.city}`, paragraphs: [
-            `Comprar un colchón por el nombre de la marca o acostándose treinta segundos en unas cuantas camas es adivinar. La cama de Dream Mapping le quita las adivinanzas: sus sensores registran tus puntos de presión en unos cinco minutos, y un Sleep Coach te lleva a los colchones que van con ese mapa. El ajuste es gratis y no hay obligación de comprar, así que la visita desde ${city} vale la pena aunque solo vengas a saber qué necesita tu cuerpo.`,
-            `La sala de exhibición tiene ${BRANDS_ES}, desde comodidad de lujo hasta opciones económicas, además de bases ajustables, almohadas, protectores y sábanas ajustados al mismo perfil.`,
-          ] },
-          { h2: `Entrega e instalación para ${city}`, paragraphs: [
-            `La entrega e instalación son gratis en compras mayores de $999, y nos llevamos el colchón viejo si ya no lo necesitas. Dile al Sleep Coach tu dirección en ${city} al hacer tu compra y confirmará contigo la ventana de entrega.`,
-          ] },
-          { h2: 'Financiamiento', paragraphs: [
-            'Hay financiamiento con Synchrony y Wells Fargo, y Snap Finance ofrece una opción de renta con opción a compra para quienes quizá no califiquen para crédito tradicional. Las solicitudes se hacen en tienda; la decisión de aprobación la toma la institución financiera. La página de financiamiento tiene los detalles y las preguntas más frecuentes.',
-          ] },
-          { h2: 'Antes de visitarnos', listStyle: 'facts', bullets: [
-            `Horario: ${L.hours.es[0]}, ${L.hours.es[1]} (hora del Este).`,
-            `Llama al ${L.phone} para preguntar por una marca o un tamaño, o reserva tu Dream Mapping en línea para que un Sleep Coach te esté esperando.`,
-            'Si quieres, haz primero el [Sleep Fit Quiz](/es/sleep-quiz) de 60 segundos en casa; el mapa en tienda confirma el resultado.',
-            'Las parejas se mapean por separado, así que vengan juntos si comparten la cama.',
-          ] },
-        ],
-        faqTitle: `Preguntas de clientes de ${city}`,
-        faqs: [
-          { question: `¿Dónde está la tienda Snooze para ${city}?`, answer: `En ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, en el condado de Douglas, abierta ${L.hours.es[0]} y ${L.hours.es[1]}.` },
-          { question: `¿Entregan en ${city}?`, answer: `Sí. La entrega e instalación son gratis en compras mayores de $999; el Sleep Coach confirma la ventana de entrega para tu dirección en ${city} al hacer tu compra.` },
-          { question: '¿Qué otras ciudades atienden?', answer: `${areaList('y')}, y el resto del área de Castle Rock.` },
-          { question: '¿Necesito cita para Dream Mapping?', answer: 'No. Puedes llegar sin cita en horario de tienda, pero reservar en línea garantiza que un Sleep Coach esté listo cuando llegues.' },
-          { question: '¿Qué marcas puedo probar en la sala de exhibición?', answer: `${BRANDS_ES}, además de bases ajustables, almohadas, protectores y sábanas.` },
-          { question: '¿Hay financiamiento?', answer: 'Sí: Synchrony, Wells Fargo y una opción de renta con opción a compra con Snap Finance, que se solicita en tienda.' },
-        ],
-        cta: { title: `Reserva tu ajuste gratis desde ${city}`, text: `Cinco minutos en la cama de Dream Mapping en ${L.city}, y te vas sabiendo qué colchones van con tu forma de dormir.`, button: 'Reservar ajuste gratis' },
-      },
     },
   };
 }

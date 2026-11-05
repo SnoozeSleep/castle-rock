@@ -2,14 +2,13 @@ import { LOCATION } from '@/lib/location';
 import { ui, type Locale } from '@/lib/i18n';
 import { ArrowRightIcon, Icon } from './icons';
 
-/* The store's details on the contact page (/contact-us, /es/contact-us; October 29, 2026), below the builder's form
+/* The store's details on the contact page (/contact-us; October 29, 2026), below the builder's form
    section: the exact address, phone and hours from lib/location.ts — the same source the top bar and the footer use,
    with the footer's labels — a tel: link and the store's Google Maps listing. Server-rendered, outside the GoHighLevel
    markup (like components/GuideLinks.tsx), so it never touches the page payload. Styles: overrides/global.css
    (.snz-areas, .snz-card). */
 const COPY = {
   en: { label: 'Store contact details', call: 'Call Us', hours: 'Store Hours' },
-  es: { label: 'Datos de contacto de la tienda', call: 'Llámanos', hours: 'Horario de la Tienda' },
 };
 
 export function ContactDetails({ locale }: { locale: Locale }) {

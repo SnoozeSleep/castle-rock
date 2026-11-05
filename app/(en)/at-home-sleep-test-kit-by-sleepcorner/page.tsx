@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "At-Home Sleep Test Kit in Castle Rock, CO | Snooze Mattress",
   "description": "The At-Home Sleep Test Kit by SleepCorner at Snooze Mattress + Wellness in Castle Rock: an FDA-cleared overnight test reviewed by licensed sleep professionals.",
   "alternates": {
-    "canonical": "/at-home-sleep-test-kit-by-sleepcorner",
-    "languages": {
-      "en-US": "/at-home-sleep-test-kit-by-sleepcorner",
-      "es-US": "/es/at-home-sleep-test-kit-by-sleepcorner",
-      "x-default": "/at-home-sleep-test-kit-by-sleepcorner"
-    }
+    "canonical": "/at-home-sleep-test-kit-by-sleepcorner"
   },
   "openGraph": {
     "title": "At-Home Sleep Test Kit in Castle Rock, CO | Snooze Mattress",

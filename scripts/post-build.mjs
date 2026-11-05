@@ -34,10 +34,10 @@ const MARKERS = [
   ['McAllen storefront / team / hero photos', /684480ff2c95c570cfc22e24|6a7578249a9c7792ea5a8b22|699c969010bc9c1e4d659063|69a1cbdf917b4b217201b5ff|69a601e75a52f4e92a27dcf5/g],
   ['McAllen GHL location id outside image paths', /ARD47WoZpqaZSQ9MSxLD(?!(?:\/|\\u002F|\\\\u002F)media(?:\/|\\u002F|\\\\u002F))/g],
   ['Texas', /\bTX\b|Texas|Rio Grande|Edinburg|Pharr|Winter Texan/g],
+  ['Spanish route', /href="\/es(?:\/|")/g],
 ];
-/* the Spanish site (section B of the brief) and the McAllen blog posts (section F) are removed by their own commits;
-   until then those two trees are not gated */
-const UNGATED = /^(es|blog)(\/|\.html$)/;
+/* the McAllen blog posts are removed by section F's commit; until then that tree is not gated */
+const UNGATED = /^blog(\/|\.html$)/;
 
 function walk(dir, out = []) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, e.name); if (e.isDirectory()) { if (e.name !== '_next' && e.name !== 'assets') walk(p, out); } else if (/\.(html|xml|txt|js|body)$/.test(e.name)) out.push(p); } return out; }
 

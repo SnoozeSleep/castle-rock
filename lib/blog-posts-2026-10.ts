@@ -11,7 +11,6 @@ import { IMG } from './blog-images';
 
 export const MEMORY_FOAM_POST: BlogPost = {
   slug: 'memory-foam-vs-hybrid-mattress-castle-rock',
-  altSlug: 'colchon-memory-foam-vs-hibrido-castle-rock',
   title: 'Memory Foam or Hybrid? How to Pick a Mattress for Hot Castle Rock Nights',
   metaTitle: 'Memory Foam vs Hybrid Mattress for Hot Nights | Castle Rock',
   metaDescription: 'Memory foam or hybrid? How each handles summer heat, back comfort, couples and lifespan, plus how Dream Mapping helps you choose. Visit our Castle Rock store.',
@@ -114,7 +113,6 @@ export const MEMORY_FOAM_POST: BlogPost = {
 
 export const SIZE_GUIDE_POST: BlogPost = {
   slug: 'mattress-size-guide-castle-rock',
-  altSlug: 'guia-tamanos-de-colchon-castle-rock',
   title: 'Full, Queen or King? How to Pick the Right Mattress Size for Your Castle Rock Home',
   metaTitle: 'Queen vs King vs Full Mattress Size Guide | Castle Rock, CO',
   metaDescription: 'Full, queen or king? Real dimensions, room sizes and tips for couples, kids and holiday guests from the Sleep Coaches at Snooze Mattress in Castle Rock.',

@@ -1,5 +1,5 @@
 /*
- * Per-page lastmod for app/sitemap.ts. For every public route (EN + ES) the date of the last commit that touched the
+ * Per-page lastmod for app/sitemap.ts. For every public route the date of the last commit that touched the
  * route's own source files is written to lib/lastmod.json: the generated page folder (page.tsx, content.ts, client.tsx,
  * scripts.ts) for builder pages, the hand-written component for /booking and /sleep-quiz, the blog module for /blog.
  * Shared files (layouts, header, footer, global CSS) are deliberately not counted — they change every page's markup
@@ -23,12 +23,12 @@ const dirty = (paths) => { try { return execSync(`git status --porcelain -- ${pa
 
 const out = {};
 for (const route of ROUTES) {
-  for (const locale of ['en', 'es']) {
-    const base = locale === 'en' ? 'app/(en)' : 'app/es';
+  for (const locale of ['en']) {
+    const base = 'app/(en)';
     const dir = route === '/' ? base : path.join(base, route.slice(1));
     const files = [...pageFiles(path.join(ROOT, dir)).map((f) => path.relative(ROOT, f)), ...(EXTRA[route] || [])];
     if (route === '/blog') files.push(path.join(dir)); // the route folder itself (page.tsx + [slug])
-    const url = locale === 'en' ? route : route === '/' ? '/es' : `/es${route}`;
+    const url = route;
     const date = (dirty(files) ? mtime(files) : null) || gitDate(files) || mtime(files) || new Date().toISOString().slice(0, 10);
     out[url] = date;
   }

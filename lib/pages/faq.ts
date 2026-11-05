@@ -37,37 +37,7 @@ const EN: Group[] = [
     { question: 'How do I apply?', answer: 'In store with a sleep specialist, during your visit, or online where the provider offers it; the team walks you through the best option for your needs.' },
   ] },
 ];
-const ES: Group[] = [
-  { h2: 'Dream Mapping', faqs: [
-    { question: '¿Qué es Dream Mapping?', answer: 'Dream Mapping es un ajuste gratis en tienda que lee tus puntos de presión en una cama con sensores y recomienda los colchones que van con tu cuerpo.' },
-    { question: '¿Cuánto tiempo toma completar el proceso de Dream Mapping?', answer: 'Unos cinco minutos. Después, un Sleep Coach te lleva únicamente a los colchones que coinciden con tu cuerpo.' },
-    { question: '¿Las parejas pueden usar Dream Mapping?', answer: 'Sí. Cada uno se mapea por separado y la recomendación toma en cuenta los dos perfiles.' },
-    { question: '¿Hay presión para comprar?', answer: 'No. Los Sleep Coaches no trabajan por comisión, y puedes irte con tus resultados y volver otro día.' },
-    { question: '¿Necesito cita?', answer: 'No. Puedes llegar sin cita en horario de tienda, pero reservar en línea garantiza que un Sleep Coach esté listo cuando llegues.' },
-    { question: '¿Cuál es la diferencia entre Dream Mapping y el Sleep Fit Quiz?', answer: 'El quiz es un cuestionario en línea de 60 segundos; Dream Mapping es la medición en tienda sobre la cama con sensores. El quiz es un primer paso, el mapa es el ajuste.' },
-  ] },
-  { h2: 'La tienda', faqs: [
-    { question: '¿Dónde está Snooze Mattress + Wellness?', answer: `En ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, abierto ${L.hours.es[0]} y ${L.hours.es[1]}; llama al ${L.phone}.` },
-    { question: '¿Por qué elegir Snooze Mattress + Wellness en Castle Rock, CO?', answer: 'Porque el ajuste se mide, no se adivina: un escaneo gratis de Dream Mapping, Sleep Coaches que no trabajan por comisión, ofertas competitivas, la Garantía de Sueño de 365 Noches en las marcas principales, y un negocio familiar al que le honraría atenderte.' },
-    { question: '¿Qué tipo de colchones manejan?', answer: 'La sala de exhibición de Castle Rock tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic (disponible únicamente en Snooze), BedTech, BedGear, Sleeptone y DreamFit.' },
-    { question: '¿Venden bases ajustables, almohadas, protectores y sábanas?', answer: 'Sí. Bases ajustables, almohadas, protectores de colchón, sábanas premium, sillas de masaje y el sillón reclinable Zcliner están en la sala de exhibición de Castle Rock.' },
-    { question: '¿Ofrecen entrega de colchones?', answer: 'Sí. Entregamos e instalamos tu colchón nuevo, gratis en compras mayores de $999, y nos llevamos tu colchón viejo si ya no lo necesitas.' },
-  ] },
-  { h2: 'Financiamiento', faqs: [
-    { question: '¿Ofrecen financiamiento?', answer: 'Sí. Hay financiamiento con Synchrony y Wells Fargo, y Snap Finance ofrece una opción de renta con opción a compra.' },
-    { question: '¿Qué opciones de financiamiento ofrecen?', answer: 'Synchrony Bank, Wells Fargo Bank, N.A. y Snap Finance (renta con opción a compra), que en conjunto cubren una amplia variedad de perfiles de crédito.' },
-    { question: '¿Hay financiamiento disponible con 0% de interés?', answer: 'Periódicamente hay financiamiento promocional, que incluye sin intereses si se paga en su totalidad dentro del periodo promocional y planes de pagos mensuales iguales. En las promociones con interés diferido, si el saldo no se paga en su totalidad dentro del periodo, se pueden cobrar intereses desde la fecha original de compra; se requieren pagos mínimos mensuales y la aprobación está sujeta a crédito. Pregunta en tienda por los detalles vigentes.' },
-    { question: '¿Qué pasa si no califico para el financiamiento tradicional?', answer: 'Snap Finance ofrece una opción de renta con opción a compra. No es un préstamo sino un contrato de renta con opción a compra para clientes que quizá no califiquen para un crédito tradicional, con solicitud rápida, pagos flexibles y posibles opciones de liquidación anticipada; el costo total puede superar el precio de compra si se paga durante todo el plazo, y la aprobación la determina Snap Finance.' },
-    { question: '¿Solicitar financiamiento afecta mi crédito?', answer: 'Puede. Las solicitudes a través de Synchrony o Wells Fargo pueden implicar una consulta de crédito, según lo determine el prestamista; Snap Finance usa sus propios criterios. Las decisiones de aprobación las toma únicamente el proveedor de financiamiento.' },
-    { question: '¿Cuánto tarda la aprobación?', answer: 'Normalmente minutos. En la mayoría de los casos las solicitudes se procesan en minutos y muchos clientes reciben respuesta el mismo día; el tiempo depende del proveedor y de la solicitud.' },
-    { question: '¿Se requiere una compra mínima?', answer: 'A veces. Algunas ofertas de financiamiento promocional requieren un monto mínimo de compra; los detalles varían según la promoción y el prestamista, así que pregunta en tienda por los requisitos vigentes.' },
-    { question: '¿Puedo liquidar mi financiamiento antes de tiempo?', answer: 'Sí. El financiamiento tradicional se puede liquidar antes de tiempo sin penalización (consulta los términos del prestamista), y Snap Finance puede ofrecer opciones de compra anticipada que reducen el costo total; consulta los términos completos con el proveedor.' },
-    { question: '¿A quién le hago los pagos?', answer: 'Directamente al proveedor de financiamiento, Synchrony, Wells Fargo o Snap Finance; Snooze Mattress + Wellness no cobra ni administra los pagos de financiamiento.' },
-    { question: '¿Por qué financiar en lugar de pagar de contado?', answer: 'El financiamiento te permite mejorar tu descanso hoy, proteger tus ahorros, distribuir los pagos en el tiempo y aprovechar las ofertas promocionales; muchos clientes prefieren pagos estructurados a posponer dormir mejor.' },
-    { question: '¿Es seguro el financiamiento?', answer: 'Sí. Los proveedores son empresas establecidas que siguen los estándares de la industria para el crédito al consumidor, y todas las aprobaciones, términos y administración los maneja directamente el prestamista o el proveedor de arrendamiento; Snooze Mattress + Wellness no toma decisiones de crédito.' },
-    { question: '¿Cómo solicito el financiamiento?', answer: 'En tienda con un especialista en sueño, durante tu visita, o en línea donde el proveedor lo permita; el equipo te guía hacia la mejor opción según tus necesidades.' },
-  ] },
-];
+;
 const flat = (g: Group[]) => g.flatMap((x) => x.faqs);
 export const PAGE: ContentPage = {
   slug: '/faq',
@@ -86,19 +56,6 @@ export const PAGE: ContentPage = {
       faqGroups: EN,
       cta: { title: 'Still have a question?', text: `Call ${L.phone} or come by ${L.street}, ${L.city}; a Sleep Coach will answer it in person, and a free Dream Mapping fitting takes about five minutes.`, button: 'Book a free fitting' },
     },
-    es: {
-      title: 'Preguntas Frecuentes de Castle Rock | Snooze Mattress',
-      description: 'Respuestas a lo que preguntan los clientes de Castle Rock a Snooze: Dream Mapping, la tienda y sus marcas, la entrega y el financiamiento.',
-      crumb: 'Preguntas frecuentes',
-      eyebrow: 'Preguntas y respuestas',
-      h1: 'Preguntas frecuentes',
-      intro: ['Todo lo que los clientes preguntan antes y durante una visita a Snooze Mattress + Wellness en Castle Rock, agrupado por tema. Cada respuesta empieza con la versión corta; las páginas enlazadas en el pie tienen el detalle.'],
-      sections: [],
-      faqTitle: 'Todas las preguntas',
-      faqs: flat(ES),
-      faqGroups: ES,
-      cta: { title: '¿Te queda alguna duda?', text: `Llama al ${L.phone} o pasa por ${L.street}, ${L.city}; un Sleep Coach te la responde en persona, y una sesión gratis de Dream Mapping tarda unos cinco minutos.`, button: 'Reservar ajuste gratis' },
-    },
   },
 };
-export const FAQ_GROUPS = { en: EN, es: ES };
+export const FAQ_GROUPS = { en: EN };

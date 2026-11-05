@@ -1,4 +1,4 @@
-/* Blog route bodies shared by the English (/blog) and Spanish (/es/blog) routes. */
+/* Blog route bodies (/blog and /blog/[slug]; English only). */
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BlogArticle, BlogCta, BlogShell, Divider, PostCard } from '@/components/blog/BlogLayout';
@@ -6,26 +6,18 @@ import { plain } from '@/components/blog/Rich';
 import { PageSchema } from '@/components/PageSchema';
 import { BLOG_AUTHOR } from '@/lib/blog-author';
 import styles from '@/components/blog/blog.module.css';
-import { altBlogPath, getPost, postsFor, relatedPosts, type BlogPost } from '@/lib/blog-posts';
+import { getPost, postsFor, relatedPosts, type BlogPost } from '@/lib/blog-posts';
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
 import { ORG_ID } from '@/lib/schema';
 
 import { SITE_URL } from '@/lib/location';
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
-const OG_LOCALE: Record<Locale, string> = { en: 'en_US', es: 'es_US' };
-const LANG: Record<Locale, string> = { en: 'en-US', es: 'es-US' };
+const OG_LOCALE: Record<Locale, string> = { en: 'en_US' };
+const LANG: Record<Locale, string> = { en: 'en-US' };
 
-const alternates = (path: string, locale: Locale) => ({
-  canonical: localizeHref(path, locale),
-  languages: { 'en-US': localizeHref(path, 'en'), 'es-US': localizeHref(path, 'es'), 'x-default': localizeHref(path, 'en') },
-});
-/* a post's alternates: its own path as canonical, the English and Spanish paths (which differ for the October 2026
-   posts, BlogPost.altSlug) as en-US / es-US, the English one as x-default */
-const postAlternates = (post: BlogPost, locale: Locale) => {
-  const own = `/blog/${post.slug}`; const other = altBlogPath(post);
-  const en = locale === 'en' ? own : other; const es = localizeHref(locale === 'es' ? own : other, 'es');
-  return { canonical: localizeHref(own, locale), languages: { 'en-US': en, 'es-US': es, 'x-default': en } };
-};
+const alternates = (path: string, locale: Locale) => ({ canonical: localizeHref(path, locale) });
+/* a post's alternates: its own path as canonical */
+const postAlternates = (post: BlogPost, locale: Locale) => ({ canonical: localizeHref(`/blog/${post.slug}`, locale) });
 
 export function blogIndexMetadata(locale: Locale): Metadata {
   const t = ui(locale).blog;

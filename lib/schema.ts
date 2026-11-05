@@ -24,7 +24,7 @@ export { SITE_URL };
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const STORE_ID = `${SITE_URL}/#store`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const LANG: Record<Locale, string> = { en: 'en-US', es: 'es-US' };
+export const LANG: Record<Locale, string> = { en: 'en-US' };
 export const pageUrl = (path: string, locale: Locale) => `${SITE_URL}${localizeHref(path, locale)}`;
 
 /* the site icon (the alarm-clock mark of the logo), the one square logo asset: 1200 × 1200 px */
@@ -83,8 +83,7 @@ function website(): JsonLd {
 }
 
 /* The Dream Mapping fitting (SEO audit section 5d; the facts the audit supplied: free, about 5 minutes, in the store),
-   one Service per language: …/dream-mapping#service (Service has no inLanguage, the booking EntryPoint carries the
-   language). /dream-mapping and /booking render the same node; the store's makesOffer points at it. */
+   …/dream-mapping#service (Service has no inLanguage, the booking EntryPoint carries the language). /dream-mapping and /booking render the same node; the store's makesOffer points at it. */
 export const dreamMappingServiceId = (locale: Locale) => `${pageUrl('/dream-mapping', locale)}#service`;
 export function dreamMappingService(locale: Locale): JsonLd {
   const booking = pageUrl('/booking', locale);
@@ -92,10 +91,8 @@ export function dreamMappingService(locale: Locale): JsonLd {
     '@type': 'Service',
     '@id': dreamMappingServiceId(locale),
     name: 'Dream Mapping',
-    serviceType: locale === 'es' ? 'Ajuste de colchón por mapeo de presión' : 'Mattress fitting by pressure mapping',
-    description: locale === 'es'
-      ? `Sesión gratuita de Dream Mapping en la tienda de ${L.city}: en unos 5 minutos, el mapeo de presión identifica el colchón que se ajusta a tu forma de dormir.`
-      : `Free in-store Dream Mapping fitting at the ${L.city} store: in about 5 minutes, pressure mapping identifies the mattress that fits the way you sleep.`,
+    serviceType: 'Mattress fitting by pressure mapping',
+    description: `Free in-store Dream Mapping fitting at the ${L.city} store: in about 5 minutes, pressure mapping identifies the mattress that fits the way you sleep.`,
     url: pageUrl('/dream-mapping', locale),
     provider: { '@id': STORE_ID },
     areaServed: L.areaServed.map((city) => ({ '@type': 'City', name: city })),

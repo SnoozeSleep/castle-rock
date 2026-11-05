@@ -10,12 +10,7 @@ export const metadata: Metadata = {
   "title": "Contact Snooze Mattress in Castle Rock, CO | Snooze Mattress",
   "description": "Contact Snooze Mattress + Wellness in Castle Rock: call (303) 736-8465, visit 6360 Promenade Pkwy or send a message to book a free Dream Mapping fitting.",
   "alternates": {
-    "canonical": "/contact-us",
-    "languages": {
-      "en-US": "/contact-us",
-      "es-US": "/es/contact-us",
-      "x-default": "/contact-us"
-    }
+    "canonical": "/contact-us"
   },
   "openGraph": {
     "title": "Contact Snooze Mattress in Castle Rock, CO | Snooze Mattress",

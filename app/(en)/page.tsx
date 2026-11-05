@@ -16,12 +16,7 @@ export const metadata: Metadata = {
   ],
   "robots": "index, follow",
   "alternates": {
-    "canonical": "/",
-    "languages": {
-      "en-US": "/",
-      "es-US": "/es",
-      "x-default": "/"
-    }
+    "canonical": "/"
   },
   "openGraph": {
     "title": "Castle Rock Mattress Store | Dream Mapping | Snooze Mattress",

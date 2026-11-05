@@ -89,7 +89,6 @@ export const LOCATION = {
   ],
   hours: {
     en: ['Mon–Sat 10 AM–7 PM', 'Sun 11 AM–6 PM'],
-    es: ['Lun–Sáb 10 AM–7 PM', 'Dom 11 AM–6 PM'],
   },
   openingHours: [
     { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '19:00' },

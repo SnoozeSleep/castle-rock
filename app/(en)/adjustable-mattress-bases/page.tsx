@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "Adjustable Beds & Bases in Castle Rock, CO | Snooze Mattress",
   "description": "Adjustable beds and bases in Castle Rock, CO from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
   "alternates": {
-    "canonical": "/adjustable-mattress-bases",
-    "languages": {
-      "en-US": "/adjustable-mattress-bases",
-      "es-US": "/es/adjustable-mattress-bases",
-      "x-default": "/adjustable-mattress-bases"
-    }
+    "canonical": "/adjustable-mattress-bases"
   },
   "openGraph": {
     "title": "Adjustable Beds & Bases in Castle Rock, CO | Snooze Mattress",

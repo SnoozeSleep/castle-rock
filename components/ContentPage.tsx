@@ -92,7 +92,7 @@ function ListBlock({ items, style }: { items: string[]; style?: ListStyle }) {
 export function ContentPage({ page, locale }: { page: ContentPageData; locale: Locale }) {
   const c = withDreamMappingLink(page.copy[locale] || page.copy.en, page.slug, locale);
   const t = ui(locale);
-  const home = locale === 'es' ? `${SITE_URL}/es` : SITE_URL;
+  const home = SITE_URL;
   const url = `${SITE_URL}${localizeHref(page.slug, locale)}`;
   const schema: Record<string, unknown>[] = [
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -113,7 +113,7 @@ export function ContentPage({ page, locale }: { page: ContentPageData; locale: L
     <main className={styles.page} data-content-page={page.slug}>
       <PageSchema items={schema} locale={locale} />
       <div className={styles.container}>
-        <nav className={styles.crumbs} aria-label={locale === 'es' ? 'Ruta de navegación' : 'Breadcrumb'}>
+        <nav className={styles.crumbs} aria-label="Breadcrumb">
           <a href={localizeHref('/', locale)}>{t.blog.home}</a>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{c.crumb}</span>

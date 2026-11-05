@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "Premium Sheets in Castle Rock, CO | Snooze Mattress",
   "description": "The right sheets can transform your sleep. The premium sheets at Snooze Mattress + Wellness in Castle Rock combine softness, breathability and durability.",
   "alternates": {
-    "canonical": "/premium-sheets",
-    "languages": {
-      "en-US": "/premium-sheets",
-      "es-US": "/es/premium-sheets",
-      "x-default": "/premium-sheets"
-    }
+    "canonical": "/premium-sheets"
   },
   "openGraph": {
     "title": "Premium Sheets in Castle Rock, CO | Snooze Mattress",

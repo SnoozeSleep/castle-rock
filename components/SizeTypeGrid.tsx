@@ -23,14 +23,6 @@ const LINES: Record<Locale, Record<string, string>> = {
     '/mattresses-for-back-pain': 'A free Dream Mapping scan finds your pressure points and the Sleep Coach finds the support',
     '/cooling-mattresses': 'Tempur-Pedic cooling models and the Spring Air Copper Collection',
   },
-  es: {
-    '/queen-mattresses': 'Parejas en una recámara estándar; el tamaño más común',
-    '/king-mattresses': 'Parejas que quieren el ancho de un twin cada uno',
-    '/full-twin-mattresses': 'Para niños, cuartos de visitas y recámaras pequeñas',
-    '/memory-foam-mattresses': 'Se amolda de cerca, alivia los puntos de presión y absorbe el movimiento de la pareja',
-    '/mattresses-for-back-pain': 'Un escaneo gratis de Dream Mapping encuentra tus puntos de presión y el soporte',
-    '/cooling-mattresses': 'Modelos Tempur-Pedic con enfriamiento y la Copper Collection de Spring Air',
-  },
 };
 
 export function SizeTypeGrid({ locale, current, inline = false }: { locale: Locale; current?: string; inline?: boolean }) {

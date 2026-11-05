@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "About Us: Castle Rock Mattress Store | Snooze Mattress",
   "description": "Snooze Mattress + Wellness, Castle Rock, CO: science-backed Dream Mapping fittings, real Sleep Coaches and no commission pressure to find your right mattress.",
   "alternates": {
-    "canonical": "/about-us",
-    "languages": {
-      "en-US": "/about-us",
-      "es-US": "/es/about-us",
-      "x-default": "/about-us"
-    }
+    "canonical": "/about-us"
   },
   "openGraph": {
     "title": "About Us: Castle Rock Mattress Store | Snooze Mattress",

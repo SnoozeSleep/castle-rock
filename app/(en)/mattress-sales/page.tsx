@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "Mattress Sales & Deals in Castle Rock, CO | Snooze Mattress",
   "description": "Current mattress deals at Snooze Mattress in Castle Rock, CO: brand savings, special financing and a free Dream Mapping fitting. See store for details.",
   "alternates": {
-    "canonical": "/mattress-sales",
-    "languages": {
-      "en-US": "/mattress-sales",
-      "es-US": "/es/mattress-sales",
-      "x-default": "/mattress-sales"
-    }
+    "canonical": "/mattress-sales"
   },
   "openGraph": {
     "title": "Mattress Sales & Deals in Castle Rock, CO | Snooze Mattress",

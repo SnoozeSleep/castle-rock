@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "Sleep Recliner (Zcliner) in Castle Rock, CO | Snooze Mattress",
   "description": "The SleepRecliner (Zcliner®) by Flexsteel, available at Snooze Mattress + Wellness in Castle Rock: advanced comfort technology with therapeutic positioning.",
   "alternates": {
-    "canonical": "/sleep-recliner",
-    "languages": {
-      "en-US": "/sleep-recliner",
-      "es-US": "/es/sleep-recliner",
-      "x-default": "/sleep-recliner"
-    }
+    "canonical": "/sleep-recliner"
   },
   "openGraph": {
     "title": "Sleep Recliner (Zcliner) in Castle Rock, CO | Snooze Mattress",

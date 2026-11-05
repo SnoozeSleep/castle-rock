@@ -2,20 +2,19 @@ import type { MetadataRoute } from 'next';
 
 // prerendered once at build time, served as a plain file
 export const dynamic = 'force-static';
-import { altBlogPath, postsFor } from '@/lib/blog-posts';
-import { localizeHref } from '@/lib/i18n';
+import { postsFor } from '@/lib/blog-posts';
 import LASTMOD from '@/lib/lastmod.json';
 
 import { SITE_URL } from '@/lib/location';
 
-/* Public, indexable pages of the converted site (hand-maintained; regeneration keeps this file). Every page exists in
-   English and Spanish (/es/...); each sitemap entry lists both as hreflang alternates. Not listed on purpose: the
+/* Public, indexable pages of the site (hand-maintained; regeneration keeps this file). English only (section B of the
+   November 2026 brief removed the Spanish mirror), so no hreflang alternates. Not listed on purpose: the
    noindex pages (the /thank/you and /dream/map/thank/you confirmation pages), the URLs that redirect (/home-page,
    /main-page, the duplicate legal pages, the builder's old contact-form URL) and the /ghl-stub placeholders.
    lastmod is per page: the date of the last commit that touched the page's own source (lib/lastmod.json, written by
    scripts/lastmod.mjs: run `npm run lastmod` before building whenever page content changed); blog posts carry their
    own dates from lib/blog-posts.ts. */
-/* priorities: home 1.0, main pages 0.8, blog posts 0.6 (below), legal pages 0.3; the Spanish twin of a page carries the same priority */
+/* priorities: home 1.0, main pages 0.8, blog posts 0.6 (below), legal pages 0.3 */
 const PAGES: Array<[path: string, priority: number]> = [
   ['/', 1],
   ['/about-us', 0.8],
@@ -52,25 +51,13 @@ const PAGES: Array<[path: string, priority: number]> = [
 
 // the home page canonical is the bare origin (no trailing slash): the sitemap uses the identical string
 const abs = (path: string) => (path === '/' ? SITE_URL : `${SITE_URL}${path}`);
-const languages = (path: string) => ({ 'en-US': abs(localizeHref(path, 'en')), 'es-US': abs(localizeHref(path, 'es')), 'x-default': abs(path) });
 const lastmod = (path: string, fallback: Date) => { const d = (LASTMOD as Record<string, string>)[path]; return d ? new Date(d) : fallback; };
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const out: MetadataRoute.Sitemap = [];
-  for (const [path, priority] of PAGES) {
-    for (const locale of ['en', 'es'] as const) {
-      const url = localizeHref(path, locale);
-      out.push({ url: abs(url), lastModified: lastmod(url, now), changeFrequency: 'monthly', priority, alternates: { languages: languages(path) } });
-    }
-  }
-  // blog posts: one entry per language; the October 2026 posts carry different slugs per language (BlogPost.altSlug)
-  for (const locale of ['en', 'es'] as const) {
-    for (const p of postsFor(locale)) {
-      const own = `/blog/${p.slug}`; const other = altBlogPath(p);
-      const en = locale === 'en' ? own : other; const es = localizeHref(locale === 'es' ? own : other, 'es');
-      out.push({ url: abs(localizeHref(own, locale)), lastModified: new Date(p.dateModified || p.datePublished), changeFrequency: 'yearly', priority: 0.6, alternates: { languages: { 'en-US': abs(en), 'es-US': abs(es), 'x-default': abs(en) } } });
-    }
-  }
+  for (const [path, priority] of PAGES) out.push({ url: abs(path), lastModified: lastmod(path, now), changeFrequency: 'monthly', priority });
+  // blog posts carry their own dates
+  for (const p of postsFor('en')) out.push({ url: abs(`/blog/${p.slug}`), lastModified: new Date(p.dateModified || p.datePublished), changeFrequency: 'yearly', priority: 0.6 });
   return out;
 }

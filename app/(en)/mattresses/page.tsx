@@ -9,12 +9,7 @@ export const metadata: Metadata = {
   "title": "Mattresses in Castle Rock, CO: Top Brands | Snooze Mattress",
   "description": "Mattresses in Castle Rock, CO: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
   "alternates": {
-    "canonical": "/mattresses",
-    "languages": {
-      "en-US": "/mattresses",
-      "es-US": "/es/mattresses",
-      "x-default": "/mattresses"
-    }
+    "canonical": "/mattresses"
   },
   "openGraph": {
     "title": "Mattresses in Castle Rock, CO: Top Brands | Snooze Mattress",

@@ -8,12 +8,7 @@ export const metadata: Metadata = {
   "title": "Mattress Protectors in Castle Rock, CO | Snooze Mattress",
   "description": "Mattress protectors in Castle Rock, CO from Snooze Mattress + Wellness: breathable, waterproof protection from spills and allergens for your mattress.",
   "alternates": {
-    "canonical": "/mattress-protectors",
-    "languages": {
-      "en-US": "/mattress-protectors",
-      "es-US": "/es/mattress-protectors",
-      "x-default": "/mattress-protectors"
-    }
+    "canonical": "/mattress-protectors"
   },
   "openGraph": {
     "title": "Mattress Protectors in Castle Rock, CO | Snooze Mattress",

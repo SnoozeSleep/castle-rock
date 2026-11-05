@@ -16,7 +16,7 @@ import type { Locale } from '@/lib/i18n';
 
 const SCRIPT_ID = 'snz-chat-widget';
 
-export function ChatWidget({ locale: _locale = 'en' }: { locale?: Locale }) {
+export function ChatWidget({ locale: _locale = 'en' }: { locale?: Locale }) { // English only: one widget id
   useEffect(() => {
     const widgetId = INTEGRATIONS.chatWidgetId.trim();
     if (!widgetId || document.getElementById(SCRIPT_ID)) return;

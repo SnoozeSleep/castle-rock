@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n';
    come from one config array (lib/announcements.ts). Two identical item sets make the loop seamless; the second set
    is hidden from assistive tech. The original block imported a local Nunito stylesheet that is an empty file, so the
    strip has always rendered in the generic sans-serif fallback; the CSS keeps that font stack. No headings, no emoji. */
-const LABEL: Record<Locale, string> = { en: 'Promotions', es: 'Promociones' };
+const LABEL: Record<Locale, string> = { en: 'Promotions' };
 
 function Sparkle() {
   return (

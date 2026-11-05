@@ -105,6 +105,20 @@ together.
   JSON-LD `@id` follow `SITE_URL`, so they move to `[CR_DOMAIN]` the moment `NEXT_PUBLIC_SITE_URL` is set. The two
   thank-you pages stay noindex; `/contact-us` is indexed.
 
+### B. Spanish site removed
+
+The brief says remove (as on the Troy site); nothing indicated the client wants `/es` kept, so it went: the `app/es`
+tree (every Spanish twin of every page), the EN | ES toggle (top bar and mobile drawer), every hreflang alternate
+(generated and hand-written metadata, the sitemap), the Spanish dictionaries (`overrides/i18n/`) and the Spanish-only
+tooling (`scripts/i18n-extract.mjs`, `spanish-copy-fixes.mjs`, `check-es.mjs`; `scripts/i18n.mjs` stays because the
+converter imports it, and with no dictionaries the converter generates English only), the Spanish copy blocks of the
+hand-written pages and components, the Spanish blog posts and the Spanish chat-widget branch (`lib/integrations.ts`
+`chatWidgetId` is one id). `vercel.json` 308s `/es` → `/` and `/es/:path*` → `/:path*` (and the legacy `-sp` slugs to
+their English pages); the sitemap is English only; `<html lang="en">`; the schema's `inLanguage` / `knowsLanguage` is
+`en-US` only. `Locale` remains a type (`'en'`) so the components keep their `locale` prop. The post-build gate now fails
+on any `/es/` link. **If the client does want a Spanish site, stop here: the McAllen repo has the full `/es` tree and
+dictionaries to port from.**
+
 ---
 
 # History: the McAllen conversion this site was cloned from

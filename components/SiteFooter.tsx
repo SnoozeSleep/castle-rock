@@ -109,7 +109,7 @@ export function SiteFooter({ locale = 'en' }: { locale?: Locale }) {
               ))}
             </p>
             <div className={styles.mapCard}>
-              <iframe className={styles.map} src={locale === 'es' ? `${MAP_EMBED}&hl=es` : MAP_EMBED} title={f.mapTitle} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+              <iframe className={styles.map} src={MAP_EMBED} title={f.mapTitle} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
               <div className={styles.locCard}>
                 <span className={styles.pin}><PinIcon /></span>
                 <div className={styles.locText}>
@@ -126,7 +126,7 @@ export function SiteFooter({ locale = 'en' }: { locale?: Locale }) {
         <div className={styles.bottom} data-animate="fade" data-delay="200">
           <span className={styles.copy}>
             <span>© {new Date().getFullYear()} {f.rights}</span>
-            <span className={styles.madeWith}>{f.madeWith} <HeartIcon /> {locale === 'es' ? 'amor' : 'love'}</span>
+            <span className={styles.madeWith}>{f.madeWith} <HeartIcon /> {'love'}</span>
           </span>
           <span className={styles.legal}>
             <a href={L('/terms-conditions-page')}>{f.terms}</a>

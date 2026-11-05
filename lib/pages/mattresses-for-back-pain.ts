@@ -47,45 +47,5 @@ export const PAGE: ContentPage = {
       ],
       cta: { title: 'Map your pressure points, free', text: 'Five minutes on the Dream Mapping bed in Castle Rock shows what your back needs from a mattress.', button: 'Book a free fitting' },
     },
-    es: {
-      title: 'Colchones para Dolor de Espalda y de Lado | Snooze Mattress',
-      description: 'Colchones para dolor de espalda y dormir de lado en Castle Rock, CO: un escaneo gratis de Dream Mapping encuentra tus puntos de presión y el soporte.',
-      crumb: 'Dolor de Espalda y Dormir de Lado',
-      eyebrow: 'Colchones por necesidad',
-      h1: 'Colchones para dolor de espalda y para dormir de lado en Castle Rock',
-      intro: [
-        'Si despiertas con rigidez, o te duelen el hombro y la cadera después de una noche de lado, el colchón es lo primero que hay que revisar. Snooze Mattress + Wellness en Castle Rock no adivina la respuesta: una sesión gratis de Dream Mapping muestra dónde tu cuerpo carga presión y dónde pierde soporte, y el Sleep Coach te lleva a los colchones hechos para ese patrón.',
-      ],
-      sections: [
-        { h2: 'Qué muestra el mapa de presión sobre el dolor de espalda', paragraphs: [
-          'Recuéstate en la cama de Dream Mapping y los sensores dibujan tus puntos de presión en pantalla: rojo para presión alta, amarillo para media, azul para ligera. Dos patrones son los que más importan. Un hueco o un hundimiento en la zona lumbar significa que el colchón al que estás acostumbrado no mantiene tu columna nivelada, así que los músculos trabajan toda la noche. Mucho rojo en hombros y caderas, sobre todo de lado, significa que esas articulaciones cargan el peso en lugar de hundirse en la superficie.',
-          'Un soporte firme y parejo que mantenga la columna alineada es lo que ayuda a reducir la presión lumbar y la rigidez matutina; unas capas de confort que alivien la presión y dejen que hombros y caderas se hundan lo justo son las que evitan que los puntos de presión te despierten. La mayoría de quienes compran por dolor de espalda necesitan un balance medido de ambas cosas, y para eso es el mapa.',
-        ] },
-        { h2: 'Si duermes de lado', paragraphs: [
-          'De lado, el peso del cuerpo se concentra en un hombro y una cadera. Una superficie demasiado firme los empuja; una demasiado suave deja caer las caderas y dobla la columna. El ajuste suele poner a quienes duermen de lado entre plush y medio con soporte por zonas debajo, y una almohada que llene el espacio entre la oreja y el hombro completa el trabajo. Las almohadas del piso de Castle Rock también se eligen según la posición al dormir.',
-        ] },
-        { h2: 'Si duermes boca arriba o boca abajo', paragraphs: [
-          'Boca arriba lo mejor es que la zona lumbar tenga soporte sin que las caderas se hundan; boca abajo se necesita el soporte más firme de todos para que la parte media no se hunda. El mapa muestra si tu colchón actual te deja hundirte, y el Sleep Coach puede llevarte directo a los modelos medio-firmes y firmes en piso. La sala de exhibición tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic, BedTech, BedGear, Sleeptone y DreamFit.',
-        ] },
-        { h2: 'Bases ajustables para el dolor de espalda', paragraphs: [
-          'Una base ajustable con posición de cabeza y pies personalizable ayuda a aliviar la presión, favorece una postura más sana al dormir y te permite elevar un poco las rodillas, una posición que a muchas personas con dolor de espalda les facilita conciliar el sueño. Las parejas pueden configurar cada lado de un split king por separado.',
-        ] },
-        { h2: 'Qué esperar en el ajuste', listStyle: 'steps', bullets: [
-          'Unos cinco minutos en la cama con sensores, recostado en la posición en la que sueles dormir; gratis y sin obligación de comprar.',
-          'Una explicación de tu mapa con un Sleep Coach, y después solo los colchones que coinciden con él.',
-          'Las parejas se mapean por separado.',
-          `Llega sin cita o reserva en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, ${L.hours.es[0]}, ${L.hours.es[1]}.`,
-        ] },
-      ],
-      faqTitle: 'Preguntas sobre dolor de espalda y dormir de lado',
-      faqs: [
-        { question: '¿Un colchón firme es mejor para el dolor de espalda?', answer: 'No automáticamente. El dolor de espalda necesita un soporte parejo que mantenga la columna nivelada, y la firmeza correcta depende de tu peso, tu posición y tus puntos de presión, que es lo que mide el ajuste de Dream Mapping.' },
-        { question: '¿Qué colchón es mejor para dormir de lado con dolor de hombro?', answer: 'Uno con capas de confort que alivien la presión y dejen que el hombro y la cadera se hundan mientras el soporte por zonas mantiene la columna recta; la mayoría de quienes duermen de lado quedan entre plush y medio.' },
-        { question: '¿Un ajuste de colchón de verdad puede encontrar la causa de mi rigidez matutina?', answer: 'Muestra dónde tu cuerpo pierde soporte y dónde carga demasiada presión, que son las dos causas de rigidez que dependen del colchón; el Sleep Coach ajusta el colchón a ese mapa.' },
-        { question: '¿Una base ajustable ayuda con el dolor de espalda?', answer: 'Elevar la cabeza y los pies alivia la presión y favorece una postura más sana al dormir; pruébala en la sala de exhibición con el colchón que elijas.' },
-        { question: '¿El ajuste es gratis?', answer: 'Sí, y no hay obligación de comprar.' },
-      ],
-      cta: { title: 'Mapea tus puntos de presión, gratis', text: 'Cinco minutos en la cama de Dream Mapping en Castle Rock muestran qué necesita tu espalda de un colchón.', button: 'Reservar ajuste gratis' },
-    },
   },
 };

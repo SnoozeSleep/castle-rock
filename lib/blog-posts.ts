@@ -31,8 +31,6 @@ export type BlogSource = { label: string; href: string }; // cited source, rende
 
 export type BlogPost = {
   slug: string;
-  /** the slug of the same post in the other language when it differs (the October 2026 posts); undefined = same slug */
-  altSlug?: string;
   title: string; // <h1> + BlogPosting.headline
   metaTitle: string; // < 60 chars
   metaDescription: string; // < 160 chars
@@ -349,20 +347,10 @@ export const POSTS: BlogPost[] = [
 import { MEMORY_FOAM_POST, SIZE_GUIDE_POST } from './blog-posts-2026-10';
 POSTS.push(MEMORY_FOAM_POST, SIZE_GUIDE_POST);
 
-/* Spanish versions (hand-translated, same images; the October 2026 posts carry their own Spanish slugs, see altSlug)
-   live in lib/i18n/blog-es/. */
-import { POST_ES as ES_HEALTH } from './i18n/blog-es/custom-mattresses-improving-health';
-import { POST_ES as ES_PRESSURE } from './i18n/blog-es/pressure-mapping-for-sleep';
-import { POST_ES as ES_ACHES } from './i18n/blog-es/mattresses-that-relieve-aches';
-import { POST_ES as ES_MEMORY_FOAM } from './i18n/blog-es/colchon-memory-foam-vs-hibrido-castle-rock';
-import { POST_ES as ES_SIZE_GUIDE } from './i18n/blog-es/guia-tamanos-de-colchon-castle-rock';
-export const POSTS_ES: BlogPost[] = [ES_HEALTH, ES_PRESSURE, ES_ACHES, ES_MEMORY_FOAM, ES_SIZE_GUIDE];
 
-export type BlogLocale = 'en' | 'es';
-export const postsFor = (locale: BlogLocale = 'en') => (locale === 'es' ? POSTS_ES : POSTS);
+export type BlogLocale = 'en';
+export const postsFor = (_locale: BlogLocale = 'en') => POSTS;
 export const getPost = (slug: string, locale: BlogLocale = 'en') => postsFor(locale).find((p) => p.slug === slug);
 /** the three most recent other posts (newest first): every post cross-links the October 2026 posts and vice versa */
 export const relatedPosts = (slug: string, locale: BlogLocale = 'en') =>
   postsFor(locale).filter((p) => p.slug !== slug).sort((a, b) => (a.datePublished < b.datePublished ? 1 : a.datePublished > b.datePublished ? -1 : 0)).slice(0, 3);
-/** the post's path in the other language (its own slug when both languages share it) */
-export const altBlogPath = (post: BlogPost) => `/blog/${post.altSlug || post.slug}`;
