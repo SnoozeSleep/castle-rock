@@ -6,12 +6,12 @@ export const POST_ES: BlogPost = {
   title: 'Colchones a tu Medida que Mejoran tu Salud',
   metaTitle: 'Colchones a tu Medida para Dormir Mejor | Snooze Mattress',
   metaDescription:
-    'Cómo un colchón ajustado a tu cuerpo alivia los puntos de presión, mejora tu descanso y cuida tu salud a largo plazo. Visita Snooze en McAllen.',
-  keywords: ['colchón a la medida', 'dormir mejor', 'puntos de presión', 'colchón para el dolor de espalda', 'tienda de colchones en McAllen'],
+    'Cómo un colchón ajustado a tu cuerpo alivia los puntos de presión, mejora tu descanso y cuida tu salud a largo plazo. Visita Snooze en Castle Rock.',
+  keywords: ['colchón a la medida', 'dormir mejor', 'puntos de presión', 'colchón para el dolor de espalda', 'tienda de colchones en Castle Rock'],
   datePublished: '2026-02-25',
   dateDisplay: '25 de febrero de 2026',
   readTime: '5 min de lectura',
-  featured: { ...IMG.specialists, alt: 'Especialistas en Sueño de Snooze ajustando un colchón a la medida de una clienta en la tienda de McAllen' },
+  featured: { ...IMG.specialists, alt: 'Especialistas en Sueño de Snooze ajustando un colchón a la medida de una clienta en la tienda de Castle Rock' },
   excerpt: '¿Cuándo fue la última vez que te levantaste sintiéndote de verdad descansado? Si eres como mucha gente, la respuesta quizá sea "ya ni me acuerdo".',
   sections: [
     {
@@ -64,7 +64,7 @@ export const POST_ES: BlogPost = {
         'Dormir bien es la base de muchísimos aspectos del bienestar. Cuando atiendes esta necesidad fundamental, te preparas para que te vaya bien en un sinfín de otras cosas. No se trata solo de sentirte mejor mañana, sino de cuidar tu salud por muchos años. Tu sueño es demasiado importante como para dejarlo a la suerte o conformarte con una solución de talla única. Un colchón ajustado a tu medida es más que un lugar para recostar la cabeza: es un compromiso con tu salud, tu comodidad y tu calidad de vida en general.',
         'Desde apoyar la estructura única de tu cuerpo hasta ayudarte a respirar mejor y generar beneficios de bienestar duraderos, la superficie de descanso correcta puede transformar cómo te sientes todos los días. Si estás listo para vivir la diferencia que un confort de sueño verdaderamente personalizado puede hacer en tu vida, te invitamos a [comunicarte con nuestro equipo](/es/booking), que te tratará como familia mientras te ayuda a encontrar tu solución de descanso perfecta.',
       ],
-      image: { ...IMG.store, alt: 'Tienda Snooze Mattress + Wellness en McAllen', caption: 'Snooze Mattress + Wellness – McAllen, 7913 N 10th St, Suite 130.' },
+      image: { ...IMG.store, alt: 'Snooze Mattress + Wellness en Castle Rock: foto de la tienda próximamente', caption: 'Snooze Mattress + Wellness – Castle Rock, 6360 Promenade Pkwy.' },
     },
   ],
   sources: [

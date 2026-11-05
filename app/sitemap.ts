@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next';
 
-// static export (next.config output: 'export'): generated once at build time, served as a plain file
+// prerendered once at build time, served as a plain file
 export const dynamic = 'force-static';
 import { altBlogPath, postsFor } from '@/lib/blog-posts';
 import { localizeHref } from '@/lib/i18n';
 import LASTMOD from '@/lib/lastmod.json';
 
-const SITE_URL = 'https://mcallen.snoozemattresscompany.com';
+import { SITE_URL } from '@/lib/location';
 
 /* Public, indexable pages of the converted site (hand-maintained; regeneration keeps this file). Every page exists in
    English and Spanish (/es/...); each sitemap entry lists both as hreflang alternates. Not listed on purpose: the
@@ -41,9 +41,9 @@ const PAGES: Array<[path: string, priority: number]> = [
   ['/memory-foam-mattresses', 0.8],
   ['/mattresses-for-back-pain', 0.8],
   ['/cooling-mattresses', 0.8],
-  ['/mattress-store-edinburg', 0.7],
-  ['/mattress-store-mission', 0.7],
-  ['/mattress-store-pharr', 0.7],
+  ['/mattress-store-parker', 0.7],
+  ['/mattress-store-highlands-ranch', 0.7],
+  ['/mattress-store-lone-tree', 0.7],
   ['/faq', 0.7],
   ['/how-to-choose-a-mattress', 0.8],
   ['/privacy-policy-page', 0.3],

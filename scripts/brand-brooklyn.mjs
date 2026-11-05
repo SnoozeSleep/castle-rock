@@ -27,7 +27,7 @@ import { listContentFiles, readPage, writePage, pageOf, strAt, isDict, esc } fro
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
-const CITY = (fs.readFileSync(path.join(ROOT, 'lib/location.ts'), 'utf8').match(/\bcity:\s*'([^']+)'/) || [, 'McAllen'])[1];
+const CITY = (fs.readFileSync(path.join(ROOT, 'lib/location.ts'), 'utf8').match(/\bcity:\s*'([^']+)'/) || [, 'Castle Rock'])[1];
 
 const OLD_LOGO_ID = '6a7f5039255b571c8e272951';
 /* the strip already ended with an older Brooklyn Bedding logo from the original export; it goes, so the brand shows once, in Englander's slot */
@@ -43,10 +43,11 @@ const BRAND_LINK = '<a class="snz-brand-link" href="https://brooklynbedding.com/
 const OLD_BANNER_ID = '80d3f6fe-5f3c-43ea-97c2-104bb74a7f69';
 const OLD_BANNER_PATH = `qR8peonBlnjGI3ZuLHQP/media/${OLD_BANNER_ID}.png`;
 /* the composite: the shared file (other locations' sites use it too, so it stays in public/ untouched) still shows the
-   logo of a brand this location no longer carries; McAllen's copy has that logo taken out (row 2 re-centred, the other
-   rows untouched, same 1110x357 size, November 5, 2026) and is the one this site shows */
+   logo of a brand this location's lineup does not carry; this site's copy has that logo taken out (row 2 re-centred, the
+   other rows untouched, same 1110x357 size, November 5, 2026 — the lineup this clone carries) and is
+   the one this site shows */
 const SHARED_BANNER_PATH = 'ARD47WoZpqaZSQ9MSxLD/media/6adfc5b336aa4a07e8efaab0.webp';
-const BANNER_PATH = 'ARD47WoZpqaZSQ9MSxLD/media/snz-brand-composite-mcallen.webp';
+const BANNER_PATH = 'ARD47WoZpqaZSQ9MSxLD/media/snz-brand-composite.webp';
 const BANNER = `/assets/lcimg/image/f_webp/q_80/r_1200/u/filesafe/${BANNER_PATH}`;
 const BANNER_IDS = ['vy3csFO5NT', 'pPrmy32EsW', 'qb2gUzQNgin', 'dreuIkARcM'];
 const OLD_BANNER_ALT = {

@@ -16,7 +16,7 @@ export type { BlogImage };
 
 /** a data table inside a section (the size guide, October 27, 2026): scrolls horizontally on narrow screens */
 export type BlogTable = { caption?: string; head: string[]; rows: string[][]; note?: string };
-/** the store block after the FAQ ("Visit Snooze Mattress in McAllen"): heading, lines (inline links allowed), fine print */
+/** the store block after the FAQ ("Visit Snooze Mattress in Castle Rock"): heading, lines (inline links allowed), fine print */
 export type BlogVisit = { heading: string; lines: string[]; fine?: string };
 
 export type BlogSection = {
@@ -59,12 +59,12 @@ export const POSTS: BlogPost[] = [
     title: 'Custom Mattresses Improving Health',
     metaTitle: 'Custom Mattresses for Better Health | Snooze Mattress',
     metaDescription:
-      'How a custom mattress fitted to your body relieves pressure points, improves sleep quality and supports long-term health. Visit Snooze in McAllen.',
-    keywords: ['custom mattress', 'better sleep', 'pressure points', 'mattress for back pain relief', 'McAllen mattress store'],
+      'How a custom mattress fitted to your body relieves pressure points, improves sleep quality and supports long-term health. Visit Snooze in Castle Rock.',
+    keywords: ['custom mattress', 'better sleep', 'pressure points', 'mattress for back pain relief', 'Castle Rock mattress store'],
     datePublished: '2026-02-25',
     dateDisplay: 'February 25, 2026',
     readTime: '5 min read',
-    featured: { ...IMG.specialists, alt: 'Snooze sleep specialists fitting a customer for a custom mattress in the McAllen showroom' },
+    featured: { ...IMG.specialists, alt: 'Snooze sleep specialists fitting a customer for a custom mattress in the Castle Rock showroom' },
     excerpt: "When was the last time you woke up feeling truly refreshed? If you're like many people, the answer might be \"I can't remember.\"",
     sections: [
       {
@@ -117,7 +117,7 @@ export const POSTS: BlogPost[] = [
           "Good sleep is foundational to so many aspects of wellness. When you address this fundamental need, you're setting yourself up for success in countless other ways. It's not just about feeling better tomorrow—it's about supporting your health for years to come. Your sleep is too important to leave to chance or compromise on a one-size-fits-all solution. A custom-fit mattress represents more than just a place to rest your head—it's a commitment to your health, comfort, and overall quality of life.",
           "From supporting your unique body structure to promoting better breathing and creating lasting wellness benefits, the right sleep surface can transform how you feel every single day. If you're ready to experience the difference that truly personalized sleep comfort can make in your life, we invite you to [connect with our team](/booking), who will treat you like family while helping you find your perfect sleep solution.",
         ],
-        image: { ...IMG.store, alt: 'Snooze Mattress + Wellness McAllen storefront', caption: 'Snooze Mattress + Wellness – McAllen, 7913 N 10th St, Suite 130.' },
+        image: { ...IMG.store, alt: 'Snooze Mattress + Wellness in Castle Rock: store photo coming soon', caption: 'Snooze Mattress + Wellness – Castle Rock, 6360 Promenade Pkwy.' },
       },
     ],
     sources: [
@@ -143,10 +143,10 @@ export const POSTS: BlogPost[] = [
   {
     slug: 'pressure-mapping-for-sleep',
     title: 'Dream Mapping: Pressure Maps for Better Sleep',
-    metaTitle: 'Dream Mapping: Pressure Mapping for Better Sleep | McAllen',
+    metaTitle: 'Dream Mapping: Pressure Mapping for Better Sleep | Castle Rock',
     metaDescription:
       'What Dream Mapping, our pressure mapping fitting, reveals about sleep positions, mattress materials and body weight, and how it helps you choose.',
-    keywords: ['Dream Mapping', 'pressure mapping', 'pressure map mattress', 'better sleep', 'spinal alignment', 'custom mattress', 'McAllen'],
+    keywords: ['Dream Mapping', 'pressure mapping', 'pressure map mattress', 'better sleep', 'spinal alignment', 'custom mattress', 'Castle Rock'],
     datePublished: '2025-01-25',
     dateModified: '2026-10-27', // refreshed for the SEO report: Dream Mapping named in the title and intro, softened wording, sources
     dateDisplay: 'January 25, 2025',
@@ -157,7 +157,7 @@ export const POSTS: BlogPost[] = [
     sections: [
       {
         paragraphs: [
-          'When it comes to understanding how well a sleep surface supports your body, pressure mapping technology has revolutionized the way we analyze comfort and [spinal alignment](/blog/mattresses-that-relieve-aches). At Snooze Mattress + Wellness in McAllen, that fitting is called [Dream Mapping](/dream-mapping). These sophisticated tools provide visual representations of how weight distributes across a mattress, revealing critical insights that were once invisible to the naked eye.',
+          'When it comes to understanding how well a sleep surface supports your body, pressure mapping technology has revolutionized the way we analyze comfort and [spinal alignment](/blog/mattresses-that-relieve-aches). At Snooze Mattress + Wellness in Castle Rock, that fitting is called [Dream Mapping](/dream-mapping). These sophisticated tools provide visual representations of how weight distributes across a mattress, revealing critical insights that were once invisible to the naked eye.',
         ],
       },
       {
@@ -166,7 +166,7 @@ export const POSTS: BlogPost[] = [
           'Pressure mapping involves placing a thin mat containing thousands of sensors between a person and their sleep surface. These sensors measure the force exerted at each point of contact, creating a color-coded visualization that shows areas of high and low pressure. Warmer colors typically indicate concentrated pressure points, while cooler colors represent areas where the body is well-supported and pressure is evenly distributed.',
           'This technology has become an invaluable tool for researchers, manufacturers, and healthcare professionals seeking to understand the complex relationship between our bodies and [the surfaces we sleep on](/blog/custom-mattresses-improving-health). What makes pressure mapping particularly powerful is its ability to translate subjective feelings of comfort into objective, measurable data.',
         ],
-        image: { ...IMG.mappingVisit, alt: 'Customers at the Pressure Mapping station inside Snooze Mattress + Wellness McAllen', caption: 'The Pressure Mapping station at our McAllen showroom.' },
+        image: { ...IMG.mappingVisit, alt: 'Customers at the Pressure Mapping station inside Snooze Mattress + Wellness Castle Rock', caption: 'The Pressure Mapping station at our Castle Rock showroom.' },
       },
       {
         heading: 'What the Colors Really Mean',
@@ -208,7 +208,7 @@ export const POSTS: BlogPost[] = [
         heading: 'Temperature and Pressure Connection',
         paragraphs: [
           'An often-overlooked insight from pressure mapping involves the relationship between pressure points and temperature regulation. Areas of high pressure concentration not only cause discomfort but also trap body heat. The reduced airflow at these pressure points can create localized hot spots that disrupt sleep quality.',
-          'Sleep surfaces that distribute pressure more evenly also tend to allow better air circulation around the body. This connection between pressure distribution and temperature management explains why some people find that [upgrading their mattress](/mattress-financing) improves both comfort and temperature regulation simultaneously. If heat is your main complaint, our guide to [memory foam vs hybrid for hot McAllen nights](/blog/memory-foam-vs-hybrid-mattress-mcallen) compares how each type handles it.',
+          'Sleep surfaces that distribute pressure more evenly also tend to allow better air circulation around the body. This connection between pressure distribution and temperature management explains why some people find that [upgrading their mattress](/mattress-financing) improves both comfort and temperature regulation simultaneously. If heat is your main complaint, our guide to [memory foam vs hybrid for Colorado summers and heated winters](/blog/memory-foam-vs-hybrid-mattress-castle-rock) compares how each type handles it.',
         ],
       },
       {
@@ -224,7 +224,7 @@ export const POSTS: BlogPost[] = [
         paragraphs: [
           'Pressure mapping has also been instrumental in understanding how sleep surfaces change over time. A new mattress may show excellent pressure distribution, but repeated compression in high-use areas can alter these patterns. Regular pressure mapping throughout a mattress\'s lifespan reveals when materials have degraded to the point where pressure hot spots begin developing.',
           'This research has informed recommendations about mattress replacement timelines and helped manufacturers develop more durable materials that maintain their pressure-distributing properties longer. It has also validated what many people experience—that a mattress that once felt comfortable can gradually develop problem areas as materials break down.',
-          '[Visit our showroom](/booking) to try our sleep surfaces and discover how personalized comfort can improve your nightly rest. [Our sleep specialists](/booking) can help you understand which materials and support systems align with your body type, preferred sleeping positions, and comfort preferences. If you are also [choosing the right mattress size](/blog/mattress-size-guide-mcallen), our size guide covers full, queen and king. Stop by today and take the first step toward more restful, rejuvenating sleep. Your body will thank you every morning.',
+          '[Visit our showroom](/booking) to try our sleep surfaces and discover how personalized comfort can improve your nightly rest. [Our sleep specialists](/booking) can help you understand which materials and support systems align with your body type, preferred sleeping positions, and comfort preferences. If you are also [choosing the right mattress size](/how-to-choose-a-mattress), our size guide covers full, queen and king. Stop by today and take the first step toward more restful, rejuvenating sleep. Your body will thank you every morning.',
         ],
       },
     ],
@@ -261,8 +261,8 @@ export const POSTS: BlogPost[] = [
     title: 'Mattresses That Relieve Aches',
     metaTitle: 'Mattresses for Back Pain Relief & Aches | Snooze Mattress',
     metaDescription:
-      'Wake up without aches: how the right mattress supports your spine, relieves pressure points and matches your sleep position. Try one at Snooze McAllen.',
-    keywords: ['mattress for back pain relief', 'mattress aches and pains', 'sleep position support', 'better sleep', 'McAllen mattress store'],
+      'Wake up without aches: how the right mattress supports your spine, relieves pressure points and matches your sleep position. Try one at Snooze Castle Rock.',
+    keywords: ['mattress for back pain relief', 'mattress aches and pains', 'sleep position support', 'better sleep', 'Castle Rock mattress store'],
     datePublished: '2026-02-25',
     dateDisplay: 'February 25, 2026',
     readTime: '6 min read',
@@ -296,7 +296,7 @@ export const POSTS: BlogPost[] = [
           "The beauty of today's options lies in the variety available. Some constructions combine different technologies in layers, attempting to balance the benefits of multiple approaches. Others focus on a single methodology refined to excel in specific ways. [When you visit a mattress store](/about-us), you'll encounter these different technologies, each designed with particular sleep styles and comfort preferences in mind.",
           "What matters most is how a particular construction feels to your specific body. Your friend's favorite sleeping surface might not work for you at all, and that's perfectly normal. Your body weight, preferred sleep positions, and where you typically experience discomfort all influence which type of support system will serve you best.",
         ],
-        image: { ...IMG.coaches, alt: 'Snooze Sleep Coaches beside the Dream Mapping display in the McAllen store', caption: 'Our Snooze Sleep Coaches help you compare comfort technologies side by side.' },
+        image: { ...IMG.coaches, alt: 'Snooze Sleep Coaches beside the Dream Mapping display in the Castle Rock store', caption: 'Our Snooze Sleep Coaches help you compare comfort technologies side by side.' },
       },
       {
         heading: 'Matching Support to Your Sleep Position',
@@ -319,7 +319,7 @@ export const POSTS: BlogPost[] = [
           "Give yourself time when exploring different options. Lie down in your natural sleep positions and notice how your body feels after several minutes. Pay attention to whether you feel pressure building anywhere or if you need to adjust your position to find comfort. Trust your body's feedback rather than trying to convince yourself that something feels right when it doesn't quite match your needs.",
           "Your journey toward pain-free mornings and truly restorative sleep starts with understanding how your body interacts with your sleep surface. By recognizing the signs of poor support, exploring different comfort technologies, and taking the time to find what works specifically for your body, you can transform your nights and wake up feeling genuinely refreshed. Remember that [investing in your sleep](/mattress-financing) is investing in your overall health and daily quality of life. If you're ready to discover which sleep solution can help you wake without aches and pains, [reach out to connect with our team](/booking), who treats every person like family and is passionate about helping you achieve better health through quality rest.",
         ],
-        image: { ...IMG.store, alt: 'Snooze Mattress + Wellness McAllen storefront', caption: 'Come lie down and test for yourself at 7913 N 10th St, Suite 130, McAllen.' },
+        image: { ...IMG.store, alt: 'Snooze Mattress + Wellness in Castle Rock: store photo coming soon', caption: 'Come lie down and test for yourself at 6360 Promenade Pkwy, Castle Rock.' },
       },
     ],
     sources: [
@@ -354,8 +354,8 @@ POSTS.push(MEMORY_FOAM_POST, SIZE_GUIDE_POST);
 import { POST_ES as ES_HEALTH } from './i18n/blog-es/custom-mattresses-improving-health';
 import { POST_ES as ES_PRESSURE } from './i18n/blog-es/pressure-mapping-for-sleep';
 import { POST_ES as ES_ACHES } from './i18n/blog-es/mattresses-that-relieve-aches';
-import { POST_ES as ES_MEMORY_FOAM } from './i18n/blog-es/colchon-memory-foam-vs-hibrido-mcallen';
-import { POST_ES as ES_SIZE_GUIDE } from './i18n/blog-es/guia-tamanos-de-colchon-mcallen';
+import { POST_ES as ES_MEMORY_FOAM } from './i18n/blog-es/colchon-memory-foam-vs-hibrido-castle-rock';
+import { POST_ES as ES_SIZE_GUIDE } from './i18n/blog-es/guia-tamanos-de-colchon-castle-rock';
 export const POSTS_ES: BlogPost[] = [ES_HEALTH, ES_PRESSURE, ES_ACHES, ES_MEMORY_FOAM, ES_SIZE_GUIDE];
 
 export type BlogLocale = 'en' | 'es';

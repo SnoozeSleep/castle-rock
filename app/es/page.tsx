@@ -7,8 +7,8 @@ import { SizeTypeGrid } from '@/components/SizeTypeGrid';
 import { AreaLinks } from '@/components/AreaLinks';
 
 export const metadata: Metadata = {
-  "title": "Colchones en McAllen | Dream Mapping | Snooze Mattress",
-  "description": "Tienda de colchones en McAllen, TX con Dream Mapping gratis, marcas líderes y financiamiento en 7913 N 10th St, Suite 130. Abrimos domingos 12–6.",
+  "title": "Colchones en Castle Rock | Dream Mapping | Snooze Mattress",
+  "description": "Tienda de colchones en Castle Rock, CO con Dream Mapping gratis, marcas líderes y financiamiento en 6360 Promenade Pkwy. Abrimos domingos 11–6.",
   "authors": [
     {
       "name": "Snooze Mattress + Wellness"
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Colchones en McAllen | Dream Mapping | Snooze Mattress",
-    "description": "Tienda de colchones en McAllen, TX con Dream Mapping gratis, marcas líderes y financiamiento en 7913 N 10th St, Suite 130. Abrimos domingos 12–6.",
+    "title": "Colchones en Castle Rock | Dream Mapping | Snooze Mattress",
+    "description": "Tienda de colchones en Castle Rock, CO con Dream Mapping gratis, marcas líderes y financiamiento en 6360 Promenade Pkwy. Abrimos domingos 11–6.",
     "url": "/es",
     "type": "website",
     "images": [
@@ -55,7 +55,7 @@ export default function Page() {
       <PageClient />
       {/* "Mattresses by size & type" — the six size/type pages as icon cards (October 27, 2026) */}
       <SizeTypeGrid locale="es" />
-      {/* "Shopping from Edinburg, Mission or Pharr?" — links to the service-area pages (SEO audit build pass, C1) */}
+      {/* "Shopping from Parker, Highlands Ranch or Lone Tree?" — links to the service-area pages (SEO audit build pass, C1) */}
       <AreaLinks locale="es" />
     </>
   );

@@ -1,5 +1,5 @@
 /* =================================================================================
-   SNOOZE SLEEP FIT QUIZ — McAllen site build (mcallen.snoozemattresscompany.com)
+   SNOOZE SLEEP FIT QUIZ — Castle Rock site build (November 2026)
    =================================================================================
    The single-store quiz (sleep-fit-quiz.html) as the site's /sleep-quiz and /es/sleep-quiz pages. Rendered by
    components/SleepQuiz.tsx (markup + scoped stylesheet); this file is loaded after hydration and boots on the
@@ -15,24 +15,26 @@
   if (!root || root.dataset.booted) return;
   root.dataset.booted = "1";
   const LANG = root.getAttribute("data-lang") === "es" ? "es" : "en";
-  const SITE_URL = "https://mcallen.snoozemattresscompany.com";
+  // the site's own origin (the custom domain once attached, the deployment host until then): no domain is hardcoded
+  const SITE_URL = location.origin;
   const PREFIX = LANG === "es" ? "/es" : "";
 
 /* =================================================================================
-   CONFIG — McAllen store
+   CONFIG — Castle Rock store
    ================================================================================= */
 const CONFIG = {
   brand: "Snooze Mattress + Wellness",
 
   store: {
-    id: "mcallen",
-    name: "Snooze Mattress + Wellness – McAllen",
-    phone: "(956) 586-5646",
-    address: "7913 N 10th St, Suite 130, McAllen, TX 78504",
+    id: "castle-rock",
+    name: "Snooze Mattress + Wellness – Castle Rock",
+    phone: "(303) 736-8465",
+    address: "6360 Promenade Pkwy, Castle Rock, CO 80108",
     bookingUrl: SITE_URL + PREFIX + "/booking",      // Dream Mapping booking page
     shopUrl: SITE_URL + PREFIX + "/mattresses",      // mattresses page
-    // McAllen sub-account Inbound Webhook URL (Automation -> Workflows -> trigger)
-    webhookUrl: "https://services.leadconnectorhq.com/hooks/ARD47WoZpqaZSQ9MSxLD/webhook-trigger/00b3cdec-7a6f-4184-95ec-81210f1e7bc8"
+    // [CR_QUIZ_WEBHOOK] the Castle Rock sub-account's Inbound Webhook URL (Automation -> Workflows -> trigger); mirrors
+    // lib/integrations.ts quizWebhookUrl. EMPTY until the client supplies it: sendLead() logs the payload and posts nothing.
+    webhookUrl: ""
   }
 };
 

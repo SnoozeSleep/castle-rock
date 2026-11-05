@@ -8,7 +8,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Por qué elegir Snooze Mattress + Wellness en McAllen, TX?",
+        "name": "¿Por qué elegir Snooze Mattress + Wellness en Castle Rock, CO?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Porque tienes los mejores precios de colchones de la ciudad gracias a nuestras ofertas competitivas y a que igualamos precios, la Garantía de Sueño de 365 Noches en las marcas principales, y un negocio familiar que te recibe con una sonrisa en nuestras pijamas Snooze Blues. ¡Sería un honor atenderte!"

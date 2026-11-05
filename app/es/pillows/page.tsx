@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Almohadas en McAllen, TX para Tu Descanso | Snooze Mattress",
-  "description": "Almohadas en McAllen, TX para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
+  "title": "Almohadas en Castle Rock, CO para Tu Descanso | Snooze Mattress",
+  "description": "Almohadas en Castle Rock, CO para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
   "alternates": {
     "canonical": "/es/pillows",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Almohadas en McAllen, TX para Tu Descanso | Snooze Mattress",
-    "description": "Almohadas en McAllen, TX para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
+    "title": "Almohadas en Castle Rock, CO para Tu Descanso | Snooze Mattress",
+    "description": "Almohadas en Castle Rock, CO para tu forma de dormir: de lado, boca arriba o boca abajo. Almohadas premium en Snooze Mattress + Wellness para tu descanso.",
     "url": "/es/pillows",
     "type": "website",
     "images": [

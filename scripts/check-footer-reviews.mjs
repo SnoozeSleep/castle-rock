@@ -27,7 +27,7 @@ for (const [route, w] of [['/', 1366], ['/', 390], ['/mattresses', 1366], ['/mat
     const cols = f ? [...f.querySelectorAll('h2')].map((h) => h.textContent.trim()) : [];
     return {
       footers: footers.length, oldFooters, rightsReservedBlocks: rights,
-      footer: f && { cols, map: !!f.querySelector('iframe[src*="maps.google.com"]'), mapH: Math.round((f.querySelector('iframe[src*="maps.google.com"]') || {}).getBoundingClientRect?.().height || 0), ctas: [...f.querySelectorAll('a')].filter((a) => /Book Your Dream Mapping Appointment|Get In Touch With Us/i.test(a.textContent)).length, phone: !!f.querySelector('a[href^="tel:"]'), openMaps: !!f.querySelector('a[href*="maps.google.com"]'), hoursOk: /10 AM – 7 PM/.test(f.textContent) && /12 – 6 PM/.test(f.textContent), width: Math.round(f.getBoundingClientRect().width), visby: document.fonts.check('800 20px "Visby Extrabold"') },
+      footer: f && { cols, map: !!f.querySelector('iframe[src*="maps.google.com"]'), mapH: Math.round((f.querySelector('iframe[src*="maps.google.com"]') || {}).getBoundingClientRect?.().height || 0), ctas: [...f.querySelectorAll('a')].filter((a) => /Book Your Dream Mapping Appointment|Get In Touch With Us/i.test(a.textContent)).length, phone: !!f.querySelector('a[href^="tel:"]'), openMaps: !!f.querySelector('a[href*="maps.google.com"]'), hoursOk: /10 AM – 7 PM/.test(f.textContent) && /11 AM–6 PM/.test(f.textContent), width: Math.round(f.getBoundingClientRect().width), visby: document.fonts.check('800 20px "Visby Extrabold"') },
       reviews, reviewsVisibleOk: reviews.some((r) => r.vis && (r.h > 100 || (r.wrapH || 0) >= 300)),
       overflow: document.documentElement.scrollWidth > innerWidth ? document.documentElement.scrollWidth : 0,
     };

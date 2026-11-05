@@ -125,7 +125,7 @@ html[lang="es"] .hl_page-preview--content .cheading-9UhGiuQIC6 h2 { font-size: c
 html[lang="es"] #heading-JQfUWePMYv h2 { max-width: none; font-size: min(46px, 5.6cqw) !important; } /* Spanish price-match headline (was h1) */
 
 
-/* ---- Service-area band (components/AreaLinks.tsx): "Shopping from Edinburg, Mission or Pharr?" at the end of the home
+/* ---- Service-area band (components/AreaLinks.tsx): "Shopping from Parker, Highlands Ranch or Lone Tree?" at the end of the home
    page, linking the three area pages (SEO audit build pass, C1). Same palette as the offer band, on white. ---- */
 .snz-areas { background: #fff; color: #1e223c; padding: 44px 20px; text-align: center; border-top: 1px solid rgba(0, 20, 137, 0.1); }
 .snz-areas__inner { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -364,3 +364,19 @@ html[lang="es"] #heading-JQfUWePMYv h2 { max-width: none; font-size: min(46px, 5
    card's main line (tel: link), in the card-title navy, orange on hover. ---- */
 .snz-contact__phone { font-size: 20px; font-weight: 800; color: #001489; text-decoration: none; }
 .snz-contact__phone:hover, .snz-contact__phone:focus-visible { color: #F58433; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Castle Rock clone (November 2026): placeholders while the client's photos, reviews and integrations are pending ---- */
+/* the Google Verified Reviews badge is a blank image until reviews are supplied: hidden */
+.hl_page-preview--content img[src="/assets/snz-blank.png"], .hl_page-preview--content img[src$="/snz-blank.png"] { display: none !important; }
+/* the navy "Photo coming soon" card (public/assets/castle-rock/photo-coming-soon.svg) in the location cards, the home team
+   photo and Step 05 of the 5-step flow: the SVG covers whatever box the builder gave the photo (preserveAspectRatio slice) */
+.hl_page-preview--content img[src$="/photo-coming-soon.svg"] { object-fit: cover; background: #001489; }
+/* the reviews section while the LeadConnector widget is not connected (scripts/reviews-widget.mjs): one centred line with
+   the phone and e-mail; "Read more reviews on Google" once the Place ID is supplied */
+.snz-reviews-more { margin: 18px 0 0; text-align: center; font-family: var(--font-poppins-stack); font-size: 15px; line-height: 1.6; color: #1e223c; }
+.snz-reviews-more a { color: #001489; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.snz-reviews-more a:hover, .snz-reviews-more a:focus-visible { color: #F58433; }
+.snz-reviews-more[data-snz-reviews="pending"] { max-width: 640px; margin: 8px auto 0; padding: 22px 20px; border-radius: 14px; background: #fff7f0; border: 1px dashed rgba(245, 132, 51, 0.6); }
+.snz-reviews-more__link { display: inline-block; padding: 14px 28px; border-radius: 8px; background: linear-gradient(135deg, #f58433 0%, #ffaa55 100%); color: #fff !important; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none !important; box-shadow: 0 8px 22px -10px rgba(245, 132, 51, 0.7); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.snz-reviews-more__link:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -10px rgba(245, 132, 51, 0.8); }
+.snz-reviews-more[hidden] { display: none; }

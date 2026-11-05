@@ -1,15 +1,19 @@
-# Only what `next build` needs is uploaded. The converter (scripts/, overrides/ templates and dictionaries, the
+# Only what `npm run build` needs is uploaded. The converter (scripts/, overrides/ templates and dictionaries, the
 # clone) runs locally and commits its output (app/, public/, components/, lib/); overrides/global.css is the one
-# override file the build imports.
+# override file the build imports, and scripts/post-build.mjs is the export gate `npm run build` runs after
+# `next build` — both must stay in the upload. No tracked stylesheet the build imports is excluded (components/*.css,
+# app/**/*.css are not listed here).
 .git
 node_modules
 .next
 out
 verify-out
-scripts
+scripts/*
+!scripts/post-build.mjs
 overrides/*
 !overrides/global.css
 README.md
+docs
 conversion-report.json
 asset-map.json
 *.md

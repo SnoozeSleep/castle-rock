@@ -1,14 +1,14 @@
-/* Spanish version of /blog/mattress-size-guide-mcallen (lib/blog-posts-2026-10.ts), hand-translated; own slug. */
+/* Spanish version of /how-to-choose-a-mattress (lib/blog-posts-2026-10.ts), hand-translated; own slug. */
 import type { BlogPost } from '@/lib/blog-posts';
 import { IMG } from '@/lib/blog-images';
 
 export const POST_ES: BlogPost = {
-  slug: 'guia-tamanos-de-colchon-mcallen',
-  altSlug: 'mattress-size-guide-mcallen',
-  title: '¿Full, Queen o King? Cómo Elegir el Tamaño de Colchón Correcto para tu Hogar en McAllen',
-  metaTitle: 'Guía de Tamaños de Colchón: Full, Queen o King | McAllen',
-  metaDescription: '¿Full, queen o king? Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas de los Sleep Coaches de Snooze Mattress en McAllen.',
-  keywords: ['guía de tamaños de colchón', 'colchón queen McAllen', 'colchón king McAllen', 'colchón full McAllen', 'queen vs king', 'king vs California king', 'colchón para cuarto de visitas'],
+  slug: 'guia-tamanos-de-colchon-castle-rock',
+  altSlug: 'mattress-size-guide-castle-rock',
+  title: '¿Full, Queen o King? Cómo Elegir el Tamaño de Colchón Correcto para tu Hogar en Castle Rock',
+  metaTitle: 'Guía de Tamaños de Colchón: Full, Queen o King | Castle Rock',
+  metaDescription: '¿Full, queen o king? Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas de los Sleep Coaches de Snooze Mattress en Castle Rock.',
+  keywords: ['guía de tamaños de colchón', 'colchón queen Castle Rock', 'colchón king Castle Rock', 'colchón full Castle Rock', 'queen vs king', 'king vs California king', 'colchón para cuarto de visitas'],
   datePublished: '2026-10-27',
   dateDisplay: '27 de octubre de 2026',
   readTime: '7 min de lectura',
@@ -17,7 +17,7 @@ export const POST_ES: BlogPost = {
   sections: [
     {
       paragraphs: [
-        'Cada noviembre, los cuartos de visitas de todo el Valle empiezan a ganarse su lugar. Los primos llegan para el Día de Acción de Gracias, los abuelos se instalan para la temporada de tamales y alguien siempre termina en el colchón inflable que amanece desinflado a las 3 a.m. También es cuando escuchamos la misma pregunta una y otra vez en nuestra sala de exhibición en McAllen: ¿qué tamaño necesitamos en realidad?',
+        'Cada noviembre, los cuartos de visitas de todo el Valle empiezan a ganarse su lugar. Los primos llegan para el Día de Acción de Gracias, los abuelos se instalan para la temporada de tamales y alguien siempre termina en el colchón inflable que amanece desinflado a las 3 a.m. También es cuando escuchamos la misma pregunta una y otra vez en nuestra sala de exhibición en Castle Rock: ¿qué tamaño necesitamos en realidad?',
         'La respuesta honesta depende de tres cosas: quién va a dormir en la cama, cómo duerme y cuánto piso estás dispuesto a sacrificar. Aquí están los números reales, más lo que hemos aprendido ayudando a familias del Valle a encontrar su ajuste en nuestra tienda de North 10th Street.',
       ],
     },
@@ -45,10 +45,10 @@ export const POST_ES: BlogPost = {
       heading: '¿Un queen es suficiente para dos adultos?',
       paragraphs: [
         'Para la mayoría de las parejas sí, pero queda justo. Un queen mide 60 pulgadas de ancho, así que a cada persona le tocan 30 pulgadas. Eso es apenas un poco más ancho que un colchón de cuna. Si alguno de los dos se despatarra, duerme con calor o se despierta cada vez que el otro se voltea, esas 30 pulgadas empiezan a sentirse pequeñas.',
-        'Ese segundo punto se repite mucho en McAllen. Dos personas en un queen comparten mucho calor corporal, y nuestras noches siguen cálidas hasta bien entrado el otoño. Dormir con calor es una de las quejas más comunes que nos traen las parejas. Unas pulgadas más de distancia entre los dos es una de las formas más simples de reducir el calor compartido. La otra es el colchón mismo, porque algunos materiales retienen más calor que otros, y eso es algo que un Sleep Coach te puede explicar.',
+        'Ese segundo punto se repite mucho en Castle Rock. Dos personas en un queen comparten mucho calor corporal, y nuestras noches siguen cálidas hasta bien entrado el otoño. Dormir con calor es una de las quejas más comunes que nos traen las parejas. Unas pulgadas más de distancia entre los dos es una de las formas más simples de reducir el calor compartido. La otra es el colchón mismo, porque algunos materiales retienen más calor que otros, y eso es algo que un Sleep Coach te puede explicar.',
         'Aquí tienes una prueba rápida que puedes hacer en cualquier cama en casa. Acuéstense los dos boca arriba con las manos detrás de la cabeza. Si sus codos se tocan, o uno de los dos ya está cerca de la orilla, vale la pena considerar un king.',
       ],
-      image: { ...IMG.coaches, alt: 'Los Sleep Coaches de Snooze Pablo Munguia y George Torres junto a la pantalla de Dream Mapping en la tienda de McAllen', caption: 'Nuestros Sleep Coaches de McAllen ayudan a las parejas a resolver tamaño y soporte en una sola visita.' },
+      image: { ...IMG.coaches, alt: 'Los Sleep Coaches de Snooze Pablo Munguia y George Torres junto a la pantalla de Dream Mapping en la tienda de Castle Rock', caption: 'Nuestros Sleep Coaches de Castle Rock ayudan a las parejas a resolver tamaño y soporte en una sola visita.' },
     },
     {
       heading: '¿Qué tanto más grande es un king que un queen?',
@@ -84,8 +84,8 @@ export const POST_ES: BlogPost = {
       heading: '¿Cómo sabes qué le queda a tu cuerpo, y no solo a tu recámara?',
       paragraphs: [
         'El tamaño es la mitad de la decisión. La otra mitad es el soporte: cómo sostiene el colchón tus hombros, tus caderas y la parte baja de tu espalda en la posición en la que realmente duermes. Dos colchones pueden ser del mismo tamaño y sentirse completamente distintos para alguien que duerme de lado y alguien que duerme boca arriba.',
-        'Por eso cada ajuste en Snooze Mattress en McAllen empieza con Dream Mapping, nuestra tecnología de mapeo de presión. Usa miles de sensores para mostrar dónde necesita soporte tu cuerpo, y tarda solo unos minutos. Las parejas también se pueden mapear, para que cada uno vea lo que su cuerpo necesita antes de elegir la cama que van a compartir. Si te da curiosidad la ciencia, aquí explicamos [cómo funciona Dream Mapping](/es/blog/pressure-mapping-for-sleep).',
-        'Encontrarás opciones en queen, king y California king entre los [colchones que manejamos en McAllen](/es/mattresses), desde Tempur-Pedic y Stearns & Foster hasta Beautyrest y Sealy.',
+        'Por eso cada ajuste en Snooze Mattress en Castle Rock empieza con Dream Mapping, nuestra tecnología de mapeo de presión. Usa miles de sensores para mostrar dónde necesita soporte tu cuerpo, y tarda solo unos minutos. Las parejas también se pueden mapear, para que cada uno vea lo que su cuerpo necesita antes de elegir la cama que van a compartir. Si te da curiosidad la ciencia, aquí explicamos [cómo funciona Dream Mapping](/es/blog/pressure-mapping-for-sleep).',
+        'Encontrarás opciones en queen, king y California king entre los [colchones que manejamos en Castle Rock](/es/mattresses), desde Tempur-Pedic y Stearns & Foster hasta Beautyrest y Sealy.',
       ],
     },
   ],
@@ -98,12 +98,12 @@ export const POST_ES: BlogPost = {
     { question: '¿Un California king es más grande que un king?', answer: 'No en total. Un California king es 4 pulgadas más largo pero 4 pulgadas más angosto que un king estándar, así que tiene un poco menos de superficie. Es la mejor opción para personas altas; un king estándar es mejor para parejas que quieren más ancho.' },
   ],
   visit: {
-    heading: 'Encuentra tu ajuste en McAllen',
+    heading: 'Encuentra tu ajuste en Castle Rock',
     lines: [
       'No todos los colchones le quedan a todos los cuerpos, y no todos los tamaños le quedan a todas las recámaras. Trae las medidas de tu cuarto, trae a quien comparte la cama contigo y deja que un Sleep Coach te ayude a resolver tamaño y soporte en una sola visita. Sin presión, solo mejor sueño.',
-      'Snooze Mattress en McAllen',
-      '7913 North 10th Street, Suite 130, McAllen, TX 78504',
-      '[(956) 586-5646](tel:+19565865646)',
+      'Snooze Mattress en Castle Rock',
+      '6360 Promenade Pkwy, Castle Rock, CO 80108',
+      '[(303) 736-8465](tel:+13037368465)',
       'Lunes a sábado, de 10 AM a 7 PM · Domingo, de 12 a 6 PM',
       '[Reserva tu cita de Dream Mapping](/es/booking) o pasa a vernos hoy. Encuentra tu ajuste hoy mismo.',
     ],

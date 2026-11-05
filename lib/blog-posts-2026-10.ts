@@ -1,30 +1,30 @@
 /*
- * The two blog posts published October 27, 2026 from the agency's drafts ("McAllen Blog – Memory Foam vs Hybrid –
- * 2026-10-27" and "McAllen Blog – Full, Queen or King: Mattress Size Guide – 2026-10-20"). The article text is the
+ * The two blog posts published October 27, 2026 from the agency's drafts ("Castle Rock Blog – Memory Foam vs Hybrid –
+ * 2026-10-27" and "Castle Rock Blog – Full, Queen or King: Mattress Size Guide – 2026-10-20"). The article text is the
  * drafts' copy verbatim; the only omissions are the two "[PLACEHOLDER – get quote from store]" Sleep Coach boxes the
- * drafts marked as needing a human, which can be added later together with McAllen-store photos (the drafts' Drive
- * photos are from another store, so the posts use the site's own McAllen images). Inline links are the drafts' own.
+ * drafts marked as needing a human, which can be added later together with Castle Rock-store photos (the drafts' Drive
+ * photos are from another store, so the posts use the site's own Castle Rock images). Inline links are the drafts' own.
  * Spanish versions (different slugs, hand-translated) live in lib/i18n/blog-es/.
  */
 import type { BlogPost } from './blog-posts';
 import { IMG } from './blog-images';
 
 export const MEMORY_FOAM_POST: BlogPost = {
-  slug: 'memory-foam-vs-hybrid-mattress-mcallen',
-  altSlug: 'colchon-memory-foam-vs-hibrido-mcallen',
-  title: 'Memory Foam or Hybrid? How to Pick a Mattress for Hot McAllen Nights',
-  metaTitle: 'Memory Foam vs Hybrid Mattress for Hot Nights | McAllen',
-  metaDescription: 'Memory foam or hybrid? How each handles McAllen heat, back comfort, couples and lifespan, plus how Dream Mapping helps you choose. Visit our McAllen store.',
-  keywords: ['memory foam vs hybrid mattress', 'memory foam mattress McAllen', 'foam mattress McAllen', 'does memory foam sleep hot', 'hybrid mattress for hot sleepers', 'how long does a memory foam mattress last', 'memory foam or hybrid for couples'],
+  slug: 'memory-foam-vs-hybrid-mattress-castle-rock',
+  altSlug: 'colchon-memory-foam-vs-hibrido-castle-rock',
+  title: 'Memory Foam or Hybrid? How to Pick a Mattress for Hot Castle Rock Nights',
+  metaTitle: 'Memory Foam vs Hybrid Mattress for Hot Nights | Castle Rock',
+  metaDescription: 'Memory foam or hybrid? How each handles summer heat, back comfort, couples and lifespan, plus how Dream Mapping helps you choose. Visit our Castle Rock store.',
+  keywords: ['memory foam vs hybrid mattress', 'memory foam mattress Castle Rock', 'foam mattress Castle Rock', 'does memory foam sleep hot', 'hybrid mattress for hot sleepers', 'how long does a memory foam mattress last', 'memory foam or hybrid for couples'],
   datePublished: '2026-10-27',
   dateDisplay: 'October 27, 2026',
   readTime: '6 min read',
   featured: { ...IMG.station, alt: 'Sleep Coach reviewing a Dream Mapping pressure map on screen while a customer lies on a mattress' },
-  excerpt: "It's the first week of November. The calendar says fall, but the thermostat in your McAllen bedroom still reads 78, the ceiling fan is on high, and you've already flipped your pillow to the cool side twice before midnight.",
+  excerpt: "It's the first week of November. The calendar says fall, but the thermostat in your Castle Rock bedroom still reads 78, the ceiling fan is on high, and you've already flipped your pillow to the cool side twice before midnight.",
   sections: [
     {
       paragraphs: [
-        "It's the first week of November. The calendar says fall, but the thermostat in your McAllen bedroom still reads 78, the ceiling fan is on high, and you've already flipped your pillow to the cool side twice before midnight. If that sounds familiar, the bed you're lying on may be part of the problem. And the question we hear more than almost any other this time of year is a simple one: memory foam or hybrid?",
+        "It's the first week of November. The calendar says fall, but the thermostat in your Castle Rock bedroom still reads 78, the ceiling fan is on high, and you've already flipped your pillow to the cool side twice before midnight. If that sounds familiar, the bed you're lying on may be part of the problem. And the question we hear more than almost any other this time of year is a simple one: memory foam or hybrid?",
         'Shoppers walk into our showroom on North 10th Street with strong opinions on both. One person loved the hug of a memory foam bed in a store years ago, then remembers how warm it slept by August. Another wants a hybrid because "springs sleep cooler," but shares a bed with a partner who wakes up every time they roll over. Both instincts are partly right. Here\'s how the two really compare when you live somewhere November highs still average around 80 degrees.',
       ],
     },
@@ -89,14 +89,14 @@ export const MEMORY_FOAM_POST: BlogPost = {
     { question: 'Is memory foam a good choice for hot sleepers in South Texas?', answer: 'It can be, if you choose a foam built for cooling and pair it with breathable sheets. If you regularly wake up sweating, start by trying hybrids and cooling foam models side by side. Your Dream Mapping results and how warm you sleep should both guide the choice.' },
     { question: 'Which lasts longer, memory foam or a hybrid?', answer: "They're close. The Sleep Foundation estimates about 6 to 7 years for foam and 6.5 to 7.5 years for hybrids, with quality materials lasting longer. Density of the foam and quality of the coils matter more than the category, and a protector helps either type last." },
     { question: 'Is memory foam or a hybrid better for couples?', answer: 'Memory foam usually does a better job of absorbing motion, so a restless partner is less likely to wake you. Hybrids with individually wrapped coils isolate motion well too, and they add firmer edges and a cooler feel. Couples with different needs can be mapped together to compare.' },
-    { question: 'Can I try both types in McAllen before I buy?', answer: 'Yes. Our McAllen showroom has memory foam and hybrid mattresses on the floor, and a Sleep Coach can run Dream Mapping on each so you can compare your pressure points and Sleep Score side by side before you decide.' },
+    { question: 'Can I try both types in Castle Rock before I buy?', answer: 'Yes. Our Castle Rock showroom has memory foam and hybrid mattresses on the floor, and a Sleep Coach can run Dream Mapping on each so you can compare your pressure points and Sleep Score side by side before you decide.' },
   ],
   visit: {
-    heading: 'Visit Snooze Mattress in McAllen',
+    heading: 'Visit Snooze Mattress in Castle Rock',
     lines: [
       'Snooze Mattress + Wellness',
-      '7913 North 10th Street, Suite 130, McAllen, TX 78504',
-      '[(956) 586-5646](tel:+19565865646)',
+      '6360 Promenade Pkwy, Castle Rock, CO 80108',
+      '[(303) 736-8465](tel:+13037368465)',
       'Monday to Saturday 10 a.m. to 7 p.m., Sunday noon to 6 p.m.',
       'Stop guessing between foam and coils. [Book your Dream Mapping visit](/booking) and find the mattress that fits your body and the way you sleep.',
     ],
@@ -113,12 +113,12 @@ export const MEMORY_FOAM_POST: BlogPost = {
 };
 
 export const SIZE_GUIDE_POST: BlogPost = {
-  slug: 'mattress-size-guide-mcallen',
-  altSlug: 'guia-tamanos-de-colchon-mcallen',
-  title: 'Full, Queen or King? How to Pick the Right Mattress Size for Your McAllen Home',
-  metaTitle: 'Queen vs King vs Full Mattress Size Guide | McAllen, TX',
-  metaDescription: 'Full, queen or king? Real dimensions, room sizes and tips for couples, kids and holiday guests from the Sleep Coaches at Snooze Mattress in McAllen.',
-  keywords: ['mattress size guide', 'queen mattress McAllen', 'king size mattress McAllen', 'full size mattress McAllen', 'queen vs king mattress', 'how long is a full bed', 'king vs California king', 'mattress for guest room'],
+  slug: 'mattress-size-guide-castle-rock',
+  altSlug: 'guia-tamanos-de-colchon-castle-rock',
+  title: 'Full, Queen or King? How to Pick the Right Mattress Size for Your Castle Rock Home',
+  metaTitle: 'Queen vs King vs Full Mattress Size Guide | Castle Rock, CO',
+  metaDescription: 'Full, queen or king? Real dimensions, room sizes and tips for couples, kids and holiday guests from the Sleep Coaches at Snooze Mattress in Castle Rock.',
+  keywords: ['mattress size guide', 'queen mattress Castle Rock', 'king size mattress Castle Rock', 'full size mattress Castle Rock', 'queen vs king mattress', 'how long is a full bed', 'king vs California king', 'mattress for guest room'],
   datePublished: '2026-10-27',
   dateDisplay: 'October 27, 2026',
   readTime: '7 min read',
@@ -127,7 +127,7 @@ export const SIZE_GUIDE_POST: BlogPost = {
   sections: [
     {
       paragraphs: [
-        "Every November, guest rooms across the Valley start earning their keep. Cousins drive up for Thanksgiving, the grandparents settle in for tamalada season, and somebody always ends up on the air mattress that's flat by 3 a.m. It's also when we hear the same question over and over in our McAllen showroom: what size do we actually need?",
+        "Every November, guest rooms across the Valley start earning their keep. Cousins drive up for Thanksgiving, the grandparents settle in for tamalada season, and somebody always ends up on the air mattress that's flat by 3 a.m. It's also when we hear the same question over and over in our Castle Rock showroom: what size do we actually need?",
         "The honest answer depends on three things: who's sleeping in the bed, how they sleep, and how much floor you're willing to give up. Here are the real numbers, plus what we've learned helping Valley families get fitted at our store on North 10th Street.",
       ],
     },
@@ -155,10 +155,10 @@ export const SIZE_GUIDE_POST: BlogPost = {
       heading: 'Is a queen big enough for two adults?',
       paragraphs: [
         "For most couples, yes, but it's snug. A queen is 60 inches wide, so each person gets 30 inches. That's only a little wider than a crib mattress. If either of you sprawls, sleeps hot, or wakes up every time the other one rolls over, those 30 inches start to feel small.",
-        "That second point comes up a lot in McAllen. Two people on a queen share a lot of body heat, and our nights stay warm well into the fall. Sleeping hot is one of the most common complaints couples bring to us. A few extra inches between you is one of the simplest ways to cut down on shared warmth. The other is the mattress itself, since some materials hold heat more than others, and that's something a Sleep Coach can walk you through.",
+        "That second point comes up a lot in Castle Rock. Two people on a queen share a lot of body heat, and our nights stay warm well into the fall. Sleeping hot is one of the most common complaints couples bring to us. A few extra inches between you is one of the simplest ways to cut down on shared warmth. The other is the mattress itself, since some materials hold heat more than others, and that's something a Sleep Coach can walk you through.",
         "Here's a quick test you can do on any bed at home. Both of you lie on your backs with your hands behind your heads. If your elbows touch, or one of you is already near the edge, it's worth looking at a king.",
       ],
-      image: { ...IMG.coaches, alt: 'Snooze Sleep Coaches Pablo Munguia and George Torres beside the Dream Mapping display in the McAllen store', caption: 'Our McAllen Sleep Coaches help couples sort out size and support in one visit.' },
+      image: { ...IMG.coaches, alt: 'Snooze Sleep Coaches Pablo Munguia and George Torres beside the Dream Mapping display in the Castle Rock store', caption: 'Our Castle Rock Sleep Coaches help couples sort out size and support in one visit.' },
     },
     {
       heading: 'How much bigger is a king than a queen?',
@@ -194,8 +194,8 @@ export const SIZE_GUIDE_POST: BlogPost = {
       heading: 'How do you know what fits your body, not just your room?',
       paragraphs: [
         'Size is half the decision. The other half is support: how the mattress holds your shoulders, hips and lower back in the position you actually sleep in. Two mattresses can be the same size and feel completely different to a side sleeper and a back sleeper.',
-        "That's why every fitting at Snooze Mattress in McAllen starts with Dream Mapping, our pressure mapping technology. It uses thousands of sensors to show where your body needs support, and it takes just a few minutes. Couples can be mapped too, so each of you can see what your body needs before you pick a bed you'll share. If you're curious about the science, here's [how Dream Mapping works](/blog/pressure-mapping-for-sleep).",
-        "You'll find queen, king and California king options across the [mattresses we carry in McAllen](/mattresses), from Tempur-Pedic and Stearns & Foster to Beautyrest and Sealy.",
+        "That's why every fitting at Snooze Mattress in Castle Rock starts with Dream Mapping, our pressure mapping technology. It uses thousands of sensors to show where your body needs support, and it takes just a few minutes. Couples can be mapped too, so each of you can see what your body needs before you pick a bed you'll share. If you're curious about the science, here's [how Dream Mapping works](/blog/pressure-mapping-for-sleep).",
+        "You'll find queen, king and California king options across the [mattresses we carry in Castle Rock](/mattresses), from Tempur-Pedic and Stearns & Foster to Beautyrest and Sealy.",
       ],
     },
   ],
@@ -208,12 +208,12 @@ export const SIZE_GUIDE_POST: BlogPost = {
     { question: 'Is a California king bigger than a king?', answer: "Not overall. A California king is 4 inches longer but 4 inches narrower than a standard king, so it has slightly less total surface. It's the better choice for tall sleepers; a standard king is better for couples who want more width." },
   ],
   visit: {
-    heading: 'Find your fit in McAllen',
+    heading: 'Find your fit in Castle Rock',
     lines: [
       'Not every mattress fits every body, and not every size fits every bedroom. Bring your room measurements, bring whoever shares the bed, and let a Sleep Coach help you sort out size and support in one visit. No pressure, just better sleep.',
-      'Snooze Mattress in McAllen',
-      '7913 North 10th Street, Suite 130, McAllen, TX 78504',
-      '[(956) 586-5646](tel:+19565865646)',
+      'Snooze Mattress in Castle Rock',
+      '6360 Promenade Pkwy, Castle Rock, CO 80108',
+      '[(303) 736-8465](tel:+13037368465)',
       'Monday to Saturday, 10 AM to 7 PM · Sunday, 12 to 6 PM',
       '[Book your Dream Mapping appointment](/booking) or stop by today. Get fitted today.',
     ],

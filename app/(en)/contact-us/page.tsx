@@ -7,8 +7,8 @@ import { ContactDetails } from '@/components/ContactDetails';
 
 export const metadata: Metadata = {
   "robots": { "index": true, "follow": true },
-  "title": "Contact Snooze Mattress in McAllen, TX | Snooze Mattress",
-  "description": "Contact Snooze Mattress + Wellness in McAllen: call (956) 586-5646, visit 7913 N 10th St, Suite 130 or send a message to book a free Dream Mapping fitting.",
+  "title": "Contact Snooze Mattress in Castle Rock, CO | Snooze Mattress",
+  "description": "Contact Snooze Mattress + Wellness in Castle Rock: call (303) 736-8465, visit 6360 Promenade Pkwy or send a message to book a free Dream Mapping fitting.",
   "alternates": {
     "canonical": "/contact-us",
     "languages": {
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Contact Snooze Mattress in McAllen, TX | Snooze Mattress",
-    "description": "Contact Snooze Mattress + Wellness in McAllen: call (956) 586-5646, visit 7913 N 10th St, Suite 130 or send a message to book a free Dream Mapping fitting.",
+    "title": "Contact Snooze Mattress in Castle Rock, CO | Snooze Mattress",
+    "description": "Contact Snooze Mattress + Wellness in Castle Rock: call (303) 736-8465, visit 6360 Promenade Pkwy or send a message to book a free Dream Mapping fitting.",
     "url": "/contact-us",
     "type": "website",
     "images": [

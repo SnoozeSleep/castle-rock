@@ -32,7 +32,7 @@ const OFFER = {
   href: (offerSrc.match(/cta:\s*\{\s*href:\s*'([^']*)'/) || [])[1] || '/mattress-sales',
   items: (loc) => [offerField('headline', loc), ...offerField('details', loc).split(/\s*·\s*/)].map((t) => t.trim()).filter(Boolean),
 };
-const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Denver', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const ACTIVE = OFFER.enabled && (!OFFER.startDate || today >= OFFER.startDate) && (!OFFER.endDate || today <= OFFER.endDate) && OFFER.items('en').length > 0;
 
 /* ---- band HTML: one link holding two ribbons; each track = two identical copies of the items (3 × the offer items) so

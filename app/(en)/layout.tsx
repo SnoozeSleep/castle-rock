@@ -9,6 +9,9 @@ import { TrackingHead, TrackingBody } from '@/components/Tracking';
 import { ChatWidget } from '@/components/ChatWidget';
 import { GHL_SHIM } from '@/lib/ghl-shim';
 import { BODY_GUARD } from '@/lib/body-guard';
+import { GhlEmbedScripts } from '@/components/GhlEmbedScripts';
+import { SITE_URL } from '@/lib/location';
+import { INTEGRATIONS } from '@/lib/integrations';
 import { Poppins } from 'next/font/google';
 import '../../overrides/global.css';
 
@@ -22,7 +25,9 @@ import '../../overrides/global.css';
 const poppins = Poppins({ weight: ['400', '500', '600', '700', '800'], subsets: ['latin'], display: 'swap', variable: '--font-poppins', preload: true });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mcallen.snoozemattresscompany.com"),
+  metadataBase: new URL(SITE_URL),
+  /* Google Search Console: <meta name="google-site-verification"> on every page once supplied (lib/integrations.ts) */
+  verification: INTEGRATIONS.googleSiteVerification ? { google: INTEGRATIONS.googleSiteVerification } : undefined,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,10 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: BODY_GUARD }} />
         {/* tracking first, high in <head>, in the client's order (components/Tracking.tsx) */}
         <TrackingHead />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* the LeadConnector widget host (form / calendar embeds once connected: lib/integrations.ts) */}
         <link rel="preconnect" href="https://link.snoozesleep.com" />
-        <link rel="dns-prefetch" href="https://reputationhub.site" />
-        <link rel="dns-prefetch" href="https://tag.simpli.fi" />
         {/* Safety net: rewrites any asset URL the GHL runtime still builds against the original CDNs to the
             local copies, provides window.__ghlOnReady for the site's own DOMContentLoaded scripts, and filters the
             review widget's height messages. A plain parser-blocking script on purpose: next/script's
@@ -65,6 +68,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="/snz-events.js?v=ev1" strategy="afterInteractive" />
         {/* the GoHighLevel chat widget in this language, added after the page has loaded (components/ChatWidget.tsx) */}
         <ChatWidget locale="en" />
+        {/* the LeadConnector embed loaders (form_embed.js, review-widget.js), once per page, only where a live embed exists */}
+        <GhlEmbedScripts />
         </div>
       </body>
     </html>

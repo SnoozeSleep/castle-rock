@@ -67,9 +67,6 @@ export function SiteFooter({ locale = 'en' }: { locale?: Locale }) {
               <a href={LOCATION.social.instagram} target="_blank" rel="noopener noreferrer" aria-label={f.instagram}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none" /></svg>
               </a>
-              <a href={LOCATION.social.youtube} target="_blank" rel="noopener noreferrer" aria-label={f.youtube}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" aria-hidden="true"><path d="M21.6 7.2a2.4 2.4 0 0 0-1.7-1.7C18.4 5 12 5 12 5s-6.4 0-7.9.5A2.4 2.4 0 0 0 2.4 7.2C2 8.7 2 12 2 12s0 3.3.4 4.8a2.4 2.4 0 0 0 1.7 1.7c1.5.5 7.9.5 7.9.5s6.4 0 7.9-.5a2.4 2.4 0 0 0 1.7-1.7c.4-1.5.4-4.8.4-4.8s0-3.3-.4-4.8Z" /><path d="m10 9.2 4.8 2.8-4.8 2.8V9.2Z" fill="currentColor" stroke="none" /></svg>
-              </a>
             </div>
             <div className={styles.ctas}>
               <a href={L('/booking')} className={styles.btn}>{f.book}</a>

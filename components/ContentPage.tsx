@@ -103,7 +103,7 @@ export function ContentPage({ page, locale }: { page: ContentPageData; locale: L
     ...(page.extraSchema ? page.extraSchema(locale) : []),
     ...(page.schemaPage ? [pageNode(page.schemaPage.type, url, c.title.replace(/\s*\|\s*Snooze Mattress\s*$/, ''), locale, {
       description: c.description,
-      ...(page.schemaPage.type === 'WebPage' ? { spatialCoverage: { '@type': 'City', name: page.schemaPage.city, containedInPlace: { '@type': 'State', name: 'Texas' } } } : {}),
+      ...(page.schemaPage.type === 'WebPage' ? { spatialCoverage: { '@type': 'City', name: page.schemaPage.city, containedInPlace: { '@type': 'State', name: LOCATION.regionName } } } : {}),
     })] : []),
   ];
   const L = LOCATION;

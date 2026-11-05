@@ -65,8 +65,8 @@ const NEW_BLOCKS = {
   DreamFit: { suffix: 'dft', logo: '6a7f5039cf50f900f2814ec2' },
 };
 const BLOCK_COPY = {
-  en: (b) => `${b} is part of the lineup on the Snooze Mattress + Wellness showroom floor in McAllen. See it in person, and book a free Dream Mapping fitting so a Sleep Coach can show you how it fits your body and the way you sleep.`,
-  es: (b) => `${b} forma parte de la selección de la sala de exhibición de Snooze Mattress + Wellness en McAllen. Conócelo en persona y reserva una sesión gratis de Dream Mapping para que un Sleep Coach te muestre cómo se ajusta a tu cuerpo y a tu forma de dormir.`,
+  en: (b) => `${b} is part of the lineup on the Snooze Mattress + Wellness showroom floor in Castle Rock. See it in person, and book a free Dream Mapping fitting so a Sleep Coach can show you how it fits your body and the way you sleep.`,
+  es: (b) => `${b} forma parte de la selección de la sala de exhibición de Snooze Mattress + Wellness en Castle Rock. Conócelo en persona y reserva una sesión gratis de Dream Mapping para que un Sleep Coach te muestre cómo se ajusta a tu cuerpo y a tu forma de dormir.`,
 };
 const LOGO_ALT = { en: (b) => `${b} logo`, es: (b) => `Logotipo de ${b}` };
 const BG = { navy: '69961ce3fa6b7baf8d3d9c10.png', light: '6972852310cc279c971af034.jpg.webp' };

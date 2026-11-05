@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Sábanas Premium en McAllen, TX | Snooze Mattress",
-  "description": "Las sábanas correctas pueden transformar tu descanso. Las sábanas premium de Snooze Mattress + Wellness en McAllen: suavidad, frescura y durabilidad.",
+  "title": "Sábanas Premium en Castle Rock, CO | Snooze Mattress",
+  "description": "Las sábanas correctas pueden transformar tu descanso. Las sábanas premium de Snooze Mattress + Wellness en Castle Rock: suavidad, frescura y durabilidad.",
   "alternates": {
     "canonical": "/es/premium-sheets",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Sábanas Premium en McAllen, TX | Snooze Mattress",
-    "description": "Las sábanas correctas pueden transformar tu descanso. Las sábanas premium de Snooze Mattress + Wellness en McAllen: suavidad, frescura y durabilidad.",
+    "title": "Sábanas Premium en Castle Rock, CO | Snooze Mattress",
+    "description": "Las sábanas correctas pueden transformar tu descanso. Las sábanas premium de Snooze Mattress + Wellness en Castle Rock: suavidad, frescura y durabilidad.",
     "url": "/es/premium-sheets",
     "type": "website",
     "images": [

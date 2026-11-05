@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Premium Sheets in McAllen, TX | Snooze Mattress",
-  "description": "The right sheets can transform your sleep. The premium sheets at Snooze Mattress + Wellness in McAllen combine softness, breathability and durability.",
+  "title": "Premium Sheets in Castle Rock, CO | Snooze Mattress",
+  "description": "The right sheets can transform your sleep. The premium sheets at Snooze Mattress + Wellness in Castle Rock combine softness, breathability and durability.",
   "alternates": {
     "canonical": "/premium-sheets",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Premium Sheets in McAllen, TX | Snooze Mattress",
-    "description": "The right sheets can transform your sleep. The premium sheets at Snooze Mattress + Wellness in McAllen combine softness, breathability and durability.",
+    "title": "Premium Sheets in Castle Rock, CO | Snooze Mattress",
+    "description": "The right sheets can transform your sleep. The premium sheets at Snooze Mattress + Wellness in Castle Rock combine softness, breathability and durability.",
     "url": "/premium-sheets",
     "type": "website",
     "images": [

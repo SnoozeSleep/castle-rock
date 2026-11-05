@@ -12,8 +12,8 @@ const COPY = {
     title: 'Not sure what size you need, or whether foam or coils suit you?',
     text: 'Two guides from our Sleep Coaches to read before you come in for your Dream Mapping fitting.',
     cards: [
-      { icon: 'bed-wide' as const, title: 'Mattress size guide: full, queen or king', text: 'Real dimensions, room sizes and tips for couples, kids and holiday guests.', href: '/blog/mattress-size-guide-mcallen' },
-      { icon: 'snowflake' as const, title: 'Memory foam vs hybrid for hot McAllen nights', text: 'Which sleeps cooler, which suits couples, and how long each type lasts.', href: '/blog/memory-foam-vs-hybrid-mattress-mcallen' },
+      { icon: 'bed-wide' as const, title: 'Mattress size guide: full, queen or king', text: 'Real dimensions, room sizes and tips for couples, kids and holiday guests.', href: '/how-to-choose-a-mattress' },
+      { icon: 'snowflake' as const, title: 'Memory foam vs hybrid for Colorado summers and heated winters', text: 'Which sleeps cooler, which suits couples, and how long each type lasts.', href: '/blog/memory-foam-vs-hybrid-mattress-castle-rock' },
     ],
     more: 'Read the guide',
   },
@@ -22,8 +22,8 @@ const COPY = {
     title: '¿No sabes qué tamaño necesitas, o si te conviene espuma o resortes?',
     text: 'Dos guías de nuestros Sleep Coaches para leer antes de venir a tu ajuste de Dream Mapping.',
     cards: [
-      { icon: 'bed-wide' as const, title: 'Guía de tamaños de colchón: full, queen o king', text: 'Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas.', href: '/blog/guia-tamanos-de-colchon-mcallen' },
-      { icon: 'snowflake' as const, title: 'Memory foam vs híbrido para las noches calurosas de McAllen', text: 'Cuál duerme más fresco, cuál conviene a las parejas y cuánto dura cada tipo.', href: '/blog/colchon-memory-foam-vs-hibrido-mcallen' },
+      { icon: 'bed-wide' as const, title: 'Guía de tamaños de colchón: full, queen o king', text: 'Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas.', href: '/blog/guia-tamanos-de-colchon-castle-rock' },
+      { icon: 'snowflake' as const, title: 'Memory foam vs híbrido para las noches calurosas de verano', text: 'Cuál duerme más fresco, cuál conviene a las parejas y cuánto dura cada tipo.', href: '/blog/colchon-memory-foam-vs-hibrido-castle-rock' },
     ],
     more: 'Leer la guía',
   },

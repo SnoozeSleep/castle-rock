@@ -1,10 +1,10 @@
 {
-  "name": "mcallen-next",
+  "name": "castlerock-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/post-build.mjs",
     "start": "next start",
     "convert": "node scripts/optimize-images.mjs && node scripts/convert.mjs",
     "verify": "node scripts/verify.mjs",
@@ -36,7 +36,12 @@
     "alts": "node scripts/image-alts.mjs",
     "hero:mark": "node scripts/hero-mark.mjs",
     "logo:synchrony": "node scripts/synchrony-logo.mjs",
-    "brand:brooklyn": "node scripts/brand-brooklyn.mjs"
+    "brand:brooklyn": "node scripts/brand-brooklyn.mjs",
+    "build:next": "next build",
+    "relocate:castle-rock": "node scripts/relocate-castle-rock.mjs",
+    "audit": "node scripts/audit-location.mjs",
+    "integrations": "node scripts/integrations.mjs",
+    "reviews:widget": "node scripts/reviews-widget.mjs"
   },
   "dependencies": {
     "next": "15.5.25",

@@ -5,7 +5,7 @@
  *   - one graph per page (November 3, 2026): exactly one JSON-LD block, no @id twice, and the site nodes
  *     #organization, #store and #website present (lib/schema.ts); {"@id"} references resolve to the page's own nodes;
  *   - exactly ONE LocalBusiness (FurnitureStore) per page, with name, full postal address, telephone, url, image,
- *     geo, hasMap, opening hours, priceRange, sameAs, parentOrganization, languages, currencies, payment, brands and
+ *     opening hours (geo and hasMap only once the Place ID is supplied), priceRange, sameAs, parentOrganization, languages, currencies, payment, brands and
  *     the Dream Mapping offer; Organization: name, url, logo, sameAs, parent; WebSite: name, url, publisher, languages;
  *   - FAQPage: ≥1 Question with name + acceptedAnswer.text; BreadcrumbList: ListItems 1..n with name + item;
  *   - ContactPage: name, url, mainEntity; BlogPosting: @id, headline, image, datePublished, author.name,
@@ -22,15 +22,19 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LIVE = process.argv.includes('--live'); const VERBOSE = process.argv.includes('--verbose');
-const SITE_URL = 'https://mcallen.snoozemattresscompany.com';
+/* the canonical origin, resolved like lib/location.ts (never a hardcoded domain) */
+const envOrigin = (v, scheme = 'https') => { const t = (v || '').trim().replace(/\/+$/, ''); return t ? (/^https?:\/\//.test(t) ? t : `${scheme}://${t}`) : ''; };
+const SITE_URL = envOrigin(process.env.NEXT_PUBLIC_SITE_URL) || envOrigin(process.env.VERCEL_PROJECT_PRODUCTION_URL) || envOrigin(process.env.VERCEL_URL) || 'http://localhost:3000';
+/* the prerendered pages: the static export (out/) when it exists, else Next's server output (.next/server/app) */
+const EXPORT_DIR = fs.existsSync(path.join(ROOT, 'out')) ? path.join(ROOT, 'out') : path.join(ROOT, '.next', 'server', 'app');
 const TYPES = new Set(['ContactPage', 'FurnitureStore', 'LocalBusiness', 'Store', 'PostalAddress', 'GeoCoordinates', 'OpeningHoursSpecification', 'City', 'State', 'Country', 'ImageObject', 'Organization', 'FAQPage', 'Question', 'Answer', 'BreadcrumbList', 'ListItem', 'BlogPosting', 'Article', 'WebPage', 'CollectionPage', 'ItemList', 'Brand', 'Person', 'Service', 'Offer', 'ReserveAction', 'EntryPoint', 'ContactPoint', 'WebSite', 'AdministrativeArea']);
 const FORBIDDEN = new Set(['AggregateRating', 'Review', 'Rating']);
 const BUSINESS = new Set(['FurnitureStore', 'LocalBusiness', 'Store']);
 /* one graph per page (lib/schema.ts, November 3, 2026): these three site nodes on every page, once each */
 const SITE_IDS = { organization: `${SITE_URL}/#organization`, store: `${SITE_URL}/#store`, website: `${SITE_URL}/#website` };
 
-const htmlFiles = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name.endsWith('.html') && !/^(404|ghl-stub)/.test(e.name) && !p.includes(`${path.sep}ghl-stub${path.sep}`)) htmlFiles.push(p); } })(path.join(ROOT, 'out'));
-const routeOf = (f) => '/' + path.relative(path.join(ROOT, 'out'), f).split(path.sep).join('/').replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
+const htmlFiles = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name.endsWith('.html') && !/^(404|_not-found|ghl-stub)/.test(e.name) && !p.includes(`${path.sep}ghl-stub${path.sep}`)) htmlFiles.push(p); } })(EXPORT_DIR);
+const routeOf = (f) => '/' + path.relative(EXPORT_DIR, f).split(path.sep).join('/').replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
 const typesOf = (o) => (Array.isArray(o['@type']) ? o['@type'] : [o['@type']]).filter(Boolean);
 const flatten = (o, out = []) => { if (!o || typeof o !== 'object') return out; if (Array.isArray(o)) { o.forEach((x) => flatten(x, out)); return out; } if (o['@type']) out.push(o); for (const [k, v] of Object.entries(o)) if (k !== '@type' && v && typeof v === 'object') flatten(v, out); return out; };
 /* a required property, following {"@id": …} references to the page's own nodes (an unresolved reference is missing) */
@@ -53,7 +57,7 @@ for (const f of htmlFiles) {
   for (const [k, id] of Object.entries(SITE_IDS)) if (!byId.has(id)) errs.push(`missing site node #${k}`);
   const biz = tops.filter((o) => typesOf(o).some((t) => BUSINESS.has(t)));
   if (biz.length !== 1) errs.push(`${biz.length} LocalBusiness blocks (expected 1)`);
-  for (const b of biz) need(b, ['@id', 'name', 'address.streetAddress', 'address.addressLocality', 'address.addressRegion', 'address.postalCode', 'address.addressCountry', 'telephone', 'url', 'image', 'geo.latitude', 'geo.longitude', 'hasMap', 'openingHoursSpecification', 'priceRange', 'sameAs', 'areaServed', 'parentOrganization.name', 'knowsLanguage', 'currenciesAccepted', 'paymentAccepted', 'brand', 'makesOffer.itemOffered'], errs, 'LocalBusiness', byId);
+  for (const b of biz) need(b, ['@id', 'name', 'address.streetAddress', 'address.addressLocality', 'address.addressRegion', 'address.postalCode', 'address.addressCountry', 'telephone', 'url', 'image', 'openingHoursSpecification', 'priceRange', 'sameAs', 'areaServed', 'parentOrganization.name', 'knowsLanguage', 'currenciesAccepted', 'paymentAccepted', 'brand', 'makesOffer.itemOffered'], errs, 'LocalBusiness', byId);
   for (const o of tops.filter((o) => o['@id'] === SITE_IDS.organization)) need(o, ['name', 'url', 'logo.url', 'sameAs', 'parentOrganization.name'], errs, 'Organization', byId);
   for (const o of tops.filter((o) => o['@id'] === SITE_IDS.website)) need(o, ['name', 'url', 'publisher.name', 'inLanguage'], errs, 'WebSite', byId);
   for (const o of tops.filter((o) => typesOf(o).includes('FAQPage'))) { if (!Array.isArray(o.mainEntity) || !o.mainEntity.length) errs.push('FAQPage: empty mainEntity'); else o.mainEntity.forEach((q, i) => need(q, ['name', 'acceptedAnswer.text'], errs, `FAQ #${i + 1}`)); }
@@ -68,6 +72,6 @@ for (const f of htmlFiles) {
   pagesChecked++; if (errs.length) pagesBad++;
   if (errs.length || VERBOSE) console.log(`${route.padEnd(46)} ${blocks.length} blocks [${kinds}]${errs.length ? '\n   ' + errs.join('\n   ') : ''}`);
 }
-console.log(`\n${pagesChecked} pages checked${LIVE ? ' (live)' : ' (out/)'}, ${pagesBad} with errors`);
+console.log(`\n${pagesChecked} pages checked${LIVE ? ' (live)' : ' (' + path.relative(ROOT, EXPORT_DIR) + ')'}, ${pagesBad} with errors`);
 for (const [k, v] of Object.entries(summary).sort((a, b) => b[1] - a[1])) console.log(`   ${String(v).padStart(3)} × [${k}]`);
 process.exit(pagesBad ? 1 : 0);

@@ -1,5 +1,6 @@
-import Script from 'next/script';
 import { SITE } from './site-config';
+import { LOCATION } from '@/lib/location';
+import { INTEGRATIONS } from '@/lib/integrations';
 import { PageSchema } from './PageSchema';
 import { Icon, type IconName } from './icons';
 import type { Locale } from '@/lib/i18n';
@@ -7,13 +8,14 @@ import { dreamMappingService } from '@/lib/schema';
 import styles from './BookingPage.module.css';
 
 /* Structured data: the Dream Mapping Service (SEO audit, October 2026 — section 5d: free, about 5 minutes, in the
-   McAllen store), the same node as on /dream-mapping (lib/schema.ts, @id …/dream-mapping#service, provider the store),
-   in the page's one graph with the site nodes (components/PageSchema.tsx). */
+   store), the same node as on /dream-mapping (lib/schema.ts, @id …/dream-mapping#service, provider the store), in the
+   page's one graph with the site nodes (components/PageSchema.tsx). */
 
 /* The Dream Mapping booking page, hand-written (not generated from the GoHighLevel export).
    The calendar is the client's exact embed placed directly in the page body: no wrapper, no container, no card.
-   form_embed.js loads after the iframe exists and resizes the iframe to the widget's content at every step; the page
-   scrolls, the iframe never does. CALENDAR_HEIGHT_GUARD below corrects the one height the widget gets wrong. */
+   form_embed.js (loaded once per page by components/GhlEmbedScripts.tsx after the iframe exists) resizes the iframe to
+   the widget's content at every step; the page scrolls, the iframe never does. CALENDAR_HEIGHT_GUARD below corrects the
+   one height the widget gets wrong. */
 
 const COPY = {
   en: {
@@ -34,6 +36,13 @@ const COPY = {
     ],
     pickTime: 'Pick a Time Above',
     questions: (phone: string) => `Questions? Call ${phone}`,
+    /* shown in place of the calendar when JavaScript is off: the LeadConnector widget cannot render without it */
+    noJs: 'The booking calendar needs JavaScript. Open the calendar directly, or call us and we will book your free Dream Mapping fitting by phone.',
+    noJsOpen: 'Open the booking calendar',
+    noJsCall: (phone: string) => `Call ${phone} to book`,
+    /* shown while no calendar is configured for this store (lib/integrations.ts [CR_CALENDAR_ID]) */
+    pending: (city: string) => `Online booking for the ${city} store is being connected. Call us or send an email and we will book your free Dream Mapping fitting for you.`,
+    email: (email: string) => `Email ${email}`,
   },
   es: {
     title: '¡Da el Primer Paso Hacia un',
@@ -52,14 +61,24 @@ const COPY = {
     ],
     pickTime: 'Elige un horario arriba',
     questions: (phone: string) => `¿Preguntas? Llama al ${phone}`,
+    noJs: 'El calendario de citas necesita JavaScript. Abre el calendario directamente o llámanos y agendamos tu Dream Mapping gratis por teléfono.',
+    noJsOpen: 'Abrir el calendario de citas',
+    noJsCall: (phone: string) => `Llama al ${phone} para agendar`,
+    pending: (city: string) => `Las citas en línea de la tienda de ${city} están por conectarse. Llámanos o escríbenos y agendamos tu Dream Mapping gratis por ti.`,
+    email: (email: string) => `Escribe a ${email}`,
   },
 };
 /* one icon per step: the sensor bed, the five minutes, the Sleep Coach, free with no obligation, couples */
 const VISIT_ICONS: IconName[] = ['sensor-bed', 'clock', 'user', 'badge-check', 'people'];
 
-/* McAllen Dream Mapping calendar (the client's embed: id = `<calendarId>_<timestamp>`) */
-export const BOOKING_CALENDAR_ID = 'lrAns7Z8j3vEJW3DC0Yr';
-const BOOKING_EMBED_ID = `${BOOKING_CALENDAR_ID}_1788459899479`;
+/* The Dream Mapping booking calendar: the client's embed URL from lib/integrations.ts ([CR_CALENDAR_ID], e.g.
+   https://link.snoozesleep.com/widget/booking/<calendarId>; iframe id = `<calendarId>_<timestamp>`). Empty until the
+   client supplies it: the page then shows a "being connected" card with the phone and e-mail instead of the iframe and
+   loads no widget script. The previous location's calendar id was removed. */
+const CALENDAR_URL = INTEGRATIONS.bookingCalendarUrl.trim().replace(/\/+$/, '');
+export const BOOKING_CALENDAR_ID = CALENDAR_URL ? CALENDAR_URL.slice(CALENDAR_URL.lastIndexOf('/') + 1) : '';
+/* the client's embed id: `<calendarId>_1788459899479` (the embed's own <br> after the iframe is dropped on purpose) */
+const BOOKING_EMBED_ID = `${BOOKING_CALENDAR_ID || 'castle-rock-dream-mapping'}_1788459899479`;
 
 /* Height guard for the calendar iframe (October 27, 2026; made deterministic October 28, 2026).
    The widget reports its height two ways: iframe-resizer messages ("[iFrameSizer]<id>:<height>:<width>:<trigger>"), which
@@ -116,17 +135,38 @@ export function BookingPage({ locale = 'en' }: { locale?: Locale }) {
         </div>
       </div>
 
-      <iframe
-        className={styles.calendar}
-        src={`https://link.snoozesleep.com/widget/booking/${BOOKING_CALENDAR_ID}`}
-        title={locale === 'es' ? 'Calendario de citas de Dream Mapping' : 'Dream Mapping booking calendar'}
-        allow="payment"
-        style={{ width: '100%', border: 'none', overflow: 'hidden' }}
-        scrolling="no"
-        id={BOOKING_EMBED_ID}
-        data-snz-resizer="form_embed"
-      />
-      <script dangerouslySetInnerHTML={{ __html: CALENDAR_HEIGHT_GUARD }} />
+      {CALENDAR_URL ? (
+        <>
+          <iframe
+            className={styles.calendar}
+            src={CALENDAR_URL}
+            title={locale === 'es' ? 'Calendario de citas de Dream Mapping' : 'Dream Mapping booking calendar'}
+            allow="payment"
+            style={{ width: '100%', border: 'none', overflow: 'hidden' }}
+            scrolling="no"
+            id={BOOKING_EMBED_ID}
+            data-snz-resizer="form_embed"
+          />
+          <script dangerouslySetInnerHTML={{ __html: CALENDAR_HEIGHT_GUARD }} />
+          {/* no-JavaScript fallback: the widget cannot render, so the page offers the calendar URL and the phone (the iframe stays, empty) */}
+          <noscript>
+            <div className={styles.noJs}>
+              <p className={styles.noJsText}>{t.noJs}</p>
+              <a className={styles.visitBtn} href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">{t.noJsOpen}</a>
+              {' '}
+              <a className={styles.visitCall} href={SITE.phoneHref}><Icon name="phone" /> {t.noJsCall(SITE.phone)}</a>
+            </div>
+          </noscript>
+        </>
+      ) : (
+        /* [CR_CALENDAR_ID] not supplied yet: no iframe, no widget script; the phone and the e-mail are the booking path */
+        <div id={BOOKING_EMBED_ID} className={styles.pending} data-snz-calendar="pending">
+          <p className={styles.noJsText}>{t.pending(LOCATION.city)}</p>
+          <a className={styles.visitBtn} href={SITE.phoneHref}><Icon name="phone" /> {t.noJsCall(SITE.phone)}</a>
+          {' '}
+          <a className={styles.visitCall} href={`mailto:${LOCATION.email}`}>{t.email(LOCATION.email)}</a>
+        </div>
+      )}
 
       <section className={styles.visit} aria-labelledby="visit-title">
         <div className={styles.visitInner}>
@@ -149,7 +189,6 @@ export function BookingPage({ locale = 'en' }: { locale?: Locale }) {
         </div>
       </section>
       </main>
-      <Script src="https://link.snoozesleep.com/js/form_embed.js" strategy="afterInteractive" />
     </>
   );
 }

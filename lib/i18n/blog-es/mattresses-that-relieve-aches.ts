@@ -3,13 +3,13 @@ import { IMG } from '@/lib/blog-images';
 
 export const POST_ES: BlogPost = {
   slug: 'mattresses-that-relieve-aches',
-  title: 'Colchones para el Dolor de Espalda en McAllen',
-  metaTitle: 'Colchones para Dolor de Espalda en McAllen | Snooze Mattress',
+  title: 'Colchones para el Dolor de Espalda en Castle Rock',
+  metaTitle: 'Colchones para Dolor de Espalda en Castle Rock | Snooze Mattress',
   metaDescription:
-    'Colchones para el dolor de espalda en McAllen: cómo el colchón correcto apoya tu columna, alivia los puntos de presión y va con tu postura al dormir.',
-  keywords: ['colchón para dolor de espalda', 'colchón dolores y molestias', 'soporte según postura al dormir', 'dormir mejor', 'tienda de colchones en McAllen'],
+    'Colchones para el dolor de espalda en Castle Rock: cómo el colchón correcto apoya tu columna, alivia los puntos de presión y va con tu postura al dormir.',
+  keywords: ['colchón para dolor de espalda', 'colchón dolores y molestias', 'soporte según postura al dormir', 'dormir mejor', 'tienda de colchones en Castle Rock'],
   datePublished: '2026-02-25',
-  dateModified: '2026-10-27', // retitled around "colchones para el dolor de espalda en McAllen" (SEO report)
+  dateModified: '2026-10-27', // retitled around "colchones para el dolor de espalda en Castle Rock" (SEO report)
   dateDisplay: '25 de febrero de 2026',
   readTime: '6 min de lectura',
   featured: { ...IMG.sleeper, alt: 'Mujer durmiendo cómodamente en un colchón de buen soporte que alivia dolores y puntos de presión' },
@@ -42,7 +42,7 @@ export const POST_ES: BlogPost = {
         'Lo bonito de las opciones de hoy es la variedad que existe. Algunas construcciones combinan diferentes tecnologías por capas, buscando equilibrar los beneficios de varios enfoques. Otras se enfocan en un solo método, perfeccionado para destacar en aspectos específicos. [Cuando visitas una tienda de colchones](/es/about-us), te vas a encontrar con estas diferentes tecnologías, cada una diseñada pensando en ciertos estilos de sueño y preferencias de confort.',
         'Lo que más importa es cómo se siente una construcción en particular con tu propio cuerpo. La superficie favorita de tu amigo puede que a ti no te funcione para nada, y eso es completamente normal. Tu peso, tus posiciones preferidas para dormir y las zonas donde normalmente sientes molestias influyen en qué tipo de sistema de soporte te va a servir mejor.',
       ],
-      image: { ...IMG.coaches, alt: 'Sleep Coaches de Snooze junto a la pantalla de Dream Mapping, nuestro mapeo de presión, en la tienda de McAllen', caption: 'Nuestros Sleep Coaches (asesores de sueño) de Snooze te ayudan a comparar las tecnologías de confort lado a lado.' },
+      image: { ...IMG.coaches, alt: 'Sleep Coaches de Snooze junto a la pantalla de Dream Mapping, nuestro mapeo de presión, en la tienda de Castle Rock', caption: 'Nuestros Sleep Coaches (asesores de sueño) de Snooze te ayudan a comparar las tecnologías de confort lado a lado.' },
     },
     {
       heading: 'Elige el Soporte Según Tu Posición al Dormir',
@@ -65,7 +65,7 @@ export const POST_ES: BlogPost = {
         'Tómate tu tiempo cuando estés probando diferentes opciones. Acuéstate en tus posiciones naturales para dormir y fíjate cómo se siente tu cuerpo después de varios minutos. Presta atención a si sientes que se acumula presión en alguna parte o si necesitas acomodarte para estar a gusto. Confía en lo que te dice tu cuerpo en lugar de tratar de convencerte de que algo se siente bien cuando en realidad no encaja con lo que necesitas.',
         'Tu camino hacia mañanas sin dolor y un sueño verdaderamente reparador empieza por entender cómo interactúa tu cuerpo con la superficie donde duermes. Al reconocer las señales de un mal soporte, conocer las diferentes tecnologías de confort y tomarte el tiempo para encontrar lo que funciona específicamente para tu cuerpo, puedes transformar tus noches y despertar sintiéndote de verdad renovado. Recuerda que [invertir en tu sueño](/es/mattress-financing) es invertir en tu salud y en tu calidad de vida de todos los días. Si estás listo para descubrir qué solución de descanso puede ayudarte a despertar sin dolores ni molestias, [comunícate con nuestro equipo](/es/booking), que trata a cada persona como familia y le apasiona ayudarte a lograr una mejor salud a través de un buen descanso.',
       ],
-      image: { ...IMG.store, alt: 'Tienda Snooze Mattress + Wellness en McAllen', caption: 'Ven, acuéstate y compruébalo tú mismo en 7913 N 10th St, Suite 130, McAllen.' },
+      image: { ...IMG.store, alt: 'Snooze Mattress + Wellness en Castle Rock: foto de la tienda próximamente', caption: 'Ven, acuéstate y compruébalo tú mismo en 6360 Promenade Pkwy, Castle Rock.' },
     },
   ],
   sources: [

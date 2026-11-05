@@ -10,7 +10,7 @@ import { altBlogPath, getPost, postsFor, relatedPosts, type BlogPost } from '@/l
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
 import { ORG_ID } from '@/lib/schema';
 
-const SITE_URL = 'https://mcallen.snoozemattresscompany.com';
+import { SITE_URL } from '@/lib/location';
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
 const OG_LOCALE: Record<Locale, string> = { en: 'en_US', es: 'es_US' };
 const LANG: Record<Locale, string> = { en: 'en-US', es: 'es-US' };

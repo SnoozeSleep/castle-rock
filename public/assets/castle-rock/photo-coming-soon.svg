@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo coming soon">
+  <rect width="1600" height="1200" fill="#001489"/>
+  <rect x="40" y="40" width="1520" height="1120" rx="28" fill="none" stroke="#F58433" stroke-width="6" stroke-dasharray="28 20" opacity="0.9"/>
+  <g transform="translate(800 520)">
+    <rect x="-110" y="-78" width="220" height="156" rx="22" fill="none" stroke="#F58433" stroke-width="14"/>
+    <circle cx="0" cy="4" r="44" fill="none" stroke="#F58433" stroke-width="14"/>
+    <rect x="-44" y="-112" width="88" height="40" rx="12" fill="#F58433"/>
+  </g>
+  <text x="800" y="720" text-anchor="middle" font-family="Poppins, Montserrat, Segoe UI, Arial, sans-serif" font-size="78" font-weight="700" fill="#ffffff">Photo coming soon</text>
+  <text x="800" y="800" text-anchor="middle" font-family="Poppins, Montserrat, Segoe UI, Arial, sans-serif" font-size="40" font-weight="500" fill="#F58433">Snooze Mattress + Wellness · Castle Rock</text>
+</svg>

@@ -3,6 +3,7 @@
    pages is translated by scripts/convert.mjs from overrides/i18n/*.json. */
 
 import { blogSlugFor } from './blog-nav';
+import { LOCATION } from './location';
 
 export type Locale = 'en' | 'es';
 export const LOCALES: Locale[] = ['en', 'es'];
@@ -46,7 +47,7 @@ export type UiStrings = {
   quizCta: { line: string; button: string; aria: string };
   footer: {
     about: string; book: string; contact: string; products: string; company: string; visit: string; hours1: string; hours2: string; location: string; directions: string; openMaps: string; mapTitle: string;
-    rights: string; madeWith: string; terms: string; privacy: string; facebook: string; instagram: string; youtube: string;
+    rights: string; madeWith: string; terms: string; privacy: string; facebook: string; instagram: string;
     companyLinks: Array<[label: string, href: string]>;
     serving: string; areas: Array<[label: string, href: string]>;
   };
@@ -82,25 +83,25 @@ const en: UiStrings = {
   quizCard: { title: 'Sleep Fit Quiz', desc: 'Not sure which mattress is right for you? Find your comfort + support in 60 seconds.', cta: 'Take the quiz' },
   quizCta: { line: 'Not sure which mattress is right for you?', button: 'Take the 60-Second Sleep Quiz', aria: 'Sleep Fit Quiz' },
   footer: {
-    about: 'Locally owned and operated in McAllen. We treat every person who walks through our door like family, and we are passionate about better health through better sleep.',
+    about: 'Snooze Mattress + Wellness in Castle Rock, serving Douglas County and the south Denver metro. We treat every person who walks through our door like family, and we are passionate about better health through better sleep.',
     book: 'Book Your Dream Mapping Appointment!', contact: 'Get In Touch With Us', products: 'Our Products', company: 'Company', visit: 'Visit Us',
-    hours1: 'Mon–Sat 10 AM–7 PM', hours2: 'Sun 12–6 PM', location: 'Our Location', directions: 'Get Directions', openMaps: 'Open Maps',
-    mapTitle: 'Map to Snooze Mattress + Wellness, 7913 N 10th St, Suite 130, McAllen, TX 78504',
+    hours1: 'Mon–Sat 10 AM–7 PM', hours2: 'Sun 11 AM–6 PM', location: 'Our Location', directions: 'Get Directions', openMaps: 'Open Maps',
+    mapTitle: 'Map to Snooze Mattress + Wellness, 6360 Promenade Pkwy, Castle Rock, CO 80108',
     rights: 'Snooze Mattress + Wellness. All Rights Reserved', madeWith: 'Made with', terms: 'Terms & Conditions', privacy: 'Privacy Policy',
-    facebook: 'Snooze McAllen on Facebook', instagram: 'Snooze McAllen on Instagram', youtube: 'Snooze McAllen on YouTube',
+    facebook: 'Snooze Mattress + Wellness Castle Rock on Facebook', instagram: 'Snooze Mattress + Wellness Castle Rock on Instagram',
     companyLinks: [['About Us', '/about-us'], ['Financing', '/mattress-financing'], ['Sales', '/mattress-sales'], ['Sleep Blog', '/blog'], ['Sleep Fit Quiz', '/sleep-quiz'], ['Dream Mapping', '/dream-mapping'], ['How to Choose a Mattress', '/how-to-choose-a-mattress'], ['FAQ', '/faq'], ['Book a Dream Mapping Appointment', '/booking'], ['Get In Touch', '/contact-us']],
-    serving: 'Also serving', areas: [['Edinburg', '/mattress-store-edinburg'], ['Mission', '/mattress-store-mission'], ['Pharr', '/mattress-store-pharr']],
+    serving: 'Also serving', areas: LOCATION.serviceAreas.map((a) => [a.city, a.slug] as [string, string]),
   },
   blog: {
     eyebrow: 'Snooze Sleep Blog', indexTitle: 'Better Sleep Starts Here',
-    indexIntro: 'Custom mattresses, pressure mapping and pain-free mornings — straight from the sleep specialists at Snooze Mattress + Wellness in McAllen.',
+    indexIntro: 'Custom mattresses, pressure mapping and pain-free mornings — straight from the sleep specialists at Snooze Mattress + Wellness in Castle Rock.',
     home: 'Home', blogCrumb: 'Sleep Blog', readArticle: 'Read article', read: (t) => `Read: ${t}`, faq: 'Frequently Asked Questions', related: 'Related Posts',
     ctaEyebrow: 'Real People. Real Results. Real Sleep.', ctaTitle: 'Visit Our Showroom',
-    ctaText: 'Talk to our Sleep Specialists in McAllen. Get pressure-mapped, try the mattresses that fit your body, and ask about 0% financing — we treat every person who walks through our door like family.',
-    ctaBook: 'Book Your Dream Mapping Appointment', ctaCall: (p) => `Call ${p}`, ctaAddr: '7913 N 10th St, Suite 130, McAllen, TX 78504 · Mon–Sat 10 AM–7 PM · Sun 12–6 PM',
-    indexMetaTitle: 'Sleep Blog | Snooze Mattress in McAllen',
-    indexMetaDesc: 'Sleep tips from Snooze Mattress + Wellness in McAllen: custom mattresses, pressure mapping and how the right mattress relieves aches and pains.',
-    ogDesc: 'Custom mattresses, pressure mapping and better sleep — from the Snooze team in McAllen.', section: 'Sleep & Wellness', by: 'By', /* + the author's name, lib/blog-author.ts */ sources: 'Sources',
+    ctaText: 'Talk to our Sleep Specialists in Castle Rock. Get pressure-mapped, try the mattresses that fit your body, and ask about 0% financing — we treat every person who walks through our door like family.',
+    ctaBook: 'Book Your Dream Mapping Appointment', ctaCall: (p) => `Call ${p}`, ctaAddr: '6360 Promenade Pkwy, Castle Rock, CO 80108 · Mon–Sat 10 AM–7 PM · Sun 11 AM–6 PM',
+    indexMetaTitle: 'Sleep Blog | Snooze Mattress in Castle Rock',
+    indexMetaDesc: 'Sleep tips from Snooze Mattress + Wellness in Castle Rock: custom mattresses, pressure mapping and how the right mattress relieves aches and pains.',
+    ogDesc: 'Custom mattresses, pressure mapping and better sleep — from the Snooze team in Castle Rock.', section: 'Sleep & Wellness', by: 'By', /* + the author's name, lib/blog-author.ts */ sources: 'Sources',
   },
 };
 
@@ -126,25 +127,25 @@ const es: UiStrings = {
   quizCard: { title: 'Sleep Fit Quiz', desc: '¿No sabes qué colchón es el ideal para ti? Descubre tu comodidad y soporte en 60 segundos.', cta: 'Hacer el quiz' },
   quizCta: { line: '¿No sabes qué colchón es el ideal para ti?', button: 'Haz el Quiz de Sueño de 60 Segundos', aria: 'Sleep Fit Quiz' },
   footer: {
-    about: 'Negocio local de McAllen, de la familia para la familia. Tratamos a cada persona que entra por nuestra puerta como si fuera de casa, y nos apasiona mejorar tu salud a través de un mejor sueño.',
+    about: 'Snooze Mattress + Wellness en Castle Rock. Tratamos a cada persona que entra por nuestra puerta como si fuera de casa, y nos apasiona mejorar tu salud a través de un mejor sueño.',
     book: 'Reserva tu cita de Dream Mapping', contact: 'Contáctanos', products: 'Nuestros Productos', company: 'Empresa', visit: 'Visítanos',
-    hours1: 'Lun–Sáb 10 AM–7 PM', hours2: 'Dom 12–6 PM', location: 'Nuestra Ubicación', directions: 'Cómo Llegar', openMaps: 'Abrir en Maps',
-    mapTitle: 'Mapa para llegar a Snooze Mattress + Wellness, 7913 N 10th St, Suite 130, McAllen, TX 78504',
+    hours1: 'Lun–Sáb 10 AM–7 PM', hours2: 'Dom 11 AM–6 PM', location: 'Nuestra Ubicación', directions: 'Cómo Llegar', openMaps: 'Abrir en Maps',
+    mapTitle: 'Mapa para llegar a Snooze Mattress + Wellness, 6360 Promenade Pkwy, Castle Rock, CO 80108',
     rights: 'Snooze Mattress + Wellness. Todos los derechos reservados', madeWith: 'Hecho con', terms: 'Términos y Condiciones', privacy: 'Política de Privacidad',
-    facebook: 'Snooze McAllen en Facebook', instagram: 'Snooze McAllen en Instagram', youtube: 'Snooze McAllen en YouTube',
+    facebook: 'Snooze Mattress + Wellness Castle Rock en Facebook', instagram: 'Snooze Mattress + Wellness Castle Rock en Instagram',
     companyLinks: [['Nosotros', '/about-us'], ['Financiamiento', '/mattress-financing'], ['Ofertas', '/mattress-sales'], ['Blog del Sueño', '/blog'], ['Sleep Fit Quiz', '/sleep-quiz'], ['Dream Mapping', '/dream-mapping'], ['Cómo elegir un colchón', '/how-to-choose-a-mattress'], ['Preguntas frecuentes', '/faq'], ['Reserva tu cita de Dream Mapping', '/booking'], ['Contáctanos', '/contact-us']],
-    serving: 'También atendemos', areas: [['Edinburg', '/mattress-store-edinburg'], ['Mission', '/mattress-store-mission'], ['Pharr', '/mattress-store-pharr']],
+    serving: 'También atendemos', areas: LOCATION.serviceAreas.map((a) => [a.city, a.slug] as [string, string]),
   },
   blog: {
     eyebrow: 'Blog del Sueño de Snooze', indexTitle: 'Dormir Mejor Empieza Aquí',
-    indexIntro: 'Colchones a tu medida, mapeo de presión y mañanas sin dolor, directo de los Especialistas en Sueño de Snooze Mattress + Wellness en McAllen.',
+    indexIntro: 'Colchones a tu medida, mapeo de presión y mañanas sin dolor, directo de los Especialistas en Sueño de Snooze Mattress + Wellness en Castle Rock.',
     home: 'Inicio', blogCrumb: 'Blog del Sueño', readArticle: 'Leer artículo', read: (t) => `Leer: ${t}`, faq: 'Preguntas Frecuentes', related: 'Artículos Relacionados',
     ctaEyebrow: 'Gente Real. Resultados Reales. Sueño Real.', ctaTitle: 'Visita Nuestra Tienda',
-    ctaText: 'Platica con nuestros Especialistas en Sueño en McAllen. Hazte tu mapeo de presión, prueba los colchones que le quedan a tu cuerpo y pregunta por el financiamiento al 0%. Aquí tratamos a cada persona que entra por nuestra puerta como familia.',
-    ctaBook: 'Reserva tu cita de Dream Mapping', ctaCall: (p) => `Llama al ${p}`, ctaAddr: '7913 N 10th St, Suite 130, McAllen, TX 78504 · Lun–Sáb 10 AM–7 PM · Dom 12–6 PM',
-    indexMetaTitle: 'Blog del Sueño | Snooze Mattress en McAllen',
-    indexMetaDesc: 'Consejos para dormir mejor de Snooze Mattress + Wellness en McAllen: colchones a tu medida, mapeo de presión y cómo el colchón correcto alivia dolores.',
-    ogDesc: 'Colchones a tu medida, mapeo de presión y mejor sueño, del equipo de Snooze en McAllen.', section: 'Sueño y Bienestar', by: 'Por', /* + el nombre del autor, lib/blog-author.ts */ sources: 'Fuentes',
+    ctaText: 'Platica con nuestros Especialistas en Sueño en Castle Rock. Hazte tu mapeo de presión, prueba los colchones que le quedan a tu cuerpo y pregunta por el financiamiento al 0%. Aquí tratamos a cada persona que entra por nuestra puerta como familia.',
+    ctaBook: 'Reserva tu cita de Dream Mapping', ctaCall: (p) => `Llama al ${p}`, ctaAddr: '6360 Promenade Pkwy, Castle Rock, CO 80108 · Lun–Sáb 10 AM–7 PM · Dom 11 AM–6 PM',
+    indexMetaTitle: 'Blog del Sueño | Snooze Mattress en Castle Rock',
+    indexMetaDesc: 'Consejos para dormir mejor de Snooze Mattress + Wellness en Castle Rock: colchones a tu medida, mapeo de presión y cómo el colchón correcto alivia dolores.',
+    ogDesc: 'Colchones a tu medida, mapeo de presión y mejor sueño, del equipo de Snooze en Castle Rock.', section: 'Sueño y Bienestar', by: 'Por', /* + el nombre del autor, lib/blog-author.ts */ sources: 'Fuentes',
   },
 };
 

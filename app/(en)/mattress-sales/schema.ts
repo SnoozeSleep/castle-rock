@@ -8,7 +8,7 @@ export const PAGE_SCHEMA: JsonLd[] = [
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why choose Snooze Mattress + Wellness in McAllen?",
+        "name": "Why choose Snooze Mattress + Wellness in Castle Rock?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Because you get the best mattress prices in town through our competitive sales and price matching, the 365-Night Sleep Guarantee on major brands, and a family business that greets you with a smile in our Snooze Blues pajamas. We would be honored to serve you!"

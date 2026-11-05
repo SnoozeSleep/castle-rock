@@ -120,3 +120,11 @@
   .step + .step::after { content: ''; position: absolute; left: 39px; top: -17px; width: 2px; height: 17px; background: #f58433; }
 }
 @media (max-width: 480px) { .visit { padding-left: 16px; padding-right: 16px; } .stepText { font-size: 15px; } }
+
+/* no-JavaScript fallback under the calendar (components/BookingPage.tsx <noscript>): the widget cannot render, so the
+   page offers the calendar URL and the phone; centred, same button style as the "Pick a Time Above" link */
+.noJs { max-width: 640px; margin: 8px auto 28px; padding: 22px 20px; border-radius: 14px; background: #fff7f0; border: 1px solid rgba(245, 132, 51, 0.35); text-align: center; }
+.noJsText { margin: 0 0 14px; font-size: 16px; line-height: 1.55; color: #1e223c; }
+.noJsText a { color: #001489; font-weight: 700; }
+/* while no booking calendar is configured for the store (lib/integrations.ts): a dashed card in the calendar's place */
+.pending { max-width: 640px; margin: 8px auto 28px; padding: 26px 20px; border-radius: 14px; background: #fff7f0; border: 1px dashed rgba(245, 132, 51, 0.6); text-align: center; }

@@ -11,7 +11,7 @@
 export type OfferCopy = { en: string; es: string };
 export type OfferConfig = {
   enabled: boolean;
-  startDate: string; // 'YYYY-MM-DD' in store time (America/Chicago); '' = no start limit (the band announces the sale ahead of it)
+  startDate: string; // 'YYYY-MM-DD' in store time (America/Denver); '' = no start limit (the band announces the sale ahead of it)
   endDate: string; // 'YYYY-MM-DD'; the band shows through the end of this day; '' = no end limit
   eyebrow: OfferCopy;
   headline: OfferCopy;
@@ -32,7 +32,7 @@ export const CURRENT_OFFER: OfferConfig = {
   cta: { href: '/mattress-sales', label: { en: 'See the sale', es: 'Ver las ofertas' } },
 };
 
-const STORE_TZ = 'America/Chicago';
+const STORE_TZ = 'America/Denver';
 /** today's date (YYYY-MM-DD) in the store's time zone */
 export const storeToday = (now = new Date()) => new Intl.DateTimeFormat('en-CA', { timeZone: STORE_TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 

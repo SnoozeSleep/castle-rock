@@ -1,7 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "redirects": [
     { "source": "/terms-conditions", "destination": "/terms-conditions-page", "permanent": true },
     { "source": "/es/terms-conditions", "destination": "/es/terms-conditions-page", "permanent": true },
@@ -13,8 +11,6 @@
     { "source": "/es/main-page", "destination": "/es", "permanent": true },
     { "source": "/post/pressure-map-for-sleep", "destination": "/blog/pressure-mapping-for-sleep", "permanent": true },
     { "source": "/es/post/pressure-map-for-sleep", "destination": "/es/blog/pressure-mapping-for-sleep", "permanent": true },
-    { "source": "/mattress-financing-mcallen-tx", "destination": "/mattress-financing", "permanent": true },
-    { "source": "/es/mattress-financing-mcallen-tx", "destination": "/es/mattress-financing", "permanent": true },
     { "source": "/massage-chairs-402809", "destination": "/massage-chairs", "permanent": true },
     { "source": "/es/massage-chairs-402809", "destination": "/es/massage-chairs", "permanent": true },
     { "source": "/review", "destination": "/", "permanent": true },
@@ -45,9 +41,9 @@
     { "source": "/es/:slug-:id(\\d{4,6})", "destination": "/es/:slug", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/ghl-stub/widget/:path*", "destination": "/ghl-stub" },
-    { "source": "/ghl-stub/form/:path*", "destination": "/ghl-stub" },
-    { "source": "/ghl-stub/link/:path*", "destination": "/ghl-stub" },
+    { "source": "/ghl-stub/widget/:path*", "destination": "/ghl-stub.html" },
+    { "source": "/ghl-stub/form/:path*", "destination": "/ghl-stub.html" },
+    { "source": "/ghl-stub/link/:path*", "destination": "/ghl-stub.html" },
     { "source": "/ghl-stub/api/js/:path*", "destination": "/ghl-stub/empty.js" },
     { "source": "/ghl-stub/api/:path*", "destination": "/ghl-stub/ok.json" }
   ],

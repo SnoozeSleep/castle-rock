@@ -6,8 +6,8 @@ import { PAGE_SCHEMA } from './schema';
 import { GuideLinks } from '@/components/GuideLinks';
 
 export const metadata: Metadata = {
-  "title": "Mattresses in McAllen, TX: Top Brands | Snooze Mattress",
-  "description": "Mattresses in McAllen, TX: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
+  "title": "Mattresses in Castle Rock, CO: Top Brands | Snooze Mattress",
+  "description": "Mattresses in Castle Rock, CO: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
   "alternates": {
     "canonical": "/mattresses",
     "languages": {
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Mattresses in McAllen, TX: Top Brands | Snooze Mattress",
-    "description": "Mattresses in McAllen, TX: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
+    "title": "Mattresses in Castle Rock, CO: Top Brands | Snooze Mattress",
+    "description": "Mattresses in Castle Rock, CO: Tempur-Pedic, Sealy, Stearns & Foster, Beautyrest, Helix, King Koil and more, fitted to you in a free Dream Mapping session.",
     "url": "/mattresses",
     "type": "website",
     "images": [

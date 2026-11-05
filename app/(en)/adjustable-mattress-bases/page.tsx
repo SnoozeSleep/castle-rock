@@ -5,8 +5,8 @@ import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 
 export const metadata: Metadata = {
-  "title": "Adjustable Beds & Bases in McAllen, TX | Snooze Mattress",
-  "description": "Adjustable beds and bases in McAllen, TX from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
+  "title": "Adjustable Beds & Bases in Castle Rock, CO | Snooze Mattress",
+  "description": "Adjustable beds and bases in Castle Rock, CO from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
   "alternates": {
     "canonical": "/adjustable-mattress-bases",
     "languages": {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     }
   },
   "openGraph": {
-    "title": "Adjustable Beds & Bases in McAllen, TX | Snooze Mattress",
-    "description": "Adjustable beds and bases in McAllen, TX from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
+    "title": "Adjustable Beds & Bases in Castle Rock, CO | Snooze Mattress",
+    "description": "Adjustable beds and bases in Castle Rock, CO from Snooze Mattress + Wellness: more comfort, support and pressure relief, less snoring. Try one in store.",
     "url": "/adjustable-mattress-bases",
     "type": "website",
     "images": [

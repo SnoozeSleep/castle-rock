@@ -1,40 +1,41 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import type { Locale } from '@/lib/i18n';
+import { LOCATION, SITE_URL } from '@/lib/location';
 import './sleep-quiz/sleep-fit-quiz.css';
 
-/* The Snooze Sleep Fit Quiz as a site page (/sleep-quiz, /es/sleep-quiz), hand-written like the booking page
-   (scripts/convert.mjs keeps app/(en)/sleep-quiz and app/es/sleep-quiz on regeneration).
+/* The Snooze Sleep Fit Quiz as a site page (/sleep-quiz), hand-written like the booking page (scripts/convert.mjs keeps
+   app/(en)/sleep-quiz on regeneration).
 
    The quiz is the client's single-store build (sleep-fit-quiz.html): this component renders its shell — the
    progress bar and the #view the screens are drawn into — inside the site's normal header and footer; the quiz's
    own top bar and © line are not needed. Styles are the quiz's own stylesheet scoped under .snz-quiz
    (components/sleep-quiz/sleep-fit-quiz.css). The quiz logic is public/sleep-fit-quiz.js, loaded after hydration
    so React never re-renders the subtree the quiz mutates; it reads the language from data-lang and sends the
-   lead to the McAllen GoHighLevel inbound webhook (CONFIG inside the script). */
+   lead to the Castle Rock GoHighLevel inbound webhook (CONFIG inside the script, [CR_QUIZ_WEBHOOK]: while it is
+   empty the completed quiz is logged, not posted). */
 
-const SITE_URL = 'https://mcallen.snoozemattresscompany.com';
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
 const OG_IMAGE = '/assets/filesafe/BljrSmLCnm4gF9LpsTRZ/media/6a90ca4e747464c6b3a3be10.png.webp';
-export const QUIZ_SCRIPT = '/sleep-fit-quiz.js?v=3';
+export const QUIZ_SCRIPT = '/sleep-fit-quiz.js?v=4'; // v=4: the Castle Rock store CONFIG (November 2026), origin-relative links
 
+const L = LOCATION;
 const META: Record<Locale, { title: string; description: string; ogLocale: string; noscript: string }> = {
   en: {
-    title: 'Sleep Fit Quiz | Snooze Mattress in McAllen',
+    title: `Sleep Fit Quiz for ${L.city} | Snooze Mattress`,
     description: 'Answer 5 quick questions about how you sleep and find the comfort level, support level and mattress features your body needs. Free, in 60 seconds.',
     ogLocale: 'en_US',
-    noscript: 'The Sleep Fit Quiz needs JavaScript. Call (956) 586-5646 or visit Snooze Mattress + Wellness at 7913 N 10th St, Suite 130, McAllen, TX 78504 and we will find your fit in person.',
+    noscript: `The Sleep Fit Quiz needs JavaScript. Call ${L.phone} or visit ${L.name} at ${L.street}, ${L.city}, ${L.region} ${L.postalCode} and we will find your fit in person.`,
   },
   es: {
-    title: 'Sleep Fit Quiz | Snooze Mattress en McAllen',
+    title: `Sleep Fit Quiz para ${L.city} | Snooze Mattress`,
     description: 'Responde 5 preguntas rápidas sobre cómo duermes y descubre la comodidad, el soporte y las características de colchón que necesitas. Gratis, 60 segundos.',
     ogLocale: 'es_US',
-    noscript: 'El Sleep Fit Quiz necesita JavaScript. Llama al (956) 586-5646 o visita Snooze Mattress + Wellness en 7913 N 10th St, Suite 130, McAllen, TX 78504 y encontraremos tu ajuste en persona.',
+    noscript: `El Sleep Fit Quiz necesita JavaScript. Llama al ${L.phone} o visita ${L.name} en ${L.street}, ${L.city}, ${L.region} ${L.postalCode} y encontraremos tu ajuste en persona.`,
   },
 };
 
-/* Results links carry ?r=<answers>; the canonical is the bare page in both languages, so shared results are not
-   indexed as separate URLs. */
+/* Results links carry ?r=<answers>; the canonical is the bare page, so shared results are not indexed as separate URLs. */
 export function sleepQuizMetadata(locale: Locale): Metadata {
   const m = META[locale] || META.en;
   const path = locale === 'es' ? '/es/sleep-quiz' : '/sleep-quiz';

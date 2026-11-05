@@ -25,7 +25,8 @@ const STAR = '<svg class="snz-ico snz-ico--star" viewBox="0 0 24 24" width="1em"
 const START = '<!--snz-recent-reviews-->', END = '<!--/snz-recent-reviews-->';
 // the widget embed: its loader script (present once per page in the markup, in every copy of the payload string) followed
 // by the iframe; attributes are double-quoted in the page markup (the converter normalises them), single-quoted in the payload
-const WIDGET_START = /(?:<script type=["']text\/javascript["'] src=["']https:\/\/reputationhub\.site\/reputation\/assets\/review-widget\.js["']><\/script>\s*)?<iframe[^>]*\blc_reviews_widget\b/g;
+// … or the pending notice scripts/reviews-widget.mjs renders while the Castle Rock widget ids are empty
+const WIDGET_START = /(?:<script type=["']text\/javascript["'] src=["']https:\/\/reputationhub\.site\/reputation\/assets\/review-widget\.js["']><\/script>\s*)?<iframe[^>]*\blc_reviews_widget\b|<!--snz-reviews-widget-->/g;
 const placeBefore = (html, block) => strip(html).replace(WIDGET_START, (m) => block + m);
 const LABELS = { en: { title: 'Recent Reviews', stars: (n) => `${n} out of 5 stars`, from: 'Google review' }, es: { title: 'Reseñas Recientes', stars: (n) => `${n} de 5 estrellas`, from: 'Reseña en Google' } };
 
@@ -43,7 +44,7 @@ const files = []; (function walk(d) { for (const e of fs.readdirSync(d, { withFi
 let changed = 0, placed = 0;
 for (const f of files) {
   const rel = path.relative(ROOT, f).split(path.sep).join('/'); const locale = /^app\/es\//.test(rel) ? 'es' : 'en';
-  const src = fs.readFileSync(f, 'utf8'); if (!src.includes('lc_reviews_widget')) continue;
+  const src = fs.readFileSync(f, 'utf8'); if (!/lc_reviews_widget|snz-reviews-widget|snz-recent-reviews/.test(src)) continue;
   const bodyM = src.match(/export const BODY_HTML = ("[\s\S]*");\s*$/); if (!bodyM) continue;
   let body = JSON.parse(bodyM[1]);
   const block = render(locale);
@@ -56,7 +57,7 @@ for (const f of files) {
   // payload: the same custom-code HTML string(s), so hydration renders the block too
   if (pm) {
     const nodes = JSON.parse(pm[2]); let touched = false;
-    for (let i = 0; i < nodes.length; i++) if (typeof nodes[i] === 'string' && nodes[i].includes('lc_reviews_widget')) { const v = placeBefore(nodes[i], block); if (v !== nodes[i]) { nodes[i] = v; touched = true; } }
+    for (let i = 0; i < nodes.length; i++) if (typeof nodes[i] === 'string' && /lc_reviews_widget|snz-reviews-widget|snz-recent-reviews/.test(nodes[i])) { const v = placeBefore(nodes[i], block); if (v !== nodes[i]) { nodes[i] = v; touched = true; } }
     if (touched) newPayload = pm[1] + escapeJsonForScript(JSON.stringify(nodes)) + pm[3];
   }
   body = pm ? newMarkup.replace('\u0000PAYLOAD\u0000', () => newPayload) : newMarkup;

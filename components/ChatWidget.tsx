@@ -1,23 +1,25 @@
 'use client';
 /**
- * The client's GoHighLevel chat widget (LeadConnector), one per page in the page's language: the English widget on every
- * page under app/(en), the Spanish one on every page under app/es. The snippet is the client's, verbatim (loader.js with
+ * The client's GoHighLevel chat widget (LeadConnector), one per page. The snippet is the client's, verbatim (loader.js with
  * data-resources-url and data-widget-id); it is appended to the end of <body> once the page has loaded and the browser is
- * idle, so it adds nothing to the critical path, the main-thread work before load, or hydration (it lands after
- * #snz-app, where React never looks). Once per page view: the root layout stays mounted across client-side navigations
- * within a language, so the widget keeps running instead of loading again. Switching language is a full page load (the
- * EN | ES links in the top bar and the mobile menu are plain <a> elements, and each language has its own root layout),
- * so every page starts with only its own language's widget. The site does not style the widget: its position, look,
- * copy and hours are managed in the client's CRM.
+ * idle (lazy, after load), so it adds nothing to the critical path, the main-thread work before load, or hydration (it
+ * lands after #snz-app, where React never looks). Once per page view: the root layout stays mounted across client-side
+ * navigations, so the widget keeps running instead of loading again. The site does not style the widget: its position,
+ * look, copy and hours are managed in the client's CRM.
+ *
+ * Castle Rock, CO (November 2026): the widget id comes from lib/integrations.ts ([CR_CHAT_EN]) and is empty until the
+ * client supplies it — nothing is loaded; the previous location's widgets (English and Spanish) were removed.
  */
 import { useEffect } from 'react';
+import { INTEGRATIONS } from '@/lib/integrations';
+import type { Locale } from '@/lib/i18n';
 
-const WIDGET_IDS = { en: '6ada7129c5fa6117307c554f', es: '6ada73894325b023027e7371' } as const;
 const SCRIPT_ID = 'snz-chat-widget';
 
-export function ChatWidget({ locale }: { locale: 'en' | 'es' }) {
+export function ChatWidget({ locale: _locale = 'en' }: { locale?: Locale }) {
   useEffect(() => {
-    if (document.getElementById(SCRIPT_ID)) return;
+    const widgetId = INTEGRATIONS.chatWidgetId.trim();
+    if (!widgetId || document.getElementById(SCRIPT_ID)) return;
     let idle = 0;
     let timer = 0;
     const add = () => {
@@ -26,7 +28,7 @@ export function ChatWidget({ locale }: { locale: 'en' | 'es' }) {
       s.id = SCRIPT_ID;
       s.src = 'https://widgets.leadconnectorhq.com/loader.js';
       s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-      s.setAttribute('data-widget-id', WIDGET_IDS[locale]);
+      s.setAttribute('data-widget-id', widgetId);
       document.body.appendChild(s);
     };
     const schedule = () => {
@@ -40,6 +42,6 @@ export function ChatWidget({ locale }: { locale: 'en' | 'es' }) {
       if (idle) window.cancelIdleCallback(idle);
       if (timer) window.clearTimeout(timer);
     };
-  }, [locale]);
+  }, []);
   return null;
 }

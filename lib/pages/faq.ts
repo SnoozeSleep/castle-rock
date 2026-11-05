@@ -17,9 +17,9 @@ const EN: Group[] = [
   ] },
   { h2: 'The store', faqs: [
     { question: 'Where is Snooze Mattress + Wellness?', answer: `At ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, open ${L.hours.en[0]} and ${L.hours.en[1]}; call ${L.phone}.` },
-    { question: 'Why choose Snooze Mattress + Wellness in McAllen, TX?', answer: 'Because the fitting is measured, not guessed: a free Dream Mapping scan, Sleep Coaches who are not on commission, competitive sales, the 365-Night Sleep Guarantee on major brands, and a family business that will be honored to serve you.' },
-    { question: 'What kind of mattresses do you carry?', answer: 'The McAllen showroom carries Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic (available only at Snooze), BedTech, BedGear, Sleeptone and DreamFit.' },
-    { question: 'Do you sell adjustable bases, pillows, protectors and sheets?', answer: 'Yes. Adjustable bases, pillows, mattress protectors, premium sheets, massage chairs and the Zcliner sleep recliner are all in the McAllen showroom.' },
+    { question: 'Why choose Snooze Mattress + Wellness in Castle Rock, CO?', answer: 'Because the fitting is measured, not guessed: a free Dream Mapping scan, Sleep Coaches who are not on commission, competitive sales, the 365-Night Sleep Guarantee on major brands, and a family business that will be honored to serve you.' },
+    { question: 'What kind of mattresses do you carry?', answer: 'The Castle Rock showroom carries Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic (available only at Snooze), BedTech, BedGear, Sleeptone and DreamFit.' },
+    { question: 'Do you sell adjustable bases, pillows, protectors and sheets?', answer: 'Yes. Adjustable bases, pillows, mattress protectors, premium sheets, massage chairs and the Zcliner sleep recliner are all in the Castle Rock showroom.' },
     { question: 'Do you offer mattress delivery?', answer: 'Yes. We deliver and set up your new mattress, free on orders over $999, and haul away your old mattress if you no longer need it.' },
   ] },
   { h2: 'Financing', faqs: [
@@ -48,9 +48,9 @@ const ES: Group[] = [
   ] },
   { h2: 'La tienda', faqs: [
     { question: '¿Dónde está Snooze Mattress + Wellness?', answer: `En ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, abierto ${L.hours.es[0]} y ${L.hours.es[1]}; llama al ${L.phone}.` },
-    { question: '¿Por qué elegir Snooze Mattress + Wellness en McAllen, TX?', answer: 'Porque el ajuste se mide, no se adivina: un escaneo gratis de Dream Mapping, Sleep Coaches que no trabajan por comisión, ofertas competitivas, la Garantía de Sueño de 365 Noches en las marcas principales, y un negocio familiar al que le honraría atenderte.' },
-    { question: '¿Qué tipo de colchones manejan?', answer: 'La sala de exhibición de McAllen tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic (disponible únicamente en Snooze), BedTech, BedGear, Sleeptone y DreamFit.' },
-    { question: '¿Venden bases ajustables, almohadas, protectores y sábanas?', answer: 'Sí. Bases ajustables, almohadas, protectores de colchón, sábanas premium, sillas de masaje y el sillón reclinable Zcliner están en la sala de exhibición de McAllen.' },
+    { question: '¿Por qué elegir Snooze Mattress + Wellness en Castle Rock, CO?', answer: 'Porque el ajuste se mide, no se adivina: un escaneo gratis de Dream Mapping, Sleep Coaches que no trabajan por comisión, ofertas competitivas, la Garantía de Sueño de 365 Noches en las marcas principales, y un negocio familiar al que le honraría atenderte.' },
+    { question: '¿Qué tipo de colchones manejan?', answer: 'La sala de exhibición de Castle Rock tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic (disponible únicamente en Snooze), BedTech, BedGear, Sleeptone y DreamFit.' },
+    { question: '¿Venden bases ajustables, almohadas, protectores y sábanas?', answer: 'Sí. Bases ajustables, almohadas, protectores de colchón, sábanas premium, sillas de masaje y el sillón reclinable Zcliner están en la sala de exhibición de Castle Rock.' },
     { question: '¿Ofrecen entrega de colchones?', answer: 'Sí. Entregamos e instalamos tu colchón nuevo, gratis en compras mayores de $999, y nos llevamos tu colchón viejo si ya no lo necesitas.' },
   ] },
   { h2: 'Financiamiento', faqs: [
@@ -74,12 +74,12 @@ export const PAGE: ContentPage = {
   kind: 'faq',
   copy: {
     en: {
-      title: 'Mattress FAQ for McAllen Shoppers | Snooze Mattress',
-      description: 'Answers to what McAllen shoppers ask Snooze: Dream Mapping, the store and its brands, delivery, and financing with Synchrony, Wells Fargo and Snap.',
+      title: 'Mattress FAQ for Castle Rock Shoppers | Snooze Mattress',
+      description: 'Answers to what Castle Rock shoppers ask Snooze: Dream Mapping, the store and its brands, delivery, and financing with Synchrony, Wells Fargo and Snap.',
       crumb: 'FAQ',
       eyebrow: 'Questions and answers',
       h1: 'Frequently asked questions',
-      intro: ['Everything shoppers ask before and during a visit to Snooze Mattress + Wellness in McAllen, grouped by topic. Each answer starts with the short version; the pages linked from the footer have the detail.'],
+      intro: ['Everything shoppers ask before and during a visit to Snooze Mattress + Wellness in Castle Rock, grouped by topic. Each answer starts with the short version; the pages linked from the footer have the detail.'],
       sections: [],
       faqTitle: 'All questions',
       faqs: flat(EN),
@@ -87,12 +87,12 @@ export const PAGE: ContentPage = {
       cta: { title: 'Still have a question?', text: `Call ${L.phone} or come by ${L.street}, ${L.city}; a Sleep Coach will answer it in person, and a free Dream Mapping fitting takes about five minutes.`, button: 'Book a free fitting' },
     },
     es: {
-      title: 'Preguntas Frecuentes de McAllen | Snooze Mattress',
-      description: 'Respuestas a lo que preguntan los clientes de McAllen a Snooze: Dream Mapping, la tienda y sus marcas, la entrega y el financiamiento.',
+      title: 'Preguntas Frecuentes de Castle Rock | Snooze Mattress',
+      description: 'Respuestas a lo que preguntan los clientes de Castle Rock a Snooze: Dream Mapping, la tienda y sus marcas, la entrega y el financiamiento.',
       crumb: 'Preguntas frecuentes',
       eyebrow: 'Preguntas y respuestas',
       h1: 'Preguntas frecuentes',
-      intro: ['Todo lo que los clientes preguntan antes y durante una visita a Snooze Mattress + Wellness en McAllen, agrupado por tema. Cada respuesta empieza con la versión corta; las páginas enlazadas en el pie tienen el detalle.'],
+      intro: ['Todo lo que los clientes preguntan antes y durante una visita a Snooze Mattress + Wellness en Castle Rock, agrupado por tema. Cada respuesta empieza con la versión corta; las páginas enlazadas en el pie tienen el detalle.'],
       sections: [],
       faqTitle: 'Todas las preguntas',
       faqs: flat(ES),

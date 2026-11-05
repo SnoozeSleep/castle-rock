@@ -1,23 +1,23 @@
-/* Spanish version of /blog/memory-foam-vs-hybrid-mattress-mcallen (lib/blog-posts-2026-10.ts), hand-translated; own slug. */
+/* Spanish version of /blog/memory-foam-vs-hybrid-mattress-castle-rock (lib/blog-posts-2026-10.ts), hand-translated; own slug. */
 import type { BlogPost } from '@/lib/blog-posts';
 import { IMG } from '@/lib/blog-images';
 
 export const POST_ES: BlogPost = {
-  slug: 'colchon-memory-foam-vs-hibrido-mcallen',
-  altSlug: 'memory-foam-vs-hybrid-mattress-mcallen',
-  title: '¿Memory Foam o Híbrido? Cómo Elegir un Colchón para las Noches Calurosas de McAllen',
-  metaTitle: 'Memory Foam o Híbrido para Noches Calurosas | McAllen',
-  metaDescription: '¿Memory foam o híbrido? Cómo responde cada uno al calor de McAllen, al dolor de espalda, a las parejas y al tiempo, y cómo Dream Mapping te ayuda a elegir.',
-  keywords: ['memory foam vs híbrido', 'colchón de memory foam McAllen', 'colchón de espuma McAllen', 'el memory foam da calor', 'colchón híbrido para quienes duermen con calor', 'cuánto dura un colchón de memory foam', 'memory foam o híbrido para parejas'],
+  slug: 'colchon-memory-foam-vs-hibrido-castle-rock',
+  altSlug: 'memory-foam-vs-hybrid-mattress-castle-rock',
+  title: '¿Memory Foam o Híbrido? Cómo Elegir un Colchón para las Noches Calurosas de Castle Rock',
+  metaTitle: 'Memory Foam o Híbrido para Noches Calurosas | Castle Rock',
+  metaDescription: '¿Memory foam o híbrido? Cómo responde cada uno al calor del verano, al dolor de espalda, a las parejas y al tiempo, y cómo Dream Mapping te ayuda a elegir.',
+  keywords: ['memory foam vs híbrido', 'colchón de memory foam Castle Rock', 'colchón de espuma Castle Rock', 'el memory foam da calor', 'colchón híbrido para quienes duermen con calor', 'cuánto dura un colchón de memory foam', 'memory foam o híbrido para parejas'],
   datePublished: '2026-10-27',
   dateDisplay: '27 de octubre de 2026',
   readTime: '6 min de lectura',
   featured: { ...IMG.station, alt: 'Sleep Coach revisando un mapa de presión de Dream Mapping en pantalla mientras un cliente está acostado en un colchón' },
-  excerpt: 'Es la primera semana de noviembre. El calendario dice otoño, pero el termostato de tu recámara en McAllen sigue marcando 78 grados, el ventilador de techo está al máximo y ya volteaste la almohada al lado fresco dos veces antes de la medianoche.',
+  excerpt: 'Es la primera semana de noviembre. El calendario dice otoño, pero el termostato de tu recámara en Castle Rock sigue marcando 78 grados, el ventilador de techo está al máximo y ya volteaste la almohada al lado fresco dos veces antes de la medianoche.',
   sections: [
     {
       paragraphs: [
-        'Es la primera semana de noviembre. El calendario dice otoño, pero el termostato de tu recámara en McAllen sigue marcando 78 grados, el ventilador de techo está al máximo y ya volteaste la almohada al lado fresco dos veces antes de la medianoche. Si te suena familiar, la cama en la que estás acostado puede ser parte del problema. Y la pregunta que más escuchamos en esta época del año es muy sencilla: ¿memory foam o híbrido?',
+        'Es la primera semana de noviembre. El calendario dice otoño, pero el termostato de tu recámara en Castle Rock sigue marcando 78 grados, el ventilador de techo está al máximo y ya volteaste la almohada al lado fresco dos veces antes de la medianoche. Si te suena familiar, la cama en la que estás acostado puede ser parte del problema. Y la pregunta que más escuchamos en esta época del año es muy sencilla: ¿memory foam o híbrido?',
         'Los clientes llegan a nuestra sala de exhibición en North 10th Street con opiniones firmes sobre los dos. A una persona le encantó el abrazo de una cama de memory foam que probó en una tienda hace años, pero luego recuerda lo caliente que dormía en agosto. Otra quiere un híbrido porque "los resortes duermen más frescos", pero comparte la cama con una pareja que se despierta cada vez que se voltea. Las dos intuiciones tienen algo de razón. Así se comparan realmente los dos cuando vives en un lugar donde las máximas de noviembre todavía promedian unos 80 grados.',
       ],
     },
@@ -82,14 +82,14 @@ export const POST_ES: BlogPost = {
     { question: '¿El memory foam es buena opción para quienes duermen con calor en el sur de Texas?', answer: 'Puede serlo, si eliges una espuma hecha para refrescar y la combinas con sábanas transpirables. Si te despiertas sudando con frecuencia, empieza por probar híbridos y modelos de espuma fresca uno junto al otro. Tus resultados de Dream Mapping y qué tanto calor sientes al dormir deben guiar la decisión.' },
     { question: '¿Cuál dura más, el memory foam o un híbrido?', answer: 'Están muy parejos. La Sleep Foundation estima entre 6 y 7 años para la espuma y entre 6.5 y 7.5 años para los híbridos, y los materiales de calidad duran más. La densidad de la espuma y la calidad de los resortes importan más que la categoría, y un protector ayuda a que cualquiera de los dos dure más.' },
     { question: '¿Memory foam o híbrido para parejas?', answer: 'El memory foam normalmente absorbe mejor el movimiento, así que es menos probable que una pareja inquieta te despierte. Los híbridos con resortes ensacados individualmente también aíslan bien el movimiento, y además agregan bordes más firmes y una sensación más fresca. Las parejas con necesidades distintas pueden mapearse juntas para comparar.' },
-    { question: '¿Puedo probar los dos tipos en McAllen antes de comprar?', answer: 'Sí. Nuestra sala de exhibición en McAllen tiene colchones de memory foam e híbridos en piso, y un Sleep Coach puede hacer Dream Mapping en cada uno para que compares tus puntos de presión y tu Sleep Score lado a lado antes de decidir.' },
+    { question: '¿Puedo probar los dos tipos en Castle Rock antes de comprar?', answer: 'Sí. Nuestra sala de exhibición en Castle Rock tiene colchones de memory foam e híbridos en piso, y un Sleep Coach puede hacer Dream Mapping en cada uno para que compares tus puntos de presión y tu Sleep Score lado a lado antes de decidir.' },
   ],
   visit: {
-    heading: 'Visita Snooze Mattress en McAllen',
+    heading: 'Visita Snooze Mattress en Castle Rock',
     lines: [
       'Snooze Mattress + Wellness',
-      '7913 North 10th Street, Suite 130, McAllen, TX 78504',
-      '[(956) 586-5646](tel:+19565865646)',
+      '6360 Promenade Pkwy, Castle Rock, CO 80108',
+      '[(303) 736-8465](tel:+13037368465)',
       'Lunes a sábado de 10 a.m. a 7 p.m., domingo de 12 a 6 p.m.',
       'Deja de adivinar entre espuma y resortes. [Reserva tu visita de Dream Mapping](/es/booking) y encuentra el colchón que le queda a tu cuerpo y a tu forma de dormir.',
     ],
