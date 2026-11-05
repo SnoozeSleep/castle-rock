@@ -133,6 +133,37 @@ the built pages and the site source; only the tooling that removes or audits the
 `scripts/brand-brooklyn.mjs`, `scripts/logo-marquee-patch.mjs`). **The client said brands are a
 PER-LOCATION decision: this list is McAllen's and needs confirming for Castle Rock** (NEEDS CLIENT INPUT).
 
+### D. Tracking / embeds — all gated on `lib/integrations.ts`
+
+Every third-party id is an empty `[CR_*]` placeholder; an empty value disables the integration (nothing rendered,
+nothing loaded) and nothing of McAllen is left. The section shells stay and offer the store's phone and e-mail instead.
+
+| Integration | Placeholder | Reader | While empty |
+|---|---|---|---|
+| Google Tag Manager | `gtmIds` `[CR_GTM]` — GTM-TVPN94M only if the agency confirms it is shared | `components/Tracking.tsx` (head snippet + body noscript per container) | no tag, no preconnect |
+| Google Analytics 4 | `ga4Id` `[CR_GA4]` | `components/Tracking.tsx` (gtag.js + config, once) | no tag |
+| Simpli.fi | `simplifiTagId` `[CR_SIMPLIFI]` | `components/Tracking.tsx` | no tag |
+| Chat widget | `chatWidgetId` `[CR_CHAT_EN]` | `components/ChatWidget.tsx` (loader appended after load, when idle; no site styling) | not loaded |
+| Booking calendar | `bookingCalendarUrl` `[CR_CALENDAR_ID]` | `components/BookingPage.tsx` (`/booking`) | a "being connected" card with the phone and e-mail replaces the iframe; no widget script |
+| Opt-in form | `formId` `[CR_FORM_ID]` | `scripts/integrations.mjs` (`npm run integrations`) → the form embeds on 9 routes (contact page + the product pages' popup) | the iframes point at the site's own `/ghl-stub/form/CR_FORM_ID` → `public/ghl-stub.html`: "This form is being connected. Call (303) 736-8465 or email keithc@snoozemattresscompany.com"; nothing posts anywhere |
+| Reviews widget | `ghlLocationId` `[CR_GHL_LOCATION_ID]` + `reviewsWidgetId` `[CR_REVIEWS_WIDGET_ID]` | `scripts/reviews-widget.mjs` (`npm run reviews:widget`) → "Some of Our Happy Customers" on 12 routes | one line in the section: "Customer reviews for the Castle Rock store are being connected. Call (303) 736-8465 or email keithc@snoozemattresscompany.com"; "Read more reviews on Google" hidden until `[CR_PLACE_ID]` |
+| Review cards | `lib/reviews.json` (verbatim client reviews) | `scripts/recent-reviews.mjs` (`npm run reviews`) | empty: the McAllen cards are removed, nothing is rendered |
+| Quiz webhook | `quizWebhookUrl` `[CR_QUIZ_WEBHOOK]`, mirrored in `public/sleep-fit-quiz.js` `CONFIG.store.webhookUrl` (change both; bump `QUIZ_SCRIPT` `?v=`) | the quiz's `sendLead()` | the completed quiz is logged in the console, not posted |
+| GHL location id | `ghlLocationId` `[CR_GHL_LOCATION_ID]` | the reviews widget URL, the webhook host | the image library keeps its `/assets/filesafe/ARD47WoZpqaZSQ9MSxLD/` paths (shared assets copied from the clone) |
+
+Kept as on McAllen: the dataLayer events (`public/snz-events.js`: `phone_click`, `directions_click`,
+`booking_confirmation`, `optin_submit`; the quiz's `quiz_start` … `quiz_completed`) fire regardless, so a container
+picks them up the moment it is configured; the chat component; `form_embed.js` exactly once per page
+(`components/GhlEmbedScripts.tsx` loads it only where a live form or calendar iframe exists, `review-widget.js` only
+where the reviews iframe exists; the generated pages and the booking page carry no loader of their own); the LeadConnector hidden-frame URL fix
+(`scripts/reviews-widget.mjs`: once the ids are set, every widget iframe starts on the site's placeholder `src` with the
+live URL in `data-src`, and only the copy that is laid out gets the live `src`, so the builder's hidden duplicate never
+requests the widget; `scripts/recent-reviews.mjs` places review cards in front of that block); the `/booking`
+sizing fix (no fixed desktop height, the widget's resizer drives it, mobile-only min-height, the height guard) and the
+no-JS fallback (the calendar URL + (303) 736-8465) once the calendar is configured. `overrides/overrides.json` →
+`widgets` carries the same placeholders for a re-convert. No Google Search Console verification was supplied
+(`googleSiteVerification`).
+
 ---
 
 # History: the McAllen conversion this site was cloned from

@@ -52,8 +52,16 @@ const LABELS = {
 const more = (t) => GBP_URL
   ? `<p class="snz-reviews-more"><a class="snz-reviews-more__link" href="${esc(GBP_URL)}" target="_blank" rel="noopener noreferrer">${t.more}</a></p>`
   : `<p class="snz-reviews-more" hidden aria-hidden="true"><a class="snz-reviews-more__link" href="#" tabindex="-1">${t.more}</a></p>`;
+/* The builder renders every section twice (a desktop-only and a mobile-only copy), so a page carries two widget
+   iframes and the copy that is hidden at the visitor's viewport would load the widget too — the LeadConnector URL-error
+   fix (November 5, 2026): every iframe starts with the site's placeholder src and carries the live URL in data-src; the
+   inline script right after it gives the live src ONLY to the copy that is laid out (at parse time, so before
+   review-widget.js, and again when the viewport crosses the breakpoint). The hidden copy keeps the placeholder. */
+const placeholderSrc = () => `/ghl-stub/widget/reviews/${LOC_ID}?widgetId=${WIDGET_ID}`;
+const liveSrc = () => `https://reputationhub.site/reputation/widgets/review_widget/${LOC_ID}?widgetId=${WIDGET_ID}`;
+const SWAP = `<script>(function(){function live(){var f=document.querySelectorAll('iframe.lc_reviews_widget[data-src]');for(var i=0;i<f.length;i++){var x=f[i];if(x.getClientRects().length&&x.getAttribute('src')!==x.getAttribute('data-src'))x.setAttribute('src',x.getAttribute('data-src'));}}live();if(!window.__snzReviewsSwap){window.__snzReviewsSwap=1;window.addEventListener('resize',live);document.addEventListener('DOMContentLoaded',live);}})();</script>`;
 const blockFor = (t) => LOC_ID && WIDGET_ID
-  ? `${START}<iframe loading="lazy" class="lc_reviews_widget" title="${t.title}" src="https://reputationhub.site/reputation/widgets/review_widget/${LOC_ID}?widgetId=${WIDGET_ID}" frameborder="0" scrolling="no" style="min-width: 100%; width: 100%;"></iframe>${more(t)}${END}`
+  ? `${START}<iframe loading="lazy" class="lc_reviews_widget" title="${t.title}" src="${placeholderSrc()}" data-src="${liveSrc()}" frameborder="0" scrolling="no" style="min-width: 100%; width: 100%;"></iframe>${SWAP}${more(t)}${END}`
   : `${START}<p class="snz-reviews-more" data-snz-reviews="pending">${t.pending}</p>${END}`;
 
 const strip = (html) => html.replace(new RegExp(`${START}[\\s\\S]*?${END}`, 'g'), '');
@@ -83,4 +91,4 @@ for (const f of files) {
   const n = newMarkup.split(START).length - 1; placed += n;
   if (next !== body) { changed++; if (!CHECK) fs.writeFileSync(f, src.replace(bodyM[1], () => JSON.stringify(next))); console.log(`${rel}: ${n} widget block(s) in the markup`); }
 }
-console.log(`reviews-widget: ${LOC_ID && WIDGET_ID ? `widget ${LOC_ID}?widgetId=${WIDGET_ID}` : 'ids missing — pending notice with the phone and e-mail'}; ${changed} page(s) ${CHECK ? 'would change' : 'changed'}, ${placed} blocks in markup; "Read more reviews on Google" ${GBP_URL ? 'live' : 'hidden until [CR_PLACE_ID]'}`);
+console.log(`reviews-widget: ${LOC_ID && WIDGET_ID ? `widget ${LOC_ID}?widgetId=${WIDGET_ID} (live src on the visible copy, the placeholder on the hidden one)` : 'ids missing — pending notice with the phone and e-mail'}; ${changed} page(s) ${CHECK ? 'would change' : 'changed'}, ${placed} blocks in markup; "Read more reviews on Google" ${GBP_URL ? 'live' : 'hidden until [CR_PLACE_ID]'}`);
