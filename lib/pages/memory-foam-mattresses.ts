@@ -46,5 +46,44 @@ export const PAGE: ContentPage = {
       ],
       cta: { title: 'Try memory foam in Castle Rock', text: 'Lie on the Dream Mapping bed for five minutes and find out whether foam, hybrid or coils fit the way you sleep.', button: 'Book a free fitting' },
     },
+    es: {
+      title: 'Colchones de Memory Foam en Castle Rock, CO | Snooze Mattress',
+      description: 'Colchones de memory foam en Castle Rock, CO: Tempur-Pedic y Snooze-O-Pedic en Snooze Mattress + Wellness, ajustados gratis a tus puntos de presión.',
+      crumb: 'Colchones de Memory Foam',
+      eyebrow: 'Colchones por tipo',
+      h1: 'Colchones de memory foam en Castle Rock, CO',
+      intro: [
+        'El memory foam se amolda al cuerpo que se recuesta encima, y por eso es lo primero que muchos imaginan cuando piensan en alivio de presión. En Snooze Mattress + Wellness en Castle Rock puedes probar memory foam de Tempur-Pedic y la línea Snooze-O-Pedic, y una sesión gratis de Dream Mapping te dice si la espuma es la respuesta correcta para tus puntos de presión o si te conviene más un híbrido o un colchón de resortes.',
+      ],
+      sections: [
+        { h2: 'Cómo se siente el memory foam', paragraphs: [
+          'El memory foam se ablanda y toma la forma del cuerpo con el calor y el peso, así que hombros y caderas se hunden mientras el resto del cuerpo se mantiene con soporte. La sensación es una respuesta lenta, envolvente, en lugar del rebote de los resortes. Como la espuma absorbe el movimiento, cuando la pareja se voltea se siente menos del otro lado de la cama.',
+          'Las ventajas y desventajas son personales. A algunos les encanta la sensación de abrazo; otros prefieren dormir sobre el colchón y no dentro de él, y algunas personas sienten calor en la espuma densa, que es donde entran las capas frescas y los diseños híbridos.',
+        ] },
+        { h2: 'Las marcas de memory foam en Snooze', h3s: [
+          { h3: 'Tempur-Pedic', paragraphs: ['La línea Tempur-Pedic en el piso de Castle Rock incluye modelos con la tecnología de enfriamiento para toda la noche de la marca, para quienes quieren el contorno de la espuma sin el calor.'] },
+          { h3: 'Snooze-O-Pedic', paragraphs: ['Snooze-O-Pedic es la línea propia de la tienda: una funda de tejido premium sobre espuma acolchada HD y una capa de espuma de confort, sobre un núcleo de resortes ensacados con borde reforzado. Combina la comodidad de la espuma con el soporte de los resortes a un precio accesible.'] },
+        ] },
+        { h2: '¿El memory foam es para ti? Que lo decida el mapa', paragraphs: [
+          'Una sesión de Dream Mapping tarda unos cinco minutos en la cama con sensores. El mapa muestra dónde tu cuerpo carga más presión; la presión alta en hombros y caderas es el patrón que el memory foam alivia mejor, mientras que un hundimiento en la zona lumbar apunta a un colchón con soporte más firme. El Sleep Coach lee el mapa contigo y te lleva a los modelos de espuma, híbridos o de resortes que van con él. El ajuste es gratis y nadie en Snooze trabaja por comisión.',
+          '¿Sigues dudando entre espuma y resortes? Nuestra guía de [memory foam vs híbrido](/es/blog/colchon-memory-foam-vs-hibrido-castle-rock) compara cómo responde cada uno al calor del verano, al dolor de espalda, a las parejas y al paso del tiempo.',
+        ] },
+        { h2: 'Entrega, financiamiento y garantía', listStyle: 'facts', bullets: [
+          'Entrega e instalación gratis en compras mayores de $999, y nos llevamos tu colchón viejo si ya no lo necesitas.',
+          'Financiamiento con Synchrony y Wells Fargo, y una opción de renta con opción a compra con Snap Finance.',
+          'Snooze Mattress + Wellness ofrece la Garantía de Sueño de 365 Noches en las marcas principales; pide los detalles a un Sleep Coach.',
+          `Visítanos en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, ${L.hours.es[0]}, ${L.hours.es[1]}.`,
+        ] },
+      ],
+      faqTitle: 'Preguntas sobre memory foam',
+      faqs: [
+        { question: '¿Qué marcas de memory foam tiene Snooze?', answer: 'Tempur-Pedic y la línea propia Snooze-O-Pedic están en la sala de exhibición de Castle Rock.' },
+        { question: '¿El memory foam es bueno para dormir de lado?', answer: 'Muchas veces sí: deja que hombros y caderas se hundan, lo que alivia los puntos de presión que más sienten quienes duermen de lado; el ajuste de Dream Mapping lo confirma para tu cuerpo.' },
+        { question: '¿El memory foam da calor?', answer: 'La espuma densa puede guardar calor, por eso Tempur-Pedic ofrece tecnología de enfriamiento y por eso algunas personas eligen un híbrido; prueba ambos en la sala de exhibición.' },
+        { question: '¿Puedo poner un colchón de memory foam en una base ajustable?', answer: 'Sí. Los colchones de espuma se doblan bien, y en la tienda hay bases ajustables con posición de cabeza y pies personalizable.' },
+        { question: '¿Cómo sé si me conviene espuma o resortes?', answer: 'Una sesión gratis de Dream Mapping de cinco minutos muestra dónde tu cuerpo necesita alivio y dónde necesita soporte, y el Sleep Coach te lleva a los modelos que coinciden.' },
+      ],
+      cta: { title: 'Prueba el memory foam en Castle Rock', text: 'Recuéstate cinco minutos en la cama de Dream Mapping y descubre si la espuma, un híbrido o los resortes van con tu forma de dormir.', button: 'Reservar ajuste gratis' },
+    },
   },
 };

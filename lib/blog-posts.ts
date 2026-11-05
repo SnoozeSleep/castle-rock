@@ -52,6 +52,9 @@ export type BlogClosing = { heading: string; lead?: string; cta: string; tagline
 
 export type BlogPost = {
   slug: string;
+  /** the slug of the same article in the other language (English post -> its Spanish slug and back): the hreflang pair,
+      the sitemap alternates and the EN | ES switcher (lib/blog-nav.ts BLOG_SLUG_ES carries the same pairing) */
+  altSlug?: string;
   title: string; // <h1> + BlogPosting.headline
   metaTitle: string; // ≤ 60 chars, ends "| Snooze Mattress"
   metaDescription: string; // ≤ 155 chars
@@ -519,8 +522,14 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-export type BlogLocale = 'en';
-export const postsFor = (_locale: BlogLocale = 'en') => POSTS;
+/* the Spanish articles (/es/blog/<slug>): none yet — /es/blog shows its empty state until they are written */
+export const POSTS_ES: BlogPost[] = [];
+
+export type BlogLocale = 'en' | 'es';
+export const postsFor = (locale: BlogLocale = 'en') => (locale === 'es' ? POSTS_ES : POSTS);
+/** the path (English-style, un-prefixed) of the same article in the other language; that language's blog index when the
+    article has no version in it */
+export const altBlogPath = (post: BlogPost) => (post.altSlug ? `/blog/${post.altSlug}` : '/blog');
 export const getPost = (slug: string, locale: BlogLocale = 'en') => postsFor(locale).find((p) => p.slug === slug);
 
 /** newest first; posts of the same day keep the document's order (Array.prototype.sort is stable) */

@@ -21,8 +21,10 @@ export const INTEGRATIONS = {
   ga4Id: 'G-RRW8EFJHLW',
   /** Simpli.fi tag id (https://tag.simpli.fi/sifitag/<id>, async) */
   simplifiTagId: 'f02b62cf-a006-4430-9df7-96dfd0660612',
-  /** [CR_CHAT_EN] LeadConnector chat widget id (data-widget-id); the site is English only */
-  chatWidgetId: '',
+  /** [CR_CHAT_EN] / [CR_CHAT_ES] LeadConnector chat widget ids (data-widget-id), one per language: the English widget on
+      the English pages, the Spanish one under /es. Neither is supplied yet. A language without an id gets NO widget —
+      the English widget never loads on /es (components/ChatWidget.tsx). */
+  chatWidgetId: { en: '', es: '' } as Record<'en' | 'es', string>,
   /** the Castle Rock GoHighLevel sub-account (location) id (supplied November 5, 2026): the reviews widget URL, the CDN
       media path and the webhook host. The image library paths under /assets/filesafe/<previous location id>/ are files
       copied from the clone (shared brand assets) and keep that path. */

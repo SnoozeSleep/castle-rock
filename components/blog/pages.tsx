@@ -1,4 +1,4 @@
-/* Blog route bodies (/blog and /blog/[slug]; English only). */
+/* Blog route bodies shared by the English (/blog) and Spanish (/es/blog) routes. */
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BlogArticle, BlogCta, BlogShell, Divider, PostCard } from '@/components/blog/BlogLayout';
@@ -7,21 +7,32 @@ import { PageSchema } from '@/components/PageSchema';
 import { ArrowRightIcon } from '@/components/icons';
 import { BLOG_AUTHOR } from '@/lib/blog-author';
 import styles from '@/components/blog/blog.module.css';
-import { byNewest, getPost, postsFor, relatedPosts, wordCountOf, type BlogPost } from '@/lib/blog-posts';
+import { altBlogPath, byNewest, getPost, postsFor, relatedPosts, wordCountOf, type BlogPost } from '@/lib/blog-posts';
 import { localizeHref, ui, type Locale } from '@/lib/i18n';
 import { ORG_ID } from '@/lib/schema';
 
 import { SITE_URL } from '@/lib/location';
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
 const OG_IMAGE = '/assets/filesafe/BljrSmLCnm4gF9LpsTRZ/media/6a90ca4e747464c6b3a3be10.png.webp';
-const OG_LOCALE: Record<Locale, string> = { en: 'en_US' };
-const LANG: Record<Locale, string> = { en: 'en-US' };
+const OG_LOCALE: Record<Locale, string> = { en: 'en_US', es: 'es_US' };
+const LANG: Record<Locale, string> = { en: 'en-US', es: 'es-US' };
 /* an image path on this origin or an absolute URL (posts 2–5 use the client's media library) */
 const abs = (src: string) => (/^https?:\/\//.test(src) ? src : `${SITE_URL}${src}`);
 
-const alternates = (path: string, locale: Locale) => ({ canonical: localizeHref(path, locale) });
-/* a post's alternates: its own path as canonical */
-const postAlternates = (post: BlogPost, locale: Locale) => ({ canonical: localizeHref(`/blog/${post.slug}`, locale) });
+const alternates = (path: string, locale: Locale) => ({
+  canonical: localizeHref(path, locale),
+  languages: { 'en-US': localizeHref(path, 'en'), 'es-US': localizeHref(path, 'es'), 'x-default': localizeHref(path, 'en') },
+});
+/* a post's alternates: its own path as canonical; when the article exists in the other language (BlogPost.altSlug — the
+   slug differs per language) the English and Spanish paths as en-US / es-US with the English one as x-default; an
+   article without a twin lists itself only, so no hreflang points at a page that is not the same article */
+const postAlternates = (post: BlogPost, locale: Locale) => {
+  const own = localizeHref(`/blog/${post.slug}`, locale);
+  if (!post.altSlug) return { canonical: own, languages: { [LANG[locale]]: own } };
+  const other = altBlogPath(post);
+  const en = locale === 'en' ? own : other; const es = locale === 'es' ? own : localizeHref(other, 'es');
+  return { canonical: own, languages: { 'en-US': en, 'es-US': es, 'x-default': en } };
+};
 
 export function blogIndexMetadata(locale: Locale): Metadata {
   const t = ui(locale).blog;
@@ -36,11 +47,11 @@ export function blogIndexMetadata(locale: Locale): Metadata {
   };
 }
 
-/* the guide pages offered while the blog is empty */
-const GUIDES: Array<[href: string, label: string]> = [
-  ['/how-to-choose-a-mattress', 'How to choose a mattress'],
-  ['/dream-mapping', 'Dream Mapping'],
-  ['/faq', 'FAQ'],
+/* the guide pages offered while a language's blog is empty */
+const GUIDES: Array<[href: string, label: Record<Locale, string>]> = [
+  ['/how-to-choose-a-mattress', { en: 'How to choose a mattress', es: 'Cómo elegir un colchón' }],
+  ['/dream-mapping', { en: 'Dream Mapping', es: 'Dream Mapping' }],
+  ['/faq', { en: 'FAQ', es: 'Preguntas frecuentes' }],
 ];
 
 export function BlogIndexPage({ locale }: { locale: Locale }) {
@@ -73,7 +84,7 @@ export function BlogIndexPage({ locale }: { locale: Locale }) {
               <p className={styles.visitLine}>{t.emptyText}</p>
               <p className={styles.visitLine}>
                 {GUIDES.map(([href, label], i) => (
-                  <span key={href}>{i > 0 && ' · '}<a href={localizeHref(href, locale)}>{label} <ArrowRightIcon /></a></span>
+                  <span key={href}>{i > 0 && ' · '}<a href={localizeHref(href, locale)}>{label[locale]} <ArrowRightIcon /></a></span>
                 ))}
               </p>
             </div>

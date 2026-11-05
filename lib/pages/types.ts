@@ -1,5 +1,5 @@
 /* Hand-written content pages (SEO audit build pass, October 2026 — section E): one data module per page under
-   lib/pages/, rendered by components/ContentPage.tsx for /<slug> (English only since November 2026). Every page: one H1, a visible
+   lib/pages/, rendered by components/ContentPage.tsx for /<slug> and /es/<slug>. Every page: one H1, a visible
    breadcrumb, 500–800 words of copy that only restates the store's real facts (lib/location.ts, Dream Mapping as
    described on the site, the brands carried, delivery on orders over $999, the financing partners), an FAQ block
    (also emitted as FAQPage JSON-LD), a BreadcrumbList, and a call to action to /booking. */

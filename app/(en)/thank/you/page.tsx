@@ -9,7 +9,12 @@ export const metadata: Metadata = {
   "title": "Thank You",
   "description": "You’re on your way to better sleep—our Dream Mapping Coach will connect with you soon.",
   "alternates": {
-    "canonical": "/thank/you"
+    "canonical": "/thank/you",
+    "languages": {
+      "en-US": "/thank/you",
+      "es-US": "/es/thank/you",
+      "x-default": "/thank/you"
+    }
   },
   "openGraph": {
     "title": "Thank You",

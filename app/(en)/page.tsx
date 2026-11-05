@@ -16,7 +16,12 @@ export const metadata: Metadata = {
   ],
   "robots": "index, follow",
   "alternates": {
-    "canonical": "/"
+    "canonical": "/",
+    "languages": {
+      "en-US": "/",
+      "es-US": "/es",
+      "x-default": "/"
+    }
   },
   "openGraph": {
     "title": "Mattress Store in Castle Rock, CO | Snooze Mattress",

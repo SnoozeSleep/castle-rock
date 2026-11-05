@@ -44,6 +44,29 @@ const COPY = {
     pending: (city: string) => `Online booking for the ${city} store is being connected. Call us or send an email and we will book your free Dream Mapping fitting for you.`,
     email: (email: string) => `Email ${email}`,
   },
+  es: {
+    title: '¡Da el Primer Paso Hacia un',
+    highlight: 'Sueño Profundo y Reparador!',
+    sub: 'Agenda tu cita personalizada de Dream Mapping y ',
+    subStrong: 'descubre tu colchón perfecto.',
+    almost: 'Ya casi…',
+    visitEyebrow: 'Tu visita',
+    visitTitle: 'Qué pasa en tu visita de Dream Mapping',
+    visitSteps: [
+      'Te recuestas en la cama con sensores de Dream Mapping en la posición en la que normalmente duermes, y los sensores mapean dónde carga presión tu cuerpo.',
+      'El mapa tarda unos cinco minutos.',
+      'Un Sleep Coach lee el mapa contigo y te lleva a los colchones que coinciden con él, en lugar de que pruebes todas las camas de la tienda.',
+      'Es gratis y no hay obligación de comprar.',
+      'Las parejas son bienvenidas: se mapea a cada uno por separado, para que el colchón funcione para los dos.',
+    ],
+    pickTime: 'Elige un horario arriba',
+    questions: (phone: string) => `¿Preguntas? Llama al ${phone}`,
+    noJs: 'El calendario de citas necesita JavaScript. Abre el calendario directamente o llámanos y agendamos tu Dream Mapping gratis por teléfono.',
+    noJsOpen: 'Abrir el calendario de citas',
+    noJsCall: (phone: string) => `Llama al ${phone} para agendar`,
+    pending: (city: string) => `Las citas en línea de la tienda de ${city} están por conectarse. Llámanos o escríbenos y agendamos tu Dream Mapping gratis por ti.`,
+    email: (email: string) => `Escribe a ${email}`,
+  },
 };
 /* one icon per step: the sensor bed, the five minutes, the Sleep Coach, free with no obligation, couples */
 const VISIT_ICONS: IconName[] = ['sensor-bed', 'clock', 'user', 'badge-check', 'people'];
@@ -118,7 +141,7 @@ export function BookingPage({ locale = 'en' }: { locale?: Locale }) {
           <iframe
             className={styles.calendar}
             src={CALENDAR_URL}
-            title="Dream Mapping booking calendar"
+            title={locale === 'es' ? 'Calendario de citas de Dream Mapping' : 'Dream Mapping booking calendar'}
             allow="payment"
             style={{ width: '100%', border: 'none', overflow: 'hidden' }}
             scrolling="no"

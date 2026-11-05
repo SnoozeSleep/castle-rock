@@ -48,5 +48,46 @@ export const PAGE: ContentPage = {
       ],
       cta: { title: 'Find the right twin or full in Castle Rock', text: 'Bring the sleeper in for a free five-minute Dream Mapping fitting and try the smaller sizes on the showroom floor.', button: 'Book a free fitting' },
     },
+    es: {
+      title: 'Colchones Full y Twin en Castle Rock, CO | Snooze Mattress',
+      description: 'Colchones twin, twin XL y full en Castle Rock, CO para niños, cuartos de visitas y recámaras pequeñas, de las marcas de Snooze, con Dream Mapping gratis.',
+      crumb: 'Colchones Full y Twin',
+      eyebrow: 'Colchones por tamaño',
+      h1: 'Colchones full y twin en Castle Rock, CO',
+      intro: [
+        'Twin, twin XL y full son los tamaños para cuartos de niños, cuartos de visitas, literas, dormitorios estudiantiles y recámaras pequeñas, y dos twin XL forman un split king. Snooze Mattress + Wellness en Castle Rock los tiene de las mismas marcas que los tamaños grandes, y aplica el mismo ajuste gratis de Dream Mapping: un niño o una visita también merece un colchón que vaya con su forma de dormir.',
+      ],
+      sections: [
+        { h2: 'Twin, twin XL o full: los tamaños', paragraphs: [
+          'Un twin mide 38 pulgadas de ancho por 75 de largo, el tamaño estándar para la cama de un niño, una litera o un sofá cama. Un twin XL agrega cinco pulgadas de largo (38 por 80): el tamaño de una cama de dormitorio estudiantil, la opción correcta para un adolescente alto y el tamaño que en pareja forma un split king sobre una base ajustable. Un full, también llamado matrimonial, mide 54 pulgadas de ancho por 75 de largo: una cama individual generosa y un tamaño práctico para un cuarto de visitas donde no cabe un queen.',
+          'Dos adultos pueden compartir un full, pero con solo 27 pulgadas para cada uno sirve más para uso ocasional que para todas las noches. A las parejas casi siempre les conviene un queen o un king.',
+          'Nuestra [guía de tamaños de colchón](/es/how-to-choose-a-mattress) compara todos los tamaños, de twin a California king, con el espacio que necesita cada uno.',
+        ] },
+        { h2: 'Quién compra cada tamaño', listStyle: 'cards', bullets: [
+          'Twin: niños que dejan la cuna, literas, sofás cama y camas nido.',
+          'Twin XL: adolescentes altos, dormitorios estudiantiles y cada mitad de un split king.',
+          'Full: un adolescente o un adulto que duerme solo, un cuarto de visitas, una recámara principal pequeña.',
+        ] },
+        { h2: 'Ajustados como cualquier otro tamaño', paragraphs: [
+          'Los tamaños chicos reciben el mismo ajuste que un king. Dream Mapping tarda unos cinco minutos en la cama con sensores, no cuesta nada y le muestra al Sleep Coach qué nivel de comodidad y de soporte necesita quien va a dormir ahí, algo que importa tanto para un niño en crecimiento como para un adulto. La sala de exhibición tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic, BedTech, BedGear, Sleeptone y DreamFit; pregunta qué modelos están en piso en twin, twin XL y full.',
+          'Un protector de colchón es una buena adición para camas de niños y de visitas: protege el colchón de derrames, manchas y alérgenos sin cambiar cómo se siente.',
+        ] },
+        { h2: 'Entrega, financiamiento y garantía', listStyle: 'facts', bullets: [
+          'Entrega e instalación gratis en compras mayores de $999, y nos llevamos el colchón viejo si ya no lo necesitas.',
+          'Financiamiento con Synchrony y Wells Fargo, y una opción de renta con opción a compra con Snap Finance.',
+          'Snooze Mattress + Wellness ofrece la Garantía de Sueño de 365 Noches en las marcas principales; pide los detalles a un Sleep Coach.',
+          `Visítanos en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, ${L.hours.es[0]}, ${L.hours.es[1]}.`,
+        ] },
+      ],
+      faqTitle: 'Preguntas sobre colchones full y twin',
+      faqs: [
+        { question: '¿Cuál es la diferencia entre un twin y un twin XL?', answer: 'El largo: un twin mide 38 por 75 pulgadas y un twin XL mide 38 por 80, el mismo largo que un queen o un king.' },
+        { question: '¿Cuánto mide un colchón full?', answer: 'Un full (matrimonial) mide 54 pulgadas de ancho por 75 de largo.' },
+        { question: '¿Un full alcanza para dos adultos?', answer: 'Sirve para uso ocasional, pero con 27 pulgadas por persona a la mayoría de las parejas les conviene más un queen o un king.' },
+        { question: '¿Un niño puede hacerse el ajuste de Dream Mapping?', answer: 'Sí. El ajuste tarda unos cinco minutos y muestra qué nivel de comodidad y soporte va con cualquier persona.' },
+        { question: '¿Qué tamaño forma un split king?', answer: 'Dos colchones twin XL lado a lado en una base king.' },
+      ],
+      cta: { title: 'Encuentra el twin o full correcto en Castle Rock', text: 'Trae a quien va a dormir ahí a una sesión gratis de Dream Mapping de cinco minutos y prueben los tamaños chicos en la sala de exhibición.', button: 'Reservar ajuste gratis' },
+    },
   },
 };

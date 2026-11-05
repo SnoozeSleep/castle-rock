@@ -8,7 +8,10 @@ const nextConfig: NextConfig = {
   // legacy slugs, the GHL stub rewrites and cache headers stay in vercel.json; the ghl-stub rewrites are mirrored below
   // so `next start` behaves like the deployment.
   // Assets are always relative (no assetPrefix).
-  experimental: { inlineCss: true }, // the page's own CSS is written into the HTML instead of render-blocking stylesheet requests
+  // inlineCss: the page's own CSS is written into the HTML instead of render-blocking stylesheet requests.
+  // globalNotFound: app/global-not-found.tsx is the 404 for unknown URLs — the site has two root layouts (English and
+  // Spanish, each with its own <html lang>), so a top-level not-found page has no layout to sit in.
+  experimental: { inlineCss: true, globalNotFound: true },
   // next/image's optimizer (/_next/image) serves the blog's hero and card images, the footer logo, and — from the
   // generated pages, by URL — the location photos and the desktop heroes (lib/location.ts STORE_PHOTO_URL /
   // TEAM_PHOTO_URL, overrides/overrides.json heroBackgrounds): resized and as WebP, never the 1–2 MB originals. Remote

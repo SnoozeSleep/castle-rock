@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   "title": "Massage Chairs in Castle Rock: Infinity | Snooze Mattress",
   "description": "Infinity massage chairs in Castle Rock at Snooze Mattress + Wellness: advanced massage technology to help you relax and recover. Try one in store.",
   "alternates": {
-    "canonical": "/massage-chairs"
+    "canonical": "/massage-chairs",
+    "languages": {
+      "en-US": "/massage-chairs",
+      "es-US": "/es/massage-chairs",
+      "x-default": "/massage-chairs"
+    }
   },
   "openGraph": {
     "title": "Massage Chairs in Castle Rock: Infinity | Snooze Mattress",

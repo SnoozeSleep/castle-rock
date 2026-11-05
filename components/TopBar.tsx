@@ -1,14 +1,15 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { LOCATION } from '@/lib/location';
-import { ui, type Locale } from '@/lib/i18n';
+import { alternateHref, ui, type Locale } from '@/lib/i18n';
 import styles from './TopBar.module.css';
 
 /* Slim top bar above the main navigation on every page (both root layouts render it; the converter writes it into
    the layout template): the store's address (-> its Google Maps listing), hours and phone (tel: link) from the shared
    location config (lib/location.ts — the same source as the footer, the location cards and the LocalBusiness schema;
-   this bar is the audit's item 6a); no language toggle (the Castle Rock site is English only). Brand navy
+   this bar is the audit's item 6a), and the EN | ES language toggle, moved here from the navigation row. Brand navy
    from the page's own colour variable, white text, orange icons from the site's SVG set, Poppins, no heading tags.
-   It scrolls away; the main header below stays sticky. Under 768px it collapses to one line. */
+   It scrolls away; the main header below stays sticky. Under 768px it collapses to one line: phone left, EN | ES right. */
 const PinIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z" />
@@ -27,7 +28,10 @@ const PhoneIcon = () => (
   </svg>
 );
 
+const normalize = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
+
 export function TopBar({ locale = 'en' }: { locale?: Locale }) {
+  const rawPath = normalize(usePathname() || '/');
   const t = ui(locale);
   const L = LOCATION;
   const hours = L.hours[locale] || L.hours.en;
@@ -50,6 +54,22 @@ export function TopBar({ locale = 'en' }: { locale?: Locale }) {
             <PhoneIcon />
             <span className={styles.text}>{L.phone}</span>
           </a>
+        </div>
+        <div className={styles.lang} role="group" aria-label={t.menu.switchTo}>
+          {(['en', 'es'] as const).map((l) => (
+            <a
+              key={l}
+              href={alternateHref(rawPath, l)}
+              hrefLang={l}
+              lang={l}
+              className={`${styles.langLink} ${l === locale ? styles.langOn : ''}`}
+              aria-current={l === locale ? 'true' : undefined}
+            >
+              {/* visible code for sighted users, full language name for screen readers (no aria-label: the visible text must be part of the accessible name) */}
+              <span aria-hidden="true">{l.toUpperCase()}</span>
+              <span className={styles.srOnly}>{l === 'en' ? 'English' : 'Español'}</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>

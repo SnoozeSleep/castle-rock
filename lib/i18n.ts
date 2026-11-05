@@ -1,30 +1,43 @@
-/* UI strings of the hand-written parts of the site (header, footer, blog chrome). English only: the Castle Rock site
-   has no Spanish mirror (November 2026 brief, section B) — the /es tree, the EN | ES toggle, the hreflang alternates and
-   the Spanish dictionaries were removed. `Locale` stays as a type so the components keep their `locale` prop. */
+/* UI strings of the hand-written parts of the site (header, footer, blog chrome) per locale, plus the
+   helpers that map a path between the English site and its /es mirror. Page copy of the GoHighLevel
+   pages is translated by scripts/convert.mjs from overrides/i18n/*.json. */
 
+import { blogSlugFor } from './blog-nav';
 import { LOCATION } from './location';
 
-export type Locale = 'en';
-export const LOCALES: Locale[] = ['en'];
+export type Locale = 'en' | 'es';
+export const LOCALES: Locale[] = ['en', 'es'];
 export const DEFAULT_LOCALE: Locale = 'en';
 
-/** one language: the path is returned as it is (kept so the components' call sites stay unchanged) */
-export function localizeHref(href: string, _locale: Locale = 'en'): string {
-  return href;
+/** '/mattresses' -> '/es/mattresses' for es; unchanged for en, assets, anchors, tel:/mailto:, external URLs. */
+export function localizeHref(href: string, locale: Locale): string {
+  if (locale === 'en' || !href.startsWith('/') || href.startsWith('//') || /^\/(assets|ghl-stub|_next|api)\//.test(href) || href === '/es' || href.startsWith('/es/')) return href;
+  return href === '/' ? '/es' : `/es${href}`;
 }
 
-/** the pathname without a trailing slash (one language, no prefix) */
+/** Locale of a pathname and its path without the locale prefix. */
 export function splitLocale(pathname: string): { locale: Locale; path: string } {
   const p = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  if (p === '/es') return { locale: 'es', path: '/' };
+  if (p.startsWith('/es/')) return { locale: 'es', path: p.slice(3) };
   return { locale: 'en', path: p || '/' };
 }
 
+/** The same page in the other language (used by the EN | ES switcher). A blog post goes to its counterpart
+    (lib/blog-nav.ts BLOG_SLUG_ES: the slug differs per language), or to that language's blog index when the article has
+    no version in it; in its own language the path stays as it is. */
+export function alternateHref(pathname: string, target: Locale): string {
+  const { locale, path } = splitLocale(pathname);
+  const post = path.match(/^\/blog\/([^/]+)$/);
+  if (post && locale !== target) { const twin = blogSlugFor(post[1], target); return localizeHref(twin ? `/blog/${twin}` : '/blog', target); }
+  return localizeHref(path, target);
+}
 
 type ProductItem = { label: string; desc: string };
 export type UiStrings = {
   langName: string;
   nav: { home: string; about: string; products: string; financing: string; sales: string; blog: string; quiz: string; allArticles: string };
-  menu: { products: string; accessories: string; latest: string; openMenu: (label: string) => string; closeMenu: (label: string) => string; openSite: string; closeSite: string; siteMenu: string; homeAria: string; call: (phone: string) => string; sizes: string; sizeLinks: Array<[label: string, href: string]> };
+  menu: { products: string; accessories: string; latest: string; openMenu: (label: string) => string; closeMenu: (label: string) => string; openSite: string; closeSite: string; siteMenu: string; homeAria: string; call: (phone: string) => string; switchTo: string; sizes: string; sizeLinks: Array<[label: string, href: string]> };
   products: Record<string, ProductItem>;
   feature: { eyebrow: string; title: string; cta: string; imgAlt: string };
   drawerBook: string;
@@ -54,7 +67,7 @@ export type ProductKey = (typeof PRODUCT_KEYS)[number];
 const en: UiStrings = {
   langName: 'English',
   nav: { home: 'Home', about: 'About Us', products: 'Our Products', financing: 'Financing', sales: 'Sales', blog: 'Blog', quiz: 'Sleep Quiz', allArticles: 'All articles' },
-  menu: { products: 'Products', accessories: 'Sleep Accessories', latest: 'Latest articles', openMenu: (l) => `Open ${l} menu`, closeMenu: (l) => `Close ${l} menu`, openSite: 'Open menu', closeSite: 'Close menu', siteMenu: 'Site menu', homeAria: 'Snooze Mattress + Wellness — home', call: (p) => `Call ${p}`,
+  menu: { products: 'Products', accessories: 'Sleep Accessories', latest: 'Latest articles', openMenu: (l) => `Open ${l} menu`, closeMenu: (l) => `Close ${l} menu`, openSite: 'Open menu', closeSite: 'Close menu', siteMenu: 'Site menu', homeAria: 'Snooze Mattress + Wellness — home', call: (p) => `Call ${p}`, switchTo: 'Ver en español',
     sizes: 'Mattresses by size & type',
     sizeLinks: [['Queen', '/queen-mattresses'], ['King', '/king-mattresses'], ['Full & Twin', '/full-twin-mattresses'], ['Memory Foam', '/memory-foam-mattresses'], ['Back Pain', '/mattresses-for-back-pain'], ['Cooling', '/cooling-mattresses']] },
   products: {
@@ -96,8 +109,51 @@ const en: UiStrings = {
   },
 };
 
-;
+const es: UiStrings = {
+  langName: 'Español',
+  nav: { home: 'Inicio', about: 'Nosotros', products: 'Productos', financing: 'Financiamiento', sales: 'Ofertas', blog: 'Blog', quiz: 'Quiz de Sueño', allArticles: 'Todos los artículos' }, // nav label kept short so the desktop row fits on one line; the full 'Nuestros Productos' stays in the footer
+  menu: { products: 'Productos', accessories: 'Accesorios para Dormir', latest: 'Artículos recientes', openMenu: (l) => `Abrir menú ${l}`, closeMenu: (l) => `Cerrar menú ${l}`, openSite: 'Abrir menú', closeSite: 'Cerrar menú', siteMenu: 'Menú del sitio', homeAria: 'Snooze Mattress + Wellness — inicio', call: (p) => `Llamar al ${p}`, switchTo: 'View in English',
+    sizes: 'Colchones por tamaño y tipo',
+    sizeLinks: [['Queen', '/queen-mattresses'], ['King', '/king-mattresses'], ['Full y Twin', '/full-twin-mattresses'], ['Memory Foam', '/memory-foam-mattresses'], ['Dolor de espalda', '/mattresses-for-back-pain'], ['Frescos', '/cooling-mattresses']] },
+  products: {
+    mattresses: { label: 'Colchones', desc: 'A tu medida con Dream Mapping' },
+    bases: { label: 'Bases Ajustables', desc: 'Eleva tu posición para dormir' },
+    chairs: { label: 'Sillas de Masaje', desc: 'Sillas de masaje Infinity®' },
+    pillows: { label: 'Almohadas', desc: 'Soporte premium para cada tipo de durmiente' },
+    protectors: { label: 'Protectores de Colchón', desc: 'Protege tu inversión' },
+    sheets: { label: 'Sábanas Premium', desc: 'Lujo que se siente cada noche' },
+    recliner: { label: 'Sillón Reclinable', desc: 'Reclínate mejor con el Zcliner®' },
+    kit: { label: 'Kit de Prueba de Sueño en Casa', desc: 'Descubre qué interrumpe tu sueño' },
+  },
+  feature: { eyebrow: 'Dream Mapping', title: 'Encuentra tu colchón perfecto en unos 5 minutos', cta: 'Reserva tu cita de Dream Mapping', imgAlt: 'Sleep Coaches de Snooze ajustando a una clienta sobre un colchón' },
+  drawerBook: 'Reserva tu cita de Dream Mapping',
+  drawerQuiz: 'Haz el Sleep Fit Quiz',
+  quizCard: { title: 'Sleep Fit Quiz', desc: '¿No sabes qué colchón es el ideal para ti? Descubre tu comodidad y soporte en 60 segundos.', cta: 'Hacer el quiz' },
+  quizCta: { line: '¿No sabes qué colchón es el ideal para ti?', button: 'Haz el Quiz de Sueño de 60 Segundos', aria: 'Sleep Fit Quiz' },
+  footer: {
+    about: 'Snooze Mattress + Wellness en Castle Rock, al servicio del condado de Douglas y el sur del área metropolitana de Denver. Tratamos a cada persona que entra por nuestra puerta como si fuera de casa, y nos apasiona mejorar tu salud a través de un mejor sueño.',
+    book: 'Reserva tu cita de Dream Mapping', contact: 'Contáctanos', products: 'Nuestros Productos', company: 'Empresa', visit: 'Visítanos',
+    hours1: 'Lun–Sáb 10 AM–7 PM', hours2: 'Dom 11 AM–6 PM', location: 'Nuestra Ubicación', directions: 'Cómo Llegar', openMaps: 'Abrir en Maps',
+    mapTitle: 'Mapa para llegar a Snooze Mattress + Wellness, 6360 Promenade Pkwy, Castle Rock, CO 80108',
+    rights: 'Snooze Mattress + Wellness. Todos los derechos reservados', madeWith: 'Hecho con', terms: 'Términos y Condiciones', privacy: 'Política de Privacidad',
+    facebook: 'Snooze Mattress + Wellness Castle Rock en Facebook', instagram: 'Snooze Mattress + Wellness Castle Rock en Instagram',
+    companyLinks: [['Nosotros', '/about-us'], ['Financiamiento', '/mattress-financing'], ['Ofertas', '/mattress-sales'], ['Blog del Sueño', '/blog'], ['Sleep Fit Quiz', '/sleep-quiz'], ['Dream Mapping', '/dream-mapping'], ['Cómo elegir un colchón', '/how-to-choose-a-mattress'], ['Preguntas frecuentes', '/faq'], ['Reserva tu cita de Dream Mapping', '/booking'], ['Contáctanos', '/contact-us']],
+    serving: 'También atendemos', areas: LOCATION.serviceAreas.map((a) => [a.city, a.slug] as [string, string]),
+  },
+  blog: {
+    eyebrow: 'Blog del Sueño de Snooze', indexTitle: 'Dormir Mejor Empieza Aquí',
+    indexIntro: 'Colchones a tu medida, mapeo de presión y mañanas sin dolor, directo de los Especialistas en Sueño de Snooze Mattress + Wellness en Castle Rock.',
+    home: 'Inicio', blogCrumb: 'Blog del Sueño', readArticle: 'Leer artículo', read: (t) => `Leer: ${t}`, faq: 'Preguntas Frecuentes', related: 'Artículos Relacionados',
+    ctaEyebrow: 'Gente Real. Resultados Reales. Sueño Real.', ctaTitle: 'Visita Nuestra Tienda',
+    ctaText: 'Platica con nuestros Especialistas en Sueño en Castle Rock. Hazte tu mapeo de presión, prueba los colchones que le quedan a tu cuerpo y pregunta por el financiamiento al 0%. Aquí tratamos a cada persona que entra por nuestra puerta como familia.',
+    ctaBook: 'Agenda tu Dream Mapping', ctaCall: (p) => `Llama al ${p}`, ctaAddr: 'Snooze Mattress + Wellness · 6360 Promenade Pkwy, Castle Rock, CO 80108 · Lun–Sáb 10 AM–7 PM · Dom 11 AM–6 PM',
+    indexMetaTitle: 'Blog del Sueño de Castle Rock | Snooze Mattress',
+    indexMetaDesc: 'Consejos para dormir mejor de Snooze Mattress + Wellness en Castle Rock: colchones a tu medida, mapeo de presión y cómo el colchón correcto alivia dolores.',
+    ogDesc: 'Colchones a tu medida, mapeo de presión y mejor sueño, del equipo de Snooze en Castle Rock.', section: 'Sueño y Bienestar', by: 'Por', /* + el nombre del autor, lib/blog-author.ts */ sources: 'Fuentes',
+    emptyTitle: 'Nuevos artículos muy pronto', emptyText: 'El Blog del Sueño de Castle Rock apenas comienza. Mientras tanto, nuestras guías explican cómo elegir un colchón, qué mide Dream Mapping y los tamaños y tipos de colchón que tenemos.',
+  },
+};
 
-export const UI: Record<Locale, UiStrings> = { en };
+export const UI: Record<Locale, UiStrings> = { en, es };
 export const ui = (locale: Locale) => UI[locale] || en;
 export { PRODUCT_KEYS };

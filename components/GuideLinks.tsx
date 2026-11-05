@@ -17,6 +17,16 @@ const COPY = {
     ],
     more: 'Read article',
   },
+  es: {
+    eyebrow: 'Del Blog del Sueño',
+    title: '¿No sabes qué tamaño necesitas, o si te conviene espuma o resortes?',
+    text: 'Dos guías de nuestros Sleep Coaches para leer antes de venir a tu ajuste de Dream Mapping.',
+    cards: [
+      { icon: 'bed-wide' as const, title: 'Guía de tamaños de colchón: full, queen o king', text: 'Medidas reales, tamaños de recámara y consejos para parejas, niños y visitas.', href: '/blog/guia-tamanos-de-colchon-castle-rock' },
+      { icon: 'snowflake' as const, title: 'Memory foam vs híbrido para las noches calurosas de verano', text: 'Cuál duerme más fresco, cuál conviene a las parejas y cuánto dura cada tipo.', href: '/blog/colchon-memory-foam-vs-hibrido-castle-rock' },
+    ],
+    more: 'Leer la guía',
+  },
 };
 
 export function GuideLinks({ locale }: { locale: Locale }) {

@@ -24,18 +24,23 @@ const SITE_URL = envOrigin(process.env.NEXT_PUBLIC_SITE_URL) || envOrigin(proces
 /* the prerendered pages: the static export (out/) when it exists, else Next's server output (.next/server/app) */
 const OUT = fs.existsSync(path.join(ROOT, 'out')) ? path.join(ROOT, 'out') : path.join(ROOT, '.next', 'server', 'app');
 
+/* The compiled server bundles (.js) are scanned too, and webpack names its modules with bare numbers — `},78504:(a,b,c)=>`,
+   `b(b.s=78504)`, `c(956)` — that change from build to build: a module id that happens to equal the old ZIP or area
+   code is not a leftover. So the ZIP only counts where it is NOT written as a module id (a number wedged between
+   `, { ( [ =` and `: ) , ] ;`), and "(956)" only where it does not follow an identifier (a call). Text, markup and
+   JSON-LD never look like either. */
 const MARKERS = [
   ['McAllen', /mcallen/gi],
-  ['McAllen phone', /586[-. ]?5646|9565865646|\(956\)/g],
-  ['McAllen ZIP / street', /78504|7913 N(?:orth)? 10th/g],
+  ['McAllen phone', /586[-. ]?5646|9565865646|(?<![\w$])\(956\)/g],
+  ['McAllen ZIP / street', /(?<![,{(\[=\d])78504(?!\d)|(?<!\d)78504(?![:),\];\d])|7913 N(?:orth)? 10th/g],
   ['McAllen GBP place id', /ChIJBYBxOXChZYYR48f71GAS7YY/g],
   ['McAllen tracking ids', /G-9R1JGVBRBR|G-TS1RXQVPYT|b781856a-502d-46d8-a1da-c8e46665edab/g],
   ['McAllen CRM ids', /6ada7129c5fa6117307c554f|6ada73894325b023027e7371|00b3cdec-7a6f-4184-95ec-81210f1e7bc8|0BTnYKylVR6OcWJug3r8|lrAns7Z8j3vEJW3DC0Yr|67f5847f79c4ab793baf0087/g],
   ['McAllen storefront / team / hero photos', /684480ff2c95c570cfc22e24|6a7578249a9c7792ea5a8b22|699c969010bc9c1e4d659063|69a1cbdf917b4b217201b5ff|69a601e75a52f4e92a27dcf5/g],
   ['McAllen GHL location id outside image paths', /ARD47WoZpqaZSQ9MSxLD(?!(?:\/|\\u002F|\\\\u002F)media(?:\/|\\u002F|\\\\u002F))/g],
   ['Texas', /\bTX\b|Texas|Rio Grande|Edinburg|Pharr|Winter Texan/g],
-  ['Spanish route', /href="\/es(?:\/|")/g],
 ];
+/* the Spanish site (/es, restored November 2026) is gated like the English one: every marker above applies to both trees */
 
 function walk(dir, out = []) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, e.name); if (e.isDirectory()) { if (e.name !== '_next' && e.name !== 'assets') walk(p, out); } else if (/\.(html|xml|txt|js|body)$/.test(e.name)) out.push(p); } return out; }
 

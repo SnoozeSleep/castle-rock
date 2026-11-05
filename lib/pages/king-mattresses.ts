@@ -46,5 +46,44 @@ export const PAGE: ContentPage = {
       ],
       cta: { title: 'Try king mattresses in Castle Rock', text: 'A free Dream Mapping fitting for both of you shows which king or split king fits the way each of you sleeps.', button: 'Book a free fitting' },
     },
+    es: {
+      title: 'Colchones King en Castle Rock, CO | Snooze Mattress',
+      description: 'Colchones king y split king en Castle Rock, CO de Tempur-Pedic, Sealy, Stearns & Foster, Serta y más, ajustados a los dos con Dream Mapping gratis.',
+      crumb: 'Colchones King',
+      eyebrow: 'Colchones por tamaño',
+      h1: 'Colchones king en Castle Rock, CO',
+      intro: [
+        'Un colchón king estándar mide 76 pulgadas de ancho por 80 de largo: dieciséis pulgadas más ancho que un queen, así que cada uno de los dos tiene para sí el ancho de un twin. En Snooze Mattress + Wellness en Castle Rock puedes comparar modelos king de las marcas de la sala de exhibición y dejar que una sesión gratis de Dream Mapping ajuste el colchón a los cuerpos de los dos.',
+      ],
+      sections: [
+        { h2: 'King, California king y split king', paragraphs: [
+          'Un king (76 por 80 pulgadas) es el tamaño estándar más ancho. Un California king cambia cuatro pulgadas de ancho por cuatro de largo (72 por 84 pulgadas), que las personas altas prefieren. Un split king son dos colchones twin XL (38 por 80 pulgadas cada uno) lado a lado en una base king, así que cada lado puede tener un nivel de comodidad distinto y, sobre una base ajustable, una posición distinta.',
+          'Un king necesita una recámara de unos 12 por 12 pies para dejar paso y lugar para los burós. Mide también la puerta y la escalera: un colchón king de una pieza es el tamaño más difícil de mover, una razón más por la que las parejas eligen un split king.',
+          'Para ver todos los tamaños lado a lado, con medidas de recámara y consejos para parejas y visitas, lee nuestra [guía de tamaños de colchón](/es/how-to-choose-a-mattress).',
+        ] },
+        { h2: 'Por qué las parejas eligen un king en Snooze', paragraphs: [
+          'Dos personas rara vez necesitan el mismo colchón. Dream Mapping mapea a cada uno por separado, y el Sleep Coach usa los dos perfiles para encontrar un king que funcione para ambos, o un split king en el que cada lado se ajusta aparte. Hay bases ajustables con posición de cabeza y pies personalizable para king y split king, algo que agradecen las parejas con distintos hábitos de lectura o de ronquidos.',
+          'La sala de exhibición tiene Tempur-Pedic, Sealy, Stearns & Foster, Serta, Beautyrest, Helix, Brooklyn Bedding, FLOWT by King Koil, Snooze Handcrafted by King Koil, Copper by Spring Air, Snooze-O-Pedic, BedTech, BedGear, Sleeptone y DreamFit. Pregunta a un Sleep Coach qué modelos están en piso en king y split king.',
+        ] },
+        { h2: 'El ajuste tarda cinco minutos', paragraphs: [
+          'Recuéstate en la cama de Dream Mapping en tu posición habitual, deja que los sensores lean tus puntos de presión y camina con el Sleep Coach hacia los colchones king que van con el mapa. El ajuste es gratis, no hay obligación de comprar y los Sleep Coaches no trabajan por comisión.',
+        ] },
+        { h2: 'Entrega, financiamiento y garantía', listStyle: 'facts', bullets: [
+          'Entrega e instalación gratis en compras mayores de $999, y nos llevamos tu colchón viejo si ya no lo necesitas.',
+          'Financiamiento con Synchrony y Wells Fargo, y una opción de renta con opción a compra con Snap Finance.',
+          'Snooze Mattress + Wellness ofrece la Garantía de Sueño de 365 Noches en las marcas principales; pide los detalles a un Sleep Coach.',
+          `Visítanos en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, ${L.hours.es[0]}, ${L.hours.es[1]}.`,
+        ] },
+      ],
+      faqTitle: 'Preguntas sobre colchones king',
+      faqs: [
+        { question: '¿Cuánto mide un colchón king?', answer: 'Un king estándar mide 76 pulgadas de ancho por 80 de largo; un California king mide 72 por 84 pulgadas.' },
+        { question: '¿Qué es un split king?', answer: 'Dos colchones twin XL (38 por 80 pulgadas cada uno) colocados lado a lado en una base king, de modo que cada lado puede tener su propio nivel de comodidad y, sobre una base ajustable, su propia posición.' },
+        { question: '¿Un king cabe en mi recámara?', answer: 'Un king va bien en una recámara de unos 12 por 12 pies o más, contando burós y espacio para caminar; mide también la puerta y la escalera, o elige un split king, que se mueve en dos piezas.' },
+        { question: '¿Dos personas con necesidades distintas pueden compartir un king?', answer: 'Sí. Dream Mapping mapea a cada uno por separado, y un split king permite ajustar cada lado aparte.' },
+        { question: '¿Entregan e instalan colchones king?', answer: 'Sí. La entrega e instalación son gratis en compras mayores de $999, y podemos llevarnos tu colchón viejo.' },
+      ],
+      cta: { title: 'Prueba colchones king en Castle Rock', text: 'Una sesión gratis de Dream Mapping para los dos muestra qué king o split king va con la forma de dormir de cada uno.', button: 'Reservar ajuste gratis' },
+    },
   },
 };

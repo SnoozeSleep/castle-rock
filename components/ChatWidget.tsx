@@ -7,8 +7,10 @@
  * navigations, so the widget keeps running instead of loading again. The site does not style the widget: its position,
  * look, copy and hours are managed in the client's CRM.
  *
- * Castle Rock, CO (November 2026): the widget id comes from lib/integrations.ts ([CR_CHAT_EN]) and is empty until the
- * client supplies it — nothing is loaded; the previous location's widgets (English and Spanish) were removed.
+ * Castle Rock, CO (November 2026): one widget id per language in lib/integrations.ts — [CR_CHAT_EN] for the English
+ * pages, [CR_CHAT_ES] for /es — both empty until the client supplies them, so nothing is loaded. Each root layout passes
+ * its own language: a language without an id gets no widget, and the English widget never loads on a Spanish page. The
+ * previous location's widgets (English and Spanish) were removed.
  */
 import { useEffect } from 'react';
 import { INTEGRATIONS } from '@/lib/integrations';
@@ -16,9 +18,9 @@ import type { Locale } from '@/lib/i18n';
 
 const SCRIPT_ID = 'snz-chat-widget';
 
-export function ChatWidget({ locale: _locale = 'en' }: { locale?: Locale }) { // English only: one widget id
+export function ChatWidget({ locale = 'en' }: { locale?: Locale }) {
   useEffect(() => {
-    const widgetId = INTEGRATIONS.chatWidgetId.trim();
+    const widgetId = (INTEGRATIONS.chatWidgetId[locale] || '').trim();
     if (!widgetId || document.getElementById(SCRIPT_ID)) return;
     let idle = 0;
     let timer = 0;

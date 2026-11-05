@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   "title": "Castle Rock Terms & Conditions | Snooze Mattress",
   "description": "The terms and conditions for using the Snooze Mattress + Wellness – Castle Rock website. By accessing or using the website, you agree to these terms.",
   "alternates": {
-    "canonical": "/terms-conditions-page"
+    "canonical": "/terms-conditions-page",
+    "languages": {
+      "en-US": "/terms-conditions-page",
+      "es-US": "/es/terms-conditions-page",
+      "x-default": "/terms-conditions-page"
+    }
   },
   "openGraph": {
     "title": "Castle Rock Terms & Conditions | Snooze Mattress",

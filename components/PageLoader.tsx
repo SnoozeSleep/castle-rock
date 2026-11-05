@@ -13,7 +13,7 @@ import type { Locale } from '@/lib/i18n';
    DOM by the motion script once hydration is over (a pre-hydration removal makes React re-render the page). It dispatches "snz:loader-done" so the scroll-reveal system starts after the fade. Reduced motion: static
    logo, quick fade. */
 
-const TEXT: Record<Locale, string> = { en: 'Preparing your best sleep…' };
+const TEXT: Record<Locale, string> = { en: 'Preparing your best sleep…', es: 'Preparando tu mejor descanso…' };
 
 const CSS = `
 #snz-loader{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 90% at 50% 0%,#0b2aa8 0%,#001489 55%,#000b4a 100%);color:#fff;font-family:var(--font-poppins-stack);transition:opacity .4s ease,transform .4s ease,visibility 0s linear .4s;transform:scale(1);will-change:opacity,transform}

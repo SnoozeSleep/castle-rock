@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   "title": "Mattress Financing in Castle Rock, CO | Snooze Mattress",
   "description": "Special financing on mattresses in Castle Rock, CO. With approved credit; terms vary by promotion. See store for details or book a Dream Mapping visit.",
   "alternates": {
-    "canonical": "/mattress-financing"
+    "canonical": "/mattress-financing",
+    "languages": {
+      "en-US": "/mattress-financing",
+      "es-US": "/es/mattress-financing",
+      "x-default": "/mattress-financing"
+    }
   },
   "openGraph": {
     "title": "Mattress Financing in Castle Rock, CO | Snooze Mattress",

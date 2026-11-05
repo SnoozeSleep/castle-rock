@@ -15,6 +15,13 @@ const COPY = {
     line: `${LOCATION.county} · ${LOCATION.metro}`,
     view: 'View page',
   },
+  es: {
+    eyebrow: 'Zona de servicio',
+    title: `¿Vienes de ${cities.slice(0, -1).join(', ')} o ${cities[cities.length - 1]}?`,
+    text: `Snooze Mattress + Wellness está en ${LOCATION.street}, en Castle Rock (condado de Douglas, al sur del área metropolitana de Denver), y atiende a ${areaList('y')} con una sesión gratis de Dream Mapping de cinco minutos. Mira qué te da una visita desde tu ciudad:`,
+    line: 'Condado de Douglas · sur del área metropolitana de Denver',
+    view: 'Ver página',
+  },
 };
 
 export function AreaLinks({ locale }: { locale: Locale }) {

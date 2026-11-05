@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import styles from './SiteHeader.module.css';
 import { SITE } from './site-config';
 import { BLOG_INDEX, blogNav } from '@/lib/blog-nav';
-import { localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
+import { alternateHref, localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
 
 type MenuKey = 'products' | 'blog';
 type NavItem = { label: string; href: string; match?: string[]; menu?: MenuKey };
@@ -112,6 +112,15 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
   const pathname = splitLocale(rawPath).path; // English path used for the active states
   const { t, PRIMARY, PRODUCT_GROUPS, SIZE_GROUP, BLOG_GROUP, blogIndex } = navTables(locale);
   const L = (href: string) => localizeHref(href, locale);
+  const langSwitch = (cls: string) => (
+    <div className={cls} role="group" aria-label={t.menu.switchTo}>
+      {(['en', 'es'] as const).map((l) => (
+        <a key={l} href={alternateHref(rawPath, l)} hrefLang={l} lang={l} className={`${styles.langLink} ${l === locale ? styles.langOn : ''}`} aria-current={l === locale ? 'true' : undefined} aria-label={l === 'en' ? 'English' : 'Español'}>
+          {l.toUpperCase()}
+        </a>
+      ))}
+    </div>
+  );
   const idBase = useId();
   const panelIds: Record<MenuKey, string> = { products: `${idBase}-products`, blog: `${idBase}-blog` };
   const drawerId = `${idBase}-drawer`;
@@ -281,7 +290,7 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
           <img src={SITE.logo} alt={SITE.logoAlt} width={156} height={44} />
         </a>
 
-        <nav className={styles.nav} aria-label="Primary">
+        <nav className={styles.nav} aria-label={locale === 'es' ? 'Principal' : 'Primary'}>
           <ul className={styles.list}>
             {PRIMARY.map((item) =>
               item.menu ? (
@@ -399,6 +408,10 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
           <button ref={closeBtnRef} type="button" className={styles.close} aria-label={t.menu.closeSite} onClick={closeMobile}><Close /></button>
         </div>
         <div className={styles.drawerBody}>
+          <div className={styles.mLangRow}>
+            <span className={styles.mLangLabel}>{locale === 'es' ? 'Idioma' : 'Language'}</span>
+            {langSwitch(styles.mLang)}
+          </div>
           <ul className={styles.mList}>
             {PRIMARY.map((item, index) =>
               item.menu ? (

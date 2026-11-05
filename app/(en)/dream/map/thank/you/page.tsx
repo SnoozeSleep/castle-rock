@@ -9,7 +9,12 @@ export const metadata: Metadata = {
   "title": "Thank You for Scheduling Your  Dream Mapping Appointment!",
   "description": "Our Sleep Coaches can’t wait to see you and start your new sleep journey!",
   "alternates": {
-    "canonical": "/dream/map/thank/you"
+    "canonical": "/dream/map/thank/you",
+    "languages": {
+      "en-US": "/dream/map/thank/you",
+      "es-US": "/es/dream/map/thank/you",
+      "x-default": "/dream/map/thank/you"
+    }
   },
   "openGraph": {
     "title": "Thank You for Scheduling Your  Dream Mapping Appointment!",

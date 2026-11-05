@@ -9,8 +9,10 @@
  * CO 80108, (303) 736-8465 as text and as tel:+13037368465), the hours, the social links, the Maps query, the one
  * LocalBusiness node (address, telephone, email, two opening-hours rules, sameAs without empty entries, areaServed the
  * six cities, no AggregateRating / Review / legalName, no geo / hasMap while the Place ID is missing), the canonical on
- * SITE_URL, the title rule ("| Snooze Mattress", <= 60, names Castle Rock), description <= 155, one H1, no hreflang
- * alternates (English only), and that no previous-location string, photo or integration id is left.
+ * SITE_URL, the title rule ("| Snooze Mattress", <= 60, names Castle Rock), description <= 155, one H1, <html lang> per
+ * tree (en / es), hreflang en-US / es-US / x-default on every pair (reciprocal; a blog post without a version in the
+ * other language lists itself only), an English page for every Spanish one and back, and that no previous-location
+ * string, photo or integration id is left.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +29,7 @@ const CR = {
   email: 'keithc@snoozemattresscompany.com',
   fb: 'https://www.facebook.com/SnoozeMattressCoCastleRock/', ig: 'https://www.instagram.com/snoozemattress_denver/',
   mapsQ: '6360+Promenade+Pkwy%2C+Castle+Rock%2C+CO+80108',
-  hoursEn: ['Mon–Sat 10 AM–7 PM', 'Sun 11 AM–6 PM'],
+  hoursEn: ['Mon–Sat 10 AM–7 PM', 'Sun 11 AM–6 PM'], hoursEs: ['Lun–Sáb 10 AM–7 PM', 'Dom 11 AM–6 PM'],
   areas: ['Castle Rock', 'Parker', 'Lone Tree', 'Highlands Ranch', 'Castle Pines', 'Centennial'],
 };
 
@@ -54,7 +56,6 @@ const LEFTOVERS = [
   { name: 'McAllen GHL location id outside image URLs', re: /ARD47WoZpqaZSQ9MSxLD/g, ok: (ctx, file) => /ARD47WoZpqaZSQ9MSxLD(?:\/|\\u002F|\\\\u002F)media(?:\/|\\u002F|\\\\u002F)|filesafe\/ARD47|imageReplacements|BANNER_PATH|image-variants|asset-map|conversion-report/.test(ctx) || /scripts\/|README|lib\/ghl-shim\.ts|public\/ghl-offline-shim\.js/.test(file) },
   { name: 'reviews / staff names', re: /Xandria|Karina R\.|Lydia,|\bPablo\b|\bElias\b/g, ok: tooling },
   { name: 'drive times', re: /minute drive|minutos en auto|drive time/gi, ok: (ctx, file) => tooling(ctx, file) || /no drive times/i.test(ctx) },
-  { name: 'Spanish route', re: /\/es\//g, ok: (ctx, file) => tooling(ctx, file) || /scripts\/|vercel\.json/.test(file) },
 ];
 
 const SKIP = new Set(['node_modules', '.next', '.git', 'verify-out', '.vercel', 'out', 'assets', 'chunks', 'docs']);
@@ -63,12 +64,16 @@ function walkHtml(dir, out = []) { if (!fs.existsSync(dir)) return out; for (con
 const rel = (p) => path.relative(ROOT, p).replace(/\\/g, '/');
 
 let problems = 0;
+/* the builder dictionaries (overrides/i18n/es.part-N.json, es.extra.json) are keyed by the English of the original clone,
+   which names the previous location: only their Spanish values are audited. es.castle-rock.json (the dictionary the
+   Spanish pages are written from) is keyed by the current English and is audited whole. */
+const DICT = /overrides\/i18n\/es\.(part-\d+|extra)\.json$/;
 function scan(files, label) {
   console.log(`\n=== ${label}: ${files.length} file(s) ===`);
   const found = {};
   for (const f of files) {
     const r = rel(f);
-    const s = fs.readFileSync(f, 'utf8');
+    const s = DICT.test(r) ? Object.values(JSON.parse(fs.readFileSync(f, 'utf8'))).join('\n') : fs.readFileSync(f, 'utf8');
     for (const L of LEFTOVERS) {
       const re = new RegExp(L.re.source, L.re.flags); let m;
       while ((m = re.exec(s))) { const ctx = s.slice(Math.max(0, m.index - 70), m.index + m[0].length + 70).replace(/\s+/g, ' '); if (L.ok(ctx, r)) continue; (found[L.name] ??= []).push(`${r}: …${ctx}…`); }
@@ -89,7 +94,9 @@ const rows = [];
 for (const f of html) {
   const s = fs.readFileSync(f, 'utf8'); const r = '/' + path.relative(OUT, f).replace(/\\/g, '/').replace(/\.html$/, '').replace(/(^|\/)index$/, '').replace(/\/$/, '');
   const route = r === '/' || r === '' ? '/' : r;
+  const es = route === '/es' || route.startsWith('/es/');
   const noindex = /<meta name="robots" content="noindex/.test(s);
+  const lang = (s.match(/<html[^>]*\blang="([^"]+)"/) || [])[1] || '';
   const blocks = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => { try { return JSON.parse(m[1]); } catch { return null; } });
   const nodes = blocks.flatMap((b) => (b && Array.isArray(b['@graph']) ? b['@graph'] : b ? [b] : []));
   const stores = nodes.filter((d) => d && Array.isArray(d['@type']) && d['@type'].includes('LocalBusiness'));
@@ -102,11 +109,17 @@ for (const f of html) {
   const desc = decode((s.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '');
   const h1 = (s.match(/<h1[\s>]/g) || []).length;
   const canonical = (s.match(/rel="canonical" href="([^"]+)"/) || [])[1] || '';
-  const hreflang = /hrefLang="|hreflang="/.test(s); // English only, no hreflang alternates
+  /* the page's hreflang alternates (lang -> path): an EN/ES pair declares en-US, es-US and x-default; a blog post with no
+     version in the other language declares only itself */
+  const alts = {}; for (const m of s.matchAll(/<link rel="alternate" (?:hrefLang|hreflang)="([^"]+)" href="([^"]+)"/g)) alts[m[1]] = m[2].replace(/^https?:\/\/[^/]+/, '') || '/';
+  const post = /^(\/es)?\/blog\/./.test(route);
+  const own = es ? 'es-US' : 'en-US', other = es ? 'en-US' : 'es-US';
+  const selfOnly = post && !alts[other] && alts[own] === route;
+  const hreflang = ['en-US', 'es-US', 'x-default'].every((l) => alts[l]) || selfOnly;
   const row = {
     route, address: count(s, CR.street), cityZip: count(s, CR.cityZip), phone: count(s, CR.phone), tel: count(s, CR.tel),
-    fb: count(s, `href="${CR.fb}"`), ig: count(s, `href="${CR.ig}"`), hours: CR.hoursEn.every((h) => s.includes(h)), maps: count(s, CR.mapsQ), jsonld: ldOk,
-    canonical, title, titleLen: title.length, descLen: desc.length, h1, hreflang, noindex,
+    fb: count(s, `href="${CR.fb}"`), ig: count(s, `href="${CR.ig}"`), hours: (es ? CR.hoursEs : CR.hoursEn).every((h) => s.includes(h)), maps: count(s, CR.mapsQ), jsonld: ldOk,
+    canonical, title, titleLen: title.length, descLen: desc.length, h1, hreflang, alts, selfOnly, noindex, lang, es,
   };
   rows.push(row);
   const bad = [];
@@ -116,15 +129,45 @@ for (const f of html) {
   if (!noindex && !/\| Snooze Mattress$/.test(title)) bad.push(`title does not end "| Snooze Mattress": ${title}`);
   if (title.length > 60) bad.push(`title ${title.length} chars`);
   // blog posts carry the client's own SEO titles (topical, not local); every other indexable page names Castle Rock
-  if (!noindex && !/Castle Rock/.test(title) && !/^\/blog\/./.test(route)) bad.push(`title without "Castle Rock": ${title}`);
+  if (!noindex && !/Castle Rock/.test(title) && !post) bad.push(`title without "Castle Rock": ${title}`);
   if (desc.length > 155) bad.push(`description ${desc.length} chars`);
   if (!desc) bad.push('no description');
   if (h1 !== 1 && !/\/sleep-quiz$/.test(route)) bad.push(`${h1} h1`);
-  if (hreflang) bad.push('hreflang alternates present (English-only site)');
+  if (!noindex && !hreflang) bad.push('hreflang incomplete');
+  if (lang !== (es ? 'es' : 'en')) bad.push(`<html lang="${lang}">`);
   if (bad.length) { problems++; console.log(`  ✗ ${route}: ${bad.join('; ')}`); }
 }
 console.log(`  routes checked: ${rows.length}; all carry the Castle Rock NAP, tel:+1…, Facebook + Instagram, hours, Maps query, one valid LocalBusiness node, canonical on ${SITE_URL}: ${rows.every((x) => x.address && x.phone && x.tel && x.fb && x.ig && x.hours && x.maps && x.jsonld && x.canonical.startsWith(SITE_URL)) ? 'YES' : 'NO'}`);
 console.log(`  noindex routes: ${rows.filter((x) => x.noindex).map((x) => x.route).join(', ') || 'none'}`);
+
+// ---- EN / ES pairs: every page in both languages, the same location data on both sides, reciprocal hreflang
+console.log('\n=== EN / ES consistency ===');
+let pairs = 0, mism = 0; const oneLanguage = [];
+for (const en of rows.filter((x) => !x.es)) {
+  const esRoute = en.route === '/' ? '/es' : `/es${en.route}`;
+  // a blog post's twin has its own slug: the page its es-US alternate names
+  const esRow = rows.find((x) => x.route === (/^\/blog\/./.test(en.route) ? en.alts['es-US'] : esRoute));
+  if (!esRow && en.selfOnly) { oneLanguage.push(en.route); continue; }
+  if (!esRow) { console.log(`  ✗ ${en.route}: no Spanish twin`); problems++; continue; } pairs++;
+  const diff = ['address', 'phone', 'tel', 'maps'].filter((k) => en[k] !== esRow[k]);
+  if (diff.length) { mism++; problems++; console.log(`  ✗ ${en.route} vs ${esRow.route}: ${diff.map((k) => `${k} ${en[k]}/${esRow[k]}`).join(', ')}`); }
+}
+for (const e of rows.filter((x) => x.es)) { const back = e.alts['en-US']; if (!e.noindex && !e.selfOnly && !rows.find((x) => !x.es && x.route === back)) { problems++; console.log(`  ✗ ${e.route}: no English twin`); } if (e.selfOnly) oneLanguage.push(e.route); }
+console.log(`  pairs: ${pairs}, mismatches: ${mism}${oneLanguage.length ? `; one language only (hreflang to itself): ${oneLanguage.join(', ')}` : ''}`);
+// every alternate points at a built page that names this page back (reciprocal en-US / es-US, x-default = the English page)
+let recip = 0;
+for (const r of rows) {
+  if (r.noindex) continue;
+  for (const [lng, target] of Object.entries(r.alts)) {
+    const t = rows.find((x) => x.route === target);
+    if (!t) { recip++; problems++; console.log(`  ✗ ${r.route}: ${lng} -> ${target} is not a built page`); continue; }
+    if (lng === 'x-default') { if (t.es) { recip++; problems++; console.log(`  ✗ ${r.route}: x-default -> ${target} (a Spanish page)`); } continue; }
+    if ((lng === 'es-US') !== t.es) { recip++; problems++; console.log(`  ✗ ${r.route}: ${lng} -> ${target} (wrong language tree)`); continue; }
+    const back = Object.entries(t.alts).find(([l, v]) => l !== 'x-default' && v === r.route);
+    if (!back) { recip++; problems++; console.log(`  ✗ ${r.route}: ${lng} -> ${target}, which does not link back`); }
+  }
+}
+console.log(`  hreflang reciprocity: ${recip ? `${recip} broken` : 'every alternate resolves and links back'}`);
 
 // ---- integrations in the built routes
 console.log('\n=== integrations in built routes ===');

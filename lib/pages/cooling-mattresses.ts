@@ -47,5 +47,44 @@ export const PAGE: ContentPage = {
       ],
       cta: { title: 'Sleep cooler in Castle Rock', text: 'A free five-minute Dream Mapping fitting shows which cooling mattress also fits your body.', button: 'Book a free fitting' },
     },
+    es: {
+      title: 'Colchones Frescos en Castle Rock, CO | Snooze Mattress',
+      description: 'Colchones frescos en Castle Rock, CO para el aire seco de Colorado y la calefacción del invierno: modelos Tempur-Pedic con enfriamiento y la Copper Collection de Spring Air, ajustados gratis.',
+      crumb: 'Colchones Frescos',
+      eyebrow: 'Colchones por tipo',
+      h1: 'Colchones frescos para los veranos de Colorado y la calefacción seca del invierno',
+      intro: [
+        'Dormir con calor es tema de todo el año en Castle Rock. Si pateas las cobijas a las 2 de la mañana o despiertas sudando, muchas veces la causa es el colchón: una superficie densa que atrapa el calor contra tu cuerpo. Snooze Mattress + Wellness tiene colchones diseñados para alejar el calor de quien duerme, y la sesión gratis de Dream Mapping se asegura de que el modelo fresco que elijas también vaya con tus puntos de presión.',
+      ],
+      sections: [
+        { h2: 'Por qué un colchón da calor', paragraphs: [
+          'La espuma que abraza el cuerpo también guarda el calor que el cuerpo desprende, y entre más te hundes, más superficie está en contacto contigo. Los diseños frescos atacan ese problema de distintas maneras: espumas abiertas o transpirables, fundas y capas que alejan el calor, y núcleos de resortes o híbridos que dejan circular el aire. La sensación que buscas decide cuál enfoque es para ti.',
+          '¿Te preguntas si [el memory foam da más calor que un híbrido](/es/blog/colchon-memory-foam-vs-hibrido-castle-rock)? Nuestra guía compara los dos para las noches de verano.',
+        ] },
+        { h2: 'Modelos frescos en el piso de Castle Rock', h3s: [
+          { h3: 'Tempur-Pedic', paragraphs: ['Los modelos frescos de Tempur-Pedic traen la tecnología de enfriamiento para toda la noche de la marca a su espuma que se amolda, para quienes quieren la sensación Tempur sin el calor.'] },
+          { h3: 'Spring Air Copper Collection', paragraphs: ['La Copper Collection de Spring Air combina capas de confort con cobre y un núcleo de soporte; el cobre se usa en ropa de cama por su capacidad de conducir el calor lejos del cuerpo.'] },
+          { h3: 'Híbridos y de resortes', paragraphs: ['Los híbridos de Sealy, Stearns & Foster, Beautyrest, Helix y King Koil ponen capas de confort sobre resortes ensacados, así que el aire circula por el núcleo en lugar de quedar atrapado debajo de ti.'] },
+        ] },
+        { h2: 'La frescura es solo la mitad del ajuste', paragraphs: [
+          'Un colchón fresco que no te da soporte sigue siendo el colchón equivocado. La cama de Dream Mapping registra tus puntos de presión en unos cinco minutos, y el Sleep Coach te muestra los modelos frescos que además coinciden con tu mapa, en el nivel de comodidad que el mapa pide. Combina el colchón con sábanas transpirables y una almohada elegida para tu posición, ambas en el piso de Castle Rock, y toda la cama duerme más fresca.',
+        ] },
+        { h2: 'Entrega, financiamiento y garantía', listStyle: 'facts', bullets: [
+          'Entrega e instalación gratis en compras mayores de $999, y nos llevamos tu colchón viejo si ya no lo necesitas.',
+          'Financiamiento con Synchrony y Wells Fargo, y una opción de renta con opción a compra con Snap Finance.',
+          'Snooze Mattress + Wellness ofrece la Garantía de Sueño de 365 Noches en las marcas principales; pide los detalles a un Sleep Coach.',
+          `Visítanos en ${L.street}, ${L.city}, ${L.region} ${L.postalCode}, ${L.hours.es[0]}, ${L.hours.es[1]}.`,
+        ] },
+      ],
+      faqTitle: 'Preguntas sobre colchones frescos',
+      faqs: [
+        { question: '¿Qué colchones frescos tiene Snooze?', answer: 'Modelos Tempur-Pedic con enfriamiento y la Copper Collection de Spring Air, además de híbridos de Sealy, Stearns & Foster, Beautyrest, Helix y King Koil cuyos núcleos de resortes dejan circular el aire.' },
+        { question: '¿El memory foam siempre da calor?', answer: 'La espuma densa guarda más calor que los resortes, por eso existen las versiones frescas; un Tempur-Pedic con enfriamiento da la sensación de espuma con menos calor.' },
+        { question: '¿Un híbrido es más fresco que uno de pura espuma?', answer: 'Normalmente sí, porque el aire circula por el núcleo de resortes en lugar de quedar atrapado debajo de ti; el ajuste te dice si un híbrido también va con tus puntos de presión.' },
+        { question: '¿Puedo probar los modelos frescos antes de comprar?', answer: 'Sí. Están en la sala de exhibición de Castle Rock, y la sesión gratis de Dream Mapping los reduce a los que van con tu forma de dormir.' },
+        { question: '¿Las sábanas y la almohada importan para dormir fresco?', answer: 'Sí. Unas sábanas transpirables y una almohada elegida para tu posición evitan que el calor se acumule a tu alrededor; ambas están disponibles en tienda.' },
+      ],
+      cta: { title: 'Duerme más fresco en Castle Rock', text: 'Una sesión gratis de Dream Mapping de cinco minutos muestra qué colchón fresco también va con tu cuerpo.', button: 'Reservar ajuste gratis' },
+    },
   },
 };

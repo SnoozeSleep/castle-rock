@@ -27,17 +27,23 @@ const META: Record<Locale, { title: string; description: string; ogLocale: strin
     ogLocale: 'en_US',
     noscript: `The Sleep Fit Quiz needs JavaScript. Call ${L.phone} or visit ${L.name} at ${L.street}, ${L.city}, ${L.region} ${L.postalCode} and we will find your fit in person.`,
   },
+  es: {
+    title: `Sleep Fit Quiz para ${L.city} | Snooze Mattress`,
+    description: 'Responde 5 preguntas rápidas sobre cómo duermes y descubre la comodidad, el soporte y las características de colchón que necesitas. Gratis, 60 segundos.',
+    ogLocale: 'es_US',
+    noscript: `El Sleep Fit Quiz necesita JavaScript. Llama al ${L.phone} o visita ${L.name} en ${L.street}, ${L.city}, ${L.region} ${L.postalCode} y encontraremos tu ajuste en persona.`,
+  },
 };
 
 /* Results links carry ?r=<answers>; the canonical is the bare page, so shared results are not indexed as separate URLs. */
 export function sleepQuizMetadata(locale: Locale): Metadata {
   const m = META[locale] || META.en;
-  const path = '/sleep-quiz';
+  const path = locale === 'es' ? '/es/sleep-quiz' : '/sleep-quiz';
   return {
     title: m.title,
     description: m.description,
     robots: 'index, follow',
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: { 'en-US': '/sleep-quiz', 'es-US': '/es/sleep-quiz', 'x-default': '/sleep-quiz' } },
     openGraph: { title: m.title, description: m.description, url: path, type: 'website', locale: m.ogLocale, siteName: 'Snooze Mattress + Wellness', images: [`${SITE_URL}${OG_IMAGE}`] },
     twitter: { card: 'summary_large_image', title: m.title, description: m.description, images: [`${SITE_URL}${OG_IMAGE}`] },
     icons: { icon: FAVICON },

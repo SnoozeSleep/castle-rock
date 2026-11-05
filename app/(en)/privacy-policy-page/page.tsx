@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   "title": "Castle Rock Privacy Policy | Snooze Mattress",
   "description": "How Snooze Mattress + Wellness in Castle Rock collects, uses and shares your personal information when you visit the site, contact us or use our services.",
   "alternates": {
-    "canonical": "/privacy-policy-page"
+    "canonical": "/privacy-policy-page",
+    "languages": {
+      "en-US": "/privacy-policy-page",
+      "es-US": "/es/privacy-policy-page",
+      "x-default": "/privacy-policy-page"
+    }
   },
   "openGraph": {
     "title": "Castle Rock Privacy Policy | Snooze Mattress",

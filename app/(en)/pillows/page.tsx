@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   "title": "Pillows in Castle Rock for How You Sleep | Snooze Mattress",
   "description": "Pillows in Castle Rock, CO fitted to how you sleep: side, back and stomach sleepers. Premium pillows at Snooze Mattress + Wellness for your sleep style.",
   "alternates": {
-    "canonical": "/pillows"
+    "canonical": "/pillows",
+    "languages": {
+      "en-US": "/pillows",
+      "es-US": "/es/pillows",
+      "x-default": "/pillows"
+    }
   },
   "openGraph": {
     "title": "Pillows in Castle Rock for How You Sleep | Snooze Mattress",
