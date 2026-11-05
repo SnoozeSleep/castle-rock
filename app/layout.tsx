@@ -13,7 +13,7 @@ import { GhlEmbedScripts } from '@/components/GhlEmbedScripts';
 import { SITE_URL } from '@/lib/location';
 import { INTEGRATIONS } from '@/lib/integrations';
 import { Poppins } from 'next/font/google';
-import '../../overrides/global.css';
+import '../overrides/global.css';
 
 /* The site typeface. next/font downloads the Google Fonts files at build time and serves them from this origin (no
    request to fonts.googleapis.com / fonts.gstatic.com at runtime), emits the @font-face rules with font-display: swap,

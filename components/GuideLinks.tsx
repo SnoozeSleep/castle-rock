@@ -3,7 +3,7 @@ import { ArrowRightIcon, Icon } from './icons';
 
 /* "Buying guides" — a short band at the end of /mattresses linking the two guides most relevant to a mattress shopper
    (November 2026 brief, E): the buying guide (sizes, comfort levels, foam vs coils) and the cooling mattresses page.
-   The McAllen version linked two McAllen blog posts; the Castle Rock blog ships empty (F), so the cards point at the
+   The previous location's version linked two of its blog posts; the Castle Rock blog ships empty (F), so the cards point at the
    hand-written guide pages until Castle Rock articles exist. Server-rendered, outside the GoHighLevel markup, so it
    never touches the page payload. Styles: overrides/global.css (.snz-areas, .snz-card). */
 const COPY = {

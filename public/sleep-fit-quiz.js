@@ -1,7 +1,7 @@
 /* =================================================================================
    SNOOZE SLEEP FIT QUIZ — Castle Rock site build (November 2026)
    =================================================================================
-   The single-store quiz (sleep-fit-quiz.html) as the site's /sleep-quiz and /es/sleep-quiz pages. Rendered by
+   The single-store quiz (sleep-fit-quiz.html) as the site's /sleep-quiz page. Rendered by
    components/SleepQuiz.tsx (markup + scoped stylesheet); this file is loaded after hydration and boots on the
    #snz-quiz element, whose data-lang attribute picks the language. Scoring, screens, lead form, validation,
    kiosk mode (?kiosk=1) and the shareable results URL (?r=...) are the original logic, unchanged. What moved:

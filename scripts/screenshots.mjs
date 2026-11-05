@@ -25,7 +25,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const issues = {};
 
 const settle = async (page) => {
-  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 80)); } window.scrollTo(0, 0); });
+  // slow steps: the site's reveal (snz-motion.js) only completes when each section crosses the viewport at a reading
+  // pace; fast scrolls leave sections mid-fade and lazy frames (the footer map) unloaded in the capture
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 350) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 180)); } await new Promise((r) => setTimeout(r, 2500)); window.scrollTo(0, 0); });
   await page.evaluate(() => Promise.race([
     Promise.all([...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))),
     new Promise((r) => setTimeout(r, 4000)),

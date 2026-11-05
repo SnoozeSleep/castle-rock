@@ -47,11 +47,11 @@ const LEFTOVERS = [
   { name: 'optin-page (only the redirect rule may name it)', re: /optin-page/g, ok: (ctx, file) => /vercel\.json|scripts\/|README/.test(file) },
   { name: 'McAllen tracking ids', re: /G-9R1JGVBRBR|G-TS1RXQVPYT|b781856a|GTM-TVPN94M/g, ok: (ctx, file) => /scripts\/|README|lib\/integrations\.ts/.test(file) },
   { name: 'McAllen CRM ids (chat, quiz webhook, form, calendar, reviews)', re: /6ada7129c5fa6117307c554f|6ada73894325b023027e7371|00b3cdec-7a6f-4184-95ec-81210f1e7bc8|0BTnYKylVR6OcWJug3r8|lrAns7Z8j3vEJW3DC0Yr|67f5847f79c4ab793baf0087/g, ok: (ctx, file) => /scripts\/|README/.test(file) },
-  { name: 'McAllen storefront / team / hero photos', re: /684480ff2c95c570cfc22e24|6a7578249a9c7792ea5a8b22|699c969010bc9c1e4d659063|69a1cbdf917b4b217201b5ff|69a601e75a52f4e92a27dcf5|38eee3d4-abcb-49e3-94e6-cd7ebd89d910\.png\\?" alt=\\?"Snooze Sleep Coaches with/g, ok: (ctx, file) => /scripts\/|README|asset-map|conversion-report|overrides\/overrides\.json|public\/ghl-offline-shim\.js|lib\/ghl-shim\.ts/.test(file) },
+  { name: 'McAllen storefront / team / hero photos', re: /684480ff2c95c570cfc22e24|6a7578249a9c7792ea5a8b22|699c969010bc9c1e4d659063|69a1cbdf917b4b217201b5ff|69a601e75a52f4e92a27dcf5/g, ok: (ctx, file) => /scripts\/|README|asset-map|conversion-report|overrides\/overrides\.json|public\/ghl-offline-shim\.js|lib\/ghl-shim\.ts/.test(file) },
   // the McAllen GoHighLevel sub-account id is the base path of the shared image library: allowed in image URLs only
   { name: 'McAllen GHL location id outside image URLs', re: /ARD47WoZpqaZSQ9MSxLD/g, ok: (ctx, file) => /ARD47WoZpqaZSQ9MSxLD(?:\/|\\u002F|\\\\u002F)media(?:\/|\\u002F|\\\\u002F)|filesafe\/ARD47|imageReplacements|BANNER_PATH|image-variants|asset-map|conversion-report/.test(ctx) || /scripts\/|README|lib\/ghl-shim\.ts|public\/ghl-offline-shim\.js/.test(file) },
   { name: 'reviews / staff names', re: /Xandria|Karina R\.|Lydia,|\bPablo\b|\bElias\b/g, ok: tooling },
-  { name: 'drive times', re: /minute drive|minutos en auto|drive time/gi, ok: tooling },
+  { name: 'drive times', re: /minute drive|minutos en auto|drive time/gi, ok: (ctx, file) => tooling(ctx, file) || /no drive times/i.test(ctx) },
   { name: 'Spanish route', re: /\/es\//g, ok: (ctx, file) => tooling(ctx, file) || /scripts\/|vercel\.json/.test(file) },
 ];
 

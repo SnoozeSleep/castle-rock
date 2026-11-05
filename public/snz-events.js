@@ -2,8 +2,8 @@
    Loaded by both root layouts after hydration. Pushes to window.dataLayer (read by the GTM container and gtag):
      phone_click            — a tel: link was clicked          { phone_number, link_text, page_path }
      directions_click       — a Google Maps link was clicked   { link_url, link_text, page_path }
-     booking_confirmation   — the Dream Mapping booking confirmation page loaded (/dream/map/thank/you, /es/…)
-     optin_submit           — the contact opt-in confirmation page loaded (/thank/you, /es/thank/you); the form
+     booking_confirmation   — the Dream Mapping booking confirmation page loaded (/dream/map/thank/you)
+     optin_submit           — the contact opt-in confirmation page loaded (/thank/you); the form
                               itself is a LeadConnector iframe, so the redirect to its thank-you page is the hook
      booking_widget_message — best effort: a confirmation-like postMessage from the LeadConnector booking widget
    The Sleep Fit Quiz already pushes quiz_start, quiz_answer, quiz_lead_form_view, quiz_completed and

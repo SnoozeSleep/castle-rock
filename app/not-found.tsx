@@ -4,14 +4,16 @@ import { LOCATION } from '@/lib/location';
 import { Icon } from '@/components/icons';
 
 /* The branded 404 (November 2026 brief, E): the site's own navy ground, the logo, a short line and the three ways on —
-   the home page, the mattresses page and a free Dream Mapping fitting — plus the store's phone. Rendered inside the root
-   layout (header, ticker and footer stay), so the visitor never lands on a bare error page. Next marks it noindex. */
+   the home page, the mattresses page and a free Dream Mapping fitting — plus the store's phone. It sits next to the root
+   layout (app/layout.tsx, moved out of the (en) route group so Next can prerender /_not-found inside the site chrome:
+   top bar, header, ticker and footer), so every unknown URL is served as a complete static page with a 404 status. */
 export const metadata: Metadata = { title: 'Page Not Found | Snooze Mattress', robots: { index: false, follow: true } };
 
 const S = {
   main: { fontFamily: 'var(--font-poppins-stack)', background: 'radial-gradient(120% 90% at 50% 0%, #0b2aa8 0%, #001489 55%, #000b4a 100%)', color: '#fff', padding: 'clamp(56px, 9vw, 112px) 20px', textAlign: 'center' as const },
   inner: { maxWidth: 680, margin: '0 auto' },
-  logo: { display: 'block', width: 170, height: 'auto', margin: '0 auto 28px' },
+  /* the navy logo sits on a white pill so it reads on the navy ground */
+  logo: { display: 'block', width: 170, height: 'auto', margin: '0 auto 28px', padding: '12px 18px', borderRadius: 14, background: '#fff', boxSizing: 'content-box' as const },
   eyebrow: { margin: '0 0 10px', fontSize: 13, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: '#F58433' },
   h1: { margin: '0 0 16px', fontSize: 'clamp(30px, 5vw, 48px)', lineHeight: 1.12, fontWeight: 800 },
   p: { margin: '0 auto 30px', maxWidth: 540, fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.86)' },
