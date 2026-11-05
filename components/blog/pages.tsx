@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { BlogArticle, BlogCta, BlogShell, Divider, PostCard } from '@/components/blog/BlogLayout';
 import { plain } from '@/components/blog/Rich';
 import { PageSchema } from '@/components/PageSchema';
+import { ArrowRightIcon } from '@/components/icons';
 import { BLOG_AUTHOR } from '@/lib/blog-author';
 import styles from '@/components/blog/blog.module.css';
 import { getPost, postsFor, relatedPosts, type BlogPost } from '@/lib/blog-posts';
@@ -12,6 +13,7 @@ import { ORG_ID } from '@/lib/schema';
 
 import { SITE_URL } from '@/lib/location';
 const FAVICON = '/assets/filesafe/qR8peonBlnjGI3ZuLHQP/media/695b9e7d17768458ae206a19.png';
+const OG_IMAGE = '/assets/filesafe/BljrSmLCnm4gF9LpsTRZ/media/6a90ca4e747464c6b3a3be10.png.webp';
 const OG_LOCALE: Record<Locale, string> = { en: 'en_US' };
 const LANG: Record<Locale, string> = { en: 'en-US' };
 
@@ -26,11 +28,18 @@ export function blogIndexMetadata(locale: Locale): Metadata {
     title: t.indexMetaTitle,
     description: t.indexMetaDesc,
     alternates: alternates('/blog', locale),
-    openGraph: { type: 'website', title: t.indexMetaTitle, description: t.ogDesc, url: localizeHref('/blog', locale), locale: OG_LOCALE[locale], images: [posts[0].featured.src] },
-    twitter: { card: 'summary_large_image', images: [posts[0].featured.src] },
+    openGraph: { type: 'website', title: t.indexMetaTitle, description: t.ogDesc, url: localizeHref('/blog', locale), locale: OG_LOCALE[locale], images: [posts[0]?.featured.src || OG_IMAGE] },
+    twitter: { card: 'summary_large_image', images: [posts[0]?.featured.src || OG_IMAGE] },
     icons: { icon: FAVICON },
   };
 }
+
+/* the guide pages offered while the blog is empty */
+const GUIDES: Array<[href: string, label: string]> = [
+  ['/how-to-choose-a-mattress', 'How to choose a mattress'],
+  ['/dream-mapping', 'Dream Mapping'],
+  ['/faq', 'FAQ'],
+];
 
 export function BlogIndexPage({ locale }: { locale: Locale }) {
   const t = ui(locale).blog;
@@ -47,11 +56,26 @@ export function BlogIndexPage({ locale }: { locale: Locale }) {
         </div>
       </header>
       <main className={`${styles.container} ${styles.indexGrid}`}>
-        <div className={styles.cards}>
-          {posts.map((p) => (
-            <PostCard key={p.slug} post={p} headingLevel="h2" locale={locale} />
-          ))}
-        </div>
+        {posts.length ? (
+          <div className={styles.cards}>
+            {posts.map((p) => (
+              <PostCard key={p.slug} post={p} headingLevel="h2" locale={locale} />
+            ))}
+          </div>
+        ) : (
+          /* no article published for this store yet (lib/blog-posts.ts): a short notice and the guides that exist */
+          <section className={styles.visit} aria-labelledby="blog-empty-title">
+            <h2 id="blog-empty-title" className={styles.h2}>{t.emptyTitle}</h2>
+            <div className={styles.visitCard}>
+              <p className={styles.visitLine}>{t.emptyText}</p>
+              <p className={styles.visitLine}>
+                {GUIDES.map(([href, label], i) => (
+                  <span key={href}>{i > 0 && ' · '}<a href={localizeHref(href, locale)}>{label} <ArrowRightIcon /></a></span>
+                ))}
+              </p>
+            </div>
+          </section>
+        )}
         <BlogCta locale={locale} />
         <div style={{ height: 'clamp(48px, 6vw, 80px)' }} />
       </main>

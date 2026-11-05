@@ -187,6 +187,19 @@ names Castle Rock, ends "| Snooze Mattress" and is ≤ 60 characters, descriptio
 15 pages over the limits after A1 (measured on the A build: titles over 60 characters or without "Castle Rock", descriptions over 155); retitled here (`scripts/seo-metadata.mjs` updated to match), the service-area pages
 read "Serving Parker from Castle Rock", the legal pages "Castle Rock Privacy Policy" / "Castle Rock Terms & Conditions".
 
+### F. Blog
+
+No McAllen post is carried over: `lib/blog-posts.ts` `POSTS` is empty, the McAllen articles (`lib/blog-posts-2026-10.ts`
+and the posts inlined in `lib/blog-posts.ts`), their Spanish twins and the shared image map (`lib/blog-images.ts`) are
+deleted. `/blog` renders the "New articles coming soon" state with the guide pages (`components/blog/pages.tsx`), the
+header shows Blog as a plain link (the dropdown returns with the first post, `lib/blog-nav.ts`), and
+`app/(en)/blog/[slug]` is absent until the first Castle Rock article (`PostPage` in `components/blog/pages.tsx` stays;
+restore the route folder from the McAllen repo together with the post data). `vercel.json` 308s the McAllen slugs
+(`/blog/custom-mattresses-improving-health`, `/blog/pressure-mapping-for-sleep`, `/blog/mattresses-that-relieve-aches`,
+`/blog/memory-foam-vs-hybrid-mattress-mcallen`, `/blog/mattress-size-guide-mcallen` and their relocated spellings) and the
+builder's `/post/*` URLs to `/blog`. The sitemap and llms.txt list posts automatically once they exist; the post-build
+gate now covers the blog tree too.
+
 ---
 
 # History: the McAllen conversion this site was cloned from

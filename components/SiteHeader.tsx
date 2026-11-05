@@ -31,7 +31,8 @@ function navTables(locale: Locale) {
     { label: t.nav.products, href: '/mattresses', menu: 'products' },
     { label: t.nav.financing, href: '/mattress-financing' },
     { label: t.nav.sales, href: '/mattress-sales' },
-    { label: t.nav.blog, href: BLOG_INDEX.href, menu: 'blog' },
+    // Blog is a dropdown only while there are posts to list (lib/blog-nav.ts); a plain link otherwise
+    { label: t.nav.blog, href: BLOG_INDEX.href, ...(blogNav(locale).length ? { menu: 'blog' as const } : {}) },
     { label: t.nav.quiz, href: '/sleep-quiz' },
   ];
   const item = (key: (typeof PRODUCT_KEYS)[number]): MenuLink => ({ label: t.products[key].label, desc: t.products[key].desc, href: PRODUCT_HREFS[key].href, icon: PRODUCT_HREFS[key].icon });

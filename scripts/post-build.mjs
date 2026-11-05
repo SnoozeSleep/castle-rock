@@ -36,8 +36,6 @@ const MARKERS = [
   ['Texas', /\bTX\b|Texas|Rio Grande|Edinburg|Pharr|Winter Texan/g],
   ['Spanish route', /href="\/es(?:\/|")/g],
 ];
-/* the McAllen blog posts are removed by section F's commit; until then that tree is not gated */
-const UNGATED = /^blog(\/|\.html$)/;
 
 function walk(dir, out = []) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const p = path.join(dir, e.name); if (e.isDirectory()) { if (e.name !== '_next' && e.name !== 'assets') walk(p, out); } else if (/\.(html|xml|txt|js|body)$/.test(e.name)) out.push(p); } return out; }
 
@@ -48,7 +46,6 @@ const files = fs.existsSync(OUT) ? walk(OUT) : [];
 let pages = 0;
 for (const f of files) {
   const rel = path.relative(OUT, f).replace(/\\/g, '/');
-  if (UNGATED.test(rel)) continue;
   const s = fs.readFileSync(f, 'utf8');
   for (const [name, re] of MARKERS) { const m = s.match(re); if (m) problems.push(`${rel}: ${name} ×${m.length} (e.g. "${m[0]}")`); }
   if (!rel.endsWith('.html') || /^(404|_not-found|ghl-stub)\.html$/.test(rel)) continue;

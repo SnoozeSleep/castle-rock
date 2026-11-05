@@ -43,6 +43,8 @@ export type UiStrings = {
     eyebrow: string; indexTitle: string; indexIntro: string; home: string; blogCrumb: string; readArticle: string; read: (title: string) => string; faq: string; related: string;
     ctaEyebrow: string; ctaTitle: string; ctaText: string; ctaBook: string; ctaCall: (phone: string) => string; ctaAddr: string;
     indexMetaTitle: string; indexMetaDesc: string; ogDesc: string; section: string; by: string; sources: string;
+    /* the empty state of /blog while no article is published (lib/blog-posts.ts) */
+    emptyTitle: string; emptyText: string;
   };
 };
 
@@ -90,6 +92,7 @@ const en: UiStrings = {
     indexMetaTitle: 'Castle Rock Sleep Blog | Snooze Mattress',
     indexMetaDesc: 'Sleep tips from Snooze Mattress + Wellness in Castle Rock: custom mattresses, pressure mapping and how the right mattress relieves aches and pains.',
     ogDesc: 'Custom mattresses, pressure mapping and better sleep — from the Snooze team in Castle Rock.', section: 'Sleep & Wellness', by: 'By', /* + the author's name, lib/blog-author.ts */ sources: 'Sources',
+    emptyTitle: 'New articles coming soon', emptyText: 'The Castle Rock Sleep Blog is just getting started. In the meantime, our guides cover how to choose a mattress, what Dream Mapping measures and the mattress sizes and types we carry.',
   },
 };
 
