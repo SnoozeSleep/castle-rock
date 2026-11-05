@@ -48,14 +48,15 @@ const COPY = {
 /* one icon per step: the sensor bed, the five minutes, the Sleep Coach, free with no obligation, couples */
 const VISIT_ICONS: IconName[] = ['sensor-bed', 'clock', 'user', 'badge-check', 'people'];
 
-/* The Dream Mapping booking calendar: the client's embed URL from lib/integrations.ts ([CR_CALENDAR_ID], e.g.
-   https://link.snoozesleep.com/widget/booking/<calendarId>; iframe id = `<calendarId>_<timestamp>`). Empty until the
-   client supplies it: the page then shows a "being connected" card with the phone and e-mail instead of the iframe and
+/* The Dream Mapping booking calendar: the client's embed URL from lib/integrations.ts (bookingCalendarUrl,
+   https://link.snoozesleep.com/widget/booking/<calendarId>; iframe id = `<calendarId>_<timestamp>`), supplied November
+   5, 2026. Should it ever be emptied, the page shows a "being connected" card with the phone and e-mail instead of the iframe and
    loads no widget script. The previous location's calendar id was removed. */
 const CALENDAR_URL = INTEGRATIONS.bookingCalendarUrl.trim().replace(/\/+$/, '');
 export const BOOKING_CALENDAR_ID = CALENDAR_URL ? CALENDAR_URL.slice(CALENDAR_URL.lastIndexOf('/') + 1) : '';
-/* the client's embed id: `<calendarId>_1788459899479` (the embed's own <br> after the iframe is dropped on purpose) */
-const BOOKING_EMBED_ID = `${BOOKING_CALENDAR_ID || 'castle-rock-dream-mapping'}_1788459899479`;
+/* the client's embed id: `<calendarId>_1793899704757`, as in the supplied snippet (the embed's own <br> after the iframe
+   is dropped on purpose) */
+const BOOKING_EMBED_ID = `${BOOKING_CALENDAR_ID || 'castle-rock-dream-mapping'}_1793899704757`;
 
 /* Height guard for the calendar iframe (October 27, 2026; made deterministic October 28, 2026).
    The widget reports its height two ways: iframe-resizer messages ("[iFrameSizer]<id>:<height>:<width>:<trigger>"), which

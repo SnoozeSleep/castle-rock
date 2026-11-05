@@ -1,4 +1,7 @@
 {
-  "_comment": "Customer reviews supplied by the client, verbatim — customer text is never edited or translated. Rendered above the reviews widget by scripts/recent-reviews.mjs (npm run reviews). Castle Rock, November 2026: EMPTY on purpose — the previous location's reviews were removed and none have been supplied for this store (NEEDS CLIENT INPUT); with no reviews nothing is rendered.",
-  "reviews": []
+  "_comment": "Customer reviews supplied by the client, verbatim — customer text is never edited (the reviewers' own spelling stays as written, e.g. \"matress\"; one line-break artifact of the source, \"go t some\", is joined). Rendered above the LeadConnector reviews widget by scripts/recent-reviews.mjs (npm run reviews) as plain cards: stars, name, the month, the source badge; no Review / AggregateRating schema. Castle Rock, November 5, 2026: two Google reviews (date = the month the client gave). A staff first name appears only inside the reviewers' own words; the site names no staff. The 3-star review the client listed is not shown, by the client's instruction.",
+  "reviews": [
+    {"name": "Ryan E.", "stars": 5, "source": "Google review", "date": "2026-06", "dateDisplay": "Jun 2026", "text": "Kyle was very helpful. I've been having some LBP issues, the pressure mapping was beneficial in confirming the type of mattress I needed. Also felt confident I was getting a fair deal."},
+    {"name": "Christian B.", "stars": 5, "source": "Google review", "date": "2026-05", "dateDisplay": "May 2026", "text": "Went to 5 different matress stores and Kyle at Snooze was the best out of all of them. I asked for the best and he delivered. It was crazy to think that at every other store their best was one of the bottom tier mattresses he carried. He worked with us to get something great and got some very nice sheets and pillows at a great price. Thanks Kyle!"}
+  ]
 }

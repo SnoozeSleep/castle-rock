@@ -143,22 +143,22 @@
  "widgets": {
   "form": {
    "file": "widgets/form.html",
-   "formId": "CR_FORM_ID",
-   "defaultFormId": "CR_FORM_ID",
+   "formId": "j5X6ShHH15vRKdggRsLr",
+   "defaultFormId": "j5X6ShHH15vRKdggRsLr",
    "formName": "Optin",
-   "_comment": "Castle Rock, CO: the LeadConnector opt-in form id is a placeholder until the client supplies it (lib/integrations.ts formId; scripts/integrations.mjs writes it into the generated pages); defaultFormId is the fallback for elements without one"
+   "_comment": "Castle Rock, CO (November 5, 2026): the LeadConnector Optin form, embedded INLINE, data-height 736 (lib/integrations.ts formId / formHeight; scripts/integrations.mjs writes them into the generated pages); defaultFormId is the fallback for elements without one"
   },
   "calendar": {
    "file": "widgets/calendar.html",
-   "calendarId": "CR_CALENDAR_ID",
-   "defaultCalendarId": "CR_CALENDAR_ID",
-   "_comment": "Castle Rock, CO: placeholder — the booking page is hand-written (components/BookingPage.tsx reads lib/integrations.ts bookingCalendarUrl)"
+   "calendarId": "3JULWAhT1FJeSO6Nk2Rn",
+   "defaultCalendarId": "3JULWAhT1FJeSO6Nk2Rn",
+   "_comment": "Castle Rock, CO: the Dream Mapping calendar — the booking page is hand-written (components/BookingPage.tsx reads lib/integrations.ts bookingCalendarUrl)"
   },
   "reviews": {
    "file": "widgets/reviews.html",
-   "locationId": "CR_GHL_LOCATION_ID",
-   "widgetId": "CR_REVIEWS_WIDGET_ID",
-   "_comment": "Castle Rock, CO: placeholders — scripts/reviews-widget.mjs renders the widget from lib/integrations.ts (a pending notice while empty)"
+   "locationId": "gsqZfpbY5MmVessxREvK",
+   "widgetId": "679d4982d04bf58812792124",
+   "_comment": "Castle Rock, CO: the LeadConnector reviews widget (scripts/reviews-widget.mjs renders it from lib/integrations.ts; the hidden copy keeps the placeholder src)"
   }
  },
  "removeElements": [
