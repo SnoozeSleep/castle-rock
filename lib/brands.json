@@ -1,0 +1,4 @@
+{
+  "_note": "The brands this store carries, in the client's order (approved list, November 4, 2026): the logo strip, the /mattresses brand blocks (scripts/brand-lineup.mjs), the store's schema brand[] (lib/schema.ts), the /mattresses ItemList (scripts/page-schema.mjs checks the page's brand headings against this list) and every brand list in the copy.",
+  "mattressBrands": ["Tempur-Pedic", "Sealy", "Stearns & Foster", "Serta", "Beautyrest", "Helix", "Brooklyn Bedding", "FLOWT by King Koil", "Snooze Handcrafted by King Koil", "Copper by Spring Air", "Snooze-O-Pedic", "BedTech", "BedGear", "Sleeptone", "DreamFit"]
+}

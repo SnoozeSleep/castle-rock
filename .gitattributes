@@ -1,0 +1,11 @@
+# One line-ending convention for every text file (the converter and the relocation scripts match exact text).
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.woff2 binary
+*.woff binary
+*.ico binary
+*.svg text
