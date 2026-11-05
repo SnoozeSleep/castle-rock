@@ -16,12 +16,13 @@
  *     (components/blog/BlogLayout.tsx BlogCta: the NAP + "Get Dream Mapped" → /booking) under the article's closing
  *     heading, not repeated as text; a non-address sentence of that paragraph (post 1) is the block's lead.
  * No staff quote, price, offer or source is added. Hero images: the brief's list (posts 2–5, the client's media library
- * through next/image — next.config.ts remotePatterns); post 1 uses the Pressure Mapping station photo already in this
- * site's assets because no storefront photo (lib/location.ts STORE_PHOTO_URL) is supplied yet.
+ * through next/image — next.config.ts remotePatterns); post 1 shows the Castle Rock storefront (lib/location.ts
+ * STORE_PHOTO_URL, since November 5, 2026).
  *
  * Inline markup inside paragraphs, list items, table cells and FAQ answers (components/blog/Rich.tsx): [text](href)
  * links, **bold**, _italic_.
  */
+import { LOCATION, STORE_PHOTO_URL } from './location';
 
 export type BlogImage = { src: string; alt: string; width: number; height: number };
 
@@ -76,6 +77,12 @@ export type BlogPost = {
 const MEDIA = 'https://assets.cdn.filesafe.space/kfb27KLffGslRPEihqeR/media/';
 const hero = (file: string, width: number, height: number, alt: string): BlogImage => ({ src: `${MEDIA}${file}`, width, height, alt });
 
+/* post 1's hero: the Castle Rock storefront (lib/location.ts STORE_PHOTO_URL, 2048×1536, supplied November 5, 2026);
+   should that constant ever be emptied, the Pressure Mapping station photo already in this site's assets stands in */
+const STOREFRONT_HERO: BlogImage = STORE_PHOTO_URL
+  ? { src: STORE_PHOTO_URL, width: 2048, height: 1536, alt: LOCATION.storefrontAlt }
+  : { src: '/assets/filesafe/jbbpu1HIxUn7iMOO9Ysd/media/69d8277f74d020e518f93f1e.png.webp', width: 2000, height: 1334, alt: 'A Sleep Coach in Snooze pajamas holding a pillow beside a man lying on the Pressure Mapping bed' };
+
 /* go-live day (store time, America/Denver) */
 const DATE = '2026-11-05';
 const DATE_DISPLAY = 'November 5, 2026';
@@ -90,12 +97,7 @@ export const POSTS: BlogPost[] = [
     keywords: ['moving to Castle Rock', 'new mattress', 'Sleep Fit', 'Dream Mapping', 'Snooze Mattress + Wellness Castle Rock'],
     datePublished: DATE,
     dateDisplay: DATE_DISPLAY,
-    featured: {
-      src: '/assets/filesafe/jbbpu1HIxUn7iMOO9Ysd/media/69d8277f74d020e518f93f1e.png.webp',
-      width: 2000,
-      height: 1334,
-      alt: 'A Sleep Coach in Snooze pajamas holding a pillow beside a man lying on the Pressure Mapping bed',
-    },
+    featured: STOREFRONT_HERO,
     excerpt: 'Moving to a new home means boxes, schedules and a very long to-do list.',
     navBlurb: 'Should you move your old mattress?',
     sections: [

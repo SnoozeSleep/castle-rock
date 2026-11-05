@@ -40,7 +40,9 @@
     "relocate:castle-rock": "node scripts/relocate-castle-rock.mjs",
     "audit": "node scripts/audit-location.mjs",
     "integrations": "node scripts/integrations.mjs",
-    "reviews:widget": "node scripts/reviews-widget.mjs"
+    "reviews:widget": "node scripts/reviews-widget.mjs",
+    "images:castle-rock": "node scripts/castle-rock-images.mjs",
+    "heroes:castle-rock": "node scripts/castle-rock-heroes.mjs"
   },
   "dependencies": {
     "next": "15.5.25",

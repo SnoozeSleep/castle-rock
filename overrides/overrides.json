@@ -2,8 +2,8 @@
  "_comment": "Hand-provided section code and live widget embeds applied by scripts/convert.mjs. `rules` match a GoHighLevel custom-code element by substrings of its current HTML (so desktop + mobile copies are both replaced) and swap in `file`; {{custom_values.*}} merge tags are filled from `vars`.",
  "vars": {
   "custom_values.new_store_city_location": "Castle Rock",
-  "custom_values.store_image_url": "/assets/castle-rock/photo-coming-soon.svg",
-  "custom_values.5th_image": "/assets/castle-rock/photo-coming-soon.svg"
+  "custom_values.store_image_url": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d41662d4d706d4803a47.jpg",
+  "custom_values.5th_image": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a32d96e6dd61c546a06d932.png"
  },
  "imageReplacements": {
   "_comment": "old media path -> new media path, applied to every reference (bare CDN URL, resize variants, payload). The new file and its r_320…r_1200 variants are added to the clone tree with `node scripts/image-variants.mjs <file> <mediaPath>`. Castle Rock, November 2026: the previous storefront mappings are gone (the location cards show the placeholder card, scripts/relocate-castle-rock.mjs).",
@@ -79,7 +79,9 @@
   "d3cbba8a-769c-497c-9a9b-c17e94c8929d": "Thermometer and cloud icon (sleep cooler)",
   "a3f44f2e-08b6-4e7e-bf54-5da512592f7c": "Confetti popper icon",
   "b20f536c-4293-458f-b4c0-b4c740100315": "Email envelope icon",
-  "b20fc504-d9c6-42e8-90ff-70cd33f4eecf": "SMS text message icon"
+  "b20fc504-d9c6-42e8-90ff-70cd33f4eecf": "SMS text message icon",
+  "6a84d41662d4d706d4803a47": "Snooze Mattress + Wellness storefront in Castle Rock, CO",
+  "6a32d96e6dd61c546a06d932": "Sleep Coaches at Snooze Mattress + Wellness in Castle Rock"
  },
  "rules": [
   {
@@ -208,23 +210,23 @@
  ],
  "heroBackgrounds": {
   "index.html": {
-   "desktop": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png",
+   "desktop": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d78596d2b224d3ec78d0.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
   },
   "home-page.html": {
-   "desktop": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png",
+   "desktop": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d78596d2b224d3ec78d0.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
   },
   "main-page.html": {
-   "desktop": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png",
+   "desktop": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d78596d2b224d3ec78d0.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
   },
   "mattress-financing.html": {
-   "desktop": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png",
+   "desktop": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d7854aaffc55cd0cf4f2.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
   },
   "about-us.html": {
-   "desktop": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png",
+   "desktop": "https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d78562d4d706d482c6e1.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
   },
   "mattresses.html": {
@@ -262,6 +264,7 @@
   "mattress-sales.html": {
    "desktop": "https://assets.cdn.filesafe.space/ARD47WoZpqaZSQ9MSxLD/media/69a605e6abd0593098698c8b.png",
    "mobile": "https://assets.cdn.filesafe.space/BljrSmLCnm4gF9LpsTRZ/media/6a9899f9da522bf173a9bd91.png"
-  }
+  },
+  "_comment": "Castle Rock (November 5, 2026): the desktop heroes of the home, About Us and financing pages are the client's composites in the Castle Rock media library, applied by scripts/castle-rock-heroes.mjs (optimizer URL in the CSS + preload, the original in the payload); phones keep the shared background."
  }
 }

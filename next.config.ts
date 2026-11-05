@@ -9,12 +9,18 @@ const nextConfig: NextConfig = {
   // so `next start` behaves like the deployment.
   // Assets are always relative (no assetPrefix).
   experimental: { inlineCss: true }, // the page's own CSS is written into the HTML instead of render-blocking stylesheet requests
-  // next/image (the blog's hero and card images, the footer logo) goes through the image optimizer: resized and served as
-  // WebP at /_next/image, never the originals. Remote sources are limited to the client's media library folder that holds
-  // the blog hero images (the Castle Rock blog brief, November 5, 2026); local /assets files need no pattern.
+  // next/image's optimizer (/_next/image) serves the blog's hero and card images, the footer logo, and — from the
+  // generated pages, by URL — the location photos and the desktop heroes (lib/location.ts STORE_PHOTO_URL /
+  // TEAM_PHOTO_URL, overrides/overrides.json heroBackgrounds): resized and as WebP, never the 1–2 MB originals. Remote
+  // sources are limited to two folders of the client's media library: the Castle Rock location's own
+  // (gsqZfpbY5MmVessxREvK: storefront, team, heroes — November 5, 2026) and the one that holds the blog hero images
+  // (kfb27KLffGslRPEihqeR); local /assets files need no pattern.
   images: {
     formats: ['image/webp'],
-    remotePatterns: [{ protocol: 'https', hostname: 'assets.cdn.filesafe.space', pathname: '/kfb27KLffGslRPEihqeR/media/**' }],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'assets.cdn.filesafe.space', pathname: '/gsqZfpbY5MmVessxREvK/media/**' },
+      { protocol: 'https', hostname: 'assets.cdn.filesafe.space', pathname: '/kfb27KLffGslRPEihqeR/media/**' },
+    ],
   },
   async rewrites() {
     return [

@@ -29,17 +29,21 @@ const PLACE_ID = '';
 const GBP_URL = PLACE_ID ? `https://www.google.com/maps/place/?q=place_id:${PLACE_ID}` : '';
 const MAPS_SEARCH = 'https://www.google.com/maps/search/?api=1&query=6360+Promenade+Pkwy+Castle+Rock+CO+80108';
 
-/* The location-specific photos (November 2026 brief): both EMPTY until the client supplies them. While empty, the pages show
-   the navy "Photo coming soon" card (PHOTO_PLACEHOLDER) in their place; no previous location's photo is used anywhere.
-   scripts/relocate-castle-rock.mjs writes the same values into the generated pages (change both together):
-     STORE_PHOTO_URL — the storefront: the location cards (the home page and every "Visit Us" block, the About Us
-                       storefront) and the LocalBusiness `image` (the logo alone while empty);
-     TEAM_PHOTO_URL  — the team: the home page's "A Family-Owned Business with a Personal Touch" / "Meet Your Sleep
-                       Coaches" card (column background on desktop, photo on phones) and Step 05 "Take Home Better Sleep"
-                       of the 5-step flow on /about-us and /mattress-financing — those two places only; there is no
-                       standalone team section. */
-export const STORE_PHOTO_URL = '';
-export const TEAM_PHOTO_URL = '';
+/* The location-specific photos (supplied November 5, 2026): the client's Castle Rock GoHighLevel media library (location
+   gsqZfpbY5MmVessxREvK). The pages load them through next/image's optimizer (/_next/image?url=…&w=…&q=75 — next.config.ts
+   images.remotePatterns allows that folder), resized and as WebP, never the originals; the JSON-LD carries the original
+   (absolute, crawlable). scripts/castle-rock-images.mjs (npm run images:castle-rock) writes them into the generated
+   pages — markup, hydration payload and the home team column's CSS — and puts the navy "Photo coming soon" card
+   (PHOTO_PLACEHOLDER) back wherever a constant is emptied again. Change the constants here, then run the script:
+     STORE_PHOTO_URL — the storefront (2048×1536 JPEG): the location cards (the home page and every "Visit Us" block,
+                       the About Us storefront), the LocalBusiness `image` and the hero of blog post 1
+                       (lib/blog-posts.ts);
+     TEAM_PHOTO_URL  — the team (680×1020 PNG, a portrait): the home page's "A Family-Owned Business with a Personal
+                       Touch" / "Meet Your Sleep Coaches" card (column background on desktop, photo on phones) and Step
+                       05 "Take Home Better Sleep" of the 5-step flow on /about-us and /mattress-financing — those two
+                       places only; there is no standalone team section. */
+export const STORE_PHOTO_URL = 'https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a84d41662d4d706d4803a47.jpg';
+export const TEAM_PHOTO_URL = 'https://assets.cdn.filesafe.space/gsqZfpbY5MmVessxREvK/media/6a32d96e6dd61c546a06d932.png';
 export const PHOTO_PLACEHOLDER = '/assets/castle-rock/photo-coming-soon.svg';
 
 export const LOCATION = {
