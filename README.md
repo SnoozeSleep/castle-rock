@@ -310,11 +310,14 @@ The repository was created on November 5, 2026 before this work started (the bri
 empty `castle-rock` repository was used). It was created **public**; the brief asked for private, and changing the
 visibility needs an organisation admin (Settings → General → Danger Zone → Change visibility).
 
-Vercel: project `snooze-mattress/castle-rock`, connected to this repository (it appeared between the first push and the
-install of November 5, 2026); every push to `main` deploys, and the result shows as the commit status "Vercel" on
-GitHub. The deployment's `*.vercel.app` host sits behind Vercel's login (deployment protection), so it cannot be opened
-or curl-ed anonymously: someone signed in to the team checks the preview (assets, fonts, icons, hero) and
-`curl -I https://<deployment>/es/mattresses` → 308. Do NOT set `NEXT_PUBLIC_SITE_URL` until the custom domain
+Vercel: project `snooze-mattress/castle-rock` (it appeared between the first push and the install of November 5,
+2026). Its one deployment known from here is of the blog commit `5f10856` (commit status "Vercel = success" on GitHub,
+17:25 UTC, when the project was created). **The install commits pushed afterwards (`503383d` … `5f544ad`, 18:06–18:08
+UTC) had no Vercel status 14 minutes later** — on the sibling repositories the status appears within a minute of a
+push — so from here they are NOT confirmed as deployed: check the project's Git connection / production branch in the
+Vercel dashboard, or redeploy `main` there. The deployment's `*.vercel.app` host sits behind Vercel's login (deployment
+protection), so it cannot be opened or curl-ed anonymously: someone signed in to the team checks the preview (assets,
+fonts, icons, hero) and `curl -I https://<deployment>/es/mattresses` → 308. Do NOT set `NEXT_PUBLIC_SITE_URL` until the custom domain
 (`[CR_DOMAIN]`, expected `castlerock.snoozemattresscompany.com`) is attached and resolving; then set it in the
 Production environment only and redeploy.
 
