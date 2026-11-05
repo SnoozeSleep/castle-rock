@@ -385,3 +385,11 @@ html[lang="es"] #heading-JQfUWePMYv h2 { max-width: none; font-size: min(46px, 5
    faces off, so the focal point sits near the top — heads to waist stay in the frame at every width. Keyed by the photo's
    media id, so the rule goes with the photo (November 5, 2026). */
 .pm-section .pm-img-frame img[src*="6a32d96e6dd61c546a06d932"] { object-position: 50% 18%; }
+/* Tracking pixels that tags append straight to <body> never take space or show an image placeholder (November 5, 2026).
+   The shared GTM container (GTM-TVPN94M) has a custom HTML tag that creates a 1x1 <img> with no size or style and
+   appends it to <body> on DOMContentLoaded; its endpoint does not answer with an image (the browser blocks it as
+   ERR_BLOCKED_BY_ORB), so on a real connection it showed as a broken-image icon in a white strip under the footer
+   (found and fixed on the Indianapolis site, which shares the container). Nothing the site renders is a direct child of
+   <body> (React output sits in #snz-app, the builder's teleports in #teleports), so this matches only such pixels;
+   their request has already gone out when the src was set, so tracking is unaffected. */
+body > img { display: none !important; }

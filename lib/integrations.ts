@@ -2,8 +2,8 @@
    DISABLES the integration: nothing is rendered, nothing is loaded, no event is lost (the dataLayer events in
    public/snz-events.js and the quiz keep pushing to window.dataLayer either way). Every previous location's id was
    removed. The GoHighLevel values (location, reviews widget, calendar, form, quiz webhook) are the client's, supplied
-   November 5, 2026; the tracking and chat ids are still [CR_*] placeholders, listed in the README under NEEDS CLIENT
-   INPUT until supplied.
+   November 5, 2026, like the tracking ids (GTM, GA4, Simpli.fi); the chat widget id is still a [CR_*] placeholder,
+   listed in the README under NEEDS CLIENT INPUT until supplied.
 
    Readers: components/Tracking.tsx (ga4Id, gtmIds, simplifiTagId; googleSiteVerification through the layout metadata),
    components/ChatWidget.tsx (chatWidgetId), components/BookingPage.tsx (bookingCalendarUrl), scripts/integrations.mjs
@@ -14,13 +14,13 @@
 export const INTEGRATIONS = {
   /** Google Search Console verification (meta name="google-site-verification"); none supplied */
   googleSiteVerification: '',
-  /** [CR_GTM] Google Tag Manager container id(s), e.g. 'GTM-XXXXXXX'. The shared store container GTM-TVPN94M goes in
-      here ONLY once the agency confirms it applies to Castle Rock. */
-  gtmIds: [] as string[],
-  /** [CR_GA4] Google Analytics 4 measurement id, e.g. 'G-XXXXXXXXXX' (gtag.js + config, installed once) */
-  ga4Id: '',
-  /** [CR_SIMPLIFI] Simpli.fi tag id (https://tag.simpli.fi/sifitag/<id>, async) */
-  simplifiTagId: '',
+  /** Google Tag Manager container(s): the shared store container, supplied for Castle Rock (November 5, 2026); one
+      snippet per container in <head> at parse time, its <noscript> iframe right after <body> */
+  gtmIds: ['GTM-TVPN94M'] as string[],
+  /** Google Analytics 4 measurement id (gtag.js + config, installed once, before the container) */
+  ga4Id: 'G-RRW8EFJHLW',
+  /** Simpli.fi tag id (https://tag.simpli.fi/sifitag/<id>, async) */
+  simplifiTagId: 'f02b62cf-a006-4430-9df7-96dfd0660612',
   /** [CR_CHAT_EN] LeadConnector chat widget id (data-widget-id); the site is English only */
   chatWidgetId: '',
   /** the Castle Rock GoHighLevel sub-account (location) id (supplied November 5, 2026): the reviews widget URL, the CDN

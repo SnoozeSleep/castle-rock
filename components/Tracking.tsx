@@ -7,8 +7,8 @@
         first thing in <body>
      3. Simpli.fi (async)
    plus the Google Search Console verification meta (rendered through the layout's metadata). Every id lives in
-   lib/integrations.ts ([CR_GA4], [CR_GTM], [CR_SIMPLIFI]); an EMPTY id renders nothing — the previous location's
-   tags were removed. Site events (phone_click, directions_click, booking_confirmation, optin_submit, quiz_*) go to the
+   lib/integrations.ts (supplied November 5, 2026: the shared container GTM-TVPN94M, GA4 G-RRW8EFJHLW, the Simpli.fi
+   tag); an EMPTY id renders nothing — the previous location's tags were removed. Site events (phone_click, directions_click, booking_confirmation, optin_submit, quiz_*) go to the
    same window.dataLayer from public/snz-events.js and the quiz, so a container picks them up the moment it is configured.
 
    Why this is a client component: React 19 treats every `<script async src>` as a hoistable resource and moves it

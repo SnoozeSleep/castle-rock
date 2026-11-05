@@ -45,7 +45,9 @@ const LEFTOVERS = [
   { name: 'old domain', re: /mcallen\.snoozemattresscompany\.com|brownsville-webiste|rockwall\.snoozemattresscompany/gi, ok: (ctx, file) => tooling(ctx, file) || /scripts\//.test(file) },
   { name: 'Englander / Puffy', re: /Englander|Puffy/g, ok: (ctx, file) => /scripts\/|README/.test(file) },
   { name: 'optin-page (only the redirect rule may name it)', re: /optin-page/g, ok: (ctx, file) => /vercel\.json|scripts\/|README/.test(file) },
-  { name: 'McAllen tracking ids', re: /G-9R1JGVBRBR|G-TS1RXQVPYT|b781856a|GTM-TVPN94M/g, ok: (ctx, file) => /scripts\/|README|lib\/integrations\.ts/.test(file) },
+  // GTM-TVPN94M is the shared store container and belongs on the Castle Rock site too (supplied November 5, 2026); the
+  // McAllen GA4 properties and its Simpli.fi tag do not
+  { name: 'McAllen tracking ids', re: /G-9R1JGVBRBR|G-TS1RXQVPYT|b781856a/g, ok: (ctx, file) => /scripts\/|README/.test(file) },
   { name: 'McAllen CRM ids (chat, quiz webhook, form, calendar, reviews)', re: /6ada7129c5fa6117307c554f|6ada73894325b023027e7371|00b3cdec-7a6f-4184-95ec-81210f1e7bc8|0BTnYKylVR6OcWJug3r8|lrAns7Z8j3vEJW3DC0Yr|67f5847f79c4ab793baf0087/g, ok: (ctx, file) => /scripts\/|README/.test(file) },
   { name: 'McAllen storefront / team / hero photos', re: /684480ff2c95c570cfc22e24|6a7578249a9c7792ea5a8b22|699c969010bc9c1e4d659063|69a1cbdf917b4b217201b5ff|69a601e75a52f4e92a27dcf5/g, ok: (ctx, file) => /scripts\/|README|asset-map|conversion-report|overrides\/overrides\.json|public\/ghl-offline-shim\.js|lib\/ghl-shim\.ts/.test(file) },
   // the McAllen GoHighLevel sub-account id is the base path of the shared image library: allowed in image URLs only

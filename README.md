@@ -329,8 +329,6 @@ Production environment only and redeploy.
 | Placeholder | Where | Until supplied |
 |---|---|---|
 | `[CR_DOMAIN]` | the Vercel project's domain + `NEXT_PUBLIC_SITE_URL` (Production) | canonicals, sitemap, robots, llms.txt and JSON-LD use the deployment host; no host redirect |
-| `[CR_GTM]` | `lib/integrations.ts` `gtmIds` — GTM-TVPN94M **only if the agency confirms** it is shared | no tag manager |
-| `[CR_GA4]`, `[CR_SIMPLIFI]` | `lib/integrations.ts` `ga4Id`, `simplifiTagId` | no analytics / Simpli.fi tag |
 | `[CR_CHAT_EN]` | `lib/integrations.ts` `chatWidgetId` | no chat widget |
 | `[CR_PLACE_ID]` | `lib/location.ts` `PLACE_ID`, then `npm run reviews:widget` | address links open a Maps search; no `hasMap` / `geo` / GBP `sameAs`; "Read more reviews on Google" hidden |
 | Form redirect (GoHighLevel setting) | the Optin form `j5X6ShHH15vRKdggRsLr` → on submit: redirect to `https://<domain>/thank/you` | the form shows its inline "Thank you for submitting your entry." message, so the visitor never reaches the noindex thank-you page and `optin_submit` cannot fire |
@@ -376,6 +374,20 @@ widget) → `npm run lastmod` → `npm run build` → `npm run audit` → `npm r
   `opacity:0` and no JS gate. The composites are the client's artwork and are used as supplied: each carries a
   "22+ ★★★★★" Google / Facebook badge and a "Tech Trusted by: NASA / Mayo Clinic" badge, and the About Us one shows the
   same customers-with-a-coach photo other locations use — reported, not altered.
+- **Tracking** (supplied in a second brief the same day; `components/Tracking.tsx`, once per page in `<head>` at parse
+  time, nothing deferred): GA4 gtag.js + config `G-RRW8EFJHLW` (once), the shared container `GTM-TVPN94M` with its
+  `<noscript>` iframe (`display:none;visibility:hidden`) at the start of `<body>`, Simpli.fi
+  `f02b62cf-a006-4430-9df7-96dfd0660612` async. The dataLayer events `phone_click`, `directions_click`,
+  `booking_confirmation`, `optin_submit` (`public/snz-events.js`) and the quiz's `quiz_completed` fire as before.
+  `overrides/global.css` `body > img { display: none !important; }`: the shared container appends a 1x1 tracking pixel
+  to `<body>` whose endpoint returns no image, which showed as a broken-image strip under the footer on the
+  Indianapolis site (same container); nothing the site renders is a direct child of `<body>`, so only such pixels are
+  hidden and their request still goes out. Checked in Chrome on the server build with no interaction: `gtm.js` once,
+  the site's `gtag.js` once (requested by the parser), Simpli.fi once, exactly one `page_view` to `G-RRW8EFJHLW` per
+  page load, the five events fire, 0 px under the footer, 0 console errors. The container then loads its own tags — 11
+  Google Ads ids and other GA4 properties (`G-BF5KB1B4YY`, `G-0MD7ZFNCDK`, `G-NHVCQT3PQG`), and on a cold load sometimes
+  its own copy of gtag.js for `G-RRW8EFJHLW` (still one `page_view`) — that is the container's configuration, not this
+  repository's (agency item).
 - **Quiz** (`lib/integrations.ts quizWebhookUrl` = `public/sleep-fit-quiz.js CONFIG.store.webhookUrl`, `QUIZ_SCRIPT ?v=5`):
   one form-encoded POST per completed quiz to
   `https://services.leadconnectorhq.com/hooks/gsqZfpbY5MmVessxREvK/webhook-trigger/qhy1QYTG65DvduRltRW9`
