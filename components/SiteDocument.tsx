@@ -59,7 +59,7 @@ export function SiteBody({ locale, children }: { locale: Locale; children: React
         <SiteFooter locale={locale} />
         <Script src="/snz-motion.js?v=mv2keep" strategy="afterInteractive" />
         {/* dataLayer events for GA4 key events: phone / directions clicks, booking and opt-in confirmations (SEO audit 7b) */}
-        <Script src="/snz-events.js?v=ev1" strategy="afterInteractive" />
+        <Script src="/snz-events.js?v=ev2" strategy="afterInteractive" />
         {/* the GoHighLevel chat widget in this language, added after the page has loaded (components/ChatWidget.tsx) */}
         <ChatWidget locale={locale} />
         {/* the LeadConnector embed loaders (form_embed.js, review-widget.js), once per page, only where a live embed exists */}

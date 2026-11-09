@@ -36,8 +36,8 @@ export function alternateHref(pathname: string, target: Locale): string {
 type ProductItem = { label: string; desc: string };
 export type UiStrings = {
   langName: string;
-  nav: { home: string; about: string; products: string; financing: string; sales: string; blog: string; quiz: string; allArticles: string };
-  menu: { products: string; accessories: string; latest: string; openMenu: (label: string) => string; closeMenu: (label: string) => string; openSite: string; closeSite: string; siteMenu: string; homeAria: string; call: (phone: string) => string; switchTo: string; sizes: string; sizeLinks: Array<[label: string, href: string]> };
+  nav: { home: string; about: string; products: string; financing: string; sales: string; blog: string; quiz: string; locations: string; allArticles: string };
+  menu: { products: string; accessories: string; latest: string; openMenu: (label: string) => string; closeMenu: (label: string) => string; openSite: string; closeSite: string; siteMenu: string; homeAria: string; call: (phone: string) => string; switchTo: string; sizes: string; sizeLinks: Array<[label: string, href: string]>; thisStore: string };
   products: Record<string, ProductItem>;
   feature: { eyebrow: string; title: string; cta: string; imgAlt: string };
   drawerBook: string;
@@ -51,6 +51,8 @@ export type UiStrings = {
     rights: string; madeWith: string; terms: string; privacy: string; facebook: string; instagram: string;
     companyLinks: Array<[label: string, href: string]>;
     serving: string; areas: Array<[label: string, href: string]>;
+    /* the sister store block (lib/location.ts SISTER_STORE) */
+    sisterTitle: string; sisterLink: (city: string) => string;
   };
   blog: {
     eyebrow: string; indexTitle: string; indexIntro: string; home: string; blogCrumb: string; readArticle: string; read: (title: string) => string; faq: string; related: string;
@@ -66,8 +68,8 @@ export type ProductKey = (typeof PRODUCT_KEYS)[number];
 
 const en: UiStrings = {
   langName: 'English',
-  nav: { home: 'Home', about: 'About Us', products: 'Our Products', financing: 'Financing', sales: 'Sales', blog: 'Blog', quiz: 'Sleep Quiz', allArticles: 'All articles' },
-  menu: { products: 'Products', accessories: 'Sleep Accessories', latest: 'Latest articles', openMenu: (l) => `Open ${l} menu`, closeMenu: (l) => `Close ${l} menu`, openSite: 'Open menu', closeSite: 'Close menu', siteMenu: 'Site menu', homeAria: 'Snooze Mattress + Wellness — home', call: (p) => `Call ${p}`, switchTo: 'Ver en español',
+  nav: { home: 'Home', about: 'About Us', products: 'Our Products', financing: 'Financing', sales: 'Sales', blog: 'Blog', quiz: 'Sleep Quiz', locations: 'Our Locations', allArticles: 'All articles' },
+  menu: { products: 'Products', accessories: 'Sleep Accessories', latest: 'Latest articles', openMenu: (l) => `Open ${l} menu`, closeMenu: (l) => `Close ${l} menu`, openSite: 'Open menu', closeSite: 'Close menu', siteMenu: 'Site menu', homeAria: 'Snooze Mattress + Wellness — home', call: (p) => `Call ${p}`, switchTo: 'Ver en español', thisStore: 'This store',
     sizes: 'Mattresses by size & type',
     sizeLinks: [['Queen', '/queen-mattresses'], ['King', '/king-mattresses'], ['Full & Twin', '/full-twin-mattresses'], ['Memory Foam', '/memory-foam-mattresses'], ['Back Pain', '/mattresses-for-back-pain'], ['Cooling', '/cooling-mattresses']] },
   products: {
@@ -94,6 +96,7 @@ const en: UiStrings = {
     facebook: 'Snooze Mattress + Wellness Castle Rock on Facebook', instagram: 'Snooze Mattress + Wellness Castle Rock on Instagram',
     companyLinks: [['About Us', '/about-us'], ['Financing', '/mattress-financing'], ['Sales', '/mattress-sales'], ['Sleep Blog', '/blog'], ['Sleep Fit Quiz', '/sleep-quiz'], ['Dream Mapping', '/dream-mapping'], ['How to Choose a Mattress', '/how-to-choose-a-mattress'], ['FAQ', '/faq'], ['Book a Dream Mapping Appointment', '/booking'], ['Get In Touch', '/contact-us']],
     serving: 'Also serving', areas: LOCATION.serviceAreas.map((a) => [a.city, a.slug] as [string, string]),
+    sisterTitle: 'Visit Our Sister Store', sisterLink: (city) => `Visit the ${city} site`,
   },
   blog: {
     eyebrow: 'Snooze Sleep Blog', indexTitle: 'Better Sleep Starts Here',
@@ -111,8 +114,8 @@ const en: UiStrings = {
 
 const es: UiStrings = {
   langName: 'Español',
-  nav: { home: 'Inicio', about: 'Nosotros', products: 'Productos', financing: 'Financiamiento', sales: 'Ofertas', blog: 'Blog', quiz: 'Quiz de Sueño', allArticles: 'Todos los artículos' }, // nav label kept short so the desktop row fits on one line; the full 'Nuestros Productos' stays in the footer
-  menu: { products: 'Productos', accessories: 'Accesorios para Dormir', latest: 'Artículos recientes', openMenu: (l) => `Abrir menú ${l}`, closeMenu: (l) => `Cerrar menú ${l}`, openSite: 'Abrir menú', closeSite: 'Cerrar menú', siteMenu: 'Menú del sitio', homeAria: 'Snooze Mattress + Wellness — inicio', call: (p) => `Llamar al ${p}`, switchTo: 'View in English',
+  nav: { home: 'Inicio', about: 'Nosotros', products: 'Productos', financing: 'Financiamiento', sales: 'Ofertas', blog: 'Blog', quiz: 'Quiz de Sueño', locations: 'Nuestras Tiendas', allArticles: 'Todos los artículos' }, // nav label kept short so the desktop row fits on one line; the full 'Nuestros Productos' stays in the footer
+  menu: { products: 'Productos', accessories: 'Accesorios para Dormir', latest: 'Artículos recientes', openMenu: (l) => `Abrir menú ${l}`, closeMenu: (l) => `Cerrar menú ${l}`, openSite: 'Abrir menú', closeSite: 'Cerrar menú', siteMenu: 'Menú del sitio', homeAria: 'Snooze Mattress + Wellness — inicio', call: (p) => `Llamar al ${p}`, switchTo: 'View in English', thisStore: 'Esta tienda',
     sizes: 'Colchones por tamaño y tipo',
     sizeLinks: [['Queen', '/queen-mattresses'], ['King', '/king-mattresses'], ['Full y Twin', '/full-twin-mattresses'], ['Memory Foam', '/memory-foam-mattresses'], ['Dolor de espalda', '/mattresses-for-back-pain'], ['Frescos', '/cooling-mattresses']] },
   products: {
@@ -139,6 +142,7 @@ const es: UiStrings = {
     facebook: 'Snooze Mattress + Wellness Castle Rock en Facebook', instagram: 'Snooze Mattress + Wellness Castle Rock en Instagram',
     companyLinks: [['Nosotros', '/about-us'], ['Financiamiento', '/mattress-financing'], ['Ofertas', '/mattress-sales'], ['Blog del Sueño', '/blog'], ['Sleep Fit Quiz', '/sleep-quiz'], ['Dream Mapping', '/dream-mapping'], ['Cómo elegir un colchón', '/how-to-choose-a-mattress'], ['Preguntas frecuentes', '/faq'], ['Reserva tu cita de Dream Mapping', '/booking'], ['Contáctanos', '/contact-us']],
     serving: 'También atendemos', areas: LOCATION.serviceAreas.map((a) => [a.city, a.slug] as [string, string]),
+    sisterTitle: 'Visita Nuestra Tienda Hermana', sisterLink: (city) => `Visita el sitio de ${city}`,
   },
   blog: {
     eyebrow: 'Blog del Sueño de Snooze', indexTitle: 'Dormir Mejor Empieza Aquí',

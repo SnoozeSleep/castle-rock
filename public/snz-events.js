@@ -6,6 +6,8 @@
      optin_submit           — the contact opt-in confirmation page loaded (/thank/you); the form
                               itself is a LeadConnector iframe, so the redirect to its thank-you page is the hook
      booking_widget_message — best effort: a confirmation-like postMessage from the LeadConnector booking widget
+     sister_store_click     — a link to the sister store's site was clicked (the "Our Locations" dropdown, the mobile
+                              drawer, the footer's "Visit Our Sister Store" block: a[data-sister-store])   { to }
    The Sleep Fit Quiz already pushes quiz_start, quiz_answer, quiz_lead_form_view, quiz_completed and
    quiz_results_revisit (public/sleep-fit-quiz.js). */
 (function () {
@@ -18,6 +20,7 @@
     var t = e.target; if (!t || !t.closest) return;
     var a = t.closest('a[href]'); if (!a) return;
     var href = a.getAttribute('href') || '';
+    if (a.hasAttribute('data-sister-store')) { push('sister_store_click', { to: a.getAttribute('data-sister-store') }); return; }
     if (/^tel:/i.test(href)) push('phone_click', { phone_number: href.replace(/^tel:/i, ''), link_text: text(a) });
     else if (MAPS.test(href)) push('directions_click', { link_url: href, link_text: text(a) });
   }, true);

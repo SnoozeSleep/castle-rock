@@ -101,6 +101,29 @@ export const LOCATION = {
   ],
 };
 
+/* The sister store (November 10, 2026 brief): Snooze Mattress + Wellness in Parker — the same owner, a few miles away.
+   Navigation only: the "Our Locations" dropdown in the header (and the mobile drawer) and the "Visit Our Sister Store"
+   block in the footer link to its site; the structured data does not mention it (no sameAs, no relatedLink).
+   SISTER_STORE_URL is the ONE place for the link target: the Parker custom domain, which resolves (today it still
+   answers with the store's previous site; the new one takes over when the domain is attached to its project — nothing
+   to swap here then). Store data as supplied, exact:
+     1467 Twenty Mile Rd, Parker, CO 80134 · (303) 862-5827 · Mon–Fri 10 AM–7 PM, Sat–Sun 11 AM–6 PM */
+export const SISTER_STORE_URL = 'https://parker.snoozemattresscompany.com';
+export const SISTER_STORE = {
+  name: 'Snooze Mattress + Wellness',
+  city: 'Parker',
+  street: '1467 Twenty Mile Rd',
+  region: 'CO',
+  postalCode: '80134',
+  phone: '(303) 862-5827',
+  phoneHref: 'tel:+13038625827',
+  hours: {
+    en: ['Mon–Fri 10 AM–7 PM', 'Sat–Sun 11 AM–6 PM'],
+    es: ['Lun–Vie 10 AM–7 PM', 'Sáb–Dom 11 AM–6 PM'],
+  },
+  url: SISTER_STORE_URL,
+};
+
 /** "Castle Rock, Parker, Lone Tree, Highlands Ranch, Castle Pines and Centennial" */
 export const areaList = (and = 'and') => `${LOCATION.areaServed.slice(0, -1).join(', ')} ${and} ${LOCATION.areaServed[LOCATION.areaServed.length - 1]}`;
 

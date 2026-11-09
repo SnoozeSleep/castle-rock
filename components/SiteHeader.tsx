@@ -6,9 +6,19 @@ import styles from './SiteHeader.module.css';
 import { SITE } from './site-config';
 import { BLOG_INDEX, blogNav } from '@/lib/blog-nav';
 import { alternateHref, localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
+import { LOCATION, SISTER_STORE } from '@/lib/location';
 
-type MenuKey = 'products' | 'blog';
+type MenuKey = 'products' | 'blog' | 'locations';
 type NavItem = { label: string; href: string; match?: string[]; menu?: MenuKey };
+
+/* "Our Locations" (November 10, 2026): this store and its sister store (lib/location.ts SISTER_STORE). The item has no
+   page of its own, so its label is the dropdown's button; the first row is this store (text, marked as current), the
+   second links to the sister store's site — a plain <a>, a full page load to another origin, rel="noopener";
+   data-sister-store carries the city for the sister_store_click dataLayer event (public/snz-events.js). */
+const STORE_ROWS = {
+  here: { label: `${LOCATION.name} — ${LOCATION.city}`, addr: `${LOCATION.street}, ${LOCATION.city}, ${LOCATION.region} ${LOCATION.postalCode}` },
+  sister: { label: `${SISTER_STORE.name} — ${SISTER_STORE.city}`, addr: `${SISTER_STORE.street}, ${SISTER_STORE.city}, ${SISTER_STORE.region} ${SISTER_STORE.postalCode}` },
+};
 type MenuLink = { label: string; href: string; desc: string; icon: keyof typeof ICONS };
 
 const PRODUCT_HREFS: Record<(typeof PRODUCT_KEYS)[number], { href: string; icon: keyof typeof ICONS }> = {
@@ -34,6 +44,7 @@ function navTables(locale: Locale) {
     // Blog is a dropdown only while there are posts to list (lib/blog-nav.ts); a plain link otherwise
     { label: t.nav.blog, href: BLOG_INDEX.href, ...(blogNav(locale).length ? { menu: 'blog' as const } : {}) },
     { label: t.nav.quiz, href: '/sleep-quiz' },
+    { label: t.nav.locations, href: '', menu: 'locations' },
   ];
   const item = (key: (typeof PRODUCT_KEYS)[number]): MenuLink => ({ label: t.products[key].label, desc: t.products[key].desc, href: PRODUCT_HREFS[key].href, icon: PRODUCT_HREFS[key].icon });
   const PRODUCT_GROUPS: { title: string; items: MenuLink[] }[] = [
@@ -63,6 +74,7 @@ const ICONS = {
   recliner: <path d="M6 20v-2M18 20v-2M5 18v-5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5H5ZM8 11V6.5A1.5 1.5 0 0 1 9.5 5h5A1.5 1.5 0 0 1 16 6.5V11" />,
   kit: <path d="M8 4h8M9 4v3.5L5.5 15a2.5 2.5 0 0 0 2.2 3.5h8.6a2.5 2.5 0 0 0 2.2-3.5L15 7.5V4M8.5 13h7" />,
   article: <path d="M6 3h9l4 4v14H6V3ZM14 3v5h5M9 12h6M9 16h6M9 8h2" />,
+  pin: <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10ZM12 13.3a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6Z" />,
 };
 
 const Icon = ({ name }: { name: keyof typeof ICONS }) => (
@@ -105,7 +117,7 @@ const Close = () => (
 
 const normalize = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 const PRODUCT_PATHS = Object.values(PRODUCT_HREFS).map((i) => i.href);
-const menuActive = (key: MenuKey, pathname: string) => (key === 'products' ? PRODUCT_PATHS.includes(pathname) : pathname === BLOG_INDEX.href || pathname.startsWith(`${BLOG_INDEX.href}/`));
+const menuActive = (key: MenuKey, pathname: string) => (key === 'products' ? PRODUCT_PATHS.includes(pathname) : key === 'blog' ? pathname === BLOG_INDEX.href || pathname.startsWith(`${BLOG_INDEX.href}/`) : false);
 
 export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
   const rawPath = normalize(usePathname() || '/');
@@ -122,7 +134,7 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
     </div>
   );
   const idBase = useId();
-  const panelIds: Record<MenuKey, string> = { products: `${idBase}-products`, blog: `${idBase}-blog` };
+  const panelIds: Record<MenuKey, string> = { products: `${idBase}-products`, blog: `${idBase}-blog`, locations: `${idBase}-locations` };
   const drawerId = `${idBase}-drawer`;
 
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
@@ -130,9 +142,9 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
   const [openAcc, setOpenAcc] = useState<MenuKey | null>(menuActive('products', pathname) ? 'products' : menuActive('blog', pathname) ? 'blog' : null);
   const [scrolled, setScrolled] = useState(false);
 
-  const itemRefs = useRef<Record<MenuKey, HTMLLIElement | null>>({ products: null, blog: null });
-  const triggerRefs = useRef<Record<MenuKey, HTMLButtonElement | null>>({ products: null, blog: null });
-  const panelRefs = useRef<Record<MenuKey, HTMLDivElement | null>>({ products: null, blog: null });
+  const itemRefs = useRef<Record<MenuKey, HTMLLIElement | null>>({ products: null, blog: null, locations: null });
+  const triggerRefs = useRef<Record<MenuKey, HTMLButtonElement | null>>({ products: null, blog: null, locations: null });
+  const panelRefs = useRef<Record<MenuKey, HTMLDivElement | null>>({ products: null, blog: null, locations: null });
   const burgerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -293,7 +305,58 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
         <nav className={styles.nav} aria-label={locale === 'es' ? 'Principal' : 'Primary'}>
           <ul className={styles.list}>
             {PRIMARY.map((item) =>
-              item.menu ? (
+              item.menu === 'locations' ? (
+                <li
+                  key={item.label}
+                  ref={(el) => { itemRefs.current.locations = el; }}
+                  className={`${styles.item} ${styles.locItem} ${openMenu === 'locations' ? styles.open : ''}`}
+                  onMouseEnter={() => onEnter('locations')}
+                  onMouseLeave={onLeave}
+                  onBlur={onItemBlur}
+                >
+                  <button
+                    ref={(el) => { triggerRefs.current.locations = el; }}
+                    type="button"
+                    className={`${styles.link} ${styles.linkBtn}`}
+                    aria-expanded={openMenu === 'locations'}
+                    aria-controls={panelIds.locations}
+                    onClick={() => (openMenu === 'locations' ? close() : open('locations'))}
+                    onKeyDown={onTriggerKey('locations')}
+                  >
+                    {item.label}
+                    <Chevron />
+                  </button>
+                  <div
+                    id={panelIds.locations}
+                    ref={(el) => { panelRefs.current.locations = el; }}
+                    className={`${styles.panel} ${styles.panelSmall} ${styles.panelLoc}`}
+                    aria-label={item.label}
+                  >
+                    <ul className={styles.groupList}>
+                      <li>
+                        <div className={`${styles.menuLink} ${styles.menuCurrent}`} aria-current="true">
+                          <span className={styles.menuIcon}><Icon name="pin" /></span>
+                          <span className={styles.menuText}>
+                            <span className={styles.menuLabel}>{STORE_ROWS.here.label}</span>
+                            <span className={styles.menuDesc}>{STORE_ROWS.here.addr}</span>
+                          </span>
+                          <span className={styles.hereBadge}>{t.menu.thisStore}</span>
+                        </div>
+                      </li>
+                      <li>
+                        <a href={SISTER_STORE.url} rel="noopener" className={styles.menuLink} data-sister-store={SISTER_STORE.city}>
+                          <span className={styles.menuIcon}><Icon name="pin" /></span>
+                          <span className={styles.menuText}>
+                            <span className={styles.menuLabel}>{STORE_ROWS.sister.label}</span>
+                            <span className={styles.menuDesc}>{STORE_ROWS.sister.addr}</span>
+                          </span>
+                          <span className={styles.menuGo}><Arrow /></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              ) : item.menu ? (
                 <li
                   key={item.label}
                   ref={(el) => { itemRefs.current[item.menu as MenuKey] = el; }}
@@ -427,7 +490,24 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
                   </button>
                   <div className={`${styles.mSub} ${openAcc === item.menu ? styles.mSubOpen : ''}`}>
                     <div className={styles.mSubInner}>
-                      {item.menu === 'products' ? (
+                      {item.menu === 'locations' ? (
+                        <div>
+                          <div className={`${styles.mSubLink} ${styles.mStore} ${styles.mStoreHere}`} aria-current="true">
+                            <Icon name="pin" />
+                            <span className={styles.mStoreText}>
+                              <span>{STORE_ROWS.here.label}</span>
+                              <span className={styles.mStoreNote}>{t.menu.thisStore}</span>
+                            </span>
+                          </div>
+                          <a href={SISTER_STORE.url} rel="noopener" className={`${styles.mSubLink} ${styles.mStore}`} data-sister-store={SISTER_STORE.city} onClick={closeMobile}>
+                            <Icon name="pin" />
+                            <span className={styles.mStoreText}>
+                              <span>{STORE_ROWS.sister.label}</span>
+                              <span className={styles.mStoreNote}>{STORE_ROWS.sister.addr}</span>
+                            </span>
+                          </a>
+                        </div>
+                      ) : item.menu === 'products' ? (
                         <>
                           {PRODUCT_GROUPS.map((group) => (
                             <div key={group.title}>

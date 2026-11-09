@@ -630,6 +630,48 @@
   .header[data-locale="es"] .quizItem { display: none; }
 }
 
+/* ---- "Our Locations" (November 10, 2026): this store + the sister store. The item has no page, so its label is the
+   dropdown's button (same look as the other links, chevron inside); the panel is the compact dropdown (.panelSmall) with
+   the Our Products rows (.menuLink). The first row is this store: text, no link, marked as current. ---- */
+.linkBtn { gap: 4px; margin: 0; border: 0; background: transparent; font-family: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.linkBtn svg { width: 14px; height: 14px; flex: 0 0 auto; transition: transform 240ms var(--snz-ease); }
+.open > .linkBtn { color: var(--snz-orange); }
+.open > .linkBtn svg { transform: rotate(180deg); }
+.panelLoc { width: 400px; }
+.menuCurrent { cursor: default; }
+.menuCurrent:hover { background: transparent; transform: none; }
+.menuCurrent .menuIcon, .menuCurrent:hover .menuIcon { color: var(--snz-orange); border-color: rgba(245, 132, 51, 0.45); }
+.hereBadge { margin-left: auto; flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; background: rgba(245, 132, 51, 0.14); color: #b4500d; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; }
+.menuGo { margin-left: auto; flex: 0 0 auto; display: inline-flex; color: var(--snz-muted); transition: color 200ms var(--snz-ease), transform 200ms var(--snz-ease); }
+.menuGo svg { width: 16px; height: 16px; }
+.menuLink:hover .menuGo, .menuLink:focus-visible .menuGo { color: var(--snz-orange); transform: translateX(2px); }
+/* the drawer rows: two lines (store, then the note / address) */
+.mStore { height: auto; min-height: 48px; padding-top: 8px; padding-bottom: 8px; align-items: flex-start; }
+.mStore svg { margin-top: 2px; }
+.mStoreText { display: flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.3; }
+.mStoreNote { font-size: 12px; font-weight: 500; color: var(--snz-muted); }
+.mStoreHere { cursor: default; }
+.mStoreHere:hover { background: transparent; color: inherit; }
+.mStoreHere svg, .mStoreHere:hover svg { color: var(--snz-orange); }
+.mStoreHere .mStoreNote { color: #b4500d; font-weight: 700; }
+/* eight items now (Our Locations after Sleep Quiz): tighter link padding on narrow desktops so the row still fits
+   between the logo and the phone button, top and compact, English and Spanish (measured every 5px from 1025 to 1320) */
+@media (min-width: 1025px) and (max-width: 1099px) {
+  .link, .compact .link { padding: 0 4px; font-size: 11.5px; letter-spacing: 0.03em; }
+  .header[data-locale="es"] .link, .header[data-locale="es"].compact .link { padding: 0 6px; letter-spacing: 0.03em; }
+}
+@media (min-width: 1100px) and (max-width: 1199px) {
+  .link, .compact .link { padding: 0 4px; font-size: 12px; letter-spacing: 0.04em; }
+  .header[data-locale="es"] .link, .header[data-locale="es"].compact .link { padding: 0 4px; font-size: 11.5px; letter-spacing: 0.03em; }
+}
+@media (min-width: 1200px) and (max-width: 1279px) {
+  .link, .compact .link { padding: 0 6px; font-size: 12px; letter-spacing: 0.04em; }
+  .header[data-locale="es"] .link, .header[data-locale="es"].compact .link { padding: 0 5px; font-size: 11.5px; letter-spacing: 0.03em; }
+}
+@media (min-width: 1280px) {
+  .header[data-locale="es"].compact .link { padding: 0 6px; }
+}
+
 /* ---- Our Products dropdown: highlighted Sleep Fit Quiz row across the bottom of the panel (same navy treatment as
    the Dream Mapping card) ---- */
 .quizRow {

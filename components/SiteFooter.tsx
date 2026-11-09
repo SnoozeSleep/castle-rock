@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { SITE } from './site-config';
-import { LOCATION } from '@/lib/location';
+import { LOCATION, SISTER_STORE } from '@/lib/location';
 import { localizeHref, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
 import styles from './SiteFooter.module.css';
 
@@ -119,6 +119,21 @@ export function SiteFooter({ locale = 'en' }: { locale?: Locale }) {
                 </div>
                 <a href={MAP_LINK} target="_blank" rel="noopener noreferrer" className={styles.openMaps}><NavIcon /> {f.openMaps}</a>
               </div>
+            </div>
+            {/* the sister store (lib/location.ts SISTER_STORE): name, address, phone, hours and a link to its site — a full
+                page load to another origin; data-sister-store feeds the sister_store_click event (public/snz-events.js) */}
+            <div className={styles.sister}>
+              <h2 className={styles.heading}>{f.sisterTitle}</h2>
+              <p className={styles.sisterName}>{SISTER_STORE.name} — {SISTER_STORE.city}</p>
+              <p className={styles.sisterAddr}>{SISTER_STORE.street}, {SISTER_STORE.city}, {SISTER_STORE.region} {SISTER_STORE.postalCode}</p>
+              <a href={SISTER_STORE.phoneHref} className={styles.phone}>
+                <span className={styles.phoneIcon}><PhoneIcon /></span>
+                {SISTER_STORE.phone}
+              </a>
+              <p className={styles.hours}>
+                {SISTER_STORE.hours[locale].map((h) => <span key={h}>{h}</span>)}
+              </p>
+              <a href={SISTER_STORE.url} rel="noopener" className={styles.sisterLink} data-sister-store={SISTER_STORE.city}>{f.sisterLink(SISTER_STORE.city)} <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>

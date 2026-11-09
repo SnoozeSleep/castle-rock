@@ -96,6 +96,15 @@
 .serving a { color: var(--navy); font-weight: 600; text-decoration: none; transition: color 200ms; }
 .serving a:hover { color: var(--orange); }
 
+/* the sister store block under the map (the footer NAP's typography: heading, phone, hours) */
+.sister { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(0, 20, 137, 0.12); display: flex; flex-direction: column; align-items: flex-start; }
+.sister .heading { margin: 0 0 10px; }
+.sisterName { margin: 0 0 2px; font: 700 0.98rem/1.35 var(--ui); color: var(--navy); }
+.sisterAddr { margin: 0 0 10px; font-size: 0.93rem; color: var(--ink-soft); }
+.sister .hours { margin-bottom: 10px; }
+.sisterLink { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; font: 700 0.95rem/1.2 var(--ui); color: var(--navy); text-decoration: none; transition: color 200ms; }
+.sisterLink:hover { color: var(--orange); }
+
 .mapCard {
   position: relative; overflow: hidden; border-radius: 18px;
   background: #e9edff; border: 1px solid rgba(255, 255, 255, 0.8);

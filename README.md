@@ -589,6 +589,45 @@ The client's LeadConnector chat widgets, one per language; nothing else changed.
 - **404.** An unknown URL — `/es/<anything>` included — gets the English 404 page (`app/global-not-found.tsx`, see
   "Spanish site restored"), so it carries the English widget, like the page around it.
 
+### Sister store cross-link: Parker (November 10, 2026)
+
+Castle Rock and Parker are the same owner, a few miles apart. This site now links to the Parker store in two places,
+English and Spanish; nothing else changed (the structured data in particular: no `sameAs`, no `relatedLink`).
+
+- **One source.** `lib/location.ts` `SISTER_STORE` (name, Parker, 1467 Twenty Mile Rd, Parker, CO 80134,
+  (303) 862-5827, Mon–Fri 10 AM–7 PM / Sat–Sun 11 AM–6 PM, Spanish hours) and `SISTER_STORE_URL` — the ONE place for
+  the link target, `https://parker.snoozemattresscompany.com`. That domain resolves today (it serves the Parker store's
+  current site; the new Parker build takes it over when it is attached to its project), so the brief's fallback — the
+  sister's `*.vercel.app` URL until its domain resolves — was not needed. To point elsewhere, change the constant.
+- **Navigation.** A top-level "Our Locations" / "Nuestras Tiendas" after Sleep Quiz (`components/SiteHeader.tsx`): the
+  item has no page, so its label is the dropdown's button (same look as the other links, chevron inside; opens on hover
+  or click, Enter / ArrowDown moves focus into the panel, Escape closes it and returns focus). The panel is the compact
+  dropdown (Blog's `.panelSmall`, 400px) with the Our Products rows: "Snooze Mattress + Wellness — Castle Rock" with the
+  address, as text, marked `aria-current="true"` and badged "This store" / "Esta tienda"; then "Snooze Mattress +
+  Wellness — Parker" with its address, a plain `<a href>` to the sister site (a full page load to another origin,
+  `rel="noopener"`, same tab). In the mobile drawer it is an accordion like Our Products and Blog, with the same two
+  rows. With eight items the desktop row needed tighter link padding below 1280px (`SiteHeader.module.css`, measured
+  every 5px from 1025 to 1320px, top and compact, English and Spanish: it fits everywhere; the Spanish Sleep Quiz item
+  stays hidden at 1025–1099px as before).
+- **Footer.** "Visit Our Sister Store" / "Visita Nuestra Tienda Hermana" (`components/SiteFooter.tsx`) at the end of the
+  location column, under the map card: the sister name, address, `tel:` phone, hours and "Visit the Parker site →" /
+  "Visita el sitio de Parker →" — the footer NAP's own classes for the heading, phone and hours.
+- **Tracking.** `public/snz-events.js` (`?v=ev2`) pushes `sister_store_click` `{ to: "Parker", page_path }` for a click
+  on any `a[data-sister-store]` — the dropdown row, the drawer row and the footer link. The sister phone is a `tel:`
+  link, so it pushes the existing `phone_click` with that number.
+- **Checked** (production build, Chrome): on `/`, a product page, `/booking`, a blog post and `/mattress-store-parker`,
+  English and Spanish, 1366 and 375px — the item after Sleep Quiz, the panel opens with the two rows (first row text
+  and current, second row the sister link, `rel="noopener"`), on screen at 1025 / 1100 / 1200px, keyboard open / close,
+  the drawer accordion, the footer block (copy, NAP, link, typography equal to the NAP's), the event pushed from both
+  links, one H1, no console errors; the dropdown link lands on `parker.snoozemattresscompany.com` (HTTP 200). Audit
+  CLEAN, schema 0 errors, EN/ES parity 37 pairs, `scripts/check-es.mjs` ok.
+- **Seen, not site faults.** The chat widget's greeting card (CRM: it opens on its own) sits over the end of the page,
+  which is exactly where the footer block lives: at 1366 × 900 and at 375px, with the page scrolled to the bottom, the
+  card covers the block's link until the visitor closes the card. Same item as in "Chat widget installed". The page's
+  20px horizontal overflow at 1025–1199px (the off-screen mobile drawer) was there before and is unchanged.
+- **Screenshots.** `docs/screenshots/sister/`: the dropdown (desktop), the drawer accordion (375px) and the footer block
+  (desktop column, 375px), English and Spanish.
+
 ---
 
 # History: the McAllen conversion this site was cloned from
