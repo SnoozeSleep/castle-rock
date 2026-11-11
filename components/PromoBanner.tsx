@@ -1,12 +1,12 @@
-import { activeSlides, fetchBanners } from '@/lib/banners';
+import { activeSlides, bannerManagerUrl, fetchBanners } from '@/lib/banners';
 import { LOCATION } from '@/lib/location';
 import { alternateHref, type Locale } from '@/lib/i18n';
 import { PromoSlide, frameStyle } from './PromoSlide';
 import { PromoCarousel } from './PromoCarousel';
 import styles from './PromoBanner.module.css';
 
-/* The promo banner slot (home page, / and /es; November 2026). Reads the shared banner feed (lib/banners.ts) for this
-   store's slug and today's date in its time zone. No eligible slide → nothing at all (no empty band). One slide → a
+/* The promo banner slot (home page, / and /es; November 2026). Reads the banner feed (lib/banners.ts: BANNERS_URL, else
+   the banner manager's endpoint for this store) for this store's slug and today's date in its time zone. No eligible slide → nothing at all (no empty band). One slide → a
    static picture, no JavaScript. Two or more → the small carousel (components/PromoCarousel.tsx), with every slide in
    the server HTML so crawlers and no-JS visitors get them (the first one shows). This site is not a static export: it
    is rendered on the server and revalidated every 60 seconds (see lib/banners.ts).
@@ -23,7 +23,7 @@ const inLocale = (href: string, locale: Locale): string => {
 };
 
 export async function PromoBanner({ locale }: { locale: Locale }) {
-  const active = activeSlides(await fetchBanners(), LOCATION.slug, LOCATION.timeZone);
+  const active = activeSlides(await fetchBanners(bannerManagerUrl(LOCATION.slug)), LOCATION.slug, LOCATION.timeZone);
   const slides = active.slides.map((s) => (s.href ? { ...s, href: inLocale(s.href, locale) } : s));
   const { interval } = active;
   if (!slides.length) return null;

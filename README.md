@@ -639,18 +639,23 @@ on `/` and `/es` only: top bar → header → orange marquee (unchanged) → **b
   rotateSeconds, start, end, stores, slides: [...] }] }`) and the banner manager's per-store API
   (`https://snooze-banner-self.vercel.app/api/sites/castlerock/banners`: `kind` promotion / evergreen, `rotateMs`,
   `images[].desktop|mobile.{url,width,height}`; the manager applies its own dates, so its promotions count as running).
-  **As of November 12, 2026 the brief's feed URL (`https://snooze-banners-seven.vercel.app/banners.json`) answers 404
-  ("The deployment could not be found on Vercel")**: set `BANNERS_URL` to the manager endpoint above (Vercel →
-  Settings → Environment Variables, Production; it takes effect on the next deployment). The manager already has the
-  `castlerock` site (no banners yet); its time zone there is America/New_York — set it to America/Denver, since the
-  manager decides which dated banners are live.
+  **Source order (since the second deploy of November 12, 2026):** `BANNERS_URL` when it is set and answers with a
+  feed; otherwise — unset, non-200, not JSON, unreachable — the manager endpoint above
+  (`lib/banners.ts` `bannerManagerUrl(LOCATION.slug)`, passed by `components/PromoBanner.tsx`). A source that answers
+  with an empty list means "no banner" and is not overridden. Why: after the first deploy the banners published for
+  `castlerock` in the manager (Black Friday 2026 + EVERGREEN, 4 slides) did not show — `BANNERS_URL` was not set in
+  Production (the live `/` and `/es` stayed static: `X-Vercel-Cache: HIT` at 1,700 s old, never `STALE`) and the
+  brief's feed URL (`https://snooze-banners-seven.vercel.app/banners.json`) answers 404 ("The deployment could not be
+  found on Vercel"). `BANNERS_URL` stays the override: set it only to point at another feed. In the manager, the
+  `castlerock` site's time zone is America/New_York — set it to America/Denver, since the manager decides which dated
+  banners are live.
 - **Store.** `lib/location.ts` `slug: 'castlerock'` (new) and `timeZone: 'America/Denver'`: banners for `"*"` or
   `castlerock`, always-on or `start` ≤ today ≤ `end` (inclusive; today = the calendar day in Denver). Running promos
   by priority (highest first), then the always-on ones; only always-on when no promo runs; at most 8 slides; interval =
   the first banner's `rotateSeconds` (default 5, minimum 2). Only https or site-relative image / link URLs.
 - **Revalidation path: ISR.** The site is served by Next.js, not a static export, so no cron and no rebuild are
-  needed: with `BANNERS_URL` set, `/` and `/es` are prerendered and regenerated at most every 60 s (the build's route
-  table shows `1m` for both); without it they stay fully static. Checked on `next start`: changing the feed from three
+  needed: `/` and `/es` are prerendered and regenerated at most every 60 s (the build's route table shows `1m` for
+  both). Checked on `next start`: changing the feed from three
   slides to one, then to none, changed both pages within about a minute.
 - **Rendering** (`components/PromoBanner.tsx`, server): no slide → nothing at all (the hero follows the marquee
   directly, same geometry as before); one slide → a static `<picture>`, no JavaScript; 2–8 →

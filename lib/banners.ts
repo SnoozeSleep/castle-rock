@@ -1,6 +1,11 @@
 /* The promo banner feed (November 2026; the slot as implemented on the clone-source site, its commits aacef8b /
-   f133d56). One JSON at
-   process.env.BANNERS_URL (set in the Vercel project's environment), in either of two shapes:
+   f133d56). Where it is read from:
+     - process.env.BANNERS_URL, when it is set (the Vercel project's environment) and answers with a feed;
+     - otherwise the banner manager's endpoint for this store (bannerManagerUrl(slug), passed in by
+       components/PromoBanner.tsx) — also when BANNERS_URL is set but fails (non-200, bad JSON, unreachable). Added
+       November 12, 2026: BANNERS_URL was not set in Production and the brief's feed URL answers 404, so the banners
+       published for this store in the manager never reached the page.
+   One JSON, in either of two shapes:
 
    1. the shared Snooze banner feed:
         { generatedAt, banners: [{ id, name, always, priority, rotateSeconds, href, start, end, stores,
@@ -45,16 +50,28 @@ const DAY = /^\d{4}-\d{2}-\d{2}$/;
 const OPEN_START = '0000-01-01';
 const OPEN_END = '9999-12-31';
 
-export async function fetchBanners(): Promise<Banner[]> {
-  const url = process.env.BANNERS_URL;
-  if (!url) return [];
+/* the banner manager's per-store endpoint (the dashboard where the banners are published) */
+export const bannerManagerUrl = (slug: string): string => `https://snooze-banner-self.vercel.app/api/sites/${encodeURIComponent(slug)}/banners`;
+
+/* one source: its banners, or null when it cannot be used (non-200, not JSON, no banners list, unreachable) */
+async function load(url: string): Promise<Banner[] | null> {
   try {
     const res = await fetch(url, { next: { revalidate: 60 } });
-    if (!res.ok) return [];
-    return normalizeFeed(await res.json());
+    if (!res.ok) return null;
+    const data: unknown = await res.json();
+    return isObj(data) && Array.isArray(data.banners) ? normalizeFeed(data) : null;
   } catch {
-    return [];
+    return null;
   }
+}
+
+/* BANNERS_URL first; the fallback (the manager's endpoint for this store) when BANNERS_URL is unset or unusable. A
+   source that answers with an empty list means "no banner" and is not overridden. */
+export async function fetchBanners(fallbackUrl = ''): Promise<Banner[]> {
+  const url = (process.env.BANNERS_URL || '').trim();
+  if (url) { const list = await load(url); if (list) return list; }
+  if (fallbackUrl && fallbackUrl !== url) { const list = await load(fallbackUrl); if (list) return list; }
+  return [];
 }
 
 const isObj = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
