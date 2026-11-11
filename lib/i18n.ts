@@ -15,18 +15,6 @@ export function localizeHref(href: string, locale: Locale): string {
   return href === '/' ? '/es' : `/es${href}`;
 }
 
-/** The current pathname as the site's links need it: no trailing slash, and the home page as "/". When Vercel
-    regenerates an ISR page in the background, usePathname() reports the root page as "/index" — on the live home page
-    that made the EN | ES toggle point at /es/index (a 404) and left Home unmarked once / became ISR for the promo
-    banner (November 12, 2026). Used by every component that reads the path (SiteHeader, TopBar). */
-export function cleanPathname(pathname: string | null | undefined): string {
-  let p = pathname || '/';
-  if (p.length > 1) p = p.replace(/\/+$/, '') || '/';
-  if (p === '/index') return '/';
-  if (p === '/es/index') return '/es';
-  return p;
-}
-
 /** Locale of a pathname and its path without the locale prefix. */
 export function splitLocale(pathname: string): { locale: Locale; path: string } {
   const p = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;

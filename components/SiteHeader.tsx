@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import styles from './SiteHeader.module.css';
 import { SITE } from './site-config';
 import { BLOG_INDEX, blogNav } from '@/lib/blog-nav';
-import { alternateHref, cleanPathname, localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
+import { alternateHref, localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale } from '@/lib/i18n';
 import { LOCATION, SISTER_STORE } from '@/lib/location';
 
 type MenuKey = 'products' | 'blog' | 'locations';
@@ -115,11 +115,12 @@ const Close = () => (
   </svg>
 );
 
+const normalize = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 const PRODUCT_PATHS = Object.values(PRODUCT_HREFS).map((i) => i.href);
 const menuActive = (key: MenuKey, pathname: string) => (key === 'products' ? PRODUCT_PATHS.includes(pathname) : key === 'blog' ? pathname === BLOG_INDEX.href || pathname.startsWith(`${BLOG_INDEX.href}/`) : false);
 
 export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
-  const rawPath = cleanPathname(usePathname()); // no trailing slash; "/index" (ISR regeneration on Vercel) -> "/"
+  const rawPath = normalize(usePathname() || '/');
   const pathname = splitLocale(rawPath).path; // English path used for the active states
   const { t, PRIMARY, PRODUCT_GROUPS, SIZE_GROUP, BLOG_GROUP, blogIndex } = navTables(locale);
   const L = (href: string) => localizeHref(href, locale);
