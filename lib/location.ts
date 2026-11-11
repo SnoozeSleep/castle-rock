@@ -47,6 +47,9 @@ export const TEAM_PHOTO_URL = 'https://assets.cdn.filesafe.space/gsqZfpbY5MmVess
 export const PHOTO_PLACEHOLDER = '/assets/castle-rock/photo-coming-soon.svg';
 
 export const LOCATION = {
+  /* the store's id in the shared Snooze feeds (the promo banner feed's `stores` and the banner manager's site key,
+     lib/banners.ts); the banners' start/end dates are calendar days in timeZone below */
+  slug: 'castlerock',
   name: 'Snooze Mattress + Wellness',
   street: '6360 Promenade Pkwy',
   city: 'Castle Rock',
