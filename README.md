@@ -594,7 +594,7 @@ The client's LeadConnector chat widgets, one per language; nothing else changed.
 Castle Rock and Parker are the same owner, a few miles apart. This site now links to the Parker store in two places,
 English and Spanish; nothing else changed (the structured data in particular: no `sameAs`, no `relatedLink`).
 
-- **One source.** `lib/location.ts` `SISTER_STORE` (name, Parker, 1467 Twenty Mile Rd, Parker, CO 80134,
+- **One source.** `lib/location.ts` `SISTER_STORE` (name, Parker, 11467 Twenty Mile Rd, Parker, CO 80134 — street number corrected November 11, 2026 —
   (303) 862-5827, Mon–Fri 10 AM–7 PM / Sat–Sun 11 AM–6 PM, Spanish hours) and `SISTER_STORE_URL` — the ONE place for
   the link target, `https://parker.snoozemattresscompany.com`. That domain resolves today (it serves the Parker store's
   current site; the new Parker build takes it over when it is attached to its project), so the brief's fallback — the
