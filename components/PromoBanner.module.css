@@ -1,0 +1,6 @@
+/* Promo banner slot on the home page (components/PromoBanner.tsx): full-bleed, edge to edge like the announcement
+   ticker above it and the hero below it — no max-width, no side margins, no padding, no rounded corners. The banner
+   manager's embed renders into the inner div, or renders nothing: while the slot is empty it has no height, so the
+   hero follows the ticker directly; when a banner shows, the embed's own fixed-ratio box (1920/500 from 768px,
+   800/600 below) fills the viewport width and sits flush between the ticker and the hero. */
+.promo { width: 100%; margin: 0; padding: 0; }
