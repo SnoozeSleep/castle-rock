@@ -655,7 +655,11 @@ on `/` and `/es` only: top bar → header → orange marquee (unchanged) → **b
   the first banner's `rotateSeconds` (default 5, minimum 2). Only https or site-relative image / link URLs.
 - **Revalidation path: ISR.** The site is served by Next.js, not a static export, so no cron and no rebuild are
   needed: `/` and `/es` are prerendered and regenerated at most every 60 s (the build's route table shows `1m` for
-  both). Checked on `next start`: changing the feed from three
+  both). **Vercel quirk:** a background regeneration of the root page renders it with `usePathname()` = `/index`; on
+  the live home page that made the EN | ES toggle point at `/es/index` (404) and left Home unmarked, minutes after the
+  banner went live. `lib/i18n.ts` `cleanPathname()` maps `/index` → `/` (and `/es/index` → `/es`) and is used by
+  every component that reads the path (`components/SiteHeader.tsx`, `components/TopBar.tsx`); any new
+  `usePathname()` reader must go through it. Checked on `next start`: changing the feed from three
   slides to one, then to none, changed both pages within about a minute.
 - **Rendering** (`components/PromoBanner.tsx`, server): no slide → nothing at all (the hero follows the marquee
   directly, same geometry as before); one slide → a static `<picture>`, no JavaScript; 2–8 →

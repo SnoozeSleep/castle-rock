@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import { LOCATION } from '@/lib/location';
-import { alternateHref, ui, type Locale } from '@/lib/i18n';
+import { alternateHref, cleanPathname, ui, type Locale } from '@/lib/i18n';
 import styles from './TopBar.module.css';
 
 /* Slim top bar above the main navigation on every page (both root layouts render it; the converter writes it into
@@ -28,10 +28,8 @@ const PhoneIcon = () => (
   </svg>
 );
 
-const normalize = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
-
 export function TopBar({ locale = 'en' }: { locale?: Locale }) {
-  const rawPath = normalize(usePathname() || '/');
+  const rawPath = cleanPathname(usePathname()); // no trailing slash; "/index" (ISR regeneration on Vercel) -> "/"
   const t = ui(locale);
   const L = LOCATION;
   const hours = L.hours[locale] || L.hours.en;
