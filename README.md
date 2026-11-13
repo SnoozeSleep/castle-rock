@@ -628,10 +628,10 @@ English and Spanish; nothing else changed (the structured data in particular: no
 - **Screenshots.** `docs/screenshots/sister/`: the dropdown (desktop), the drawer accordion (375px) and the footer block
   (desktop column, 375px), English and Spanish.
 
-### Clearance & Floor Models page (November 13, 2026, branch `clearance` — not merged)
+### Clearance & Floor Models page (November 13, 2026; live on main the same day)
 
 Ported from the clone-source site, where the page is live and approved (its commits 0669b17, 7e442e8, 422fe33,
-e47a320 on `main`). Branch `clearance`, deployed as a Vercel Preview; merging to `main` is a separate decision.
+e47a320 on `main`). Built on branch `clearance` and checked on its Vercel Preview first; merged to `main` (production) on November 13, 2026 at the client's request.
 
 - **What.** `/clearance` (English only) is the client's drop-in kit — hero, filters, listing cards with photo carousel,
   "Request info" modal, "Text me new deals" form, fine print — under `app/(en)/clearance/page.tsx` (the English header,
