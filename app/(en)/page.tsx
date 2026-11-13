@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import PageClient from './client';
 import { PromoBanner } from '@/components/PromoBanner';
+import { ClearanceHomeLink } from '@/components/clearance/ClearanceHomeLink';
 import { PageSchema } from '@/components/PageSchema';
 import { PAGE_SCHEMA } from './schema';
 import { SizeTypeGrid } from '@/components/SizeTypeGrid';
@@ -55,6 +56,8 @@ export default function Page() {
       <PageSchema items={PAGE_SCHEMA} locale="en" />
       {/* promo banners from the banner manager (components/PromoBanner.tsx): the embed renders the store's live banners, or nothing */}
       <PromoBanner />
+      {/* small link to the Clearance & Floor Models page, only while clearance listings exist (components/clearance/) */}
+      <ClearanceHomeLink locale="en" />
       <PageClient />
       {/* "Mattresses by size & type" — the six size/type pages as icon cards (October 27, 2026) */}
       <SizeTypeGrid locale="en" />

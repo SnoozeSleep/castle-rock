@@ -9,7 +9,7 @@ import { alternateHref, localizeHref, splitLocale, ui, PRODUCT_KEYS, type Locale
 import { LOCATION, SISTER_STORE } from '@/lib/location';
 
 type MenuKey = 'products' | 'blog' | 'locations';
-type NavItem = { label: string; href: string; match?: string[]; menu?: MenuKey };
+type NavItem = { label: string; href: string; match?: string[]; menu?: MenuKey; noLocale?: boolean }; // noLocale: one URL for both languages (no /es twin)
 
 /* "Our Locations" (November 10, 2026): this store and its sister store (lib/location.ts SISTER_STORE). The item has no
    page of its own, so its label is the dropdown's button; the first row is this store (text, marked as current), the
@@ -41,6 +41,7 @@ function navTables(locale: Locale) {
     { label: t.nav.products, href: '/mattresses', menu: 'products' },
     { label: t.nav.financing, href: '/mattress-financing' },
     { label: t.nav.sales, href: '/mattress-sales' },
+    { label: t.nav.clearance, href: '/clearance', noLocale: true }, // Clearance & Floor Models (English page only; /es/clearance 308s to it)
     // Blog is a dropdown only while there are posts to list (lib/blog-nav.ts); a plain link otherwise
     { label: t.nav.blog, href: BLOG_INDEX.href, ...(blogNav(locale).length ? { menu: 'blog' as const } : {}) },
     { label: t.nav.quiz, href: '/sleep-quiz' },
@@ -124,6 +125,7 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
   const pathname = splitLocale(rawPath).path; // English path used for the active states
   const { t, PRIMARY, PRODUCT_GROUPS, SIZE_GROUP, BLOG_GROUP, blogIndex } = navTables(locale);
   const L = (href: string) => localizeHref(href, locale);
+  const hrefOf = (item: NavItem) => (item.noLocale ? item.href : L(item.href));
   const langSwitch = (cls: string) => (
     <div className={cls} role="group" aria-label={t.menu.switchTo}>
       {(['en', 'es'] as const).map((l) => (
@@ -365,7 +367,7 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
                   onMouseLeave={onLeave}
                   onBlur={onItemBlur}
                 >
-                  <a href={L(item.href)} className={`${styles.link} ${isActive(item) ? styles.active : ''}`} aria-current={isActive(item) ? 'page' : undefined}>
+                  <a href={hrefOf(item)} className={`${styles.link} ${isActive(item) ? styles.active : ''}`} aria-current={isActive(item) ? 'page' : undefined}>
                     {item.label}
                   </a>
                   <button
@@ -421,8 +423,8 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
                   </div>
                 </li>
               ) : (
-                <li key={item.label} className={item.href === '/sleep-quiz' ? `${styles.item} ${styles.quizItem}` : styles.item}>
-                  <a href={L(item.href)} className={`${styles.link} ${isActive(item) ? styles.active : ''}`} aria-current={isActive(item) ? 'page' : undefined}>
+                <li key={item.label} className={item.href === '/sleep-quiz' ? `${styles.item} ${styles.quizItem}` : item.href === '/clearance' ? `${styles.item} ${styles.clearanceItem}` : styles.item}>
+                  <a href={hrefOf(item)} className={`${styles.link} ${isActive(item) ? styles.active : ''}`} aria-current={isActive(item) ? 'page' : undefined}>
                     {item.label}
                   </a>
                 </li>
@@ -535,7 +537,7 @@ export function SiteHeader({ locale = 'en' }: { locale?: Locale }) {
                 </li>
               ) : (
                 <li key={item.label} className={styles.mItem} style={{ '--i': index } as React.CSSProperties}>
-                  <a href={L(item.href)} className={`${styles.mLink} ${isActive(item) ? styles.mActive : ''}`} aria-current={isActive(item) ? 'page' : undefined} onClick={closeMobile}>{item.label}</a>
+                  <a href={hrefOf(item)} className={`${styles.mLink} ${isActive(item) ? styles.mActive : ''}`} aria-current={isActive(item) ? 'page' : undefined} onClick={closeMobile}>{item.label}</a>
                 </li>
               ),
             )}

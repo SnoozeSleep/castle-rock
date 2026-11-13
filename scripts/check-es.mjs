@@ -21,6 +21,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 
+/* English-only routes (no /es twin by design; vercel.json 308s the /es path to them): the Clearance & Floor Models page */
+const EN_ONLY = new Set(['/clearance']);
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const BASE = args.find((a) => /^https?:/.test(a)) || 'http://localhost:4173';
@@ -70,6 +73,7 @@ async function open(route, width, track) {
 console.log(`Spanish site check on ${BASE} — ${enRoutes.length} English page(s)\n`);
 for (const en of enRoutes.sort()) {
   if (ONLY && en !== ONLY) continue;
+  if (EN_ONLY.has(en)) { console.log(`  ${en.padEnd(46)} English only by design — no Spanish twin, skipped`); continue; }
   const es = twin(en);
   if (!es) { flag(`${en}: no Spanish twin`); rows.push([en, '—']); continue; }
   const S = await open(es, 1280, true);
@@ -79,7 +83,7 @@ for (const en of enRoutes.sort()) {
     const rel = (h) => (h || '').replace(/^https?:\/\/[^/]+/, '') || '/';
     const alts = Object.fromEntries([...document.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => [l.getAttribute('hreflang'), rel(l.getAttribute('href'))]));
     const toggles = [...document.querySelectorAll('a[hreflang]')].filter((a) => !a.closest('main')).map((a) => ({ lang: a.getAttribute('hreflang'), href: a.getAttribute('href'), tag: a.tagName, onclick: !!a.getAttribute('onclick') }));
-    const internal = [...document.querySelectorAll('a[href]:not([hreflang])')].map((a) => a.getAttribute('href')).filter((h) => h && h.startsWith('/') && !h.startsWith('//')).map((h) => h.split(/[?#]/)[0]).filter((p) => !/^\/(assets|ghl-stub|_next)\//.test(p) && !/\.[a-z0-9]{2,5}$/i.test(p));
+    const internal = [...document.querySelectorAll('a[href]:not([hreflang])')].map((a) => a.getAttribute('href')).filter((h) => h && h.startsWith('/') && !h.startsWith('//')).map((h) => h.split(/[?#]/)[0]).filter((p) => !/^\/(assets|ghl-stub|_next)\//.test(p) && p !== '/clearance' /* the English-only page the Spanish nav links to by design */ && !/\.[a-z0-9]{2,5}$/i.test(p));
     const off = [...new Set(internal.filter((p) => !(p === '/es' || p.startsWith('/es/'))))];
     const left = [];
     for (const e of document.querySelectorAll('h1,h2,h3,h4,p,li,a,button,span,td,th,summary,label')) {
