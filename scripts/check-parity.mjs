@@ -16,6 +16,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
 
+/* English-only routes (no /es twin by design; vercel.json 308s the /es path to them): the Clearance & Floor Models page */
+const EN_ONLY = new Set(['/clearance']);
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, '.next', 'server', 'app');
 const only = process.argv.slice(2).find((a) => a.startsWith('/'));
@@ -75,6 +78,7 @@ for (const route of enRoutes.sort()) {
   if (only && route !== only) continue;
   const post = /^\/blog\/([^/]+)$/.exec(route);
   const esRoute = post ? (SLUG_ES[post[1]] ? `/es/blog/${SLUG_ES[post[1]]}` : null) : route === '/' ? '/es' : `/es${route}`;
+  if (EN_ONLY.has(route)) { console.log(`– ${route}: English only by design (no Spanish twin)`); continue; }
   const en = html(route), es = esRoute ? html(esRoute) : null;
   if (!en) continue;
   if (!es) { console.log(`✗ ${route}: no Spanish twin${esRoute ? ` (${esRoute} not built)` : ''}`); differing++; continue; }

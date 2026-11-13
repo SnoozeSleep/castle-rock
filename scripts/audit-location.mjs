@@ -18,6 +18,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+/* English-only routes (no /es twin by design; vercel.json 308s the /es path to them): the Clearance & Floor Models page */
+const EN_ONLY = new Set(['/clearance']);
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const envOrigin = (v, scheme = 'https') => { const s = (v || '').trim().replace(/\/+$/, ''); return s ? (/^https?:\/\//.test(s) ? s : `${scheme}://${s}`) : ''; };
 const SITE_URL = envOrigin(process.env.NEXT_PUBLIC_SITE_URL) || envOrigin(process.env.VERCEL_PROJECT_PRODUCTION_URL) || envOrigin(process.env.VERCEL_URL) || 'http://localhost:3000';
@@ -122,14 +125,15 @@ for (const f of html) {
   if (!row.address || !row.phone || !row.tel || !row.fb || !row.ig || !row.hours || !row.maps || !row.jsonld) bad.push('missing Castle Rock data' + (row.jsonld ? '' : ' (LocalBusiness node)'));
   if (!row.canonical.startsWith(SITE_URL)) bad.push('canonical ' + row.canonical);
   // the confirmation pages are noindex (short titles by design); the quiz draws its H1 client-side (public/sleep-fit-quiz.js)
-  if (!noindex && !/\| Snooze Mattress$/.test(title)) bad.push(`title does not end "| Snooze Mattress": ${title}`);
+  // EN_ONLY: the Clearance page keeps the kit's approved title ("… | Snooze Mattress in Castle Rock") and description
+  if (!noindex && !EN_ONLY.has(route) && !/\| Snooze Mattress$/.test(title)) bad.push(`title does not end "| Snooze Mattress": ${title}`);
   if (title.length > 60) bad.push(`title ${title.length} chars`);
   // blog posts carry the client's own SEO titles (topical, not local); every other indexable page names Castle Rock
   if (!noindex && !/Castle Rock/.test(title) && !post) bad.push(`title without "Castle Rock": ${title}`);
-  if (desc.length > 155) bad.push(`description ${desc.length} chars`);
+  if (desc.length > 155 && !EN_ONLY.has(route)) bad.push(`description ${desc.length} chars`);
   if (!desc) bad.push('no description');
   if (h1 !== 1 && !/\/sleep-quiz$/.test(route)) bad.push(`${h1} h1`);
-  if (!noindex && !hreflang) bad.push('hreflang incomplete');
+  if (!noindex && !hreflang && !EN_ONLY.has(route)) bad.push('hreflang incomplete');
   if (lang !== (es ? 'es' : 'en')) bad.push(`<html lang="${lang}">`);
   if (bad.length) { problems++; console.log(`  ✗ ${route}: ${bad.join('; ')}`); }
 }
@@ -143,7 +147,7 @@ for (const en of rows.filter((x) => !x.es)) {
   const esRoute = en.route === '/' ? '/es' : `/es${en.route}`;
   // a blog post's twin has its own slug: the page its es-US alternate names
   const esRow = rows.find((x) => x.route === (/^\/blog\/./.test(en.route) ? en.alts['es-US'] : esRoute));
-  if (!esRow && en.selfOnly) { oneLanguage.push(en.route); continue; }
+  if (!esRow && (en.selfOnly || EN_ONLY.has(en.route))) { oneLanguage.push(en.route); continue; }
   if (!esRow) { console.log(`  ✗ ${en.route}: no Spanish twin`); problems++; continue; } pairs++;
   const diff = ['address', 'phone', 'tel', 'maps'].filter((k) => en[k] !== esRow[k]);
   if (diff.length) { mism++; problems++; console.log(`  ✗ ${en.route} vs ${esRow.route}: ${diff.map((k) => `${k} ${en[k]}/${esRow[k]}`).join(', ')}`); }

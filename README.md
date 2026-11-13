@@ -628,6 +628,62 @@ English and Spanish; nothing else changed (the structured data in particular: no
 - **Screenshots.** `docs/screenshots/sister/`: the dropdown (desktop), the drawer accordion (375px) and the footer block
   (desktop column, 375px), English and Spanish.
 
+### Clearance & Floor Models page (November 13, 2026; live on main the same day)
+
+Ported from the clone-source site, where the page is live and approved (its commits 0669b17, 7e442e8, 422fe33,
+e47a320 on `main`). Built on branch `clearance` and checked on its Vercel Preview first; merged to `main` (production) on November 13, 2026 at the client's request.
+
+- **What.** `/clearance` (English only) is the client's drop-in kit — hero, filters, listing cards with photo carousel,
+  "Request info" modal, "Text me new deals" form, fine print — under `app/(en)/clearance/page.tsx` (the English header,
+  ticker and footer), `components/clearance/*` (the kit's components and CSS: only the modal's z-index and the phone
+  placeholder, `(303) 555-0123`, differ from the kit) and `lib/clearance.ts`. The kit's own README, with this site's
+  note on top, is `docs/clearance-README.md`.
+- **This store.** `lib/clearance.ts` keeps the rows whose `location` is **Castle Rock** (two words; compared trimmed and
+  case-insensitively, so "castle rock" matches and "castlerock" does not) and takes the store fields from
+  `lib/location.ts` — `STORE` = `{ slug: 'castlerock', name: 'Snooze Mattress in Castle Rock', city, phone }`; it is
+  the only import in the file (with its `.ts` extension so Node's test runner resolves it: `tsconfig.json`
+  `allowImportingTsExtensions`). Title "Clearance & Floor Models | Snooze Mattress in Castle Rock" and the kit's
+  description with that name (173 chars — the audit's 60 / 155 and "| Snooze Mattress" rules exempt this route,
+  `EN_ONLY` in `scripts/audit-location.mjs`, `check-parity.mjs`, `check-es.mjs`). The request payload sends
+  `store: "castlerock"`, `store_name: "Snooze Mattress in Castle Rock"`; the kit's fallback error line shows the store's
+  phone from the same data. **On November 13, 2026 the published sheet had 8 rows, all McAllen's, and 0 for Castle
+  Rock**: the page shows the kit's empty state ("Nothing here right now") and the ticker item and home link stay hidden.
+- **Listings come from the published Google Sheet** (`CLEARANCE_URL`): `getClearance()` fetches it with
+  `revalidate: 60`, parses the CSV in place (quoted fields, commas and newlines inside quotes), maps the kit's columns
+  (new_in_box yes/no, $ and , stripped, YYYY-MM-DD or MM/DD/YYYY, photos split on | or whitespace with Google Drive
+  share links converted, blank status = available, unknown status hidden + logged), skips rows without
+  id/brand/model/sale/retail (logged). No env or any failure → no listings, the empty state, never an error.
+- **Requests.** `app/api/clearance-request/route.ts` (the kit's): honeypot, 10-digit phone + SMS consent, the listing
+  looked up server-side through `getClearance({ noStore: true })`, then forwarded to `GHL_CLEARANCE_WEBHOOK_URL`.
+  **Env vars** (names only in `.env.example`; values only in Vercel, set with the CLI on November 13, 2026, Production
+  + Preview): `GHL_CLEARANCE_WEBHOOK_URL` (Secret / sensitive) and `CLEARANCE_URL` (Config). The webhook URL is in
+  no file of this repository; the guard before every push is `git grep <the webhook's own path token>` → nothing.
+  (`git grep leadconnectorhq` cannot be empty on this site: the chat widget loader, the quiz webhook and the GHL shim
+  already reference that host on `main`; the guard is the new URL's token, plus `git grep -c leadconnectorhq` compared
+  with `main`.)
+- **Build mode: nothing to drop.** This site has never been a static export (no `output: 'export'`; the server build
+  was already in place for the hreflang middleware), so the ISR page and the two API routes needed no config change:
+  `/clearance` and `/api/clearance-summary` are ISR (1 m), `/api/clearance-request` is a function, every other route
+  stays prerendered — the build's route table shows it.
+- **Nav.** "Clearance" → `/clearance` right after "Sales" in the desktop row and the mobile drawer
+  (`components/SiteHeader.tsx`, `NavItem.noLocale`: the Spanish header's "Liquidación" links to the same English
+  page), active state on the page. Nine items now: below 1200px the Sleep Quiz item is hidden in both languages (the
+  Spanish header already hid it at 1025–1099px; the quiz stays in the Our Products dropdown row, the drawer and the
+  footer) and from 1280px the links give up a little padding and letter-spacing (`SiteHeader.module.css`, measured
+  every 5px from 1025 to 1320 and at the common widths, both header states, both languages: the row fits everywhere).
+- **Only while listings exist.** `app/api/clearance-summary/route.ts` (cached 60 s) returns `{ visible }`;
+  `components/clearance/ClearanceTickerItem.tsx` adds "Floor Model & Clearance Deals" / "Modelos de Piso y Liquidación"
+  to the announcement ticker and `ClearanceHomeLink.tsx` a small link under the promo banner slot on `/` and `/es`
+  (`app/(en)/page.tsx`; `app/es/page.tsx` is written from it by `npm run es:sync`; the converter's home template too),
+  both read in the browser so the prerendered pages stay static, both absent while the count is 0.
+- **SEO.** Self-canonical `/clearance`, one H1 (the kit's hero), the page's graph carries `WebPage` + `BreadcrumbList`
+  Home › Clearance beside the store nodes; `/clearance` in the sitemap (daily, 0.7, English + x-default only) and in
+  `lib/lastmod.json`; `vercel.json` 308 `/es/clearance` → `/clearance` (Vercel applies it; `next start` does not).
+- **Tests.** `npm test` → `node --test "tests/**/*.test.ts"` (Node 24 strips the types): the kit's parser cases with
+  this store's rows, the live sheet's row format, plus two new cases — the store fields come from `lib/location.ts`,
+  and the location filter matches "Castle Rock" in any case/spacing but never "castlerock", "Castle" or "Castle Rock CO".
+- **Unchanged:** every other page, the `/es` site, the promo banner slot, the footer and the Parker sister-store links.
+
 ---
 
 # History: the McAllen conversion this site was cloned from

@@ -672,6 +672,27 @@
   .header[data-locale="es"].compact .link { padding: 0 6px; }
 }
 
+/* ---- "Clearance" nav item (after Sales): the NINTH item (November 13, 2026). The row must still fit between the logo
+   and the phone button in both header states and both languages; measured every 5px from 1025 to 1320 and at the
+   common desktop widths. Below 1200px the Sleep Quiz item is hidden in BOTH languages (it was already hidden for
+   Spanish at 1025–1099px): the quiz stays reachable through the Our Products dropdown row, the mobile drawer and the
+   footer. From 1280px the links give up a little padding and letter-spacing (they had 10px / 0.07em). ---- */
+.clearanceItem { }
+@media (min-width: 1025px) and (max-width: 1199px) { .quizItem { display: none; } }
+@media (min-width: 1025px) and (max-width: 1099px) {
+  .header[data-locale="es"] .link, .header[data-locale="es"].compact .link { padding: 0 3px; font-size: 11px; letter-spacing: 0.01em; }
+}
+@media (min-width: 1200px) and (max-width: 1279px) {
+  .link, .compact .link { padding: 0 5px; }
+  .header[data-locale="es"] .link, .header[data-locale="es"].compact .link { padding: 0 4px; font-size: 11.5px; letter-spacing: 0.02em; }
+}
+@media (min-width: 1280px) {
+  .link { padding: 0 6px; font-size: 12.5px; letter-spacing: 0.05em; }
+  .compact .link { padding: 0 6px; font-size: 12px; letter-spacing: 0.05em; }
+  .header[data-locale="es"] .link { padding: 0 6px; font-size: 12px; letter-spacing: 0.03em; }
+  .header[data-locale="es"].compact .link { padding: 0 4px; font-size: 11.5px; letter-spacing: 0.02em; }
+}
+
 /* ---- Our Products dropdown: highlighted Sleep Fit Quiz row across the bottom of the panel (same navy treatment as
    the Dream Mapping card) ---- */
 .quizRow {
